@@ -10,13 +10,13 @@ package com.spartronics4915.recyclerush;
  */
 public class Main {
 
-	/**
-	 * @param args Command-line arguments to program
-	 */
-	public static void main(String[] args) {
+  /**
+   * @param args Command-line arguments to program
+   */
+  public static void main(String[] args) {
 
-		System.out.println("Please remove this once build season officially starts.");
+    System.out.println("Please remove this once build season officially starts.");
 
-	}
+  }
 
 }
