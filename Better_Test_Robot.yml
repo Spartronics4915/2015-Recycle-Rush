@@ -67,7 +67,7 @@ Children:
       Name: Robot Drive Two Motors
     Properties:
       Default Command: !!robotbuilder.data.properties.TypeSelectionProperty {default: None,
-        name: Default Command, type: Command, validators: null, value: None}
+        name: Default Command, type: Command, validators: null, value: Arcade Dive}
     Base: Subsystem
     Name: Drivetrain
   Properties: {}
