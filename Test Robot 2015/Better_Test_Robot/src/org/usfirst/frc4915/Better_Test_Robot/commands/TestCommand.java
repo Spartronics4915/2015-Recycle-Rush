@@ -30,7 +30,7 @@ public class  TestCommand extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	System.out.println("Hello World");
+    	System.out.println("Test Command");
     }
 
     // Called repeatedly when this Command is scheduled to run
