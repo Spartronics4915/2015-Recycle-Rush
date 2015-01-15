@@ -50,11 +50,10 @@ public class MecanumDriveControls1 extends Subsystem {
     	return robotDrive41;
     }
     
-    public void mecanumDrive() {
-    	Joystick joystickDrive = Robot.oi.getDriveStick1();
-        double joystickX = joystickDrive.getAxis(Joystick.AxisType.kX);
-        double joystickY = joystickDrive.getAxis(Joystick.AxisType.kY);
-        double joystickTwist = joystickDrive.getAxis(Joystick.AxisType.kTwist);
+    public void mecanumDrive(Joystick joystick) {
+        double joystickX = joystick.getAxis(Joystick.AxisType.kX);
+        double joystickY = joystick.getAxis(Joystick.AxisType.kY);
+        double joystickTwist = joystick.getAxis(Joystick.AxisType.kTwist);
         if ((Math.abs(joystickX) < 0.2) && (Math.abs(joystickY) < 0.2)) {
             if (Math.abs(joystickTwist) < 0.2)
             	robotDrive41.stopMotor();
