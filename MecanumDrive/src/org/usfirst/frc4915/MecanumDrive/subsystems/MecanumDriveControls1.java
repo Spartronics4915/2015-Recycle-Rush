@@ -11,10 +11,11 @@
 
 package org.usfirst.frc4915.MecanumDrive.subsystems;
 
+import org.usfirst.frc4915.MecanumDrive.Robot;
 import org.usfirst.frc4915.MecanumDrive.RobotMap;
 import org.usfirst.frc4915.MecanumDrive.commands.*;
-import edu.wpi.first.wpilibj.*;
 
+import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 
@@ -43,6 +44,23 @@ public class MecanumDriveControls1 extends Subsystem {
 	
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
+    }
+    
+    public RobotDrive getRobotDrive() {
+    	return robotDrive41;
+    }
+    
+    public void mecanumDrive() {
+    	Joystick joystickDrive = Robot.oi.getDriveStick1();
+        double joystickX = joystickDrive.getAxis(Joystick.AxisType.kX);
+        double joystickY = joystickDrive.getAxis(Joystick.AxisType.kY);
+        double joystickTwist = joystickDrive.getAxis(Joystick.AxisType.kTwist);
+        if ((Math.abs(joystickX) < 0.2) && (Math.abs(joystickY) < 0.2)) {
+            if (Math.abs(joystickTwist) < 0.2)
+            	robotDrive41.stopMotor();
+        } else {
+        	robotDrive41.mecanumDrive_Cartesian(joystickX, joystickY, joystickTwist, 0.0);
+        }
     }
 }
 

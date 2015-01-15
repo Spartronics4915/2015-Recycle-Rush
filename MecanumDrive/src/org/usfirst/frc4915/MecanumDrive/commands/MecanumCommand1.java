@@ -11,8 +11,10 @@
 
 package org.usfirst.frc4915.MecanumDrive.commands;
 
-import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc4915.MecanumDrive.Robot;
+
+import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
@@ -35,6 +37,7 @@ public class  MecanumCommand1 extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	Robot.mecanumDriveControls1.mecanumDrive();
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -44,10 +47,12 @@ public class  MecanumCommand1 extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
+    	Robot.mecanumDriveControls1.getRobotDrive().stopMotor();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	end();
     }
 }
