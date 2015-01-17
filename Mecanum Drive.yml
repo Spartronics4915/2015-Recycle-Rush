@@ -115,7 +115,7 @@ Children:
       Name: Robot Drive 4 1
     Properties:
       Default Command: !!robotbuilder.data.properties.TypeSelectionProperty {default: None,
-        name: Default Command, type: Command, validators: null, value: Mecanum Command 1}
+        name: Default Command, type: Command, validators: null, value: Arcade Drive}
     Base: Subsystem
     Name: Mecanum Drive Controls 1
   Properties: {}
@@ -149,6 +149,14 @@ Children:
       Requires: !!robotbuilder.data.properties.TypeSelectionProperty {default: None,
         name: Requires, type: Subsystem, validators: null, value: Mecanum Drive Controls 1}
       Button on SmartDashboard: !!robotbuilder.data.properties.BooleanProperty {default: true,
+        name: Button on SmartDashboard, validators: null, value: true}
+    Base: Command
+    Name: Arcade Drive
+  - Children: []
+    Properties:
+      Requires: !!robotbuilder.data.properties.TypeSelectionProperty {default: None,
+        name: Requires, type: Subsystem, validators: null, value: Mecanum Drive Controls 1}
+      Button on SmartDashboard: !!robotbuilder.data.properties.BooleanProperty {default: true,
         name: Button on SmartDashboard, validators: null, value: false}
     Base: Command
     Name: Mecanum Command 1
@@ -156,7 +164,7 @@ Children:
   Base: Commands
   Name: Commands
 Properties:
-  Eclipse Workspace: !!robotbuilder.data.properties.FileProperty {default: /Users/olivia/workspace,
+  Eclipse Workspace: !!robotbuilder.data.properties.FileProperty {default: /Users/Tarkan/workspace,
     extension: null, folder: true, name: Eclipse Workspace, validators: null, value: /Users/olivia/workspace}
   Export Commands: !!robotbuilder.data.properties.BooleanProperty {default: true,
     name: Export Commands, validators: null, value: true}
