@@ -58,7 +58,7 @@ public class MecanumDriveControls1 extends Subsystem {
             if (Math.abs(joystickTwist) < 0.2)
             	robotDrive41.stopMotor();
         } else {
-        	robotDrive41.mecanumDrive_Cartesian(joystickX, joystickY, joystickTwist, 0.0);
+        	robotDrive41.mecanumDrive_Cartesian(joystickX, joystickY, joystickTwist, RobotMap.gyro.getAngle());
         }
     }
 }
