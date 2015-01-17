@@ -56,5 +56,9 @@ public class MecanumDriveControls1 extends Subsystem {
         	robotDrive41.mecanumDrive_Cartesian(joystickX, joystickY, joystickTwist, 0.0);
         }
     }
+    
+    public void arcadeDrive(Joystick joystick) {
+    	robotDrive41.arcadeDrive(joystick);
+    }
 }
 

@@ -11,7 +11,9 @@
 
 package org.usfirst.frc4915.MecanumDrive.commands;
 
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Command;
+
 import org.usfirst.frc4915.MecanumDrive.Robot;
 
 /**
@@ -35,6 +37,8 @@ public class  ArcadeDrive extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	Joystick joystickDrive = Robot.oi.getDriveStick1();
+    	Robot.mecanumDriveControls1.arcadeDrive(joystickDrive);
     }
 
     // Make this return true when this Command no longer needs to run execute()
