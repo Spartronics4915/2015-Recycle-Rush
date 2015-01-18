@@ -54,11 +54,10 @@ public class MecanumDriveControls1 extends Subsystem {
         double joystickX = joystick.getAxis(Joystick.AxisType.kX);
         double joystickY = joystick.getAxis(Joystick.AxisType.kY);
         double joystickTwist = joystick.getAxis(Joystick.AxisType.kTwist);
-        if ((Math.abs(joystickX) < 0.2) && (Math.abs(joystickY) < 0.2)) {
-            if (Math.abs(joystickTwist) < 0.2)
+        if ((Math.abs(joystickX) < 0.2) && (Math.abs(joystickY) < 0.2) && (Math.abs(joystickTwist) < 0.2)) {
             	robotDrive41.stopMotor();
         } else {
-        	robotDrive41.mecanumDrive_Cartesian(joystickX, joystickY, joystickTwist, RobotMap.gyro.getAngle());
+        	robotDrive41.mecanumDrive_Cartesian(joystickX, joystickY, joystickTwist, 0.0);
         }
     }
 }
