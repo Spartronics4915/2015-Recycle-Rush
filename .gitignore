@@ -1,3 +1,6 @@
 *~
-MecanumDrive/bin/*
+bin/
+build/
+dist/
+.metadata/
 *.class
