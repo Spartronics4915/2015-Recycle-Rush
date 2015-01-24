@@ -46,6 +46,10 @@ public class RobotMap {
 	mecanumDriveControls1LeftRear2.changeControlMode(ControlMode.Speed);
 	mecanumDriveControls1RightFront3.changeControlMode(ControlMode.Speed);
 	mecanumDriveControls1RightRear4.changeControlMode(ControlMode.Speed);
+	mecanumDriveControls1LeftFront1.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
+	mecanumDriveControls1LeftRear2.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
+	mecanumDriveControls1RightFront3.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
+	mecanumDriveControls1RightRear4.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
 	
 	// Gyro instantiation
 	gyro = new Gyro(0);
