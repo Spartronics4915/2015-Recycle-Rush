@@ -24,9 +24,8 @@ public class Grabber extends Subsystem {
      * 
      * @return state of the pneumatics from magnetic switches.
      */
-    public boolean extend() {
+    public void extend() {
     	grabberSolenoid.set(DoubleSolenoid.Value.kForward);
-    	return isGrabberExtended();
     }
     
     /**
@@ -34,9 +33,8 @@ public class Grabber extends Subsystem {
      * 
      * @return state of the pneumatics from magnetic switches.
      */
-    public boolean retract() {
+    public void retract() {
     	grabberSolenoid.set(DoubleSolenoid.Value.kReverse);
-    	return isGrabberExtended();
     }
     
     /**
@@ -44,15 +42,9 @@ public class Grabber extends Subsystem {
      * 
      * @return state of the pneumatics from magnetic switches.
      */
-    public boolean off() {
+    public void off() {
     	grabberSolenoid.set(DoubleSolenoid.Value.kOff);
-    	return isGrabberExtended();
     }
     
-    /**public boolean isGrabberExtended() {
-    	return ???;
-    }
-	*/
-
 }
 
