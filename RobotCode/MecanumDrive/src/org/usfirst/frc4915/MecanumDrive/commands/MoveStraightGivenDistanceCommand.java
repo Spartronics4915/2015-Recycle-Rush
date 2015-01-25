@@ -47,7 +47,10 @@ public class  MoveStraightGivenDistanceCommand extends Command {
     }
     
     double getDistanceForMotor(CANTalon motor, long elapsed){
-    	return motor.getSpeed()*elapsed/1000*6*Math.PI/12;
+    	int ticksPerRevolution = 1000;
+    	double circumferenceOfWheel = 6*Math.PI;
+    	int inchesPerFoot = 12;
+    	return motor.getSpeed()*elapsed/ticksPerRevolution*circumferenceOfWheel/inchesPerFoot;
     }
     
     // Called repeatedly when this Command is scheduled to run
