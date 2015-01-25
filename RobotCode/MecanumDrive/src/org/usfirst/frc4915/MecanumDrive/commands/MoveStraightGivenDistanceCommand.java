@@ -52,12 +52,15 @@ public class  MoveStraightGivenDistanceCommand extends Command {
     
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.mecanumDriveControls1.driveStraight(0.2);
+    	if (inputDistance < 0)
+    		Robot.mecanumDriveControls1.driveStraight(-0.2);
+    	else 
+    		Robot.mecanumDriveControls1.driveStraight(0.2);
     	long elapsed = 0;
     	long startTime = System.currentTimeMillis();
     	long endTime = 0;
     	double distance = 0;
-    	while(distance < inputDistance){
+    	while(Math.abs(distance) < Math.abs(inputDistance)){
     		try {
 				Thread.sleep(100);
 			} catch (InterruptedException e) {
