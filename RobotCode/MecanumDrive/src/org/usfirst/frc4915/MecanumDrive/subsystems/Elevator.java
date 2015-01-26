@@ -32,5 +32,20 @@ public class Elevator extends Subsystem {
 		// TODO Auto-generated method stub
 		
 	}
+
+	public void moveToPosition(int i) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public int getPosition() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public boolean isInPosition(int i) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }
 
