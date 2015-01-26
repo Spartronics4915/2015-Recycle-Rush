@@ -1,15 +1,21 @@
 package org.usfirst.frc4915.MecanumDrive.commands;
 
+import org.usfirst.frc4915.MecanumDrive.RobotMap;
+import org.usfirst.frc4915.MecanumDrive.subsystems.Elevator;
+
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
 public class ElevatorJumpToPosition0 extends Command {
+	
+	Elevator elevator = RobotMap.elevator;
 
     public ElevatorJumpToPosition0() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
+    	requires(elevator);
     }
 
     // Called just before this Command runs the first time
