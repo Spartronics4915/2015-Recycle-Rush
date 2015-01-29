@@ -13,7 +13,7 @@ public class Grabber extends Subsystem {
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 	
-	DoubleSolenoid grabberSolenoid = RobotMap.grabberSolenoid;
+	DoubleSolenoid grabberSolenoid = RobotMap.largeCylinder;
 	
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
