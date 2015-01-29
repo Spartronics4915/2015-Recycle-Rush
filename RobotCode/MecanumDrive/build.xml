@@ -20,11 +20,23 @@
   <!-- <property name="target" value=""/> -->
 
   <!-- Any other property in build.properties can also be overridden. -->
+	
+  <!-- inspired by http://llbit.se/?p=1876 -->
+  <!-- get a new version string using git describe if possible -->
+  <echo message="Updating version string..."/>
+  <exec executable="git" outputproperty="code-version" failifexecutionfails="true">
+  	<!-- `git rev-parse head' echoes the entire SHA hash. Future versions of this will use git describe to show current tag version too. -->
+    <arg line="rev-parse head"/>
+  </exec>
+  <echo message="Version string found: ${code-version}" />
   
   <property file="${user.home}/wpilib/wpilib.properties"/>
   <property file="build.properties"/>
   <property file="${user.home}/wpilib/java/${version}/ant/build.properties"/>
   
-  <import file="${wpilib.ant.dir}/build.xml"/>
+  <!-- <import file="${wpilib.ant.dir}/build.xml"/> -->
+  <!-- We need to use a custom script for versions. -->
+
+  <import file="custom_wpi_build.xml" />
 
 </project> 
