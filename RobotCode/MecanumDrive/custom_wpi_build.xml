@@ -1,8 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
 <!-- 
 NONE OF THIS IS MINE. This is the standard WPI build script with two small additions at lines 94 and 154. Go bug them if it doesn't work!
 -->
 
-<?xml version="1.0" encoding="UTF-8"?>
 
 <project name="athena-project-build" default="deploy">
 
