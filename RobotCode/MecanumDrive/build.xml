@@ -25,8 +25,7 @@
   <!-- get a new version string using git describe if possible -->
   <echo message="Updating version string..."/>
   <exec executable="git" outputproperty="code-version" failifexecutionfails="true">
-  	<!-- `git rev-parse head' echoes the entire SHA hash. Future versions of this will use git describe to show current tag version too. -->
-    <arg line="rev-parse head"/>
+    <arg line="describe --tags"/>
   </exec>
   <echo message="Version string found: ${code-version}" />
   
