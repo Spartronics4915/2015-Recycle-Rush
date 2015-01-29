@@ -1,6 +1,0 @@
-language: java
-jdk:
-  - oraclejdk8
-before_script:
-  - "cd ./RobotCode/MecanumDrive"
-script: "ant jar"
