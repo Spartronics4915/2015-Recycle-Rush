@@ -45,7 +45,7 @@ public class  MoveStraightGivenDistanceCommand extends Command {
     			RobotMap.mecanumDriveControls1RightFront3,
     			RobotMap.mecanumDriveControls1RightRear4 );
     }
-    
+    // calculates the distance traveled using the wheel circumference and the number of wheel rotations. 
     double getDistanceForMotor(CANTalon motor, long elapsed){
     	int ticksPerRevolution = 1000;
     	double circumferenceOfWheel = 6*Math.PI;
@@ -55,27 +55,32 @@ public class  MoveStraightGivenDistanceCommand extends Command {
     
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	// This loop allows for a negative input that will have the robot run backwards. 
     	if (inputDistance < 0)
     		Robot.mecanumDriveControls1.driveStraight(-0.2);
     	else 
     		Robot.mecanumDriveControls1.driveStraight(0.2);
+    	// Creates variables for use in determining the time so we can compute the distance traveled 
     	long elapsed = 0;
     	long startTime = System.currentTimeMillis();
     	long endTime = 0;
+    	// creates a variable to keep track of the time. 
     	double distance = 0;
+    	// creates two variables for use in determining the wait. 
+    	double wait = System.currentTimeMillis();
+    	double time = 0;
+    	// creates a loop to track the distance traveled
     	while(Math.abs(distance) < Math.abs(inputDistance)){
-    		try {
-				Thread.sleep(100);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-    		endTime = System.currentTimeMillis();
-    		elapsed = endTime - startTime;
-    		double distanceSinceElapsed = 0;
-    		for(CANTalon motor : motors){
-    			double distanceForMotor = getDistanceForMotor (motor, elapsed);
-    			distanceSinceElapsed = Math.max(distanceForMotor, distanceSinceElapsed);
+    		if (time < 100){
+    			time = System.currentTimeMillis() - wait;}
+    		else
+    			// uses the time to determine the distance traveled since the last time the robot was sampled.
+    			endTime = System.currentTimeMillis();
+    			elapsed = endTime - startTime;
+    			double distanceSinceElapsed = 0;
+    			for(CANTalon motor : motors){
+    				double distanceForMotor = getDistanceForMotor (motor, elapsed);
+    				distanceSinceElapsed = Math.max(distanceForMotor, distanceSinceElapsed);
     		}
     		distance+=distanceSinceElapsed;
     		startTime=endTime;
