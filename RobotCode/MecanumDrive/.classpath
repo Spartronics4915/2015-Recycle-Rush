@@ -8,5 +8,6 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Network Tables Sources"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/WPI Library"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/WPI Sources"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/WPI Java"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
