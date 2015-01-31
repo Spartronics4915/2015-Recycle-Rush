@@ -48,7 +48,6 @@ public class DriveTrain extends Subsystem {
 
     public void initDefaultCommand() {
         setDefaultCommand(new MecanumDrive());
-        robotDrive.setMaxOutput(.7);
         
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
@@ -70,8 +69,17 @@ public class DriveTrain extends Subsystem {
         double joystickX = joystick.getAxis(Joystick.AxisType.kX);
         double joystickY = joystick.getAxis(Joystick.AxisType.kY);
         double joystickTwist = joystick.getAxis(Joystick.AxisType.kTwist);
-        System.out.println(joystickX + ", " + joystickY + ", " + joystickTwist);
         Throttle = 0.50 * (joystick.getThrottle()) + 0.50; 
+        if ((Math.abs(joystickX) < 0.2)) {
+        	joystickX = 0;
+        }
+        if ((Math.abs(joystickY) < 0.2)) {
+        	joystickY = 0;
+        }
+        if ((Math.abs(joystickTwist) < 0.2)) {
+        	joystickTwist = 0;
+        }
+        System.out.println(joystickX + ", " + joystickY + ", " + joystickTwist);
         if ((Math.abs(joystickX) < 0.2) && (Math.abs(joystickY) < 0.2) && (Math.abs(joystickTwist) < 0.2)) {
             System.out.println("Stopping Motor");	
         	robotDrive.stopMotor();
