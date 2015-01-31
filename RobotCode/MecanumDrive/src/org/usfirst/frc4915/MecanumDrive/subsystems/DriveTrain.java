@@ -48,6 +48,7 @@ public class DriveTrain extends Subsystem {
 
     public void initDefaultCommand() {
         setDefaultCommand(new MecanumDrive());
+        robotDrive.setMaxOutput(.7);
         
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
