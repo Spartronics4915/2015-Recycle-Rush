@@ -54,12 +54,13 @@ public class RobotMap {
     /**
      * GRABBER
      */
-    public static DoubleSolenoid largeCylinder;
-    public static Solenoid smallCylinder;
+    public static DoubleSolenoid mommaSolenoid;
+    public static Solenoid babySolenoid;
     
     /**
      * GENERAL SENSORS
      */
+
     public static BuiltInAccelerometer accelerometer;
     
     
@@ -130,8 +131,8 @@ public class RobotMap {
 		 * GRABBER START
 		 */
 		// Double Solenoid instantiation. Wiring: 0 --> Forward channel (extended). 1 --> Reverse channel (retracted).
-		largeCylinder = new DoubleSolenoid(PCM_NODE_ID, 0, 1); // Uses 10 as the Node ID for the PCM.
-		smallCylinder = new Solenoid(PCM_NODE_ID, 0); //Port numbers need to be decided for both solenoids
+		mommaSolenoid = new DoubleSolenoid(PCM_NODE_ID, 0, 1); // Uses 10 as the Node ID for the PCM.
+		babySolenoid = new Solenoid(PCM_NODE_ID, 0); //Port numbers need to be decided for both solenoids
 		/**
 		 * GRABBER END
 		 */
