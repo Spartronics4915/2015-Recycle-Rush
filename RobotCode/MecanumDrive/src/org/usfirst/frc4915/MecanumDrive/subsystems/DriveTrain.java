@@ -67,12 +67,12 @@ public class DriveTrain extends Subsystem {
         double joystickX = joystick.getAxis(Joystick.AxisType.kX);
         double joystickY = joystick.getAxis(Joystick.AxisType.kY);
         double joystickTwist = joystick.getAxis(Joystick.AxisType.kTwist);
-        System.out.println(joystickX + ", " + joystickY + ", " + joystickTwist);
+        //System.out.println(joystickX + ", " + joystickY + ", " + joystickTwist);
         if ((Math.abs(joystickX) < 0.2) && (Math.abs(joystickY) < 0.2) && (Math.abs(joystickTwist) < 0.2)) {
-            System.out.println("Stopping Motor");	
+            //System.out.println("Stopping Motor");	
         	robotDrive.stopMotor();
         } else {
-        	System.out.println("Driving");
+        	//System.out.println("Driving");
         	robotDrive.mecanumDrive_Cartesian(joystickX, joystickY, joystickTwist, 0.0);
         }
     }
@@ -91,6 +91,7 @@ public class DriveTrain extends Subsystem {
     	int ticksPerRevolution = 1000;
     	double circumferenceOfWheel = 6*Math.PI;
     	int inchesPerFoot = 12;
+    	System.out.println("Speed" + motor.getSpeed());
     	return motor.getSpeed()*elapsed/ticksPerRevolution*circumferenceOfWheel/inchesPerFoot;
     }
     
