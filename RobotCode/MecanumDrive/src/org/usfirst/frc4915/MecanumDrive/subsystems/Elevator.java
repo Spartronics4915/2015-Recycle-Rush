@@ -2,10 +2,9 @@ package org.usfirst.frc4915.MecanumDrive.subsystems;
 
 import org.usfirst.frc4915.MecanumDrive.RobotMap;
 import org.usfirst.frc4915.MecanumDrive.commands.ElevatorFineTune;
-
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
+import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.Joystick;
-import java.text.DecimalFormat;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -30,7 +29,7 @@ public class Elevator extends Subsystem {
 	public final double POSITION_FIVE = 5; 
 	public final double POSITION_SIX = 6; // Highest position
 	
-	
+	public CANTalon winch = RobotMap.elevatorWinchMotor14;
 	
     public void initDefaultCommand() {
     	setDefaultCommand(new ElevatorFineTune());
@@ -38,23 +37,28 @@ public class Elevator extends Subsystem {
         //setDefaultCommand(new MySpecialCommand());
     }
 
-	public boolean isInPosition(int i) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean isInPosition(double position) {
+		if (Math.abs(position - getPosition()) <= 1) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
     
     public void moveToPosition(double position) {
     	
-    	if (roundPosition(position) == roundPosition(getPosition())) {
+    	if (isInPosition(position)) {
     		System.out.println("You are already in this position.");
     	}
     	else {
-    		/* TODO
-    		 * double distanceToTravel = roundPosition(getPosition()) - roundPosition(position);
-    		 * math to convert distanceToTravel to rotations or time to travel
-    		 */
-    		System.out.println("Moving elevator.");
+    		double speed = TEMP;
+    		if (getPosition() > position) { // Let positive be up and negative be down
+    			speed = speed * -1;
+    		}
+    		// TODO find way to start motor
     	}
+    	System.out.println("Moving elevator.");
     }
     
     public void moveAtSpeed(Joystick Axis) {
@@ -65,7 +69,8 @@ public class Elevator extends Subsystem {
     
     public void stopElevator() {
     	// stops any current commands telling the elevator to move.
-    	// TODO find out how to stop the elevator 
+    	
+    	winch.stopMotor();
     	System.out.println("Elevator has stopped.");
     }
     
@@ -75,26 +80,10 @@ public class Elevator extends Subsystem {
     public double getPosition() {
     	// Returns the position of the elevator.
     	// TODO find how to get the position
-    	double position = TEMP;
+    	double position = potentiometer.get(); // Current voltage reading
     	
     	System.out.println("We got the current position of the elevator.");
     	return position;
-    }
-    
-    private double roundPosition(double position) {
-    	System.out.printf("position has been rounded from %f to %f",
-    			position, Double.parseDouble(new DecimalFormat("#.#").format(position)));
-    	
-    	return Double.parseDouble(new DecimalFormat("#.#").format(position));
-    }
-    
-    public boolean isInPosition(double position) {
-    	if (roundPosition(position) == roundPosition(getPosition())) {
-    		return true;
-    	}
-    	else {
-    		return false;
-    	}
     }
 }
 
