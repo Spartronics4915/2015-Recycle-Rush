@@ -55,18 +55,23 @@ public class  MoveStraightGivenDistanceCommand extends Command {
     protected void initialize() {
     	
     	// This loop allows for a negative input that will have the robot run backwards. 
-    	if (inputDistance < 0)
+    	if (inputDistance < 0) {
+    		System.out.println("Driving backwards...");
     		driveTrain.driveStraight(-0.2);
-    	else 
+    	}
+    	else { 
+    		System.out.println("Driving forwards...");
     		driveTrain.driveStraight(0.2);
+    	}
     	// Creates variables for use in determining the time so we can compute the distance traveled 
     	elapsed = 0;
     	startTime = System.currentTimeMillis();
+		System.out.println("Start time recorded: " + startTime);
     	endTime = 0;
     	// creates a variable to keep track of the time. 
     	distance = 0;
     	// creates two variables for use in determining the wait. 
-    	wait = System.currentTimeMillis();
+    	wait = startTime;
     	time = 0;
     }
     /**
@@ -78,35 +83,44 @@ public class  MoveStraightGivenDistanceCommand extends Command {
     	// creates a loop to track the distance traveled
     		if (time < 100){
     			time = System.currentTimeMillis() - wait;
+    			System.out.println("Time is now " + time + " out of 100");
 			}
     		else {
     			// uses the time to determine the distance traveled since the last time the robot was sampled.
     			endTime = System.currentTimeMillis();
     			elapsed = endTime - startTime;
     			distanceSinceElapsed = 0;
+        		System.out.println("Recorded end time: " + endTime + " (difference of " + elapsed + " seconds)s");
     			//maybe a method???
     			for(CANTalon motor : motors) {
     				double distanceForMotor = driveTrain.getDistanceForMotor(motor, elapsed);
+        			System.out.println("Distance for motor " + motor + ": " + distanceForMotor);
     				distanceSinceElapsed = Math.max(distanceForMotor, distanceSinceElapsed);
+        			System.out.println("Distance since elapsed: " + distanceSinceElapsed);
     			}
     		}
     		distance += distanceSinceElapsed;
-    		startTime = endTime; 	
+    		startTime = endTime;
+    		System.out.println("Completed movement of " + distance + " ft.");
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return (Math.abs(distance) > Math.abs(inputDistance));
+        boolean finished = (Math.abs(distance) > Math.abs(inputDistance));
+		System.out.println("Testing if finished: " + finished);
+		return finished;
     }
 
     // Called once after isFinished returns true
     protected void end() {
+		System.out.println("Stopping motor");
     	driveTrain.getRobotDrive().stopMotor(); 
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+		System.out.println("Command interrupted!");
     	end();
     }
 }
