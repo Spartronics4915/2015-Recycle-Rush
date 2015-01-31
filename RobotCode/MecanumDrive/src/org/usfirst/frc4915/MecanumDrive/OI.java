@@ -92,7 +92,8 @@ public class OI {
         LiveWindow.addSensor("Drive Train", "Distance Sensor", Robot.driveTrain.distanceSensor);
 
         // Shows the current version number on the driver station
-        SmartDashboard.putString("Code Version", VersionFinder.parseVersionFromManifest(this));
+        String parsedVersion = VersionFinder.parseVersionFromManifest(this);
+        SmartDashboard.putString("Code Version", parsedVersion == null? "<not found>" : parsedVersion);
     }
     
     /**
