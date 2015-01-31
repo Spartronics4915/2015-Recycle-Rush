@@ -64,7 +64,7 @@ public class Elevator extends Subsystem {
     public void moveAtSpeed(Joystick Axis) {
     	// moves elevator at a constant speed
     	// TODO
-		System.out.println("Joystick is moving at a constant speed");
+		//System.out.println("Joystick is moving at a constant speed");
     }
     
     public void stopElevator() {
