@@ -29,7 +29,7 @@ public class Elevator extends Subsystem {
 	public final double POSITION_FIVE = 5; 
 	public final double POSITION_SIX = 6; // Highest position
 	
-	public CANTalon Elevator = RobotMap.elevatorWinchMotor14;
+	public CANTalon winch = RobotMap.elevatorWinchMotor14;
 	
     public void initDefaultCommand() {
     	setDefaultCommand(new ElevatorFineTune());
@@ -70,7 +70,7 @@ public class Elevator extends Subsystem {
     public void stopElevator() {
     	// stops any current commands telling the elevator to move.
     	
-    	Elevator.stopMotor();
+    	winch.stopMotor();
     	System.out.println("Elevator has stopped.");
     }
     

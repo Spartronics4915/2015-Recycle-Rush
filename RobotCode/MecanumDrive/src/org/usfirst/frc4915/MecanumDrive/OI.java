@@ -87,7 +87,7 @@ public class OI {
         driveStick = new Joystick(1);
         elevatorStick = new Joystick(2);
 
-	    
+
         // SmartDashboard Buttons
         SmartDashboard.putData("Autonomous Command", new AutonomousCommand());
         SmartDashboard.putData("Move Straight 5 feet", new MoveStraightGivenDistanceCommand(5));
