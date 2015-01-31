@@ -41,6 +41,8 @@ public class DriveTrain extends Subsystem {
     public static Gyro gyro = RobotMap.gyro;
     public static Ultrasonic distanceSensor = RobotMap.distanceSensor;
     
+    public double Throttle = 0;
+
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 
@@ -67,12 +69,13 @@ public class DriveTrain extends Subsystem {
         double joystickX = joystick.getAxis(Joystick.AxisType.kX);
         double joystickY = joystick.getAxis(Joystick.AxisType.kY);
         double joystickTwist = joystick.getAxis(Joystick.AxisType.kTwist);
-        //System.out.println(joystickX + ", " + joystickY + ", " + joystickTwist);
+        System.out.println(joystickX + ", " + joystickY + ", " + joystickTwist);
+        Throttle = 0.50 * (joystick.getThrottle()) + 0.50; 
         if ((Math.abs(joystickX) < 0.2) && (Math.abs(joystickY) < 0.2) && (Math.abs(joystickTwist) < 0.2)) {
-            //System.out.println("Stopping Motor");	
+            System.out.println("Stopping Motor");	
         	robotDrive.stopMotor();
         } else {
-        	//System.out.println("Driving");
+        	System.out.println("Driving");
         	robotDrive.mecanumDrive_Cartesian(joystickX, joystickY, joystickTwist, 0.0);
         }
     }
@@ -80,6 +83,8 @@ public class DriveTrain extends Subsystem {
     public void driveStraight(double speed) {
     	robotDrive.drive(speed, 0);
     }
+    
+
     /**
      * 
      * @param motor is the motor on the wheels with an encoder used to determine the distance traveled. 
