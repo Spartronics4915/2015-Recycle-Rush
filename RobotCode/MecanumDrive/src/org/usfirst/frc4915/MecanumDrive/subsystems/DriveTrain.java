@@ -97,6 +97,7 @@ public class DriveTrain extends Subsystem {
     	int ticksPerRevolution = 1000;
     	double circumferenceOfWheel = 6*Math.PI;
     	int inchesPerFoot = 12;
+    	System.out.println("Speed" + motor.getSpeed());
     	return motor.getSpeed()*elapsed/ticksPerRevolution*circumferenceOfWheel/inchesPerFoot;
     }
     
