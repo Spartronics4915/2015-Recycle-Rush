@@ -54,15 +54,6 @@ public class  MoveStraightGivenDistanceCommand extends Command {
      */
     protected void initialize() {
     	
-    	// This loop allows for a negative input that will have the robot run backwards. 
-    	if (inputDistance < 0) {
-    		System.out.println("Driving backwards...");
-    		driveTrain.driveStraight(-0.2);
-    	}
-    	else { 
-    		System.out.println("Driving forwards...");
-    		driveTrain.driveStraight(0.2);
-    	}
     	// Creates variables for use in determining the time so we can compute the distance traveled 
     	elapsed = 0;
     	startTime = System.currentTimeMillis();
@@ -80,6 +71,15 @@ public class  MoveStraightGivenDistanceCommand extends Command {
     
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	// This loop allows for a negative input that will have the robot run backwards. 
+    	if (inputDistance < 0) {
+    		System.out.println("Driving backwards...");
+    		driveTrain.driveStraight(-0.2);
+    	}
+    	else { 
+    		System.out.println("Driving forwards...");
+    		driveTrain.driveStraight(0.2);
+    	}
     	// creates a loop to track the distance traveled
     		if (time < 100){
     			time = System.currentTimeMillis() - wait;
