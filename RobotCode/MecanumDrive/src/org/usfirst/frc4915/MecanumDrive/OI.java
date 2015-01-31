@@ -79,9 +79,12 @@ public class OI {
         elevatorJumpToPositionFour.whenPressed(new ElevatorJumpToPosition4());
         elevatorJumpToPositionFive = new JoystickButton(elevatorStick, 11); // TODO find buttons number
         elevatorJumpToPositionFive.whenPressed(new ElevatorJumpToPosition5());
-        elevatorJumpToPositionSix = new JoystickButton(elevatorStick, 3); // TODO find buttons number
+        elevatorJumpToPositionSix = new JoystickButton(elevatorStick, 6); // TODO find buttons number
         elevatorJumpToPositionSix.whenPressed(new ElevatorJumpToPosition6());
-	    
+        
+        driveStick = new Joystick(1);
+        elevatorStick = new Joystick(2);
+
         // SmartDashboard Buttons
         SmartDashboard.putData("Autonomous Command", new AutonomousCommand());
         SmartDashboard.putData("Move Straight 5 feet", new MoveStraightGivenDistanceCommand(5));
