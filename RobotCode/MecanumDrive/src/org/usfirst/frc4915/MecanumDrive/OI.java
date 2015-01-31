@@ -85,18 +85,25 @@ public class OI {
         elevatorJumpToPositionFour.whenPressed(new ElevatorJumpToPosition4());
         elevatorJumpToPositionFive = new JoystickButton(elevatorStick, 11); // TODO find buttons number
         elevatorJumpToPositionFive.whenPressed(new ElevatorJumpToPosition5());
-        elevatorJumpToPositionSix = new JoystickButton(elevatorStick, 12); // TODO find buttons number
+        elevatorJumpToPositionSix = new JoystickButton(elevatorStick, 3); // TODO find buttons number
         elevatorJumpToPositionSix.whenPressed(new ElevatorJumpToPosition6());
 	    
         // SmartDashboard Buttons
         SmartDashboard.putData("Autonomous Command", new AutonomousCommand());
         SmartDashboard.putData("Move Straight 5 feet", new MoveStraightGivenDistanceCommand(5));
         SmartDashboard.putData("Move Backwards 5 feet", new MoveStraightGivenDistanceCommand(-5));
+        SmartDashboard.putData("DriveStraight 1 second", new DriveStraight());
         
         // LiveWindowSendable info (Test mode)
         LiveWindow.addSensor("Other Sensors", "Accelerometer", RobotMap.accelerometer);
         LiveWindow.addSensor("Drive Train", "Distance Sensor", Robot.driveTrain.distanceSensor);
-
+        
+        // Motor values
+        SmartDashboard.putDouble("LeftFront Speed", RobotMap.mecanumDriveControls1LeftFront10.getSpeed());
+        SmartDashboard.putDouble("LeftRear Speed", RobotMap.mecanumDriveControls1LeftRear11.getSpeed());
+        SmartDashboard.putDouble("RightFront Speed", RobotMap.mecanumDriveControls1RightFront12.getSpeed());
+        SmartDashboard.putDouble("RightRear Speed", RobotMap.mecanumDriveControls1RightRear13.getSpeed());
+        
         // Shows the current version number on the driver station
         String parsedVersion = VersionFinder.parseVersionFromManifest(this);
         SmartDashboard.putString("Code Version", parsedVersion == null? "<not found>" : parsedVersion);
