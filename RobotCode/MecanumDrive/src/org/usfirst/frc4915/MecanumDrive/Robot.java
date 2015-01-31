@@ -41,7 +41,7 @@ public class Robot extends IterativeRobot {
      * used for any initialization code.
      */
     public void robotInit() {
-    RobotMap.init();
+    	RobotMap.init();
         driveTrain = new DriveTrain();
         elevator = new Elevator();
         // OI must be constructed after subsystems. If the OI creates Commands 
