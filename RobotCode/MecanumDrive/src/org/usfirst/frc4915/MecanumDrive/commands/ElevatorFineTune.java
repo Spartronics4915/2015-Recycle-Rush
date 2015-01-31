@@ -11,11 +11,11 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class ElevatorFineTune extends Command {
 
-	Elevator elevator = RobotMap.elevator;
+	Elevator elevator = Robot.elevator;
     public ElevatorFineTune() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(RobotMap.elevator);
+    	requires(Robot.elevator);
     }
 
     // Called just before this Command runs the first time
