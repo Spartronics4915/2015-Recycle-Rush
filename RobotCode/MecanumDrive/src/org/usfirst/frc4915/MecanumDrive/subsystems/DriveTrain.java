@@ -82,7 +82,7 @@ public class DriveTrain extends Subsystem {
     }
     
     public void driveStraight(double speed) {
-    	robotDrive.drive(speed, 0);
+    	robotDrive.mecanumDrive_Cartesian(speed, speed, 0.0, 0.0);
     }
     
 
