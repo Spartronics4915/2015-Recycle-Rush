@@ -47,19 +47,20 @@ public class RobotMap {
     public static DigitalInput limitSwitchBottom; // May be used for elevator as a sensor for testing if at the bottom of elevator
     public static DigitalInput limitSwitchTop; // May be used for elevator as a sensor for testing if at the top of elevator
     // Potentiometer
-    private static int inputPort = 1; // Analog input port for the potentiometer.
-	private static int scale = 1; // Scaling for the potentiometer
+    private static int inputPort = 1; // TODO find correct port for the potentiometer
+	private static int scale = 1; // TODO find correct scale for the potentiometer
     public static AnalogPotentiometer potentiometer;
     
     /**
      * GRABBER
      */
-    public static DoubleSolenoid largeCylinder;
-    public static Solenoid smallCylinder;
+    public static DoubleSolenoid mommaSolenoid;
+    public static Solenoid babySolenoid;
     
     /**
      * GENERAL SENSORS
      */
+
     public static BuiltInAccelerometer accelerometer;
     
     
@@ -130,8 +131,8 @@ public class RobotMap {
 		 * GRABBER START
 		 */
 		// Double Solenoid instantiation. Wiring: 0 --> Forward channel (extended). 1 --> Reverse channel (retracted).
-		largeCylinder = new DoubleSolenoid(PCM_NODE_ID, 0, 1); // Uses 10 as the Node ID for the PCM.
-		smallCylinder = new Solenoid(PCM_NODE_ID, 0); //Port numbers need to be decided for both solenoids
+		mommaSolenoid = new DoubleSolenoid(PCM_NODE_ID, 0, 1); // Uses 10 as the Node ID for the PCM.
+		babySolenoid = new Solenoid(PCM_NODE_ID, 0); //Port numbers need to be decided for both solenoids
 		/**
 		 * GRABBER END
 		 */
