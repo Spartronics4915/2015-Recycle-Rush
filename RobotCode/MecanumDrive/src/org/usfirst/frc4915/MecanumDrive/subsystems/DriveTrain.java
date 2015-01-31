@@ -32,7 +32,7 @@ public class DriveTrain extends Subsystem {
     SpeedController leftRear = RobotMap.mecanumDriveControls1LeftRear11;
     SpeedController rightFront = RobotMap.mecanumDriveControls1RightFront12;
     SpeedController rightRear = RobotMap.mecanumDriveControls1RightRear13;
-    RobotDrive robotDrive = RobotMap.driveTrainRobotDrive;
+    RobotDrive robotDrive;
 
     public static List <CANTalon> motors =  Arrays.asList(RobotMap.mecanumDriveControls1LeftFront10, 
 			RobotMap.mecanumDriveControls1LeftRear11, 
@@ -52,6 +52,8 @@ public class DriveTrain extends Subsystem {
 	
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
+        
+        robotDrive = RobotMap.driveTrainRobotDrive;
     }
     
     public RobotDrive getRobotDrive() {
@@ -64,12 +66,16 @@ public class DriveTrain extends Subsystem {
      * @param joystick that controls the robot movement
      */
     public void mecanumDrive(Joystick joystick) {
+    	
         double joystickX = joystick.getAxis(Joystick.AxisType.kX);
         double joystickY = joystick.getAxis(Joystick.AxisType.kY);
         double joystickTwist = joystick.getAxis(Joystick.AxisType.kTwist);
+        System.out.println(joystickX + ", " + joystickY + ", " + joystickTwist);
         if ((Math.abs(joystickX) < 0.2) && (Math.abs(joystickY) < 0.2) && (Math.abs(joystickTwist) < 0.2)) {
-            	robotDrive.stopMotor();
+            System.out.println("Stopping Motor");	
+        	robotDrive.stopMotor();
         } else {
+        	System.out.println("Driving");
         	robotDrive.mecanumDrive_Cartesian(joystickX, joystickY, joystickTwist, 0.0);
         }
     }
@@ -89,6 +95,11 @@ public class DriveTrain extends Subsystem {
     	double circumferenceOfWheel = 6*Math.PI;
     	int inchesPerFoot = 12;
     	return motor.getSpeed()*elapsed/ticksPerRevolution*circumferenceOfWheel/inchesPerFoot;
+    }
+    
+    public void arcadeDrive(Joystick stick){
+    	System.out.println("Arcade Drive");
+    	robotDrive.arcadeDrive(stick);
     }
 }
 
