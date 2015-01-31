@@ -74,11 +74,11 @@ public class  MoveStraightGivenDistanceCommand extends Command {
     	// This loop allows for a negative input that will have the robot run backwards. 
     	if (inputDistance < 0) {
     		System.out.println("Driving backwards...");
-    		driveTrain.driveStraight(-0.2,0.2);
+    		driveTrain.driveStraight(1);
     	}
     	else { 
     		System.out.println("Driving forwards...");
-    		driveTrain.driveStraight(0.2,-0.2);
+    		driveTrain.driveStraight(1);
     	}
     	// creates a loop to track the distance traveled
     		if (time < 100){
