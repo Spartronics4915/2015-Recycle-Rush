@@ -11,6 +11,7 @@
 
 package org.usfirst.frc4915.MecanumDrive;
     
+import org.usfirst.frc4915.MecanumDrive.subsystems.DriveTrain;
 import org.usfirst.frc4915.MecanumDrive.subsystems.Elevator;
 
 import edu.wpi.first.wpilibj.*;
@@ -59,8 +60,10 @@ public class RobotMap {
     /**
      * GENERAL SENSORS
      */
+
+    public static BuiltInAccelerometer accelerometer;
     
-  
+    
     // The Pneumatic Control Module's CAN Node ID. Use 10 for 4915. Use 20 for 9999.
     public final static int PCM_NODE_ID = 10;
     
@@ -74,14 +77,18 @@ public class RobotMap {
 		mecanumDriveControls1LeftRear11 = new CANTalon(11);
 		mecanumDriveControls1RightFront12 = new CANTalon(12);
 		mecanumDriveControls1RightRear13 = new CANTalon(13);
-//		mecanumDriveControls1LeftFront10.changeControlMode(ControlMode.Speed);
-//		mecanumDriveControls1LeftRear11.changeControlMode(ControlMode.Speed);
-//		mecanumDriveControls1RightFront12.changeControlMode(ControlMode.Speed);
-//		mecanumDriveControls1RightRear13.changeControlMode(ControlMode.Speed);
-//		mecanumDriveControls1LeftFront10.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
-//		mecanumDriveControls1LeftRear11.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
-//		mecanumDriveControls1RightFront12.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
-//		mecanumDriveControls1RightRear13.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
+		mecanumDriveControls1LeftFront10.changeControlMode(ControlMode.Speed);
+		mecanumDriveControls1LeftRear11.changeControlMode(ControlMode.Speed);
+		mecanumDriveControls1RightFront12.changeControlMode(ControlMode.Speed);
+		mecanumDriveControls1RightRear13.changeControlMode(ControlMode.Speed);
+		mecanumDriveControls1LeftFront10.set(0);
+		mecanumDriveControls1LeftRear11.set(0);
+		mecanumDriveControls1RightFront12.set(0);
+		mecanumDriveControls1RightRear13.set(0);
+		mecanumDriveControls1LeftFront10.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
+	    mecanumDriveControls1LeftRear11.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
+		mecanumDriveControls1RightFront12.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
+		mecanumDriveControls1RightRear13.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
 		
 		driveTrainRobotDrive = new RobotDrive(mecanumDriveControls1LeftFront10, 
 				   mecanumDriveControls1LeftRear11,
@@ -134,6 +141,9 @@ public class RobotMap {
 		/**
 		 * GENERAL SENSORS START
 		 */
+		// Built in Accelerometer
+		accelerometer = new BuiltInAccelerometer();
+		accelerometer.startLiveWindowMode();
 		/**
 		 * SENSORS END
 		 */
