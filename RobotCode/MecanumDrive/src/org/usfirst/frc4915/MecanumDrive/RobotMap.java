@@ -74,14 +74,14 @@ public class RobotMap {
 		mecanumDriveControls1LeftRear11 = new CANTalon(11);
 		mecanumDriveControls1RightFront12 = new CANTalon(12);
 		mecanumDriveControls1RightRear13 = new CANTalon(13);
-		mecanumDriveControls1LeftFront10.changeControlMode(ControlMode.Speed);
-		mecanumDriveControls1LeftRear11.changeControlMode(ControlMode.Speed);
-		mecanumDriveControls1RightFront12.changeControlMode(ControlMode.Speed);
-		mecanumDriveControls1RightRear13.changeControlMode(ControlMode.Speed);
-		mecanumDriveControls1LeftFront10.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
-		mecanumDriveControls1LeftRear11.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
-		mecanumDriveControls1RightFront12.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
-		mecanumDriveControls1RightRear13.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
+//		mecanumDriveControls1LeftFront10.changeControlMode(ControlMode.Speed);
+//		mecanumDriveControls1LeftRear11.changeControlMode(ControlMode.Speed);
+//		mecanumDriveControls1RightFront12.changeControlMode(ControlMode.Speed);
+//		mecanumDriveControls1RightRear13.changeControlMode(ControlMode.Speed);
+//		mecanumDriveControls1LeftFront10.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
+//		mecanumDriveControls1LeftRear11.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
+//		mecanumDriveControls1RightFront12.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
+//		mecanumDriveControls1RightRear13.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
 		
 		driveTrainRobotDrive = new RobotDrive(mecanumDriveControls1LeftFront10, 
 				   mecanumDriveControls1LeftRear11,

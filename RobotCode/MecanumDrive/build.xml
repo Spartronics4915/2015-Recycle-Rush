@@ -33,9 +33,8 @@
   <property file="build.properties"/>
   <property file="${user.home}/wpilib/java/${version}/ant/build.properties"/>
   
-  <!-- <import file="${wpilib.ant.dir}/build.xml"/> -->
+  <import file="${wpilib.ant.dir}/build.xml"/>
   <!-- We need to use a custom script for versions. -->
 
-  <import file="custom_wpi_build.xml" />
 
 </project> 
