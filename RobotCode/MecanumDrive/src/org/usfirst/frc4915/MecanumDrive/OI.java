@@ -12,9 +12,12 @@
 package org.usfirst.frc4915.MecanumDrive;
 
 import org.usfirst.frc4915.MecanumDrive.commands.AutonomousCommand;
+import org.usfirst.frc4915.MecanumDrive.commands.CloseGrabber;
 import org.usfirst.frc4915.MecanumDrive.commands.DriveStraight;
 import org.usfirst.frc4915.MecanumDrive.commands.ElevatorJumpToPosition;
 import org.usfirst.frc4915.MecanumDrive.commands.MoveStraightGivenDistanceCommand;
+import org.usfirst.frc4915.MecanumDrive.commands.OpenGrabber;
+import org.usfirst.frc4915.MecanumDrive.commands.OpenSmallGrabber;
 import org.usfirst.frc4915.MecanumDrive.subsystems.Elevator;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -100,6 +103,11 @@ public class OI {
         SmartDashboard.putData("Move Straight 5 feet", new MoveStraightGivenDistanceCommand(5));
         SmartDashboard.putData("Move Backwards 5 feet", new MoveStraightGivenDistanceCommand(-5));
         SmartDashboard.putData("DriveStraight 1 second", new DriveStraight());
+        SmartDashboard.putData("Open Large Grabber", new OpenGrabber());
+        SmartDashboard.putData("Push Small Grabber", new OpenSmallGrabber());
+        SmartDashboard.putData("Release Small Grabber", new OpenGrabber());
+        SmartDashboard.putData("Close Large Grabber", new CloseGrabber());
+
         
         // LiveWindowSendable info (Test mode)
         LiveWindow.addSensor("Other Sensors", "Accelerometer", RobotMap.accelerometer);

@@ -25,7 +25,6 @@ public class Grabber extends Subsystem {
         //setDefaultCommand(new MySpecialCommand());
     }
     
-    //TODO review these methods for them to do what they describe
     /**
      * Extend the large piston. This will move arms to position for picking up wide totes.
      */
