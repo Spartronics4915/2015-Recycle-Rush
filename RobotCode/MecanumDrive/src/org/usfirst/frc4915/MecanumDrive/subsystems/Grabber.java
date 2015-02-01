@@ -39,9 +39,10 @@ public class Grabber extends Subsystem {
     }
     
     /**
-     * Extend the small piston. This will tighten the grip on the totes so they can be picked up.
+     * Extend the small piston. This will tighten the grip on the totes so they can be picked up. // TODO this may be changed later
      */
     public void pinch() {
+    	
     	babySolenoid.set(true);
     }
     
