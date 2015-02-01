@@ -11,6 +11,7 @@
 
 package org.usfirst.frc4915.MecanumDrive;
     
+import org.usfirst.frc4915.MecanumDrive.subsystems.DriveTrain;
 import org.usfirst.frc4915.MecanumDrive.subsystems.Elevator;
 
 import edu.wpi.first.wpilibj.*;
@@ -53,15 +54,14 @@ public class RobotMap {
     /**
      * GRABBER
      */
-    public static DoubleSolenoid largeCylinder;
-    public static Solenoid smallCylinder;
+    public static DoubleSolenoid mommaSolenoid;
+    public static Solenoid babySolenoid;
     
     /**
      * GENERAL SENSORS
      */
     public static BuiltInAccelerometer accelerometer;
-    
-    
+
     // The Pneumatic Control Module's CAN Node ID. Use 10 for 4915. Use 20 for 9999.
     public final static int PCM_NODE_ID = 10;
     
@@ -79,8 +79,12 @@ public class RobotMap {
 //		mecanumDriveControls1LeftRear11.changeControlMode(ControlMode.Speed);
 //		mecanumDriveControls1RightFront12.changeControlMode(ControlMode.Speed);
 //		mecanumDriveControls1RightRear13.changeControlMode(ControlMode.Speed);
+//		mecanumDriveControls1LeftFront10.set(0);
+//		mecanumDriveControls1LeftRear11.set(0);
+//		mecanumDriveControls1RightFront12.set(0);
+//		mecanumDriveControls1RightRear13.set(0);
 //		mecanumDriveControls1LeftFront10.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
-//		mecanumDriveControls1LeftRear11.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
+//	    mecanumDriveControls1LeftRear11.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
 //		mecanumDriveControls1RightFront12.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
 //		mecanumDriveControls1RightRear13.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
 		
@@ -125,8 +129,8 @@ public class RobotMap {
 		 * GRABBER START
 		 */
 		// Double Solenoid instantiation. Wiring: 0 --> Forward channel (extended). 1 --> Reverse channel (retracted).
-		largeCylinder = new DoubleSolenoid(PCM_NODE_ID, 0, 1); // Uses 10 as the Node ID for the PCM.
-		smallCylinder = new Solenoid(PCM_NODE_ID, 0); //Port numbers need to be decided for both solenoids
+		mommaSolenoid = new DoubleSolenoid(PCM_NODE_ID, 0, 1); // Uses 10 as the Node ID for the PCM.
+		babySolenoid = new Solenoid(PCM_NODE_ID, 0); //Port numbers need to be decided for both solenoids
 		/**
 		 * GRABBER END
 		 */
@@ -135,7 +139,9 @@ public class RobotMap {
 		/**
 		 * GENERAL SENSORS START
 		 */
+		// Built in Accelerometer
 		accelerometer = new BuiltInAccelerometer();
+		accelerometer.startLiveWindowMode();
 		/**
 		 * SENSORS END
 		 */

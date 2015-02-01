@@ -7,27 +7,27 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class ArcadeDrive extends Command {
+public class DriveStraight extends Command {
 
-    public ArcadeDrive() {
+    public DriveStraight() {
         // Use requires() here to declare subsystem dependencies
         requires(Robot.driveTrain);
+        setTimeout(1);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	System.out.println("Drive Straight");
+    	Robot.driveTrain.driveStraight(.2);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	//TODO read joystick value for thottle and update motor values with the modified throttle
-    	Robot.driveTrain.arcadeDrive(Robot.oi.getDriveStick1());
-    	
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return isTimedOut();
     }
 
     // Called once after isFinished returns true
