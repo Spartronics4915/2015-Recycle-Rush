@@ -11,7 +11,11 @@
 
 package org.usfirst.frc4915.MecanumDrive;
 
-import org.usfirst.frc4915.MecanumDrive.commands.*;
+import org.usfirst.frc4915.MecanumDrive.commands.AutonomousCommand;
+import org.usfirst.frc4915.MecanumDrive.commands.DriveStraight;
+import org.usfirst.frc4915.MecanumDrive.commands.ElevatorJumpToPosition;
+import org.usfirst.frc4915.MecanumDrive.commands.MoveStraightGivenDistanceCommand;
+import org.usfirst.frc4915.MecanumDrive.subsystems.Elevator;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -74,19 +78,19 @@ public class OI {
         elevatorStick = new Joystick(1);
         
         elevatorJumpToPositionZero = new JoystickButton(elevatorStick, 2); // TODO find buttons number
-        elevatorJumpToPositionZero.whenPressed(new ElevatorJumpToPosition0());
+        elevatorJumpToPositionZero.whenPressed(new ElevatorJumpToPosition(Elevator.POSITION_ZERO, 0));
         elevatorJumpToPositionOne = new JoystickButton(elevatorStick, 7); // TODO find buttons number
-        elevatorJumpToPositionOne.whenPressed(new ElevatorJumpToPosition1());
+        elevatorJumpToPositionOne.whenPressed(new ElevatorJumpToPosition(Elevator.POSITION_ONE, 1));
         elevatorJumpToPositionTwo = new JoystickButton(elevatorStick, 8); // TODO find buttons number
-        elevatorJumpToPositionTwo.whenPressed(new ElevatorJumpToPosition2());
+        elevatorJumpToPositionTwo.whenPressed(new ElevatorJumpToPosition(Elevator.POSITION_TWO, 2));
         elevatorJumpToPositionThree = new JoystickButton(elevatorStick, 9); // TODO find buttons number
-        elevatorJumpToPositionThree.whenPressed(new ElevatorJumpToPosition3());
+        elevatorJumpToPositionThree.whenPressed(new ElevatorJumpToPosition(Elevator.POSITION_THREE, 3));
         elevatorJumpToPositionFour = new JoystickButton(elevatorStick, 10); // TODO find buttons number
-        elevatorJumpToPositionFour.whenPressed(new ElevatorJumpToPosition4());
+        elevatorJumpToPositionFour.whenPressed(new ElevatorJumpToPosition(Elevator.POSITION_FOUR, 4));
         elevatorJumpToPositionFive = new JoystickButton(elevatorStick, 11); // TODO find buttons number
-        elevatorJumpToPositionFive.whenPressed(new ElevatorJumpToPosition5());
+        elevatorJumpToPositionFive.whenPressed(new ElevatorJumpToPosition(Elevator.POSITION_FIVE, 5));
         elevatorJumpToPositionSix = new JoystickButton(elevatorStick, 6); // TODO find buttons number
-        elevatorJumpToPositionSix.whenPressed(new ElevatorJumpToPosition6());
+        elevatorJumpToPositionSix.whenPressed(new ElevatorJumpToPosition(Elevator.POSITION_SIX, 6));
         
         driveStick = new Joystick(0);
         elevatorStick = new Joystick(1);
