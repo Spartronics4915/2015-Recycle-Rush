@@ -4,7 +4,7 @@ import org.usfirst.frc4915.MecanumDrive.Robot;
 import org.usfirst.frc4915.MecanumDrive.subsystems.Elevator;
 import edu.wpi.first.wpilibj.command.Command;
 
-public abstract class ElevatorJumpToPosition extends Command {
+public class ElevatorJumpToPosition extends Command {
 	Elevator elevator = Robot.elevator;
 	int numberOfTotes;
 	private double heightOfPosition;

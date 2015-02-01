@@ -60,10 +60,8 @@ public class RobotMap {
     /**
      * GENERAL SENSORS
      */
-
     public static BuiltInAccelerometer accelerometer;
-    
-    
+
     // The Pneumatic Control Module's CAN Node ID. Use 10 for 4915. Use 20 for 9999.
     public final static int PCM_NODE_ID = 10;
     
