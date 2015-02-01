@@ -88,8 +88,8 @@ public class OI {
         elevatorJumpToPositionSix = new JoystickButton(elevatorStick, 6); // TODO find buttons number
         elevatorJumpToPositionSix.whenPressed(new ElevatorJumpToPosition6());
         
-        driveStick = new Joystick(1);
-        elevatorStick = new Joystick(2);
+        driveStick = new Joystick(0);
+        elevatorStick = new Joystick(1);
 
         // SmartDashboard Buttons
         SmartDashboard.putData("Autonomous Command", new AutonomousCommand());
@@ -102,10 +102,15 @@ public class OI {
         LiveWindow.addSensor("Drive Train", "Distance Sensor", Robot.driveTrain.distanceSensor);
         
         // Motor values
-        SmartDashboard.putDouble("LeftFront Speed", RobotMap.mecanumDriveControls1LeftFront10.getSpeed());
-        SmartDashboard.putDouble("LeftRear Speed", RobotMap.mecanumDriveControls1LeftRear11.getSpeed());
-        SmartDashboard.putDouble("RightFront Speed", RobotMap.mecanumDriveControls1RightFront12.getSpeed());
-        SmartDashboard.putDouble("RightRear Speed", RobotMap.mecanumDriveControls1RightRear13.getSpeed());
+        SmartDashboard.putNumber("LeftFront Speed", RobotMap.mecanumDriveControls1LeftFront10.getSpeed());
+        SmartDashboard.putNumber("LeftRear Speed", RobotMap.mecanumDriveControls1LeftRear11.getSpeed());
+        SmartDashboard.putNumber("RightFront Speed", RobotMap.mecanumDriveControls1RightFront12.getSpeed());
+        SmartDashboard.putNumber("RightRear Speed", RobotMap.mecanumDriveControls1RightRear13.getSpeed());
+        
+        SmartDashboard.putNumber("LeftFront Position", RobotMap.mecanumDriveControls1LeftFront10.getEncPosition());
+        SmartDashboard.putNumber("LeftRear Position", RobotMap.mecanumDriveControls1LeftRear11.getEncPosition());
+        SmartDashboard.putNumber("RightFront Position", RobotMap.mecanumDriveControls1RightFront12.getEncPosition());
+        SmartDashboard.putNumber("RightRear Position", RobotMap.mecanumDriveControls1RightRear13.getEncPosition());
         
         // Shows the current version number on the driver station
         String parsedVersion = VersionFinder.parseVersionFromManifest(this);

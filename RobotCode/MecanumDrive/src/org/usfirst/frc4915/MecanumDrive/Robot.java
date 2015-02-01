@@ -17,6 +17,7 @@ import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc4915.MecanumDrive.commands.*;
 import org.usfirst.frc4915.MecanumDrive.subsystems.*;
@@ -99,6 +100,11 @@ public class Robot extends IterativeRobot {
      * This function is called periodically during operator control
      */
     public void teleopPeriodic() {
+        System.out.println("LeftFront Position: " + RobotMap.mecanumDriveControls1LeftFront10.getEncPosition());
+        System.out.println("LeftRear Position: " + RobotMap.mecanumDriveControls1LeftRear11.getEncPosition());
+        System.out.println("RightFront Position: " + RobotMap.mecanumDriveControls1RightFront12.getEncPosition());
+        System.out.println("RightRear Position: " + RobotMap.mecanumDriveControls1RightRear13.getEncPosition());
+
         Scheduler.getInstance().run();
     }
 

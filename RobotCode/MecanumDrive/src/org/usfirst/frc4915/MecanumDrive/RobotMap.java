@@ -85,10 +85,10 @@ public class RobotMap {
 //		mecanumDriveControls1LeftRear11.set(0);
 //		mecanumDriveControls1RightFront12.set(0);
 //		mecanumDriveControls1RightRear13.set(0);
-//		mecanumDriveControls1LeftFront10.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
-//	    mecanumDriveControls1LeftRear11.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
-//		mecanumDriveControls1RightFront12.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
-//		mecanumDriveControls1RightRear13.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
+		mecanumDriveControls1LeftFront10.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
+	    mecanumDriveControls1LeftRear11.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
+		mecanumDriveControls1RightFront12.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
+		mecanumDriveControls1RightRear13.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
 		
 		driveTrainRobotDrive = new RobotDrive(mecanumDriveControls1LeftFront10, 
 				   mecanumDriveControls1LeftRear11,
@@ -132,7 +132,7 @@ public class RobotMap {
 		 */
 		// Double Solenoid instantiation. Wiring: 0 --> Forward channel (extended). 1 --> Reverse channel (retracted).
 		mommaSolenoid = new DoubleSolenoid(PCM_NODE_ID, 0, 1); // Uses 10 as the Node ID for the PCM.
-		babySolenoid = new Solenoid(PCM_NODE_ID, 0); //Port numbers need to be decided for both solenoids
+		babySolenoid = new Solenoid(PCM_NODE_ID, 2); //Port numbers need to be decided for both solenoids
 		/**
 		 * GRABBER END
 		 */
