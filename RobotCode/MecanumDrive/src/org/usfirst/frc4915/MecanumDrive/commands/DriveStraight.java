@@ -1,27 +1,24 @@
 package org.usfirst.frc4915.MecanumDrive.commands;
 
 import org.usfirst.frc4915.MecanumDrive.Robot;
-import org.usfirst.frc4915.MecanumDrive.RobotMap;
-import org.usfirst.frc4915.MecanumDrive.subsystems.Elevator;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class ElevatorJumpToPosition5 extends Command {
-	Elevator elevator = Robot.elevator;
+public class DriveStraight extends Command {
 
-    public ElevatorJumpToPosition5() {
+    public DriveStraight() {
         // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
-    	requires(elevator);
+        requires(Robot.driveTrain);
+        setTimeout(1);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	System.out.println("Moving elevator to position 5");
-    	elevator.moveToPosition(5);
+    	System.out.println("Drive Straight");
+    	Robot.driveTrain.driveStraight(.2);
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -30,13 +27,11 @@ public class ElevatorJumpToPosition5 extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return (elevator.isInPosition(5));
+        return isTimedOut();
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	System.out.println("Elevator is in position 5");
-    	elevator.stopElevator();
     }
 
     // Called when another command which requires one or more of the same

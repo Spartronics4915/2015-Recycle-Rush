@@ -17,6 +17,7 @@ import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc4915.MecanumDrive.commands.*;
 import org.usfirst.frc4915.MecanumDrive.subsystems.*;
@@ -35,15 +36,17 @@ public class Robot extends IterativeRobot {
     public static OI oi;
     public static DriveTrain driveTrain;
     public static Elevator elevator;
+    public static Grabber grabber;
 
     /**
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
      */
     public void robotInit() {
-    RobotMap.init();
+    	RobotMap.init();
         driveTrain = new DriveTrain();
         elevator = new Elevator();
+        grabber = new Grabber();
         // OI must be constructed after subsystems. If the OI creates Commands 
         //(which it very likely will), subsystems are not guaranteed to be 
         // constructed yet. Thus, their requires() statements may grab null 
@@ -97,6 +100,11 @@ public class Robot extends IterativeRobot {
      * This function is called periodically during operator control
      */
     public void teleopPeriodic() {
+        System.out.println("LeftFront Position: " + RobotMap.mecanumDriveControls1LeftFront10.getEncPosition());
+        System.out.println("LeftRear Position: " + RobotMap.mecanumDriveControls1LeftRear11.getEncPosition());
+        System.out.println("RightFront Position: " + RobotMap.mecanumDriveControls1RightFront12.getEncPosition());
+        System.out.println("RightRear Position: " + RobotMap.mecanumDriveControls1RightRear13.getEncPosition());
+
         Scheduler.getInstance().run();
     }
 

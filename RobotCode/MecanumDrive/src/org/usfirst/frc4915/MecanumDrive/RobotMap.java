@@ -11,6 +11,7 @@
 
 package org.usfirst.frc4915.MecanumDrive;
     
+import org.usfirst.frc4915.MecanumDrive.subsystems.DriveTrain;
 import org.usfirst.frc4915.MecanumDrive.subsystems.Elevator;
 
 import edu.wpi.first.wpilibj.*;
@@ -46,24 +47,23 @@ public class RobotMap {
     public static DigitalInput limitSwitchBottom; // May be used for elevator as a sensor for testing if at the bottom of elevator
     public static DigitalInput limitSwitchTop; // May be used for elevator as a sensor for testing if at the top of elevator
     // Potentiometer
-    private static int inputPort = 1; // Analog input port for the potentiometer.
-	private static int scale = 1; // Scaling for the potentiometer
+    private static int inputPort = 1; // TODO find correct port for the potentiometer
+	private static int scale = 1; // TODO find correct scale for the potentiometer
     public static AnalogPotentiometer potentiometer;
     
     /**
      * GRABBER
      */
-    public static DoubleSolenoid largeCylinder;
-    public static Solenoid smallCylinder;
+    public static DoubleSolenoid mommaSolenoid;
+    public static Solenoid babySolenoid;
     
     /**
      * GENERAL SENSORS
      */
-    
-    
-    
+    public static BuiltInAccelerometer accelerometer;
+
     // The Pneumatic Control Module's CAN Node ID. Use 10 for 4915. Use 20 for 9999.
-    public final static int PCM_NODE_ID = 10;
+    public final static int PCM_NODE_ID = 20;
     
     public static void init() {
 		
@@ -75,12 +75,16 @@ public class RobotMap {
 		mecanumDriveControls1LeftRear11 = new CANTalon(11);
 		mecanumDriveControls1RightFront12 = new CANTalon(12);
 		mecanumDriveControls1RightRear13 = new CANTalon(13);
-		mecanumDriveControls1LeftFront10.changeControlMode(ControlMode.Speed);
-		mecanumDriveControls1LeftRear11.changeControlMode(ControlMode.Speed);
-		mecanumDriveControls1RightFront12.changeControlMode(ControlMode.Speed);
-		mecanumDriveControls1RightRear13.changeControlMode(ControlMode.Speed);
+//		mecanumDriveControls1LeftFront10.changeControlMode(ControlMode.Speed);
+//		mecanumDriveControls1LeftRear11.changeControlMode(ControlMode.Speed);
+//		mecanumDriveControls1RightFront12.changeControlMode(ControlMode.Speed);
+//		mecanumDriveControls1RightRear13.changeControlMode(ControlMode.Speed);
+//		mecanumDriveControls1LeftFront10.set(0);
+//		mecanumDriveControls1LeftRear11.set(0);
+//		mecanumDriveControls1RightFront12.set(0);
+//		mecanumDriveControls1RightRear13.set(0);
 		mecanumDriveControls1LeftFront10.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
-		mecanumDriveControls1LeftRear11.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
+	    mecanumDriveControls1LeftRear11.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
 		mecanumDriveControls1RightFront12.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
 		mecanumDriveControls1RightRear13.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
 		
@@ -125,8 +129,8 @@ public class RobotMap {
 		 * GRABBER START
 		 */
 		// Double Solenoid instantiation. Wiring: 0 --> Forward channel (extended). 1 --> Reverse channel (retracted).
-		largeCylinder = new DoubleSolenoid(PCM_NODE_ID, 0, 1); // Uses 10 as the Node ID for the PCM.
-		smallCylinder = new Solenoid(PCM_NODE_ID, 0); //Port numbers need to be decided for both solenoids
+		mommaSolenoid = new DoubleSolenoid(PCM_NODE_ID, 0, 1); // Uses 10 as the Node ID for the PCM.
+		babySolenoid = new Solenoid(PCM_NODE_ID, 2); //Port numbers need to be decided for both solenoids
 		/**
 		 * GRABBER END
 		 */
@@ -135,6 +139,9 @@ public class RobotMap {
 		/**
 		 * GENERAL SENSORS START
 		 */
+		// Built in Accelerometer
+		accelerometer = new BuiltInAccelerometer();
+		accelerometer.startLiveWindowMode();
 		/**
 		 * SENSORS END
 		 */
