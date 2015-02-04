@@ -1,7 +1,78 @@
-*~
-bin/
-build/
-dist/
-.metadata/
+# Build #
+#########
+MANIFEST.MF
+dependency-reduced-pom.xml
+
+# Compiled #
+############
+bin
+build
+dist
+lib
+out
+run
+target
 *.class
+*.com
+*.dll
+*.exe
+*.o
+*.so
+
+# Databases #
+#############
+*.db
+*.sql
+*.sqlite
+
+# Packages #
+############
+*.7z
+*.dmg
+*.gz
+*.iso
+*.rar
+*.tar
+*.zip
+
+# Repository #
+##############
+.git
+
+# Logging #
+###########
+/logs
+*.log
+
+# Misc #
+########
+*.bak
+
+# System #
+##########
+.DS_Store
+ehthumbs.db
+Thumbs.db
+
+# Project #
+###########
+.checkstyle
+.classpath
+.externalToolBuilders
+.factorypath
+.gradle
+.idea
+.metadata/
+.project
 .recommenders
+.settings
+atlassian-ide-plugin.xml
+build.xml
+eclipse
+nb-configuration.xml
+nbproject
+run
+*.iml
+*.ipr
+*.iws
+/.apt_generated/
