@@ -1,0 +1,82 @@
+plugins {
+    id "java"
+    id 'org.hidetake.ssh' version '0.4.5'
+}
+
+sourceCompatibility = '1.8'
+targetCompatibility = '1.8'
+
+def wpilibDir = System.env['HOME'] + '/wpilib/java/current'
+
+def getVersionName = { ->
+    def stdout = new ByteArrayOutputStream()
+    exec {
+        commandLine 'git', 'describe', '--tags'
+        standardOutput = stdout
+    }
+    return stdout.toString().trim()
+}
+
+def gitVersion = getVersionName()
+
+println """
+***** Starting roboRIO build script *****
+
+Code version found: ${gitVersion}
+length: ${gitVersion.length()}
+
+*****************************************
+"""
+
+repositories {
+    mavenCentral()
+
+    flatDir {
+        dirs wpilibDir + '/lib'
+    }
+}
+
+dependencies {
+
+    compile name: 'NetworkTables'
+    compile name: 'WPILib'
+
+}
+
+remotes {
+    roboRIO {
+        host = 'roboRIO-' + team + '.local'
+        user = 'admin'
+        password = ''
+    }
+}
+
+ssh.settings {
+    knownHosts = allowAnyHosts
+}
+
+jar {
+    baseName = 'FRCUserProgram'
+
+    manifest {
+        attributes 'Main-Class': 'edu.wpi.first.wpilibj.RobotBase',
+                'Robot-Class': robotClass,
+                'Build-Version': gitVersion
+    }
+
+    from {
+        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
+
+task deploy(dependsOn: 'jar') << {
+    description = "Deploy the user program to the roboRIO"
+
+    ssh.run {
+        session(remotes.roboRIO) {
+            put jar.archivePath, '/home/lvuser'
+            put wpilibDir + '/ant/robotCommand', '/home/lvuser'
+            execute '. /etc/profile.d/natinst-path.sh; /usr/local/frc/bin/frcKillRobot.sh -t -r'
+        }
+    }
+}
