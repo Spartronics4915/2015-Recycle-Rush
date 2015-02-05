@@ -47,7 +47,7 @@ public class CustomDebugger
 /**
  * the collection of desired names for the loggers
  */
-	enum LoggerNames
+	public static enum LoggerNames
 	{
 	    	Drivetrain,
 	    	Grabber,

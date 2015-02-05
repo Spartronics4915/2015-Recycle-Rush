@@ -113,7 +113,7 @@ public class RobotMap {
 		/**
 		 * ELEVATOR START
 		 */
-		//Elevator instantiation
+		//ELEVATOR instantiation
 		elevatorWinchMotor14 = new CANTalon(14);
 		
 		// Potentiometer instantiation
