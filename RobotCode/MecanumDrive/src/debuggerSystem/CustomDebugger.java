@@ -44,7 +44,9 @@ public class CustomDebugger
 {
     
 	private Map<LoggerNames,Logger> loggerMap = new HashMap<>(); 
-	
+/**
+ * the collection of desired names for the loggers
+ */
 	enum LoggerNames
 	{
 	    	Drivetrain,
@@ -53,7 +55,12 @@ public class CustomDebugger
 	    	Autonomous,
 	    	Elevator;
     }
-	   
+
+/**
+ * constructor for CustomDebugger
+ *  fills the hashmap with the loggers defined in enumerator LoggerNames
+ *  calls setFormatter and stopParentHandlerLogerUse
+ */
     public CustomDebugger()
     {
         for (LoggerNames n: LoggerNames.values())
@@ -64,7 +71,12 @@ public class CustomDebugger
         this.stopParentHandlerLoggerUse();
         
     }
-    
+/**
+ * Sets the internal filter of the debugger, turns all
+ * other loggers but this off
+ * 
+ * @param a one of the LoggerNames in the enumerator LoggerNames
+ */
     public void setFilter(LoggerNames a)
     {   
         for (Logger n: loggerMap.values())
@@ -75,7 +87,11 @@ public class CustomDebugger
             }
         }
     }
-    
+/**
+ * Sets the internal filter of the debugger, turns all
+ * loggers back on, this must be called before another
+ * filter is applied
+ */
     public void resetFilter()
     {
         for (Logger n : loggerMap.values())
@@ -83,7 +99,12 @@ public class CustomDebugger
                 n.setLevel(Level.ALL);
         }
     }
-    
+/**
+ *  a private method that sets the setUseParentHandlers option
+ *  in java.util.logging to false
+ * makes the entire formatter system work
+ * it is called during 
+ */
     private void stopParentHandlerLoggerUse()
     {
         for (Logger n : loggerMap.values())
@@ -91,7 +112,10 @@ public class CustomDebugger
                 n.setUseParentHandlers(false);
         }
     }
-    
+/**
+ * a private method called during initialization
+ * gives each logger a preconfigured handler
+ */
     private void setFormatter()
     {
         CustomFormatter doge = new CustomFormatter();
@@ -105,7 +129,12 @@ public class CustomDebugger
         
         
     }
-    
+/**
+ * checks through all loggers to test for activation
+ * 
+ * @return boolean[] at index i it represents if Logger at
+ * index i in the enumerator LoggerNames is on or off
+ */
     public boolean[] checkFilter()
     {
        //returns an array of booleans showing if a logger is off or on (false for off true for on)
@@ -128,7 +157,11 @@ public class CustomDebugger
        return output;
     }
     
-    
+/**
+ * 
+ * @param a the LoggerNames that is desired to handle the message
+ * @param b the string that is passed to the logger to log
+ */
     public void logError(LoggerNames a, String b)
     {   
         loggerMap.get(a).info(b);

@@ -17,7 +17,6 @@ public class CustomFormatter extends Formatter
         output += record.getLoggerName();
         output += ": ";
         output += record.getMessage();
-        //System.out.println("Custom format was called");
         output += "\n";
         return output;
     }
@@ -30,7 +29,6 @@ public class CustomFormatter extends Formatter
         output += record.getLoggerName();
         output += ": ";
         output += record.getMessage();
-        System.out.println("Custom formatMessage was called");
         output += "\n";
         return output;
     }
