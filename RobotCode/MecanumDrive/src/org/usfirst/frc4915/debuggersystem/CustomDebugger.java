@@ -40,85 +40,70 @@ import java.util.logging.ConsoleHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class CustomDebugger
-{
+public class CustomDebugger {
 
-	private Map<LoggerNames, Logger> loggerMap = new HashMap<>();
+    private Map<LoggerNames, Logger> loggerMap = new HashMap<>();
 
-	enum LoggerNames
-	{
-        DRIVETRAIN,
-        GRABBER,
-        GENERAL,
-        AUTONOMOUS,
-        ELEVATOR
-    }
-
-    public CustomDebugger()
-    {
-        for (LoggerNames n: LoggerNames.values())
-        {
-        	loggerMap.put(n, Logger.getLogger(n.name()));
+    public CustomDebugger() {
+        for (LoggerNames n : LoggerNames.values()) {
+            loggerMap.put(n, Logger.getLogger(n.name()));
         }
         this.setFormatter();
         this.stopParentHandlerLoggerUse();
     }
-    
-    public void setFilter(LoggerNames a)
-    {
-        for (Logger n : loggerMap.values())
-        {
-            if (!n.getName().equalsIgnoreCase(a.name()))
-            {
+
+    public void setFilter(LoggerNames a) {
+        for (Logger n : loggerMap.values()) {
+            if (!n.getName().equalsIgnoreCase(a.name())) {
                 n.setLevel(Level.OFF);
             }
         }
     }
-    
-    public void resetFilter()
-    {
-        for (Logger n : loggerMap.values())
-        {
+
+    public void resetFilter() {
+        for (Logger n : loggerMap.values()) {
             n.setLevel(Level.ALL);
         }
     }
-    
-    public void stopParentHandlerLoggerUse()
-    {
-        for (Logger n : loggerMap.values())
-        {
+
+    public void stopParentHandlerLoggerUse() {
+        for (Logger n : loggerMap.values()) {
             n.setUseParentHandlers(false);
         }
     }
-    
-    public void setFormatter()
-    {
+
+    public void setFormatter() {
         CustomFormatter customFormatter = new CustomFormatter();
         ConsoleHandler handler = new ConsoleHandler();
-        
+
         handler.setFormatter(customFormatter);
         for (Logger n : loggerMap.values()) {
             n.addHandler(handler);
         }
     }
-    
-    public boolean[] checkFilter()
-    {
+
+    public boolean[] checkFilter() {
         //returns an array of booleans showing if a logger is off or on (false for off true for on)
         boolean[] output = new boolean[loggerMap.size()];
         int i = 0;
-        for (Logger n : loggerMap.values())
-        {
+        for (Logger n : loggerMap.values()) {
             output[i] = (n.getLevel() == Level.OFF);
             i++;
         }
 
-       return output;
+        return output;
     }
 
-    public void logError(LoggerNames a, String b)
-    {   
+    public void logError(LoggerNames a, String b) {
         loggerMap.get(a).info(b);
+    }
+
+    enum LoggerNames {
+        DRIVETRAIN,
+        GRABBER,
+        GENERAL,
+        AUTONOMOUS,
+        ELEVATOR
     }
 
 }
