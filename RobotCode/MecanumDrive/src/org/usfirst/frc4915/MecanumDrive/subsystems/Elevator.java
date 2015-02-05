@@ -6,6 +6,7 @@ import org.usfirst.frc4915.MecanumDrive.commands.ElevatorFineTune;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.CANTalon.ControlMode;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -34,6 +35,9 @@ public class Elevator extends Subsystem {
 	
 	public static final double MOTOR_SPEED = .5; // TODO find correct speed
 	public static final double CONSTANT_SPEED = .1; // TODO find correct value for constant speed
+	
+	public DigitalInput limitSwitchBottom = RobotMap.limitSwitchBottom;
+	public DigitalInput limitSwitchTop = RobotMap.limitSwitchTop;
 	
 	public CANTalon winch = RobotMap.elevatorWinchMotor14;
 	
@@ -118,6 +122,14 @@ public class Elevator extends Subsystem {
     	// Returns the position of the elevator
     	System.out.println("We got the current position of the elevator.");
     	return potentiometer.get();
+    }
+    	
+    public boolean isOverMaxHeight() {
+    	return limitSwitchTop.get();
+    }
+    
+    public boolean isBelowMinHeight() {
+    	return limitSwitchBottom.get();
     }
 }
 
