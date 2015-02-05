@@ -33,8 +33,8 @@ public class  MecanumDrive extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	// TODO Use Custom Debugger
     	System.out.println("Starting MecanumDrive Command");
-        Robot.driveTrain.getRobotDrive().setMaxOutput(.2);
     }
 
     // Called repeatedly when this Command is scheduled to run
