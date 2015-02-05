@@ -84,7 +84,7 @@ public class CustomDebugger
         }
     }
     
-    public void stopParentHandlerLoggerUse()
+    private void stopParentHandlerLoggerUse()
     {
         for (Logger n : loggerMap.values())
         {
@@ -92,7 +92,7 @@ public class CustomDebugger
         }
     }
     
-    public void setFormatter()
+    private void setFormatter()
     {
         CustomFormatter doge = new CustomFormatter();
         ConsoleHandler handler = new ConsoleHandler();
