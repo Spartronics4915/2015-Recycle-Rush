@@ -2,40 +2,22 @@
 
 <project name="FRC Deployment" default="deploy">
 
-  <!--
-  The following properties can be defined to override system level
-  settings. These should not be touched unless you know what you're
-  doing. The primary use is to override the wpilib version when
-  working with older robots that can't compile with the latest
-  libraries.
-  -->
+    <!-- inspired by http://llbit.se/?p=1876 -->
+    <!-- get a new version string using git describe if possible -->
+    <echo message="Updating version string..."/>
+    <exec executable="git" outputproperty="code-version" errorproperty="code-version" error="UNKNOWN-VERSION"
+          failifexecutionfails="false">
+        <arg line="describe --tags"/>
+    </exec>
+    <echo message="Version string found: ${code-version}"/>
 
-  <!-- By default the system version of WPI is used -->
-  <!-- <property name="version" value=""/> -->
+    <property file="${user.home}/wpilib/wpilib.properties"/>
+    <property file="build.properties"/>
+    <property file="${user.home}/wpilib/java/${version}/ant/build.properties"/>
 
-  <!-- By default the system team number is used -->
-  <!-- <property name="team-number" value=""/> -->
+    <!-- <import file="${wpilib.ant.dir}/build.xml"/> -->
+    <!-- We need to use a custom script for versions. -->
 
-  <!-- By default the target is set to 10.TE.AM.2 -->
-  <!-- <property name="target" value=""/> -->
-
-  <!-- Any other property in build.properties can also be overridden. -->
-	
-  <!-- inspired by http://llbit.se/?p=1876 -->
-  <!-- get a new version string using git describe if possible -->
-  <echo message="Updating version string..."/>
-  <exec executable="git" outputproperty="code-version" failifexecutionfails="true">
-    <arg line="describe --tags"/>
-  </exec>
-  <echo message="Version string found: ${code-version}" />
-  
-  <property file="${user.home}/wpilib/wpilib.properties"/>
-  <property file="build.properties"/>
-  <property file="${user.home}/wpilib/java/${version}/ant/build.properties"/>
-  
-  <!-- <import file="${wpilib.ant.dir}/build.xml"/> -->
-  <!-- We need to use a custom script for versions. -->
-
-  <import file="custom_wpi_build.xml"/>
+    <import file="custom_wpi_build.xml"/>
 
 </project> 
