@@ -15,8 +15,10 @@ import org.usfirst.frc4915.MecanumDrive.Robot;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Command;
-
+import org.usfirst.frc4915.debuggersystem.CustomDebugger;
+import org.usfirst.frc4915.debuggersystem.CustomDebugger.LoggerNames;
 /**
+ * 
  *
  */
 public class  MecanumDrive extends Command {
@@ -33,8 +35,11 @@ public class  MecanumDrive extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	// TODO Use Custom Debugger
-    	System.out.println("Starting MecanumDrive Command");
+    	CustomDebugger doge = new CustomDebugger();
+    	doge.logError(LoggerNames.DRIVETRAIN, "Starting MecanumDrive Command");
+    	doge.setFilter(LoggerNames.DRIVETRAIN);
+    	doge.resetFilter();
+    	
     }
 
     // Called repeatedly when this Command is scheduled to run
