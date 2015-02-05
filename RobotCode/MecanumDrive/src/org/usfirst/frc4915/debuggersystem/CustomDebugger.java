@@ -98,7 +98,7 @@ public class CustomDebugger {
         loggerMap.get(a).info(b);
     }
 
-    enum LoggerNames {
+    public static enum LoggerNames {
         DRIVETRAIN,
         GRABBER,
         GENERAL,
