@@ -116,10 +116,8 @@ public class Elevator extends Subsystem {
  	
     public double getPosition() {
     	// Returns the position of the elevator
-    	
-    	double position = potentiometer.get();
     	System.out.println("We got the current position of the elevator.");
-    	return position;
+    	return potentiometer.get();
     }
 }
 

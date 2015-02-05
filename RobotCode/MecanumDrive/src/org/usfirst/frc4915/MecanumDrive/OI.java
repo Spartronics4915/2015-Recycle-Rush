@@ -112,6 +112,9 @@ public class OI {
         // LiveWindowSendable info (Test mode)
         LiveWindow.addSensor("Other Sensors", "Accelerometer", RobotMap.accelerometer);
         LiveWindow.addSensor("Drive Train", "Distance Sensor", Robot.driveTrain.distanceSensor);
+        LiveWindow.addSensor("Elevator", "Upper limit switch", RobotMap.limitSwitchTop);
+        LiveWindow.addSensor("Elevator", "Lower limit switch", RobotMap.limitSwitchBottom);
+        LiveWindow.addSensor("Elevator", "Linear potentiometer", RobotMap.potentiometer);
         
         // Motor values
         SmartDashboard.putNumber("LeftFront Speed", RobotMap.mecanumDriveControls1LeftFront10.getSpeed());
@@ -123,6 +126,10 @@ public class OI {
         SmartDashboard.putNumber("LeftRear Position", RobotMap.mecanumDriveControls1LeftRear11.getEncPosition());
         SmartDashboard.putNumber("RightFront Position", RobotMap.mecanumDriveControls1RightFront12.getEncPosition());
         SmartDashboard.putNumber("RightRear Position", RobotMap.mecanumDriveControls1RightRear13.getEncPosition());
+        
+        SmartDashboard.putNumber("Elevator Speed", RobotMap.elevatorWinchMotor14.getSpeed());
+        
+        SmartDashboard.putNumber("Linear Potentiometer height", RobotMap.potentiometer.get());
         
         // Shows the current version number on the driver station
         String parsedVersion = VersionFinder.parseVersionFromManifest(this);
