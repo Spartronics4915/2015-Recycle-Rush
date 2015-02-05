@@ -138,7 +138,7 @@ public class DriveTrain extends Subsystem {
     
     public void arcadeDrive(Joystick stick){
     	 CustomDebugger doge = new CustomDebugger();
-     	doge.logError(LoggerNames.DRIVETRAIN, ("Arcade Drive");
+     	doge.logError(LoggerNames.DRIVETRAIN, "Arcade Drive");
      	doge.setFilter(LoggerNames.DRIVETRAIN);
      	doge.resetFilter();
     	robotDrive.arcadeDrive(stick);
