@@ -24,7 +24,15 @@ public class ElevatorJumpToPosition extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	elevator.moveToPosition(heightOfPosition);
+    	if(elevator.isOverMaxHeight()) {
+    		elevator.moveToPosition(elevator.POSITION_SIX);
+    	}
+    	else if(elevator.isBelowMinHeight()) {
+    		elevator.moveToPosition(elevator.POSITION_ZERO);
+    	}
+    	else {
+    		elevator.moveToPosition(heightOfPosition);
+    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()

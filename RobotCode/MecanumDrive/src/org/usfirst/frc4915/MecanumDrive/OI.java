@@ -80,19 +80,19 @@ public class OI {
         driveStick = new Joystick(0);
         elevatorStick = new Joystick(1);
         
-        elevatorJumpToPositionZero = new JoystickButton(elevatorStick, 2); // TODO find buttons number
+        elevatorJumpToPositionZero = new JoystickButton(elevatorStick, 2); 
         elevatorJumpToPositionZero.whenPressed(new ElevatorJumpToPosition(Elevator.POSITION_ZERO, 0));
-        elevatorJumpToPositionOne = new JoystickButton(elevatorStick, 7); // TODO find buttons number
+        elevatorJumpToPositionOne = new JoystickButton(elevatorStick, 7); 
         elevatorJumpToPositionOne.whenPressed(new ElevatorJumpToPosition(Elevator.POSITION_ONE, 1));
-        elevatorJumpToPositionTwo = new JoystickButton(elevatorStick, 8); // TODO find buttons number
+        elevatorJumpToPositionTwo = new JoystickButton(elevatorStick, 8);
         elevatorJumpToPositionTwo.whenPressed(new ElevatorJumpToPosition(Elevator.POSITION_TWO, 2));
-        elevatorJumpToPositionThree = new JoystickButton(elevatorStick, 9); // TODO find buttons number
+        elevatorJumpToPositionThree = new JoystickButton(elevatorStick, 9); 
         elevatorJumpToPositionThree.whenPressed(new ElevatorJumpToPosition(Elevator.POSITION_THREE, 3));
-        elevatorJumpToPositionFour = new JoystickButton(elevatorStick, 10); // TODO find buttons number
+        elevatorJumpToPositionFour = new JoystickButton(elevatorStick, 10); 
         elevatorJumpToPositionFour.whenPressed(new ElevatorJumpToPosition(Elevator.POSITION_FOUR, 4));
-        elevatorJumpToPositionFive = new JoystickButton(elevatorStick, 11); // TODO find buttons number
+        elevatorJumpToPositionFive = new JoystickButton(elevatorStick, 11); 
         elevatorJumpToPositionFive.whenPressed(new ElevatorJumpToPosition(Elevator.POSITION_FIVE, 5));
-        elevatorJumpToPositionSix = new JoystickButton(elevatorStick, 6); // TODO find buttons number
+        elevatorJumpToPositionSix = new JoystickButton(elevatorStick, 6);
         elevatorJumpToPositionSix.whenPressed(new ElevatorJumpToPosition(Elevator.POSITION_SIX, 6));
         
         driveStick = new Joystick(0);
@@ -107,7 +107,13 @@ public class OI {
         SmartDashboard.putData("Push Small Grabber", new OpenSmallGrabber());
         SmartDashboard.putData("Release Small Grabber", new OpenGrabber());
         SmartDashboard.putData("Close Large Grabber", new CloseGrabber());
-
+        SmartDashboard.putData("Jump to Elevator Position", new ElevatorJumpToPosition(Elevator.POSITION_ZERO, 0));
+        SmartDashboard.putData("Jump to Elevator Position", new ElevatorJumpToPosition(Elevator.POSITION_ONE, 1));
+        SmartDashboard.putData("Jump to Elevator Position", new ElevatorJumpToPosition(Elevator.POSITION_TWO, 2));
+        SmartDashboard.putData("Jump to Elevator Position", new ElevatorJumpToPosition(Elevator.POSITION_THREE, 3));
+        SmartDashboard.putData("Jump to Elevator Position", new ElevatorJumpToPosition(Elevator.POSITION_FOUR, 4));
+        SmartDashboard.putData("Jump to Elevator Position", new ElevatorJumpToPosition(Elevator.POSITION_FIVE, 5));
+        SmartDashboard.putData("Jump to Elevator Position", new ElevatorJumpToPosition(Elevator.POSITION_SIX, 6));
         
         // LiveWindowSendable info (Test mode)
         LiveWindow.addSensor("Other Sensors", "Accelerometer", RobotMap.accelerometer);
