@@ -116,11 +116,11 @@ public class CustomDebugger
     	   
             if(n.getLevel() == Level.OFF)
             {
-                output[i] = true;
+                output[i] = false;
             }
             else
             {
-                output[i] = false;
+                output[i] = true;
             }
             i++;
        }
