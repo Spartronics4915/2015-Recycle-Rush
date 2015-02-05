@@ -1,4 +1,4 @@
-package debuggerSystem;
+package org.usfirst.frc4915.debuggersystem;
 
 /*
  * This is a custom system that allows for easy debug logging 

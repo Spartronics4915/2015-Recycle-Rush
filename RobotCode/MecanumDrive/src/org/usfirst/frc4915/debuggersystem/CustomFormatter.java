@@ -1,4 +1,4 @@
-package debuggerSystem;
+package org.usfirst.frc4915.debuggersystem;
 
 import java.util.logging.*;
 public class CustomFormatter extends Formatter
