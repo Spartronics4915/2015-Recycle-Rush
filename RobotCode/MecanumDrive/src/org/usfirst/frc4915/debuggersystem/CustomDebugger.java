@@ -10,8 +10,8 @@ package org.usfirst.frc4915.debuggersystem;
  * 
 *setFilter (LogerNames)
 *takes the desired LoggerNames enumerator that the user only wants 
-*the debug log to process (ex. if only LoggerNames.Drivetrain was to be 
-*seen, the call of object.setFilter(LoggerNames.Drivetrain) would be used)
+*the debug log to process (ex. if only LoggerNames.DRIVETRAIN was to be
+*seen, the call of object.setFilter(LoggerNames.DRIVETRAIN) would be used)
 *
 *resetFilter ()
 *resets the filter to allow all LoggerNames
@@ -47,11 +47,11 @@ public class CustomDebugger
 	
 	enum LoggerNames
 	{
-	    	Drivetrain,
-	    	Grabber,
-	    	General,
-	    	Autonomous,
-	    	Elevator;
+        DRIVETRAIN,
+        GRABBER,
+        GENERAL,
+        AUTONOMOUS,
+        ELEVATOR;
     }
 	   
     public CustomDebugger()
@@ -94,10 +94,10 @@ public class CustomDebugger
     
     public void setFormatter()
     {
-        CustomFormatter doge = new CustomFormatter();
+        CustomFormatter customFormatter = new CustomFormatter();
         ConsoleHandler handler = new ConsoleHandler();
         
-        handler.setFormatter(doge);
+        handler.setFormatter(customFormatter);
         for (Logger n : loggerMap.values())
         {
         	n.addHandler(handler);
