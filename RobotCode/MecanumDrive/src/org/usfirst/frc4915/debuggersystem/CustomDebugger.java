@@ -97,12 +97,9 @@ public class CustomDebugger
         ConsoleHandler handler = new ConsoleHandler();
         
         handler.setFormatter(customFormatter);
-        for (Logger n : loggerMap.values())
-        {
-        	n.addHandler(handler);
+        for (Logger n : loggerMap.values()) {
+            n.addHandler(handler);
         }
-        
-        
     }
     
     public boolean[] checkFilter()
@@ -112,7 +109,6 @@ public class CustomDebugger
         int i = 0;
         for (Logger n : loggerMap.values())
         {
-
             output[i] = (n.getLevel() == Level.OFF);
             i++;
         }
