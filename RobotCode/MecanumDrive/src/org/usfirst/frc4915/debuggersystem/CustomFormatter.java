@@ -1,13 +1,11 @@
 package org.usfirst.frc4915.debuggersystem;
 
-import java.util.logging.*;
+import java.util.logging.Formatter;
+import java.util.logging.Handler;
+import java.util.logging.LogRecord;
+
 public class CustomFormatter extends Formatter
 {
-    
-    public CustomFormatter()
-    {
-        super();
-    }
     
     @Override
     public String format(LogRecord record)
@@ -17,7 +15,7 @@ public class CustomFormatter extends Formatter
         output += record.getLoggerName();
         output += ": ";
         output += record.getMessage();
-        //System.out.println("Custom format was called");
+
         output += "\n";
         return output;
     }
@@ -30,7 +28,7 @@ public class CustomFormatter extends Formatter
         output += record.getLoggerName();
         output += ": ";
         output += record.getMessage();
-        System.out.println("Custom formatMessage was called");
+
         output += "\n";
         return output;
     }
