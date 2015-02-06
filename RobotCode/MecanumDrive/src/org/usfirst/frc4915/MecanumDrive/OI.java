@@ -134,22 +134,5 @@ public class OI {
         String parsedVersion = VersionFinder.parseVersionFromManifest(this);
         SmartDashboard.putString("Code Version", parsedVersion == null? "<not found>" : parsedVersion);
     }
-    
-    /**
-     * For driving
-     * @return the drive stick
-     */
-    public Joystick getDriveStick1() {
-        return driveStick;
-    }
-
-    /**
-     * For lifting
-     * @return the elevator stick
-     */
-    public Joystick getElevatorStick() {
-    	return elevatorStick;
-    }
-
 }
 
