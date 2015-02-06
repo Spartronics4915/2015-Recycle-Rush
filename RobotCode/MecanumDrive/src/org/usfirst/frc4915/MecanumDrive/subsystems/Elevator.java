@@ -49,7 +49,7 @@ public class Elevator extends Subsystem {
 
 	public boolean isInPosition(double position) {
 		// tells if the elevator is in a specific preset position
-		return Math.abs(position - getPosition() <= 1);
+		return Math.abs(position - getPosition()) <= 1;
 	}
     
     public void moveToPosition(double position) {
