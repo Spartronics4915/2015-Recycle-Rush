@@ -146,8 +146,8 @@ public class Elevator extends Subsystem {
      * 
      * @param positionNumber
      */
-	public void convertPositionToHeight(int positionNumber) {
+	public double convertPositionToHeight(int positionNumber) {
 		// TODO Auto-generated method stub
-		
+		return positionNumber;
 	}
 }
