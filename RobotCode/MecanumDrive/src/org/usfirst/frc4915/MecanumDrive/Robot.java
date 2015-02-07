@@ -56,6 +56,8 @@ public class Robot extends IterativeRobot {
      */
     public void robotInit() {
     	RobotMap.init();
+    	
+    	preferences = Preferences.getInstance();
         driveTrain = new DriveTrain();
         elevator = new Elevator();
         grabber = new Grabber();
@@ -65,15 +67,13 @@ public class Robot extends IterativeRobot {
         // pointers. Bad news. Don't move it.
         oi = new OI();
         RobotMap.gyro.reset();
-        // instantiate the command used for the autonomous period
-        autonomousCommand = new AutonomousCommand();
 
-        testPreferencesItemOne = preferences.getDouble("Test One", 123.4);
-        testPreferencesItemOne = preferences.getDouble("Test Two", 456.7);
+        testPreferencesItemOne = preferences.getDouble("TestOne", 123.4);
+        testPreferencesItemOne = preferences.getDouble("TestTwo", 456.7);
         
         autonomousProgramChooser = new SendableChooser();
         autonomousProgramChooser.addDefault("Autonomous Program One", new GenericTestCommand(10, "Running program one!"));
-        autonomousProgramChooser.addDefault("Autonomous Program Two", new GenericTestCommand(20, "Running program two!"));
+        autonomousProgramChooser.addObject("Autonomous Program Two", new GenericTestCommand(20, "Running program two!"));
         
         SmartDashboard.putData("Autonomous Program", autonomousProgramChooser);
 
@@ -94,8 +94,9 @@ public class Robot extends IterativeRobot {
     }
 
     public void autonomousInit() {
-        // schedule the autonomous command (example)
-        if (autonomousCommand != null) autonomousCommand.start();
+        // Use the selected autonomous command
+    	autonomousCommand = (Command) autonomousProgramChooser.getSelected();
+    	autonomousCommand.start();
     }
 
     /**
