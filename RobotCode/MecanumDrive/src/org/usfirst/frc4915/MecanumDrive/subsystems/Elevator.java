@@ -48,7 +48,7 @@ public class Elevator extends Subsystem {
     
     // TODO Make sure that the winch does not begin winding the wrong way -- We may use a limit switch to tell if the cable is tight or not.
     // Discuss this with Elevator Subteam and Riyadth
-    public void moveAtSpeed(Joystick joystick) {
+    public void moveWithJoystick(Joystick joystick) {
     	/*
     	 * Moves elevator at a constant speed
     	 * speed is currently set, user cannot change speed to be moved at
@@ -60,29 +60,59 @@ public class Elevator extends Subsystem {
         	holdPosition();
         }
         else {
-        	winch.changeControlMode(ControlMode.Speed);
-        	System.out.println("Moving Elevator at constant speed");
-        	if (joystickY > 0) {
-        		winch.set(CONSTANT_SPEED);
-        	}
-        	else {
-        		winch.set(CONSTANT_SPEED * -1);
-        	}
+        	moveElevator(joystickY);
         }
     }
     
+    /**
+     * Moves the elevator using the speed control mode.
+     * 
+     * @param speed that the elevator moves + goes up, - goes down
+     */
+    public void moveElevator(double speed) {
+    	// TODO make sure we can calibrate our potentiometer so that these two points are 0 and 66 inches.
+    	// The elevator's minimum height is 0 inches
+    	if (winch.getPosition() <= 0) {
+    		if (speed < 0) {
+    			speed = 0;
+    		}
+    	}
+    	// The elevator's maximum height is 66 inches TODO Confirm
+    	if (winch.getPosition() >= 66) {
+    		if (speed > 0) {
+    			speed = 0;
+    		}
+    	}
+    	changeControlModeWinch(ControlMode.Speed);
+    	winch.set(speed);
+    }
+    
+    /**
+     * Changes the control mode so that you can use it in both speed and position modes.
+     * 
+     * @param mode the ControlMode for the winch - either ControlMode.Speed or ControlMode.Position
+     */
+    public void changeControlModeWinch(ControlMode mode) {
+    	winch.changeControlMode(mode);
+    }
+    
+    /**
+     * Stops the elevator from moving. Used at the end of commands.
+     */
     public void stopElevator() {
     	// stops any current commands telling the elevator to move.
-    	
     	winch.disableControl();
     	System.out.println("Elevator has stopped.");
     }
     
+    /**
+     * TODO Make this actually work - It will drift and continually use a new point to hold the position
+     */
     public void holdPosition() {
     	/*
     	 * Keeps the elevator in a constant position
     	 */
-    	winch.changeControlMode(ControlMode.Position);
+    	changeControlModeWinch(ControlMode.Position);
     	winch.set(winch.getPosition());
     }
  	
@@ -94,8 +124,19 @@ public class Elevator extends Subsystem {
     	return winch.getPosition();
     }
     
+    /** 
+     * Moves based on a position value
+     * @param position The position (between 0 and 66 inches that you want your elevator
+     */
     public void setPosition(double position) {
-    	// TODO figure out scaling
+    	if (position <= 0) {
+    		position = 0;
+    	}
+    	// The elevator's maximum height is 66 inches TODO Confirm
+    	if (position >= 66) {
+    		position = 66;
+    	}
+    	changeControlModeWinch(ControlMode.Position);
     	winch.set(position);
     }
 }
