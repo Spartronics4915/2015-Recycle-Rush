@@ -1,7 +1,9 @@
 package org.usfirst.frc4915.MecanumDrive.subsystems;
 
+import org.usfirst.frc4915.MecanumDrive.Robot;
 import org.usfirst.frc4915.MecanumDrive.RobotMap;
 import org.usfirst.frc4915.MecanumDrive.commands.ElevatorFineTune;
+import org.usfirst.frc4915.debuggersystem.CustomDebugger.LoggerNames;
 
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.CANTalon.ControlMode;
@@ -21,21 +23,23 @@ public class Elevator extends Subsystem {
 	// If you need to stack on the ground, use position 0.
 	
 	// TODO find exact height's of positions for number of totes in inches
-	public static final double POSITION_ZERO = 0; // Lowest position
-	public static final double POSITION_ONE = 1;
-	public static final double POSITION_TWO = 2;
-	public static final double POSITION_THREE = 3;
-	public static final double POSITION_FOUR = 4;
-	public static final double POSITION_FIVE = 5; 
-	public static final double POSITION_SIX = 6; // Highest position
+	public static final int POSITION_ZERO = 0; // Lowest position
+	public static final int POSITION_ONE = 1;
+	public static final int POSITION_TWO = 2;
+	public static final int POSITION_THREE = 3;
+	public static final int POSITION_FOUR = 4;
+	public static final int POSITION_FIVE = 5; 
+	public static final int POSITION_SIX = 6; // Highest position
 	
-	public static final double MOTOR_SPEED = .5; // TODO find correct speed
-	public static final double CONSTANT_SPEED = .1; // TODO find correct value for constant speed
+	public static final double FAST_SPEED = .5; // TODO find correct speed
+	public static final double SLOW_SPEED = .1; // TODO find correct value for constant speed
 	
 	public CANTalon winch = RobotMap.elevatorWinchMotor14;
 	
-	// TODO Add Javadoc comments to each method
-	
+	/**
+	 * Initializes the default command (WPI java default method)
+	 * Called on initialization of the subsystem
+	 */
     public void initDefaultCommand() {
     	setDefaultCommand(new ElevatorFineTune());
         // Set the default command for a subsystem here.
@@ -44,11 +48,11 @@ public class Elevator extends Subsystem {
     
     // TODO Make sure that the winch does not begin winding the wrong way -- We may use a limit switch to tell if the cable is tight or not.
     // Discuss this with Elevator Subteam and Riyadth
+    /**
+     * Moves the elevator at a speed given by the joystick (y axis).
+     * @param joystick Forward on joystick is up, backward is down
+     */
     public void moveWithJoystick(Joystick joystick) {
-    	/*
-    	 * Moves elevator at a constant speed
-    	 * speed is currently set, user cannot change speed to be moved at
-    	 */
         double joystickY = joystick.getAxis(Joystick.AxisType.kY);
         System.out.println("Elevator joystick " + joystickY);
         if (Math.abs(joystickY) <= .2) {
@@ -68,13 +72,13 @@ public class Elevator extends Subsystem {
     public void moveElevator(double speed) {
     	// TODO make sure we can calibrate our potentiometer so that these two points are 0 and 66 inches.
     	// The elevator's minimum height is 0 inches
-    	if (winch.getPosition() <= 0) {
+    	if (getPosition() <= 0) {
     		if (speed < 0) {
     			speed = 0;
     		}
     	}
     	// The elevator's maximum height is 66 inches TODO Confirm
-    	if (winch.getPosition() >= 66) {
+    	if (getPosition() >= 66) {
     		if (speed > 0) {
     			speed = 0;
     		}
@@ -109,13 +113,15 @@ public class Elevator extends Subsystem {
     	 * Keeps the elevator in a constant position
     	 */
     	changeControlModeWinch(ControlMode.Position);
-    	winch.set(winch.getPosition());
+    	winch.set(getPosition());
     }
  	
-    // TODO potentiometer will be connected to the SRX
+    /**
+     * @return the position of the elevator in inches (between 0 and 66)
+     */
     public double getPosition() {
     	// Returns the position of the elevator
-    	System.out.printf("The elevator is at this position %f", winch.getPosition()); // TODO use custom debugger
+    	Robot.debugger.logError(LoggerNames.ELEVATOR, "The elevator is at position" + getPosition());
     	// TODO figure out scaling
     	return winch.getPosition();
     }
@@ -135,4 +141,13 @@ public class Elevator extends Subsystem {
     	changeControlModeWinch(ControlMode.Position);
     	winch.set(position);
     }
+
+    /**
+     * 
+     * @param positionNumber
+     */
+	public double convertPositionToHeight(int positionNumber) {
+		// TODO Auto-generated method stub
+		return positionNumber;
+	}
 }
