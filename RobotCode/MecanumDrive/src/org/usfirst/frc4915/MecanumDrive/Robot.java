@@ -72,8 +72,8 @@ public class Robot extends IterativeRobot {
         testPreferencesItemOne = preferences.getDouble("Test Two", 456.7);
         
         autonomousProgramChooser = new SendableChooser();
-        autonomousProgramChooser.addDefault("Open a Grabber (test for now)", new OpenGrabber());
-        autonomousProgramChooser.addDefault("Open another Grabber (test for now)", new OpenGrabber());
+        autonomousProgramChooser.addDefault("Autonomous Program One", new GenericTestCommand(10, "Running program one!"));
+        autonomousProgramChooser.addDefault("Autonomous Program Two", new GenericTestCommand(20, "Running program two!"));
         
         SmartDashboard.putData("Autonomous Program", autonomousProgramChooser);
 
