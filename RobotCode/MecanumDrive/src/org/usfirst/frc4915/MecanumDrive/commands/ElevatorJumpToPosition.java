@@ -8,20 +8,20 @@ public class ElevatorJumpToPosition extends Command {
 	Elevator elevator = Robot.elevator;
 	// TODO use only the position (what level the elevator should go to) as an input
 	// Position number -- number of totes that you would need to stack on top of.
-	int numberOfTotes;
-	private double heightOfPosition;
 	
-    public ElevatorJumpToPosition(double heightOfPosition, int numberOfTotes) {
+	private int positionNumber;
+	private double height;
+	
+    public ElevatorJumpToPosition(int position) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(elevator);
-    	this.heightOfPosition = heightOfPosition;
-    	this.numberOfTotes = numberOfTotes;
+    	positionNumber = position;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	System.out.println("Moving elevator to position" + numberOfTotes);
+    	
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -32,12 +32,12 @@ public class ElevatorJumpToPosition extends Command {
     // Make this return true when this Command no longer needs to run execute()
     // TODO This command doesn't end
     protected boolean isFinished() {
-        return false;
+        return elevator.getPosition() == ;
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	System.out.println("Elevator is in position " + numberOfTotes);
+    	System.out.println("Elevator is in position " + );
     	elevator.stopElevator();
     }
 
