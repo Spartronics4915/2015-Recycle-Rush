@@ -25,6 +25,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc4915.MecanumDrive.commands.*;
 import org.usfirst.frc4915.MecanumDrive.subsystems.*;
+import org.usfirst.frc4915.debuggersystem.CustomDebugger;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -47,6 +48,7 @@ public class Robot extends IterativeRobot {
     public static DriveTrain driveTrain;
     public static Elevator elevator;
     public static Grabber grabber;
+    public static CustomDebugger debugger = new CustomDebugger();
 
     /**
      * This function is run when the robot is first started up and should be
@@ -74,7 +76,7 @@ public class Robot extends IterativeRobot {
         autonomousProgramChooser.addDefault("Open another Grabber (test for now)", new OpenGrabber());
         
         SmartDashboard.putData("Autonomous Program", autonomousProgramChooser);
-        
+
         // Test for sending messages to smart dashboard
         SendUserMessage.displayMessage();
     }
