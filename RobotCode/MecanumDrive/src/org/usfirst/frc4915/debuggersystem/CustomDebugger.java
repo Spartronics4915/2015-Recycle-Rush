@@ -142,12 +142,11 @@ public class CustomDebugger {
     public void logError(LoggerNames logger, String message) {
         loggerMap.get(logger).info(message);
     }
-
     
     /**
      * Collection of logger names (categories)
      */
-	public static enum LoggerNames {
+    public static enum LoggerNames {
         DRIVETRAIN,
         GRABBER,
         GENERAL,

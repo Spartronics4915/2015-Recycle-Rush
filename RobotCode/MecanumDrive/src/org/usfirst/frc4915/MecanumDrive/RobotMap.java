@@ -47,9 +47,8 @@ public class RobotMap {
     public static DigitalInput limitSwitchBottom; // May be used for elevator as a sensor for testing if at the bottom of elevator
     public static DigitalInput limitSwitchTop; // May be used for elevator as a sensor for testing if at the top of elevator
     // Potentiometer
-    private static int inputPort = 1; // TODO find correct port for the potentiometer
-	private static int scale = 1; // TODO find correct scale for the potentiometer
-    public static AnalogPotentiometer potentiometer;
+    private static final int SCALE = 1; // TODO find correct scale for the potentiometer
+	public static AnalogPotentiometer potentiometer;
     
     /**
      * GRABBER
@@ -123,10 +122,12 @@ public class RobotMap {
 		 * ELEVATOR START
 		 */
 		//ELEVATOR instantiation
+		// TODO set limit switch configuration on the winch motor
 		elevatorWinchMotor14 = new CANTalon(14);
-		
+		elevatorWinchMotor14.changeControlMode(ControlMode.Speed);
+		elevatorWinchMotor14.setFeedbackDevice(CANTalon.FeedbackDevice.AnalogPot);
+		elevatorWinchMotor14.setPID(1, 0.002, 1.0, 0.0001, 255, 200, 0);
 		// Potentiometer instantiation
-		potentiometer = new AnalogPotentiometer(inputPort, scale); //Port numbers need to be decided
 		
 		// TODO Limit Switches instantiation goes here
 		/**

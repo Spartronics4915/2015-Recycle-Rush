@@ -45,7 +45,7 @@ public class  MecanumDrive extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Joystick joystickDrive = Robot.oi.getDriveStick1();
+    	Joystick joystickDrive = Robot.oi.driveStick;
     	Robot.driveTrain.mecanumDrive(joystickDrive);
     }
 

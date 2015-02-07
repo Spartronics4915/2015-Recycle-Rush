@@ -99,6 +99,7 @@ public class DriveTrain extends Subsystem {
         	debugger.logError(LoggerNames.DRIVETRAIN, 	("Driving"));
         	debugger.setFilter(LoggerNames.DRIVETRAIN);
         	debugger.resetFilter();
+        	robotDrive.stopMotor();
         	robotDrive.mecanumDrive_Cartesian(joystickX, joystickY, joystickTwist, 0.0);
         	
         /*	leftFront.set(60);
@@ -107,7 +108,7 @@ public class DriveTrain extends Subsystem {
         	rightRear.set(60); */
         }
 
-    }
+}
     
     public void driveStraight(double speed) {
     	robotDrive.mecanumDrive_Cartesian(0.0, speed, 0.0, 0.0);

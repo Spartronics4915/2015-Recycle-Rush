@@ -36,9 +36,6 @@ public class Elevator extends Subsystem {
 	public static final double MOTOR_SPEED = .5; // TODO find correct speed
 	public static final double CONSTANT_SPEED = .1; // TODO find correct value for constant speed
 	
-	public DigitalInput limitSwitchBottom = RobotMap.limitSwitchBottom;
-	public DigitalInput limitSwitchTop = RobotMap.limitSwitchTop;
-	
 	public CANTalon winch = RobotMap.elevatorWinchMotor14;
 	
 	// TODO Add Javadoc comments to each method
@@ -47,39 +44,6 @@ public class Elevator extends Subsystem {
     	setDefaultCommand(new ElevatorFineTune());
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
-    }
-
-	public boolean isInPosition(double position) {
-		// tells if the elevator is in a specific preset position
-		
-		if (Math.abs(position - getPosition()) <= 1) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-    
-	// TODO PID loop for precise control maybe???
-    public void moveToPosition(double position) {
-    	/*
-    	 * moves the elevator to a preset position based on the number of totes
-    	 * driver wishes to stack on.
-    	 */
-    	if (isInPosition(position)) {
-    		holdPosition();
-    		System.out.println("You are already in this position.");
-    	}
-    	else {
-    		winch.changeControlMode(ControlMode.Speed);
-    		double speed = MOTOR_SPEED;
-    		if (getPosition() > position) { // Let positive be up and negative be down
-    			speed = speed * -1;
-    		}
-    		winch.set(speed);
-    	}
-    	System.out.println("Moving elevator.");
-    	
     }
     
     // TODO Make sure that the winch does not begin winding the wrong way -- We may use a limit switch to tell if the cable is tight or not.
@@ -119,26 +83,19 @@ public class Elevator extends Subsystem {
     	 * Keeps the elevator in a constant position
     	 */
     	winch.changeControlMode(ControlMode.Position);
-    	winch.setFeedbackDevice(CANTalon.FeedbackDevice.AnalogPot);
     	winch.set(winch.getPosition());
     }
  	
     // TODO potentiometer will be connected to the SRX
     public double getPosition() {
     	// Returns the position of the elevator
-    	
-    	double position = potentiometer.get();
-    	System.out.println("We got the current position of the elevator.");
-    	return position;
+    	System.out.printf("The elevator is at this position %f", winch.getPosition()); // TODO use custom debugger
+    	// TODO figure out scaling
+    	return winch.getPosition();
     }
     
-    // TODO limit switch will be connected to the SRX
-    public boolean isOverMaxHeight() {
-    	return limitSwitchTop.get();
-    }
-    
-    public boolean isBelowMinHeight() {
-    	return limitSwitchBottom.get();
+    public void setPosition(double position) {
+    	// TODO figure out scaling
+    	winch.set(position);
     }
 }
-
