@@ -20,6 +20,7 @@ import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc4915.MecanumDrive.commands.*;
@@ -39,6 +40,8 @@ public class Robot extends IterativeRobot {
     Preferences preferences;
     double testPreferencesItemOne;
     double testPreferencesItemTwo;
+    
+    SendableChooser autonomousProgramChooser;
     
     public static OI oi;
     public static DriveTrain driveTrain;
@@ -65,6 +68,12 @@ public class Robot extends IterativeRobot {
 
         testPreferencesItemOne = preferences.getDouble("Test One", 123.4);
         testPreferencesItemOne = preferences.getDouble("Test Two", 456.7);
+        
+        autonomousProgramChooser = new SendableChooser();
+        autonomousProgramChooser.addDefault("Open a Grabber (test for now)", new OpenGrabber());
+        autonomousProgramChooser.addDefault("Open another Grabber (test for now)", new OpenGrabber());
+        
+        SmartDashboard.putData("Autonomous Program", autonomousProgramChooser);
         
         // Test for sending messages to smart dashboard
         SendUserMessage.displayMessage();
