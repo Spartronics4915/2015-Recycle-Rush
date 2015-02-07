@@ -40,7 +40,7 @@ public class Robot extends IterativeRobot {
     public static DriveTrain driveTrain;
     public static Elevator elevator;
     public static Grabber grabber;
-    public static CustomDebugger debugger;
+    public static CustomDebugger debugger = new CustomDebugger();
 
     /**
      * This function is run when the robot is first started up and should be
@@ -60,8 +60,6 @@ public class Robot extends IterativeRobot {
         // instantiate the command used for the autonomous period
         autonomousCommand = new AutonomousCommand();
 
-        
-        
         // Test for sending messages to smart dashboard
         SendUserMessage.displayMessage();
     }
