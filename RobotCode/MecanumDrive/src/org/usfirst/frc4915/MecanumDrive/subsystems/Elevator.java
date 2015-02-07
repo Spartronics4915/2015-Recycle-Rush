@@ -51,13 +51,7 @@ public class Elevator extends Subsystem {
 
 	public boolean isInPosition(double position) {
 		// tells if the elevator is in a specific preset position
-		
-		if (Math.abs(position - getPosition()) <= 1) {
-			return true;
-		}
-		else {
-			return false;
-		}
+		return Math.abs(position - getPosition()) <= 1;
 	}
     
 	// TODO PID loop for precise control maybe???
