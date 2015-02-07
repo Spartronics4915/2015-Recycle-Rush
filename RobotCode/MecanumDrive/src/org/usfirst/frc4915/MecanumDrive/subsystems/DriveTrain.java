@@ -90,13 +90,11 @@ public class DriveTrain extends Subsystem {
     	doge.setFilter(LoggerNames.DRIVETRAIN);
     	doge.resetFilter();
         if ((Math.abs(joystickX) < 0.2) && (Math.abs(joystickY) < 0.2) && (Math.abs(joystickTwist) < 0.2)) {
-        	CustomDebugger doge = new CustomDebugger();
         	doge.logError(LoggerNames.DRIVETRAIN, ("Stopping Motor"));
         	doge.setFilter(LoggerNames.DRIVETRAIN);
         	doge.resetFilter();	
         	robotDrive.stopMotor();
         } else {
-        	CustomDebugger doge = new CustomDebugger();
         	doge.logError(LoggerNames.DRIVETRAIN, 	("Driving"));
         	doge.setFilter(LoggerNames.DRIVETRAIN);
         	doge.resetFilter();
