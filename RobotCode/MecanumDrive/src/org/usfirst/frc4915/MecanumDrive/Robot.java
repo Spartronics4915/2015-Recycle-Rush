@@ -16,6 +16,7 @@ import org.usfirst.frc4915.MecanumDrive.RobotMap;
 
 import edu.wpi.first.wpilibj.Gyro;
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -34,6 +35,10 @@ import org.usfirst.frc4915.MecanumDrive.subsystems.*;
 public class Robot extends IterativeRobot {
 
     Command autonomousCommand;
+    
+    Preferences preferences;
+    double testPreferencesItemOne;
+    double testPreferencesItemTwo;
     
     public static OI oi;
     public static DriveTrain driveTrain;
@@ -58,7 +63,8 @@ public class Robot extends IterativeRobot {
         // instantiate the command used for the autonomous period
         autonomousCommand = new AutonomousCommand();
 
-        
+        testPreferencesItemOne = preferences.getDouble("Test One", 123.4);
+        testPreferencesItemOne = preferences.getDouble("Test Two", 456.7);
         
         // Test for sending messages to smart dashboard
         SendUserMessage.displayMessage();
