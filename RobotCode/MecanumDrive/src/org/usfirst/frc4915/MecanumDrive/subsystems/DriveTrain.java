@@ -17,6 +17,8 @@ import java.util.List;
 import org.usfirst.frc4915.MecanumDrive.Robot;
 import org.usfirst.frc4915.MecanumDrive.RobotMap;
 import org.usfirst.frc4915.MecanumDrive.commands.*;
+import org.usfirst.frc4915.debuggersystem.CustomDebugger;
+import org.usfirst.frc4915.debuggersystem.CustomDebugger.LoggerNames;
 
 import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -32,6 +34,8 @@ public class DriveTrain extends Subsystem {
     SpeedController rightFront = RobotMap.mecanumDriveControls1RightFront12;
     SpeedController rightRear = RobotMap.mecanumDriveControls1RightRear13;
     RobotDrive robotDrive;
+    CustomDebugger debugger = Robot.debugger;
+
 
     public static List <CANTalon> motors =  Arrays.asList(RobotMap.mecanumDriveControls1LeftFront10, 
 			RobotMap.mecanumDriveControls1LeftRear11, 
@@ -83,15 +87,19 @@ public class DriveTrain extends Subsystem {
         if ((Math.abs(joystickTwist) < 0.2)) {
         	joystickTwist = 0;
         }
-     // TODO Use Custom Debugger
-        System.out.println(joystickX + ", " + joystickY + ", " + joystickTwist);
+    	debugger.logError(LoggerNames.DRIVETRAIN, 	(joystickX + ", " + joystickY + ", " + joystickTwist));
+    	debugger.setFilter(LoggerNames.DRIVETRAIN);
+    	debugger.resetFilter();
         if ((Math.abs(joystickX) < 0.2) && (Math.abs(joystickY) < 0.2) && (Math.abs(joystickTwist) < 0.2)) {
-        	// TODO Use Custom Debugger
-        	System.out.println("Stopping Motor");	
+        	debugger.logError(LoggerNames.DRIVETRAIN, ("Stopping Motor"));
+        	debugger.setFilter(LoggerNames.DRIVETRAIN);
+        	debugger.resetFilter();	
         	robotDrive.stopMotor();
         } else {
-        	// TODO Use Custom Debugger
-        	System.out.println("Driving");
+        	debugger.logError(LoggerNames.DRIVETRAIN, 	("Driving"));
+        	debugger.setFilter(LoggerNames.DRIVETRAIN);
+        	debugger.resetFilter();
+        	robotDrive.stopMotor();
         	robotDrive.mecanumDrive_Cartesian(joystickX, joystickY, joystickTwist, 0.0);
         	
         /*	leftFront.set(60);
@@ -100,7 +108,7 @@ public class DriveTrain extends Subsystem {
         	rightRear.set(60); */
         }
 
-    }
+}
     
     public void driveStraight(double speed) {
     	robotDrive.mecanumDrive_Cartesian(0.0, speed, 0.0, 0.0);
@@ -119,16 +127,18 @@ public class DriveTrain extends Subsystem {
     	int ticksPerRevolution = 1000;
     	double circumferenceOfWheel = 6*Math.PI;
     	int inchesPerFoot = 12;
-    	// TODO Use Custom Debugger
-    	System.out.println("Speed" + motor.getSpeed());
+    	debugger.logError(LoggerNames.DRIVETRAIN, ("Speed" + motor.getSpeed()));
+    	debugger.setFilter(LoggerNames.DRIVETRAIN);
+    	debugger.resetFilter();
     	return motor.getSpeed()*elapsed/ticksPerRevolution*circumferenceOfWheel/inchesPerFoot;
     }
     
     // TODO Make a method that displays the speed of a motor
     
     public void arcadeDrive(Joystick stick){
-    	// TODO Use Custom Debugger
-    	System.out.println("Arcade Drive");
+     	debugger.logError(LoggerNames.DRIVETRAIN, "Arcade Drive");
+     	debugger.setFilter(LoggerNames.DRIVETRAIN);
+     	debugger.resetFilter();
     	robotDrive.arcadeDrive(stick);
     }
 }
