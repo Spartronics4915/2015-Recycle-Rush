@@ -23,13 +23,13 @@ public class Elevator extends Subsystem {
 	// If you need to stack on the ground, use position 0.
 	
 	// TODO find exact height's of positions for number of totes in inches
-	public static final double POSITION_ZERO = 0; // Lowest position
-	public static final double POSITION_ONE = 1;
-	public static final double POSITION_TWO = 2;
-	public static final double POSITION_THREE = 3;
-	public static final double POSITION_FOUR = 4;
-	public static final double POSITION_FIVE = 5; 
-	public static final double POSITION_SIX = 6; // Highest position
+	public static final int POSITION_ZERO = 0; // Lowest position
+	public static final int POSITION_ONE = 1;
+	public static final int POSITION_TWO = 2;
+	public static final int POSITION_THREE = 3;
+	public static final int POSITION_FOUR = 4;
+	public static final int POSITION_FIVE = 5; 
+	public static final int POSITION_SIX = 6; // Highest position
 	
 	public static final double FAST_SPEED = .5; // TODO find correct speed
 	public static final double SLOW_SPEED = .1; // TODO find correct value for constant speed
@@ -141,4 +141,13 @@ public class Elevator extends Subsystem {
     	changeControlModeWinch(ControlMode.Position);
     	winch.set(position);
     }
+
+    /**
+     * 
+     * @param positionNumber
+     */
+	public void convertPositionToHeight(int positionNumber) {
+		// TODO Auto-generated method stub
+		
+	}
 }
