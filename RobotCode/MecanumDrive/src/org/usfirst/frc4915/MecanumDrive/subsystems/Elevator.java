@@ -38,12 +38,16 @@ public class Elevator extends Subsystem {
 	
 	public CANTalon winch = RobotMap.elevatorWinchMotor14;
 	
+	// TODO Add Javadoc comments to each method
+	
     public void initDefaultCommand() {
     	setDefaultCommand(new ElevatorFineTune());
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
     }
     
+    // TODO Make sure that the winch does not begin winding the wrong way -- We may use a limit switch to tell if the cable is tight or not.
+    // Discuss this with Elevator Subteam and Riyadth
     public void moveAtSpeed(Joystick joystick) {
     	/*
     	 * Moves elevator at a constant speed
@@ -82,9 +86,10 @@ public class Elevator extends Subsystem {
     	winch.set(winch.getPosition());
     }
  	
+    // TODO potentiometer will be connected to the SRX
     public double getPosition() {
     	// Returns the position of the elevator
-    	System.out.println("We got the current position of the elevator."); // TODO use custom debugger
+    	System.out.printf("The elevator is at this position %f", winch.getPosition()); // TODO use custom debugger
     	// TODO figure out scaling
     	return winch.getPosition();
     }
