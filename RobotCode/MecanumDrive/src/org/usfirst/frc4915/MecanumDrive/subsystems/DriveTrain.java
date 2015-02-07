@@ -17,6 +17,8 @@ import java.util.List;
 import org.usfirst.frc4915.MecanumDrive.Robot;
 import org.usfirst.frc4915.MecanumDrive.RobotMap;
 import org.usfirst.frc4915.MecanumDrive.commands.*;
+import org.usfirst.frc4915.debuggersystem.CustomDebugger;
+import org.usfirst.frc4915.debuggersystem.CustomDebugger.LoggerNames;
 
 import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -83,15 +85,19 @@ public class DriveTrain extends Subsystem {
         if ((Math.abs(joystickTwist) < 0.2)) {
         	joystickTwist = 0;
         }
-     // TODO Use Custom Debugger
-        System.out.println(joystickX + ", " + joystickY + ", " + joystickTwist);
+        CustomDebugger doge = new CustomDebugger();
+    	doge.logError(LoggerNames.DRIVETRAIN, 	(joystickX + ", " + joystickY + ", " + joystickTwist));
+    	doge.setFilter(LoggerNames.DRIVETRAIN);
+    	doge.resetFilter();
         if ((Math.abs(joystickX) < 0.2) && (Math.abs(joystickY) < 0.2) && (Math.abs(joystickTwist) < 0.2)) {
-        	// TODO Use Custom Debugger
-        	System.out.println("Stopping Motor");	
+        	doge.logError(LoggerNames.DRIVETRAIN, ("Stopping Motor"));
+        	doge.setFilter(LoggerNames.DRIVETRAIN);
+        	doge.resetFilter();	
         	robotDrive.stopMotor();
         } else {
-        	// TODO Use Custom Debugger
-        	System.out.println("Driving");
+        	doge.logError(LoggerNames.DRIVETRAIN, 	("Driving"));
+        	doge.setFilter(LoggerNames.DRIVETRAIN);
+        	doge.resetFilter();
         	robotDrive.mecanumDrive_Cartesian(joystickX, joystickY, joystickTwist, 0.0);
         	
         /*	leftFront.set(60);
@@ -119,16 +125,20 @@ public class DriveTrain extends Subsystem {
     	int ticksPerRevolution = 1000;
     	double circumferenceOfWheel = 6*Math.PI;
     	int inchesPerFoot = 12;
-    	// TODO Use Custom Debugger
-    	System.out.println("Speed" + motor.getSpeed());
+    	CustomDebugger doge = new CustomDebugger();
+    	doge.logError(LoggerNames.DRIVETRAIN, ("Speed" + motor.getSpeed()));
+    	doge.setFilter(LoggerNames.DRIVETRAIN);
+    	doge.resetFilter();
     	return motor.getSpeed()*elapsed/ticksPerRevolution*circumferenceOfWheel/inchesPerFoot;
     }
     
     // TODO Make a method that displays the speed of a motor
     
     public void arcadeDrive(Joystick stick){
-    	// TODO Use Custom Debugger
-    	System.out.println("Arcade Drive");
+    	 CustomDebugger doge = new CustomDebugger();
+     	doge.logError(LoggerNames.DRIVETRAIN, "Arcade Drive");
+     	doge.setFilter(LoggerNames.DRIVETRAIN);
+     	doge.resetFilter();
     	robotDrive.arcadeDrive(stick);
     }
 }

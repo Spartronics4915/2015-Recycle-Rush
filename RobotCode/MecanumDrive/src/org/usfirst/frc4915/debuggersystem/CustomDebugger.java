@@ -146,7 +146,7 @@ public class CustomDebugger {
     /**
      * Collection of logger names (categories)
      */
-    enum LoggerNames {
+    public static enum LoggerNames {
         DRIVETRAIN,
         GRABBER,
         GENERAL,
