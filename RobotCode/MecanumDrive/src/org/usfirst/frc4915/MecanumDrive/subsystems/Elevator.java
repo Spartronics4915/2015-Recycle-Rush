@@ -6,6 +6,7 @@ import org.usfirst.frc4915.MecanumDrive.commands.ElevatorFineTune;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.CANTalon.ControlMode;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -35,7 +36,12 @@ public class Elevator extends Subsystem {
 	public static final double MOTOR_SPEED = .5; // TODO find correct speed
 	public static final double CONSTANT_SPEED = .1; // TODO find correct value for constant speed
 	
+	public DigitalInput limitSwitchBottom = RobotMap.limitSwitchBottom;
+	public DigitalInput limitSwitchTop = RobotMap.limitSwitchTop;
+	
 	public CANTalon winch = RobotMap.elevatorWinchMotor14;
+	
+	// TODO Add Javadoc comments to each method
 	
     public void initDefaultCommand() {
     	setDefaultCommand(new ElevatorFineTune());
@@ -54,6 +60,7 @@ public class Elevator extends Subsystem {
 		}
 	}
     
+	// TODO PID loop for precise control maybe???
     public void moveToPosition(double position) {
     	/*
     	 * moves the elevator to a preset position based on the number of totes
@@ -75,6 +82,8 @@ public class Elevator extends Subsystem {
     	
     }
     
+    // TODO Make sure that the winch does not begin winding the wrong way -- We may use a limit switch to tell if the cable is tight or not.
+    // Discuss this with Elevator Subteam and Riyadth
     public void moveAtSpeed(Joystick joystick) {
     	/*
     	 * Moves elevator at a constant speed
@@ -114,12 +123,22 @@ public class Elevator extends Subsystem {
     	winch.set(winch.getPosition());
     }
  	
+    // TODO potentiometer will be connected to the SRX
     public double getPosition() {
     	// Returns the position of the elevator
     	
     	double position = potentiometer.get();
     	System.out.println("We got the current position of the elevator.");
     	return position;
+    }
+    
+    // TODO limit switch will be connected to the SRX
+    public boolean isOverMaxHeight() {
+    	return limitSwitchTop.get();
+    }
+    
+    public boolean isBelowMinHeight() {
+    	return limitSwitchBottom.get();
     }
 }
 
