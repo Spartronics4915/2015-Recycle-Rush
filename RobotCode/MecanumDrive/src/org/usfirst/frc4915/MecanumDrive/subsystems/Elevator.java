@@ -53,9 +53,11 @@ public class Elevator extends Subsystem {
 													// in inches
 	public static final double HEIGHT_OF_TOTE = 12;
 
-	private static final double JOYSTICK_SCALE = -10; //TODO Decide scale for joystick movement position change
-	
-	public CANTalon winch = RobotMap.elevatorWinchMotor14;
+	private static final double JOYSTICK_SCALE = -10; // TODO Decide scale for
+														// joystick movement
+														// position change
+
+	public CANTalon winch = RobotMap.elevatorWinchMotor;
 
 	/**
 	 * Initializes the default command (WPI java default method) Called on
