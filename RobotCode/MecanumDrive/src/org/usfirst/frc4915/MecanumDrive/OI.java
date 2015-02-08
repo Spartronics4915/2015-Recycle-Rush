@@ -81,19 +81,16 @@ public class OI {
         elevatorStick = new Joystick(1);
         
         elevatorJumpToPositionZero = new JoystickButton(elevatorStick, 2); 
-        elevatorJumpToPositionZero.whenPressed(new ElevatorJumpToPosition(Elevator.POSITION_ZERO, 0));
+        elevatorJumpToPositionZero.whenPressed(new ElevatorJumpToPosition(Elevator.POSITION_ZERO));
         elevatorJumpToPositionOne = new JoystickButton(elevatorStick, 7); 
-        elevatorJumpToPositionOne.whenPressed(new ElevatorJumpToPosition(Elevator.POSITION_ONE, 1));
+        elevatorJumpToPositionOne.whenPressed(new ElevatorJumpToPosition(Elevator.POSITION_ONE));
         elevatorJumpToPositionTwo = new JoystickButton(elevatorStick, 8);
-        elevatorJumpToPositionTwo.whenPressed(new ElevatorJumpToPosition(Elevator.POSITION_TWO, 2));
+        elevatorJumpToPositionTwo.whenPressed(new ElevatorJumpToPosition(Elevator.POSITION_TWO));
         elevatorJumpToPositionThree = new JoystickButton(elevatorStick, 9); 
-        elevatorJumpToPositionThree.whenPressed(new ElevatorJumpToPosition(Elevator.POSITION_THREE, 3));
+        elevatorJumpToPositionThree.whenPressed(new ElevatorJumpToPosition(Elevator.POSITION_THREE));
         elevatorJumpToPositionFour = new JoystickButton(elevatorStick, 10); 
-        elevatorJumpToPositionFour.whenPressed(new ElevatorJumpToPosition(Elevator.POSITION_FOUR, 4));
-        elevatorJumpToPositionFive = new JoystickButton(elevatorStick, 11); 
-        elevatorJumpToPositionFive.whenPressed(new ElevatorJumpToPosition(Elevator.POSITION_FIVE, 5));
-        elevatorJumpToPositionSix = new JoystickButton(elevatorStick, 6);
-        elevatorJumpToPositionSix.whenPressed(new ElevatorJumpToPosition(Elevator.POSITION_SIX, 6));
+        elevatorJumpToPositionFour.whenPressed(new ElevatorJumpToPosition(Elevator.POSITION_FOUR));
+        
         
         driveStick = new Joystick(0);
         elevatorStick = new Joystick(1);
@@ -107,17 +104,17 @@ public class OI {
         SmartDashboard.putData("Push Small Grabber", new OpenSmallGrabber());
         SmartDashboard.putData("Release Small Grabber", new OpenGrabber());
         SmartDashboard.putData("Close Large Grabber", new CloseGrabber());
-        SmartDashboard.putData("Jump to Elevator Position", new ElevatorJumpToPosition(Elevator.POSITION_ZERO, 0));
-        SmartDashboard.putData("Jump to Elevator Position", new ElevatorJumpToPosition(Elevator.POSITION_ONE, 1));
-        SmartDashboard.putData("Jump to Elevator Position", new ElevatorJumpToPosition(Elevator.POSITION_TWO, 2));
-        SmartDashboard.putData("Jump to Elevator Position", new ElevatorJumpToPosition(Elevator.POSITION_THREE, 3));
-        SmartDashboard.putData("Jump to Elevator Position", new ElevatorJumpToPosition(Elevator.POSITION_FOUR, 4));
-        SmartDashboard.putData("Jump to Elevator Position", new ElevatorJumpToPosition(Elevator.POSITION_FIVE, 5));
-        SmartDashboard.putData("Jump to Elevator Position", new ElevatorJumpToPosition(Elevator.POSITION_SIX, 6));
+        SmartDashboard.putData("Jump to Elevator Position", new ElevatorJumpToPosition(Elevator.POSITION_ZERO));
+        SmartDashboard.putData("Jump to Elevator Position", new ElevatorJumpToPosition(Elevator.POSITION_ONE));
+        SmartDashboard.putData("Jump to Elevator Position", new ElevatorJumpToPosition(Elevator.POSITION_TWO));
+        SmartDashboard.putData("Jump to Elevator Position", new ElevatorJumpToPosition(Elevator.POSITION_THREE));
+        SmartDashboard.putData("Jump to Elevator Position", new ElevatorJumpToPosition(Elevator.POSITION_FOUR));
         
         // LiveWindowSendable info (Test mode)
         LiveWindow.addSensor("Other Sensors", "Accelerometer", RobotMap.accelerometer);
         LiveWindow.addSensor("Drive Train", "Distance Sensor", Robot.driveTrain.distanceSensor);
+        LiveWindow.addActuator("Grabber", "Double Solenoid", RobotMap.mommaSolenoid);
+        LiveWindow.addActuator("Grabber", "Solenoid", RobotMap.babySolenoid);
         // LiveWindow.addSensor("Elevator", "Upper limit switch", RobotMap.limitSwitchTop);
         // LiveWindow.addSensor("Elevator", "Lower limit switch", RobotMap.limitSwitchBottom);
         // LiveWindow.addSensor("Elevator", "Linear potentiometer", RobotMap.potentiometer);
