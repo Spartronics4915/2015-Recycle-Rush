@@ -76,3 +76,4 @@ run
 *.ipr
 *.iws
 /.apt_generated/
+UNKNOWN*
