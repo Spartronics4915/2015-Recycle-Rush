@@ -1,8 +1,6 @@
 package org.usfirst.frc4915.MecanumDrive.commands;
 
 import org.usfirst.frc4915.MecanumDrive.Robot;
-import org.usfirst.frc4915.MecanumDrive.subsystems.Elevator;
-
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class AutonomousCommandGroup extends CommandGroup {
