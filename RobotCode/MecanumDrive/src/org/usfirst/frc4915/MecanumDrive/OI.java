@@ -20,8 +20,6 @@ import org.usfirst.frc4915.MecanumDrive.commands.IntermediateOpen;
 import org.usfirst.frc4915.MecanumDrive.commands.MoveStraightPositionModeCommand;
 import org.usfirst.frc4915.MecanumDrive.commands.OpenGrabber;
 import org.usfirst.frc4915.MecanumDrive.subsystems.DriveTrain;
-import org.usfirst.frc4915.MecanumDrive.subsystems.Elevator;
-
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -96,15 +94,15 @@ public class OI {
 		 * JOYSTICK BUTTONS (ELEVATOR)
 		 */
 		elevatorJumpToPositionZero = new JoystickButton(elevatorStick, 2);
-		elevatorJumpToPositionZero.whenPressed(new ElevatorJumpToPosition(Elevator.POSITION_ZERO));
+		elevatorJumpToPositionZero.whenPressed(new ElevatorJumpToPosition(0));
 		elevatorJumpToPositionOne = new JoystickButton(elevatorStick, 7);
-		elevatorJumpToPositionOne.whenPressed(new ElevatorJumpToPosition(Elevator.POSITION_ONE));
+		elevatorJumpToPositionOne.whenPressed(new ElevatorJumpToPosition(1));
 		elevatorJumpToPositionTwo = new JoystickButton(elevatorStick, 8);
-		elevatorJumpToPositionTwo.whenPressed(new ElevatorJumpToPosition(Elevator.POSITION_TWO));
+		elevatorJumpToPositionTwo.whenPressed(new ElevatorJumpToPosition(2));
 		elevatorJumpToPositionThree = new JoystickButton(elevatorStick, 9);
-		elevatorJumpToPositionThree.whenPressed(new ElevatorJumpToPosition(Elevator.POSITION_THREE));
+		elevatorJumpToPositionThree.whenPressed(new ElevatorJumpToPosition(3));
 		elevatorJumpToPositionFour = new JoystickButton(elevatorStick, 10);
-		elevatorJumpToPositionFour.whenPressed(new ElevatorJumpToPosition(Elevator.POSITION_FOUR));
+		elevatorJumpToPositionFour.whenPressed(new ElevatorJumpToPosition(4));
 
 		/**
 		 * AUTONOMOUS COMMAND
@@ -132,11 +130,11 @@ public class OI {
 		/**
 		 * ELEVATOR
 		 */
-		SmartDashboard.putData("Jump to Elevator Position", new ElevatorJumpToPosition(Elevator.POSITION_ZERO));
-		SmartDashboard.putData("Jump to Elevator Position", new ElevatorJumpToPosition(Elevator.POSITION_ONE));
-		SmartDashboard.putData("Jump to Elevator Position", new ElevatorJumpToPosition(Elevator.POSITION_TWO));
-		SmartDashboard.putData("Jump to Elevator Position", new ElevatorJumpToPosition(Elevator.POSITION_THREE));
-		SmartDashboard.putData("Jump to Elevator Position", new ElevatorJumpToPosition(Elevator.POSITION_FOUR));
+		SmartDashboard.putData("Jump to Elevator Position 0", new ElevatorJumpToPosition(0));
+		SmartDashboard.putData("Jump to Elevator Position 1", new ElevatorJumpToPosition(1));
+		SmartDashboard.putData("Jump to Elevator Position 2", new ElevatorJumpToPosition(2));
+		SmartDashboard.putData("Jump to Elevator Position 3", new ElevatorJumpToPosition(3));
+		SmartDashboard.putData("Jump to Elevator Position 4", new ElevatorJumpToPosition(4));
 
 		/**
 		 * SENSOR OUTPUT
@@ -144,12 +142,6 @@ public class OI {
 		LiveWindow.addSensor("Other Sensors", "Accelerometer", RobotMap.accelerometer);
 		LiveWindow.addSensor("Drive Train", "Distance Sensor", DriveTrain.distanceSensor);
 		LiveWindow.addActuator("Grabber", "Double Solenoid", RobotMap.mommaSolenoid);
-		// LiveWindow.addSensor("Elevator", "Upper limit switch",
-		// RobotMap.limitSwitchTop);
-		// LiveWindow.addSensor("Elevator", "Lower limit switch",
-		// RobotMap.limitSwitchBottom);
-		// LiveWindow.addSensor("Elevator", "Linear potentiometer",
-		// RobotMap.potentiometer);
 
 		/**
 		 * MOTOR SPEED OUTPUT

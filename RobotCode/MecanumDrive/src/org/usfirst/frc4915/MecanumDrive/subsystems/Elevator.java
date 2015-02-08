@@ -12,27 +12,9 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 // TODO check the disableControl functionality. We may need to enableControl.
 public class Elevator extends Subsystem {
 
-	// Put methods for controlling this subsystem
-	// here. Call these from Commands.
-
 	// These positions describe the number of totes you stacking on top of.
 	// If you need to stack on top of 3 totes, use position 3.
 	// If you need to stack on the ground, use position 0.
-
-	// These values are in inches.
-	// We do not take into account the height of the chassis as the
-	// potentiometer will not.
-	// TODO We likely will remove this for calibrate-able values
-	public static final int POSITION_ZERO = 0; // Lowest position inches
-	public static final int POSITION_ONE = 12;
-	public static final int POSITION_TWO = 24;
-	public static final int POSITION_THREE = 36;
-	public static final int POSITION_FOUR = 48; // Highest position inches
-
-	// TODO Use a static variable (height) that is constantly used by the motor
-	// as the position it should be in.
-	// Not in inches. Between minimumPotentiometerValue and
-	// maximumPotentiometerValue.
 
 	// TODO initialize height
 	// Not in inches. Between minimumPotentiometerValue and
