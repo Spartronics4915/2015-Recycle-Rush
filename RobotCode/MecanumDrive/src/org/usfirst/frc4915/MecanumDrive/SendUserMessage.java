@@ -1,6 +1,6 @@
 package org.usfirst.frc4915.MecanumDrive;
 
-import edu.wpi.first.wpilibj.smartdashboard.*;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class SendUserMessage {
 	public static void displayMessage() {
