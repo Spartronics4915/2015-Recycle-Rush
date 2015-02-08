@@ -39,6 +39,11 @@ public class RobotMap {
 	
 	public static final int MOTOR_PORT_ELEVATOR_WINCH = 14;
 	
+	// The Pneumatic Control Module's CAN Node ID. Use 10 for 4915. Use 20 for
+	// 9999.
+	public final static int PCM_NODE_ID = 10;
+	// TODO add Gyro, distanceSensor, Solenoids
+	
 	/**
 	 * DRIVETRAIN
 	 */
@@ -78,9 +83,7 @@ public class RobotMap {
 	 */
 	public static BuiltInAccelerometer accelerometer;
 
-	// The Pneumatic Control Module's CAN Node ID. Use 10 for 4915. Use 20 for
-	// 9999.
-	public final static int PCM_NODE_ID = 20;
+
 
 	public static void init() {
 
