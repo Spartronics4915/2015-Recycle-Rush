@@ -4,7 +4,6 @@ import org.usfirst.frc4915.MecanumDrive.Robot;
 import org.usfirst.frc4915.MecanumDrive.RobotMap;
 import org.usfirst.frc4915.MecanumDrive.commands.ElevatorFineTune;
 import org.usfirst.frc4915.debuggersystem.CustomDebugger.LoggerNames;
-
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.CANTalon.ControlMode;
 import edu.wpi.first.wpilibj.Joystick;
@@ -33,6 +32,9 @@ public class Elevator extends Subsystem {
 	
 	public static final double FAST_SPEED = .5; // TODO find correct speed
 	public static final double SLOW_SPEED = .1; // TODO find correct value for constant speed
+	
+	public static final double CHASIS_HEIGHT = 5; // These two measurements are in inches
+	public static final double HEIGHT_OF_TOTE = 12;
 	
 	public CANTalon winch = RobotMap.elevatorWinchMotor14;
 	
@@ -70,15 +72,15 @@ public class Elevator extends Subsystem {
      * @param speed that the elevator moves + goes up, - goes down
      */
     public void moveElevator(double speed) {
-    	// TODO make sure we can calibrate our potentiometer so that these two points are 0 and 66 inches.
+    	// TODO make sure we can calibrate our potentiometer so that these two points are 0 and 54 inches.
     	// The elevator's minimum height is 0 inches
     	if (getPosition() <= 0) {
     		if (speed < 0) {
     			speed = 0;
     		}
     	}
-    	// The elevator's maximum height is 66 inches TODO Confirm
-    	if (getPosition() >= 66) {
+    	// The elevator's maximum height is 54 inches TODO Confirm
+    	if (getPosition() >= 54) {
     		if (speed > 0) {
     			speed = 0;
     		}
@@ -114,7 +116,7 @@ public class Elevator extends Subsystem {
     }
  	
     /**
-     * @return the position of the elevator in inches (between 0 and 66)
+     * @return the position of the elevator in inches (between 0 and 54)
      */
     public double getPosition() {
     	Robot.debugger.logError(LoggerNames.ELEVATOR, "The elevator is at position" + getPosition());
@@ -124,15 +126,15 @@ public class Elevator extends Subsystem {
     
     /** 
      * Moves based on a position value
-     * @param position The position (between 0 and 66 inches that you want your elevator
+     * @param position The position (between 0 and 54 inches that you want your elevator
      */
     public void setPosition(double position) {
     	if (position <= 0) {
     		position = 0;
     	}
-    	// The elevator's maximum height is 66 inches TODO Confirm
-    	if (position >= 66) {
-    		position = 66;
+    	// The elevator's maximum height is 54 inches TODO Confirm
+    	if (position >= 54) {
+    		position = 54;
     	}
     	changeControlModeWinch(ControlMode.Position);
     	winch.set(position);
