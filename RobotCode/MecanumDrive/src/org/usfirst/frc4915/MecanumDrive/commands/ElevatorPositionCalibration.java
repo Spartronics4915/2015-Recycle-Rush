@@ -29,6 +29,6 @@ public class ElevatorPositionCalibration extends CommandGroup {
 		addParallel(new ElevatorMoveToHeight());
 		addSequential(new ElevatorMinHeightCalibrate());
 		addSequential(new ElevatorMaxHeightCalibrate());
-    	addSequential(new ElevatorStop());
+		addSequential(new ElevatorStop());
 	}
 }
