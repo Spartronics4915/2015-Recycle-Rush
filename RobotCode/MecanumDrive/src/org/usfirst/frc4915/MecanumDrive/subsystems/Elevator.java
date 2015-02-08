@@ -33,13 +33,16 @@ public class Elevator extends Subsystem {
 	// as the position it should be in.
 	// Not in inches. Between minimumPotentiometerValue and
 	// maximumPotentiometerValue.
+
+	// TODO initialize height
+	// Not in inches. Between minimumPotentiometerValue and maximumPotentiometerValue.
 	public static double height;
 
 	// POTENTIOMTERS : fwd --> top, rev --> bottom
 
 	// Set by ElevatorMax/MinHeightCalibrate commands
-	public static double minimumPotentiometerValue;
-	public static double maximumPotentiometerValue;
+	public static double minimumPotentiometerValue = 1023;
+	public static double maximumPotentiometerValue = 0;
 
 	public static final double RANGE_OF_MOTION = 54; // The elevator can go a
 														// distance between 54
@@ -146,7 +149,7 @@ public class Elevator extends Subsystem {
 		// the change in value per inch and multiply by the number of inches
 		// that the totes are stacked
 		height = minimumPotentiometerValue + ((maximumPotentiometerValue - minimumPotentiometerValue) * HEIGHT_OF_TOTE * positionNumber / RANGE_OF_MOTION);
-	}
+    }
 
 	/**
 	 * 
