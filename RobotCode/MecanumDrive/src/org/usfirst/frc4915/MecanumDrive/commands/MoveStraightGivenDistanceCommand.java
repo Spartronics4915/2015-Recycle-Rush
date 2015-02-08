@@ -11,11 +11,9 @@
 
 package org.usfirst.frc4915.MecanumDrive.commands;
 
-import java.util.Arrays;
 import java.util.List;
 
 import org.usfirst.frc4915.MecanumDrive.Robot;
-import org.usfirst.frc4915.MecanumDrive.RobotMap;
 import org.usfirst.frc4915.MecanumDrive.subsystems.DriveTrain;
 
 import edu.wpi.first.wpilibj.CANTalon;
@@ -25,7 +23,7 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class  MoveStraightGivenDistanceCommand extends Command {
-	public static List <CANTalon> motors = Robot.driveTrain.motors;
+	public static List <CANTalon> motors = DriveTrain.motors;
 	public double inputDistance;
 	private DriveTrain driveTrain = Robot.driveTrain;
 	

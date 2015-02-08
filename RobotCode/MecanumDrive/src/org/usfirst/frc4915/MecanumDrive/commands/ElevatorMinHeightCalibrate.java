@@ -34,7 +34,7 @@ public class ElevatorMinHeightCalibrate extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Elevator.minimumPotentiometerValue = elevator.getPosition();
+    	Elevator.minimumPotentiometerValue = elevator.getPositionInches();
     	Robot.debugger.logError(LoggerNames.ELEVATOR, "Minimum position value " + Elevator.minimumPotentiometerValue);
     }
 
