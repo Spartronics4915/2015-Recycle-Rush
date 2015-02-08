@@ -83,15 +83,15 @@ public class OI {
         elevatorStick = new Joystick(1);
         
         elevatorJumpToPositionZero = new JoystickButton(elevatorStick, 2); 
-        elevatorJumpToPositionZero.whenPressed(new ElevatorJumpToPosition(Elevator.POSITION_ZERO));
+        elevatorJumpToPositionZero.whenPressed(new ElevatorJumpToPosition(0));
         elevatorJumpToPositionOne = new JoystickButton(elevatorStick, 7); 
-        elevatorJumpToPositionOne.whenPressed(new ElevatorJumpToPosition(Elevator.POSITION_ONE));
+        elevatorJumpToPositionOne.whenPressed(new ElevatorJumpToPosition(1));
         elevatorJumpToPositionTwo = new JoystickButton(elevatorStick, 8);
-        elevatorJumpToPositionTwo.whenPressed(new ElevatorJumpToPosition(Elevator.POSITION_TWO));
+        elevatorJumpToPositionTwo.whenPressed(new ElevatorJumpToPosition(2));
         elevatorJumpToPositionThree = new JoystickButton(elevatorStick, 9); 
-        elevatorJumpToPositionThree.whenPressed(new ElevatorJumpToPosition(Elevator.POSITION_THREE));
+        elevatorJumpToPositionThree.whenPressed(new ElevatorJumpToPosition(3));
         elevatorJumpToPositionFour = new JoystickButton(elevatorStick, 10); 
-        elevatorJumpToPositionFour.whenPressed(new ElevatorJumpToPosition(Elevator.POSITION_FOUR));
+        elevatorJumpToPositionFour.whenPressed(new ElevatorJumpToPosition(4));
         
         
         driveStick = new Joystick(0);
@@ -109,11 +109,11 @@ public class OI {
         SmartDashboard.putData("Close All Grabbers", new CloseAllGrabbers());
         SmartDashboard.putData("Open Large Grabber", new OpenGrabber());
         SmartDashboard.putData("Close Large Grabber", new CloseGrabber());
-        SmartDashboard.putData("Jump to Elevator Position", new ElevatorJumpToPosition(Elevator.POSITION_ZERO));
-        SmartDashboard.putData("Jump to Elevator Position", new ElevatorJumpToPosition(Elevator.POSITION_ONE));
-        SmartDashboard.putData("Jump to Elevator Position", new ElevatorJumpToPosition(Elevator.POSITION_TWO));
-        SmartDashboard.putData("Jump to Elevator Position", new ElevatorJumpToPosition(Elevator.POSITION_THREE));
-        SmartDashboard.putData("Jump to Elevator Position", new ElevatorJumpToPosition(Elevator.POSITION_FOUR));
+        SmartDashboard.putData("Jump to Elevator Position", new ElevatorJumpToPosition(0));
+        SmartDashboard.putData("Jump to Elevator Position", new ElevatorJumpToPosition(1));
+        SmartDashboard.putData("Jump to Elevator Position", new ElevatorJumpToPosition(2));
+        SmartDashboard.putData("Jump to Elevator Position", new ElevatorJumpToPosition(3));
+        SmartDashboard.putData("Jump to Elevator Position", new ElevatorJumpToPosition(4));
 
         
         // LiveWindowSendable info (Test mode)
