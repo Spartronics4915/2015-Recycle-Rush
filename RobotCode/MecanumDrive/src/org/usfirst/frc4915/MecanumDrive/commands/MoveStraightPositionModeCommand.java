@@ -55,7 +55,7 @@ public class  MoveStraightPositionModeCommand extends Command {
     	for(int i = 0; i < motors.size(); i++) {
     		CANTalon motor = motors.get(i);
     		
-        	double startingTickValue = motor.getEncPosition();
+        	double startingTickValue = motor.getPosition();
         	Double endValue = startingTickValue + ticksToMove;
         	if(i >= 2) {
         		// right motors are inverted
@@ -75,44 +75,43 @@ public class  MoveStraightPositionModeCommand extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	if(inputDistance < 0)
-    		driveTrain.driveStraight(-0.2);
+    		driveTrain.driveStraight(0.7);
     	else
-    		driveTrain.driveStraight(0.2);
+    		driveTrain.driveStraight(-0.7);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	for(int i = 0; i < motors.size(); i++) {
-        	boolean finished = false;
-        	double currentPosition = motors.get(i).getEncPosition();
-        	Double desiredPosition = desiredTicksValue.get(i);
-        	System.out.println("Motor " + i + ": current position: " + currentPosition
-        			+ ", desired position " + desiredPosition);
-        	
-        	if(i >= 2) {
-        		// right motors are inverted
-        		if(inputDistance < 0) {
-            		finished = currentPosition >= desiredPosition;
-            	} else {
-            		finished = currentPosition <= desiredPosition;
-            	}
+    	// checking to see if the front motors have finished
+    	if(inputDistance > 0)
+    		return isMotorFinished(0) || isMotorFinished(2);
+    	else 
+    		return isMotorFinished(1) || isMotorFinished(3);
+    }
+    private boolean isMotorFinished(int i) {
+    	boolean finished = false;
+    	double currentPosition = motors.get(i).getPosition();
+    	Double desiredPosition = desiredTicksValue.get(i);
+    	System.out.println("Motor " + i + ": current position: " + currentPosition
+    			+ ", desired position " + desiredPosition);
+    	
+    	if(i >= 2) {
+    		// right motors are inverted
+    		if(inputDistance < 0) {
+        		finished = currentPosition >= desiredPosition;
         	} else {
-	        	if(inputDistance < 0) {
-	        		finished = currentPosition <= desiredPosition;
-	        	} else {
-	        		finished = currentPosition >= desiredPosition;
-	        	}
-    		}
-        	
-        	if(finished) {
-        		System.out.println("Motor " + i + " is finished");
-        		return true;
+        		finished = currentPosition <= desiredPosition;
+        	}
+    	} else {
+        	if(inputDistance < 0) {
+        		finished = currentPosition <= desiredPosition;
+        	} else {
+        		finished = currentPosition >= desiredPosition;
         	}
     	}
+    	return finished;
     	
-    	return false;
     }
-
     // Called once after isFinished returns true
     protected void end() {
 		System.out.println("Stopping motor");

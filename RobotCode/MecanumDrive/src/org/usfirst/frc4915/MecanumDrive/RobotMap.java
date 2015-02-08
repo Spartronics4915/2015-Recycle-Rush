@@ -162,11 +162,6 @@ public class RobotMap {
 			mecanumDriveControls1LeftRear11.setPID(1, 0.002, 1.0, 0.0001, 255, 200, 0);
 			mecanumDriveControls1RightFront12.setPID(1, 0.002, 1.0, 0.0001, 255, 200, 0);
 			mecanumDriveControls1RightRear13.setPID(1, 0.002, 1.0, 0.0001, 255, 200, 0);
-		} else if(mode.equals(ControlMode.Position)) {
-			mecanumDriveControls1LeftFront10.setPID(0.4, 0.002, 1.0, 0.0001, 255, 50, 0);
-			mecanumDriveControls1LeftRear11.setPID(0.4, 0.002, 1.0, 0.0001, 255, 50, 0);
-			mecanumDriveControls1RightFront12.setPID(0.4, 0.002, 1.0, 0.0001, 255, 50, 0);
-			mecanumDriveControls1RightRear13.setPID(0.4, 0.002, 1.0, 0.0001, 255, 50, 0);
 		}
 
     }

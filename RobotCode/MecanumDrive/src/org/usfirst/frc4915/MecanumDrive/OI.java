@@ -99,8 +99,8 @@ public class OI {
 
         // SmartDashboard Buttons
         SmartDashboard.putData("Autonomous Command", new AutonomousCommand());
-        SmartDashboard.putData("Move Straight 5 feet", new MoveStraightPositionModeCommand(5));
-        SmartDashboard.putData("Move Backwards 5 feet", new MoveStraightPositionModeCommand(-5));
+        SmartDashboard.putData("Move Straight 9 feet", new MoveStraightPositionModeCommand(9));
+        SmartDashboard.putData("Move Backwards 9 feet", new MoveStraightPositionModeCommand(-9));
         SmartDashboard.putData("DriveStraight 1 second", new DriveStraight());
 
         SmartDashboard.putData("Close Grabber", new CloseGrabber());
