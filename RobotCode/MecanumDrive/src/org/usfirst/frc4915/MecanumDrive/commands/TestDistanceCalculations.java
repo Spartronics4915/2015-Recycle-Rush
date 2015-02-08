@@ -27,20 +27,19 @@ public class TestDistanceCalculations extends Command {
 	double distanceY;
 	double changeInDistanceX;
 	double changeInDistanceY;
-	
+
 	long previousTime;
 	long currentTime;
 	long changeInTime;
-	
+
 	BuiltInAccelerometer accelerometer = RobotMap.accelerometer;
-	
+
 	public TestDistanceCalculations() {
 		requires(Robot.driveTrain);
 	}
 	@Override
 	protected void end() {
-		System.out.printf("The robot traveled %f meters in the x direction and %f meters in the y direction",
-							distanceX, distanceY);
+		System.out.printf("The robot traveled %f meters in the x direction and %f meters in the y direction", distanceX, distanceY);
 	}
 
 	@Override
@@ -48,33 +47,32 @@ public class TestDistanceCalculations extends Command {
 		previousTime = currentTime;
 		currentTime = System.currentTimeMillis();
 		changeInTime = currentTime - previousTime;
-		
+
 		previousAccelerationX = currentAccelerationX;
 		currentAccelerationX = accelerometer.getX();
 		previousAccelerationY = currentAccelerationY;
 		currentAccelerationY = accelerometer.getY();
 		changeInAccelerationX = currentAccelerationX - previousAccelerationX;
 		changeInAccelerationY = currentAccelerationY - previousAccelerationY;
-		
+
 		previousVelocityX = currentVelocityX;
 		previousVelocityY = currentVelocityY;
 		currentVelocityX = gForceToSSI(changeInAccelerationX) * milliSecondsToSSI(changeInTime);
 		currentVelocityY = gForceToSSI(changeInAccelerationY) * milliSecondsToSSI(changeInTime);
-		
+
 		changeInDistanceX = currentVelocityX * milliSecondsToSSI(changeInTime);
 		changeInDistanceY = currentVelocityY * milliSecondsToSSI(changeInTime);
-		
+
 		distanceX += changeInDistanceX;
 		distanceY += changeInDistanceY;
-		
-		System.out.printf("The robot traveled %f meters in the x direction and %f meters in the y direction",
-						distanceX, distanceY);
+
+		System.out.printf("The robot traveled %f meters in the x direction and %f meters in the y direction", distanceX, distanceY);
 	}
-	
+
 	private double gForceToSSI(double gForce) {
 		return gForce * 9.8;
 	}
-	
+
 	private double milliSecondsToSSI(long milliseconds) {
 		return milliseconds / 1000d;
 	}
@@ -99,5 +97,5 @@ public class TestDistanceCalculations extends Command {
 	protected boolean isFinished() {
 		return false;
 	}
-	
+
 }
