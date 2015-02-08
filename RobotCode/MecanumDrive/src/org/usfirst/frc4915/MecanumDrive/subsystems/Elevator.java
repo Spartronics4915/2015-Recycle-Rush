@@ -109,11 +109,11 @@ public class Elevator extends Subsystem {
      * Converts from a position between zero totes to six totes to inches.
      * If you need to stack on top of 3 totes, use position 3.
 	 * If you need to stack on the ground, use position 0.
+	 * 
      * 
      * @param positionNumber the number of totes you are stacking on top of.
-     * @return height in inches
      */
-	public void convertPositionToHeight(int positionNumber) {
+	public void setHeightToPosition(int positionNumber) {
 		// find the range between the min and max Potentiometer values, divide by 54 to get 
 		// the change in value per inch and multiply by the number of inches that the totes are stacked
 		height = minimumPotentiometerValue + 

@@ -21,7 +21,7 @@ public class ElevatorJumpToPosition extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	Robot.debugger.logError(LoggerNames.ELEVATOR, "Elevator Initialized");
-    	elevator.convertPositionToHeight(positionNumber);
+    	elevator.setHeightToPosition(positionNumber);
     }
 
     // Called repeatedly when this Command is scheduled to run
