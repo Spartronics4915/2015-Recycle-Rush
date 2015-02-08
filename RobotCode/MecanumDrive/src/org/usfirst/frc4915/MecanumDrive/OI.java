@@ -118,6 +118,8 @@ public class OI {
         // LiveWindowSendable info (Test mode)
         LiveWindow.addSensor("Other Sensors", "Accelerometer", RobotMap.accelerometer);
         LiveWindow.addSensor("Drive Train", "Distance Sensor", Robot.driveTrain.distanceSensor);
+        LiveWindow.addActuator("Grabber", "Double Solenoid", RobotMap.mommaSolenoid);
+        LiveWindow.addActuator("Grabber", "Solenoid", RobotMap.babySolenoid);
         // LiveWindow.addSensor("Elevator", "Upper limit switch", RobotMap.limitSwitchTop);
         // LiveWindow.addSensor("Elevator", "Lower limit switch", RobotMap.limitSwitchBottom);
         // LiveWindow.addSensor("Elevator", "Linear potentiometer", RobotMap.potentiometer);
