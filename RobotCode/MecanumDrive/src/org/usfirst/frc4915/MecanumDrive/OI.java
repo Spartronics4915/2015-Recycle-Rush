@@ -20,8 +20,6 @@ import org.usfirst.frc4915.MecanumDrive.commands.IntermediateOpen;
 import org.usfirst.frc4915.MecanumDrive.commands.MoveStraightPositionModeCommand;
 import org.usfirst.frc4915.MecanumDrive.commands.OpenGrabber;
 import org.usfirst.frc4915.MecanumDrive.subsystems.DriveTrain;
-import org.usfirst.frc4915.MecanumDrive.subsystems.Elevator;
-
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -144,12 +142,6 @@ public class OI {
 		LiveWindow.addSensor("Other Sensors", "Accelerometer", RobotMap.accelerometer);
 		LiveWindow.addSensor("Drive Train", "Distance Sensor", DriveTrain.distanceSensor);
 		LiveWindow.addActuator("Grabber", "Double Solenoid", RobotMap.mommaSolenoid);
-		// LiveWindow.addSensor("Elevator", "Upper limit switch",
-		// RobotMap.limitSwitchTop);
-		// LiveWindow.addSensor("Elevator", "Lower limit switch",
-		// RobotMap.limitSwitchBottom);
-		// LiveWindow.addSensor("Elevator", "Linear potentiometer",
-		// RobotMap.potentiometer);
 
 		/**
 		 * MOTOR SPEED OUTPUT
