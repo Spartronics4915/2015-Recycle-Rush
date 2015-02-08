@@ -8,40 +8,41 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class ElevatorJumpToPosition extends Command {
 	Elevator elevator = Robot.elevator;
-	
-	// Position number -- number of totes that you would need to stack on top of.
+
+	// Position number -- number of totes that you would need to stack on top
+	// of.
 	private int positionNumber;
-	
-    public ElevatorJumpToPosition(int position) {
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
-    	positionNumber = position;
-    }
 
-    // Called just before this Command runs the first time
-    protected void initialize() {
-    	Robot.debugger.logError(LoggerNames.ELEVATOR, "Elevator Initialized");
-    	elevator.convertPositionToHeight(positionNumber);
-    }
+	public ElevatorJumpToPosition(int position) {
+		// Use requires() here to declare subsystem dependencies
+		// eg. requires(chassis);
+		positionNumber = position;
+	}
 
-    // Called repeatedly when this Command is scheduled to run
-    protected void execute() {
-    	//Changes height
-    }
+	// Called just before this Command runs the first time
+	protected void initialize() {
+		Robot.debugger.logError(LoggerNames.ELEVATOR, "Elevator Initialized");
+		elevator.convertPositionToHeight(positionNumber);
+	}
 
-    // Make this return true when this Command no longer needs to run execute()
-    // TODO This command doesn't end
-    protected boolean isFinished() {
-    	return true;
-    }
+	// Called repeatedly when this Command is scheduled to run
+	protected void execute() {
+		// Changes height
+	}
 
-    // Called once after isFinished returns true
-    protected void end() {
-    }
+	// Make this return true when this Command no longer needs to run execute()
+	// TODO This command doesn't end
+	protected boolean isFinished() {
+		return true;
+	}
 
-    // Called when another command which requires one or more of the same
-    // subsystems is scheduled to run
-    protected void interrupted() {
-    	end();
-    }
+	// Called once after isFinished returns true
+	protected void end() {
+	}
+
+	// Called when another command which requires one or more of the same
+	// subsystems is scheduled to run
+	protected void interrupted() {
+		end();
+	}
 }

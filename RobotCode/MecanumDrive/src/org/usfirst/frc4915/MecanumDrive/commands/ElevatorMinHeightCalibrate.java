@@ -13,33 +13,34 @@ public class ElevatorMinHeightCalibrate extends Command {
 
 	Elevator elevator = Robot.elevator;
 
-    public ElevatorMinHeightCalibrate() {
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
-    }
+	public ElevatorMinHeightCalibrate() {
+		// Use requires() here to declare subsystem dependencies
+		// eg. requires(chassis);
+	}
 
-    // Called just before this Command runs the first time
-    protected void initialize() {
-    }
+	// Called just before this Command runs the first time
+	protected void initialize() {
+	}
 
-    // Called repeatedly when this Command is scheduled to run
-    protected void execute() {
-    	elevator.moveElevator(-.2);
-    }
+	// Called repeatedly when this Command is scheduled to run
+	protected void execute() {
+		elevator.moveElevator(-.2);
+	}
 
-    // Make this return true when this Command no longer needs to run execute()
-    protected boolean isFinished() {
-        return elevator.isAtBottomOfElevator();
-    }
+	// Make this return true when this Command no longer needs to run execute()
+	protected boolean isFinished() {
+		return elevator.isAtBottomOfElevator();
+	}
 
-    // Called once after isFinished returns true
-    protected void end() {
-    	Elevator.minimumPotentiometerValue = elevator.getPositionInches();
-    	Robot.debugger.logError(LoggerNames.ELEVATOR, "Minimum position value " + Elevator.minimumPotentiometerValue);
-    }
+	// Called once after isFinished returns true
+	protected void end() {
+		Elevator.minimumPotentiometerValue = elevator.getPositionInches();
+		Robot.debugger.logError(LoggerNames.ELEVATOR, "Minimum position value "
+				+ Elevator.minimumPotentiometerValue);
+	}
 
-    // Called when another command which requires one or more of the same
-    // subsystems is scheduled to run
-    protected void interrupted() {
-    }
+	// Called when another command which requires one or more of the same
+	// subsystems is scheduled to run
+	protected void interrupted() {
+	}
 }

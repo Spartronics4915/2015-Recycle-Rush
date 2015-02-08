@@ -8,7 +8,6 @@
 // update. Deleting the comments indicating the section will prevent
 // it from being updated in the future.
 
-
 package org.usfirst.frc4915.MecanumDrive.subsystems;
 
 import java.util.Arrays;
@@ -34,114 +33,121 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  *
  */
 public class DriveTrain extends Subsystem {
-    SpeedController leftFront = RobotMap.mecanumDriveControls1LeftFront10;
-    SpeedController leftRear = RobotMap.mecanumDriveControls1LeftRear11;
-    SpeedController rightFront = RobotMap.mecanumDriveControls1RightFront12;
-    SpeedController rightRear = RobotMap.mecanumDriveControls1RightRear13;
-    RobotDrive robotDrive;
-    CustomDebugger debugger = Robot.debugger;
+	SpeedController leftFront = RobotMap.mecanumDriveControls1LeftFront10;
+	SpeedController leftRear = RobotMap.mecanumDriveControls1LeftRear11;
+	SpeedController rightFront = RobotMap.mecanumDriveControls1RightFront12;
+	SpeedController rightRear = RobotMap.mecanumDriveControls1RightRear13;
+	RobotDrive robotDrive;
+	CustomDebugger debugger = Robot.debugger;
 
-
-    public static List <CANTalon> motors =  Arrays.asList(RobotMap.mecanumDriveControls1LeftFront10, 
-			RobotMap.mecanumDriveControls1LeftRear11, 
+	public static List<CANTalon> motors = Arrays.asList(
+			RobotMap.mecanumDriveControls1LeftFront10,
+			RobotMap.mecanumDriveControls1LeftRear11,
 			RobotMap.mecanumDriveControls1RightFront12,
-			RobotMap.mecanumDriveControls1RightRear13 );
+			RobotMap.mecanumDriveControls1RightRear13);
 
-    public static Gyro gyro = RobotMap.gyro;
-    public static Ultrasonic distanceSensor = RobotMap.distanceSensor;
-    
-    public double Throttle = 0;
+	public static Gyro gyro = RobotMap.gyro;
+	public static Ultrasonic distanceSensor = RobotMap.distanceSensor;
 
-    // Put methods for controlling this subsystem
-    // here. Call these from Commands.
+	public double Throttle = 0;
 
-    public void initDefaultCommand() {
-    	setDefaultCommand(new MecanumDrive());
-        
-        // Set the default command for a subsystem here.
-        //setDefaultCommand(new MySpecialCommand());
-        
-        robotDrive = RobotMap.driveTrainRobotDrive;
-    }
-    
-    public RobotDrive getRobotDrive() {
-    	return robotDrive;
-    }
-    
-    /**
-     * Drives a mecanum drivetrain in the direction of the joystick pointed
-     * Since the motors are enabled to use their encoders in RobotMap,
-     * each motor should go at the speeds that they need to more accurately.
-     * Because of this, we do not want to use setMaxOutput, because the
-     * value set in RobotMap.java is needed to be the same.
-     * 
-     * @param joystick that controls the robot movement
-     */
-    public void mecanumDrive(Joystick joystick) {
-    	
-        double joystickX = joystick.getAxis(Joystick.AxisType.kX);
-        double joystickY = joystick.getAxis(Joystick.AxisType.kY);
-        double joystickTwist = joystick.getAxis(Joystick.AxisType.kTwist);
-        Throttle = 0.50 * (joystick.getThrottle()) + 0.50; 
-        if ((Math.abs(joystickX) < 0.2)) {
-        	joystickX = 0;
-        }
-        if ((Math.abs(joystickY) < 0.2)) {
-        	joystickY = 0;
-        }
-        if ((Math.abs(joystickTwist) < 0.2)) {
-        	joystickTwist = 0;
-        }
-    	debugger.logError(LoggerNames.DRIVETRAIN, 	(joystickX + ", " + joystickY + ", " + joystickTwist));
-        if ((Math.abs(joystickX) < 0.2) && (Math.abs(joystickY) < 0.2) && (Math.abs(joystickTwist) < 0.2)) {
-        	debugger.logError(LoggerNames.DRIVETRAIN, ("Stopping Motor"));
-        	robotDrive.stopMotor();
-        } else {
-        	debugger.logError(LoggerNames.DRIVETRAIN, 	("Driving"));
-        	robotDrive.stopMotor();
-        	robotDrive.mecanumDrive_Cartesian(joystickX, joystickY, joystickTwist, gyro.getAngle());
-        	
-        /*	leftFront.set(60);
-        	leftRear.set(60);
-        	rightFront.set(60);
-        	rightRear.set(60); */
-        }
+	// Put methods for controlling this subsystem
+	// here. Call these from Commands.
 
+	public void initDefaultCommand() {
+		setDefaultCommand(new MecanumDrive());
+
+		// Set the default command for a subsystem here.
+		// setDefaultCommand(new MySpecialCommand());
+
+		robotDrive = RobotMap.driveTrainRobotDrive;
+	}
+
+	public RobotDrive getRobotDrive() {
+		return robotDrive;
+	}
+
+	/**
+	 * Drives a mecanum drivetrain in the direction of the joystick pointed
+	 * Since the motors are enabled to use their encoders in RobotMap, each
+	 * motor should go at the speeds that they need to more accurately. Because
+	 * of this, we do not want to use setMaxOutput, because the value set in
+	 * RobotMap.java is needed to be the same.
+	 * 
+	 * @param joystick
+	 *            that controls the robot movement
+	 */
+	public void mecanumDrive(Joystick joystick) {
+
+		double joystickX = joystick.getAxis(Joystick.AxisType.kX);
+		double joystickY = joystick.getAxis(Joystick.AxisType.kY);
+		double joystickTwist = joystick.getAxis(Joystick.AxisType.kTwist);
+		Throttle = 0.50 * (joystick.getThrottle()) + 0.50;
+		if ((Math.abs(joystickX) < 0.2)) {
+			joystickX = 0;
+		}
+		if ((Math.abs(joystickY) < 0.2)) {
+			joystickY = 0;
+		}
+		if ((Math.abs(joystickTwist) < 0.2)) {
+			joystickTwist = 0;
+		}
+		debugger.logError(LoggerNames.DRIVETRAIN, (joystickX + ", " + joystickY
+				+ ", " + joystickTwist));
+		if ((Math.abs(joystickX) < 0.2) && (Math.abs(joystickY) < 0.2)
+				&& (Math.abs(joystickTwist) < 0.2)) {
+			debugger.logError(LoggerNames.DRIVETRAIN, ("Stopping Motor"));
+			robotDrive.stopMotor();
+		} else {
+			debugger.logError(LoggerNames.DRIVETRAIN, ("Driving"));
+			robotDrive.stopMotor();
+			robotDrive.mecanumDrive_Cartesian(joystickX, joystickY,
+					joystickTwist, gyro.getAngle());
+
+			/*
+			 * leftFront.set(60); leftRear.set(60); rightFront.set(60);
+			 * rightRear.set(60);
+			 */
+		}
+
+	}
+	public void calibrateGyro() {
+		gyro.reset();
+	}
+
+	public void driveStraight(double speed) {
+		robotDrive.mecanumDrive_Cartesian(0.0, speed, 0.0, 0.0);
+	}
+
+	/**
+	 * 
+	 * @param motor
+	 *            is the motor on the wheels with an encoder used to determine
+	 *            the distance traveled.
+	 * @param elapsed
+	 *            is the time since the last sampling of the motor.
+	 * @return the distance traveled since the last sampling of the encoder.
+	 */
+	// TODO Make this actually work
+	// calculates the distance traveled using the wheel circumference and the
+	// number of wheel rotations.
+	public double getDistanceForMotor(CANTalon motor, long elapsed) {
+		int ticksPerRevolution = 1000;
+		double circumferenceOfWheel = 6 * Math.PI;
+		int inchesPerFoot = 12;
+		debugger.logError(LoggerNames.DRIVETRAIN, ("Speed" + motor.getSpeed()));
+		debugger.setFilter(LoggerNames.DRIVETRAIN);
+		debugger.resetFilter();
+		return motor.getSpeed() * elapsed / ticksPerRevolution
+				* circumferenceOfWheel / inchesPerFoot;
+	}
+
+	// TODO Make a method that displays the speed of a motor
+
+	public void arcadeDrive(Joystick stick) {
+		debugger.logError(LoggerNames.DRIVETRAIN, "Arcade Drive");
+		debugger.setFilter(LoggerNames.DRIVETRAIN);
+		debugger.resetFilter();
+		robotDrive.arcadeDrive(stick);
+	}
 }
-    public void calibrateGyro(){
-    	gyro.reset();
-    }
-    
-    public void driveStraight(double speed) {
-    	robotDrive.mecanumDrive_Cartesian(0.0, speed, 0.0, 0.0);
-    }
-    
-
-    /**
-     * 
-     * @param motor is the motor on the wheels with an encoder used to determine the distance traveled. 
-     * @param elapsed is the time since the last sampling of the motor. 
-     * @return the distance traveled since the last sampling of the encoder. 
-     */
-    // TODO Make this actually work
-    // calculates the distance traveled using the wheel circumference and the number of wheel rotations. 
-    public double getDistanceForMotor(CANTalon motor, long elapsed){
-    	int ticksPerRevolution = 1000;
-    	double circumferenceOfWheel = 6*Math.PI;
-    	int inchesPerFoot = 12;
-    	debugger.logError(LoggerNames.DRIVETRAIN, ("Speed" + motor.getSpeed()));
-    	debugger.setFilter(LoggerNames.DRIVETRAIN);
-    	debugger.resetFilter();
-    	return motor.getSpeed()*elapsed/ticksPerRevolution*circumferenceOfWheel/inchesPerFoot;
-    }
-    
-    // TODO Make a method that displays the speed of a motor
-    
-    public void arcadeDrive(Joystick stick){
-     	debugger.logError(LoggerNames.DRIVETRAIN, "Arcade Drive");
-     	debugger.setFilter(LoggerNames.DRIVETRAIN);
-     	debugger.resetFilter();
-    	robotDrive.arcadeDrive(stick);
-    }
-}
-
