@@ -42,15 +42,11 @@ import org.usfirst.frc4915.debuggersystem.CustomDebugger;
 public class Robot extends IterativeRobot {
 
     Command autonomousCommand;
-
     SendableChooser autoChooser;
-        
-    
     Preferences preferences;
-    double testPreferencesItemOne;
-    double testPreferencesItemTwo;
     
-    SendableChooser autonomousProgramChooser;
+    double Distance1;
+    double Distance2;
     
     public static OI oi;
     public static DriveTrain driveTrain;
@@ -78,22 +74,16 @@ public class Robot extends IterativeRobot {
 
         // instantiate the command used for the autonomous period
   //      autonomousCommand = new AutonomousCommand();
+
+        Distance1 = preferences.getDouble("Distance to move straight", 3.0);
+        
         autoChooser = new SendableChooser();
-        autoChooser.addDefault("Drive straight", new Auto1());
-        autoChooser.addObject("Drive backwards", new Auto2());
-        autoChooser.addObject("Drive sideways", new Auto3());
+        autoChooser.addDefault("Drive straight", new Auto1("auto1", Distance1));
+        autoChooser.addObject("Drive backwards", new Auto2("auto2"));
+        autoChooser.addObject("Drive sideways", new Auto3("auto3"));
         
         SmartDashboard.putData("Autonomous mode chooser", autoChooser);
-
-
-        testPreferencesItemOne = preferences.getDouble("TestOne", 123.4);
-        testPreferencesItemOne = preferences.getDouble("TestTwo", 456.7);
         
-        autonomousProgramChooser = new SendableChooser();
-        autonomousProgramChooser.addDefault("Autonomous Program One", new GenericTestCommand(10, "Running program one!"));
-        autonomousProgramChooser.addObject("Autonomous Program Two", new GenericTestCommand(20, "Running program two!"));
-        
-        SmartDashboard.putData("Autonomous Program", autonomousProgramChooser);
 
         // Test for sending messages to smart dashboard
         SendUserMessage.displayMessage();
@@ -117,9 +107,6 @@ public class Robot extends IterativeRobot {
         autonomousCommand.start();
         if (autonomousCommand != null) autonomousCommand.start();
         
-        // Use the selected autonomous command
-    	autonomousCommand = (Command) autonomousProgramChooser.getSelected();
-    	autonomousCommand.start();
     }
 
     /**
