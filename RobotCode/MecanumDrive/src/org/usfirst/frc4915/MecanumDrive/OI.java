@@ -90,10 +90,7 @@ public class OI {
         elevatorJumpToPositionThree.whenPressed(new ElevatorJumpToPosition(Elevator.POSITION_THREE));
         elevatorJumpToPositionFour = new JoystickButton(elevatorStick, 10); 
         elevatorJumpToPositionFour.whenPressed(new ElevatorJumpToPosition(Elevator.POSITION_FOUR));
-        elevatorJumpToPositionFive = new JoystickButton(elevatorStick, 11); 
-        elevatorJumpToPositionFive.whenPressed(new ElevatorJumpToPosition(Elevator.POSITION_FIVE));
-        elevatorJumpToPositionSix = new JoystickButton(elevatorStick, 6);
-        elevatorJumpToPositionSix.whenPressed(new ElevatorJumpToPosition(Elevator.POSITION_SIX));
+        
         
         driveStick = new Joystick(0);
         elevatorStick = new Joystick(1);
@@ -112,8 +109,6 @@ public class OI {
         SmartDashboard.putData("Jump to Elevator Position", new ElevatorJumpToPosition(Elevator.POSITION_TWO));
         SmartDashboard.putData("Jump to Elevator Position", new ElevatorJumpToPosition(Elevator.POSITION_THREE));
         SmartDashboard.putData("Jump to Elevator Position", new ElevatorJumpToPosition(Elevator.POSITION_FOUR));
-        SmartDashboard.putData("Jump to Elevator Position", new ElevatorJumpToPosition(Elevator.POSITION_FIVE));
-        SmartDashboard.putData("Jump to Elevator Position", new ElevatorJumpToPosition(Elevator.POSITION_SIX));
         
         // LiveWindowSendable info (Test mode)
         LiveWindow.addSensor("Other Sensors", "Accelerometer", RobotMap.accelerometer);

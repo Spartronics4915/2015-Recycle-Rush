@@ -2,6 +2,7 @@ package org.usfirst.frc4915.MecanumDrive.commands;
 
 import org.usfirst.frc4915.MecanumDrive.Robot;
 import org.usfirst.frc4915.MecanumDrive.subsystems.Elevator;
+import org.usfirst.frc4915.debuggersystem.CustomDebugger.LoggerNames;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class ElevatorJumpToPosition extends Command {
@@ -37,7 +38,7 @@ public class ElevatorJumpToPosition extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	System.out.println("Elevator is in position " + elevator.getPosition());
+    	Robot.debugger.logError(LoggerNames.ELEVATOR, "Elevator is in position " + positionNumber);
     	elevator.stopElevator();
     }
 

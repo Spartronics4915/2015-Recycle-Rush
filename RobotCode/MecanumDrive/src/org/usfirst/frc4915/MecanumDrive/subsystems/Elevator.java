@@ -4,7 +4,6 @@ import org.usfirst.frc4915.MecanumDrive.Robot;
 import org.usfirst.frc4915.MecanumDrive.RobotMap;
 import org.usfirst.frc4915.MecanumDrive.commands.ElevatorFineTune;
 import org.usfirst.frc4915.debuggersystem.CustomDebugger.LoggerNames;
-
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.CANTalon.ControlMode;
 import edu.wpi.first.wpilibj.Joystick;
@@ -22,17 +21,20 @@ public class Elevator extends Subsystem {
 	// If you need to stack on top of 3 totes, use position 3.
 	// If you need to stack on the ground, use position 0.
 	
-	// TODO find exact height's of positions for number of totes in inches
+	// These values are in inches.
+	// We do not take into account the height of the chassis as the potentiometer will not.
 	public static final int POSITION_ZERO = 0; // Lowest position
-	public static final int POSITION_ONE = 1;
-	public static final int POSITION_TWO = 2;
-	public static final int POSITION_THREE = 3;
-	public static final int POSITION_FOUR = 4;
-	public static final int POSITION_FIVE = 5; 
-	public static final int POSITION_SIX = 6; // Highest position
+	public static final int POSITION_ONE = 12;
+	public static final int POSITION_TWO = 24;
+	public static final int POSITION_THREE = 36;
+	public static final int POSITION_FOUR = 48; // Highest position
+	
+	public static final double CHASIS_HEIGHT = 5; // These two measurements are in inches
+	public static final double HEIGHT_OF_TOTE = 12;
 	
 	public static final double FAST_SPEED = .5; // TODO find correct speed
 	public static final double SLOW_SPEED = .1; // TODO find correct value for constant speed
+	
 	
 	public CANTalon winch = RobotMap.elevatorWinchMotor14;
 	
@@ -70,15 +72,15 @@ public class Elevator extends Subsystem {
      * @param speed that the elevator moves + goes up, - goes down
      */
     public void moveElevator(double speed) {
-    	// TODO make sure we can calibrate our potentiometer so that these two points are 0 and 66 inches.
+    	// TODO make sure we can calibrate our potentiometer so that these two points are 0 and 54 inches.
     	// The elevator's minimum height is 0 inches
     	if (getPosition() <= 0) {
     		if (speed < 0) {
     			speed = 0;
     		}
     	}
-    	// The elevator's maximum height is 66 inches TODO Confirm
-    	if (getPosition() >= 66) {
+    	// The elevator's maximum height is 54 inches TODO Confirm
+    	if (getPosition() >= 54) {
     		if (speed > 0) {
     			speed = 0;
     		}
@@ -100,27 +102,23 @@ public class Elevator extends Subsystem {
      * Stops the elevator from moving. Used at the end of commands.
      */
     public void stopElevator() {
-    	// stops any current commands telling the elevator to move.
     	winch.disableControl();
     	System.out.println("Elevator has stopped.");
     }
     
     /**
      * TODO Make this actually work - It will drift and continually use a new point to hold the position
+     * Holds the elevator in it's current position
      */
     public void holdPosition() {
-    	/*
-    	 * Keeps the elevator in a constant position
-    	 */
     	changeControlModeWinch(ControlMode.Position);
     	winch.set(getPosition());
     }
  	
     /**
-     * @return the position of the elevator in inches (between 0 and 66)
+     * @return the position of the elevator in inches (between 0 and 54)
      */
     public double getPosition() {
-    	// Returns the position of the elevator
     	Robot.debugger.logError(LoggerNames.ELEVATOR, "The elevator is at position" + getPosition());
     	// TODO figure out scaling
     	return winch.getPosition();
@@ -128,26 +126,48 @@ public class Elevator extends Subsystem {
     
     /** 
      * Moves based on a position value
-     * @param position The position (between 0 and 66 inches that you want your elevator
+     * @param position The position (between 0 and 54 inches that you want your elevator
      */
     public void setPosition(double position) {
     	if (position <= 0) {
     		position = 0;
     	}
-    	// The elevator's maximum height is 66 inches TODO Confirm
-    	if (position >= 66) {
-    		position = 66;
+    	// The elevator's maximum height is 54 inches TODO Confirm
+    	if (position >= 54) {
+    		position = 54;
     	}
     	changeControlModeWinch(ControlMode.Position);
     	winch.set(position);
     }
 
     /**
+     * Converts from a position between zero totes to six totes to inches.
      * 
-     * @param positionNumber
+     * @param positionNumber the number of totes you are stacking on top of.
+     * @return height in inches
      */
 	public double convertPositionToHeight(int positionNumber) {
-		// TODO Auto-generated method stub
-		return positionNumber;
+		double height;
+		switch (positionNumber) {
+		case 0:
+			height = POSITION_ZERO;
+			break;
+		case 1:
+			height = POSITION_ONE;
+			break;
+		case 2:
+			height = POSITION_TWO;
+			break;
+		case 3:
+			height = POSITION_THREE;
+			break;
+		case 4:
+			height = POSITION_FOUR;
+			break;
+		default:
+			height = POSITION_ZERO;
+			break;
+		}
+		return height;
 	}
 }
