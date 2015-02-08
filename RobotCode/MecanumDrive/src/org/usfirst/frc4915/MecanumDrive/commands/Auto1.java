@@ -20,7 +20,7 @@ public class Auto1 {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	System.out.printf("** %s (%d/%d)%n", message, i, count);
-    	System.out.print("TO MOVE "+distance+" FT");
+    	System.out.println("****TO MOVE "+distance+" FT**");
     	i++;
     }
 
