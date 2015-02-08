@@ -78,8 +78,7 @@ public class Elevator extends Subsystem {
 		double joystickY = joystick.getAxis(Joystick.AxisType.kY);
 		System.out.println("Elevator joystick " + joystickY);
 		if (Math.abs(joystickY) <= .2) {
-			Robot.debugger.logError(LoggerNames.ELEVATOR,
-					"Joystick value too small");
+			Robot.debugger.logError(LoggerNames.ELEVATOR, "Joystick value too small");
 			moveElevator(0);
 		} else {
 			moveElevator(joystickY * JOYSTICK_SCALE);
@@ -120,10 +119,8 @@ public class Elevator extends Subsystem {
 	 * @return the position of the elevator in inches (between 0 and 54)
 	 */
 	public double getPositionInches() {
-		double position = (getPosition() - minimumPotentiometerValue)
-				* (RANGE_OF_MOTION / (maximumPotentiometerValue - minimumPotentiometerValue));
-		Robot.debugger.logError(LoggerNames.ELEVATOR,
-				"The elevator is at position " + position);
+		double position = (getPosition() - minimumPotentiometerValue) * (RANGE_OF_MOTION / (maximumPotentiometerValue - minimumPotentiometerValue));
+		Robot.debugger.logError(LoggerNames.ELEVATOR, "The elevator is at position " + position);
 		return position;
 	}
 
@@ -131,8 +128,7 @@ public class Elevator extends Subsystem {
 	 * @return the read value from the potentiometer (between 0 and 1023)
 	 */
 	public double getPosition() {
-		Robot.debugger.logError(LoggerNames.ELEVATOR,
-				"The potentiometer reads " + winch.getPosition());
+		Robot.debugger.logError(LoggerNames.ELEVATOR, "The potentiometer reads " + winch.getPosition());
 		return winch.getPosition();
 	}
 
@@ -149,9 +145,7 @@ public class Elevator extends Subsystem {
 		// by 54 to get
 		// the change in value per inch and multiply by the number of inches
 		// that the totes are stacked
-		height = minimumPotentiometerValue
-				+ ((maximumPotentiometerValue - minimumPotentiometerValue)
-						* HEIGHT_OF_TOTE * positionNumber / RANGE_OF_MOTION);
+		height = minimumPotentiometerValue + ((maximumPotentiometerValue - minimumPotentiometerValue) * HEIGHT_OF_TOTE * positionNumber / RANGE_OF_MOTION);
 	}
 
 	/**
@@ -190,8 +184,7 @@ public class Elevator extends Subsystem {
 		if (height < minimumPotentiometerValue) {
 			height = minimumPotentiometerValue;
 		}
-		Robot.debugger.logError(LoggerNames.ELEVATOR, "Elevator's height is "
-				+ height);
+		Robot.debugger.logError(LoggerNames.ELEVATOR, "Elevator's height is " + height);
 	}
 
 }

@@ -32,8 +32,7 @@ public class ElevatorMaxHeightCalibrate extends Command {
 	// Called once after isFinished returns true
 	protected void end() {
 		Elevator.maximumPotentiometerValue = elevator.getPositionInches();
-		Robot.debugger.logError(LoggerNames.ELEVATOR, "Maximum position value "
-				+ Elevator.maximumPotentiometerValue);
+		Robot.debugger.logError(LoggerNames.ELEVATOR, "Maximum position value " + Elevator.maximumPotentiometerValue);
 	}
 
 	// Called when another command which requires one or more of the same

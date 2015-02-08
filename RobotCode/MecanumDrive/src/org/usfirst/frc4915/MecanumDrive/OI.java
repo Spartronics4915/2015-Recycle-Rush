@@ -79,30 +79,23 @@ public class OI {
 		elevatorStick = new Joystick(1);
 
 		elevatorJumpToPositionZero = new JoystickButton(elevatorStick, 2);
-		elevatorJumpToPositionZero.whenPressed(new ElevatorJumpToPosition(
-				Elevator.POSITION_ZERO));
+		elevatorJumpToPositionZero.whenPressed(new ElevatorJumpToPosition(Elevator.POSITION_ZERO));
 		elevatorJumpToPositionOne = new JoystickButton(elevatorStick, 7);
-		elevatorJumpToPositionOne.whenPressed(new ElevatorJumpToPosition(
-				Elevator.POSITION_ONE));
+		elevatorJumpToPositionOne.whenPressed(new ElevatorJumpToPosition(Elevator.POSITION_ONE));
 		elevatorJumpToPositionTwo = new JoystickButton(elevatorStick, 8);
-		elevatorJumpToPositionTwo.whenPressed(new ElevatorJumpToPosition(
-				Elevator.POSITION_TWO));
+		elevatorJumpToPositionTwo.whenPressed(new ElevatorJumpToPosition(Elevator.POSITION_TWO));
 		elevatorJumpToPositionThree = new JoystickButton(elevatorStick, 9);
-		elevatorJumpToPositionThree.whenPressed(new ElevatorJumpToPosition(
-				Elevator.POSITION_THREE));
+		elevatorJumpToPositionThree.whenPressed(new ElevatorJumpToPosition(Elevator.POSITION_THREE));
 		elevatorJumpToPositionFour = new JoystickButton(elevatorStick, 10);
-		elevatorJumpToPositionFour.whenPressed(new ElevatorJumpToPosition(
-				Elevator.POSITION_FOUR));
+		elevatorJumpToPositionFour.whenPressed(new ElevatorJumpToPosition(Elevator.POSITION_FOUR));
 
 		driveStick = new Joystick(0);
 		elevatorStick = new Joystick(1);
 
 		// SmartDashboard Buttons
 		SmartDashboard.putData("Autonomous Command", new AutonomousCommand());
-		SmartDashboard.putData("Move Straight 9 feet",
-				new MoveStraightPositionModeCommand(9));
-		SmartDashboard.putData("Move Backwards 9 feet",
-				new MoveStraightPositionModeCommand(-9));
+		SmartDashboard.putData("Move Straight 9 feet", new MoveStraightPositionModeCommand(9));
+		SmartDashboard.putData("Move Backwards 9 feet", new MoveStraightPositionModeCommand(-9));
 		SmartDashboard.putData("DriveStraight 1 second", new DriveStraight());
 		SmartDashboard.putData("Close Grabber", new CloseGrabber());
 		SmartDashboard.putData("Vent", new CloseSmallGrabber());
@@ -111,24 +104,16 @@ public class OI {
 		SmartDashboard.putData("Close All Grabbers", new CloseAllGrabbers());
 		SmartDashboard.putData("Open Large Grabber", new OpenGrabber());
 		SmartDashboard.putData("Close Large Grabber", new CloseGrabber());
-		SmartDashboard.putData("Jump to Elevator Position",
-				new ElevatorJumpToPosition(Elevator.POSITION_ZERO));
-		SmartDashboard.putData("Jump to Elevator Position",
-				new ElevatorJumpToPosition(Elevator.POSITION_ONE));
-		SmartDashboard.putData("Jump to Elevator Position",
-				new ElevatorJumpToPosition(Elevator.POSITION_TWO));
-		SmartDashboard.putData("Jump to Elevator Position",
-				new ElevatorJumpToPosition(Elevator.POSITION_THREE));
-		SmartDashboard.putData("Jump to Elevator Position",
-				new ElevatorJumpToPosition(Elevator.POSITION_FOUR));
+		SmartDashboard.putData("Jump to Elevator Position", new ElevatorJumpToPosition(Elevator.POSITION_ZERO));
+		SmartDashboard.putData("Jump to Elevator Position", new ElevatorJumpToPosition(Elevator.POSITION_ONE));
+		SmartDashboard.putData("Jump to Elevator Position", new ElevatorJumpToPosition(Elevator.POSITION_TWO));
+		SmartDashboard.putData("Jump to Elevator Position", new ElevatorJumpToPosition(Elevator.POSITION_THREE));
+		SmartDashboard.putData("Jump to Elevator Position", new ElevatorJumpToPosition(Elevator.POSITION_FOUR));
 
 		// LiveWindowSendable info (Test mode)
-		LiveWindow.addSensor("Other Sensors", "Accelerometer",
-				RobotMap.accelerometer);
-		LiveWindow.addSensor("Drive Train", "Distance Sensor",
-				DriveTrain.distanceSensor);
-		LiveWindow.addActuator("Grabber", "Double Solenoid",
-				RobotMap.mommaSolenoid);
+		LiveWindow.addSensor("Other Sensors", "Accelerometer", RobotMap.accelerometer);
+		LiveWindow.addSensor("Drive Train", "Distance Sensor", DriveTrain.distanceSensor);
+		LiveWindow.addActuator("Grabber", "Double Solenoid", RobotMap.mommaSolenoid);
 		// LiveWindow.addSensor("Elevator", "Upper limit switch",
 		// RobotMap.limitSwitchTop);
 		// LiveWindow.addSensor("Elevator", "Lower limit switch",
@@ -137,34 +122,23 @@ public class OI {
 		// RobotMap.potentiometer);
 
 		// Motor values
-		SmartDashboard.putNumber("LeftFront Speed",
-				RobotMap.mecanumDriveControls1LeftFront10.getSpeed());
-		SmartDashboard.putNumber("LeftRear Speed",
-				RobotMap.mecanumDriveControls1LeftRear11.getSpeed());
-		SmartDashboard.putNumber("RightFront Speed",
-				RobotMap.mecanumDriveControls1RightFront12.getSpeed());
-		SmartDashboard.putNumber("RightRear Speed",
-				RobotMap.mecanumDriveControls1RightRear13.getSpeed());
+		SmartDashboard.putNumber("LeftFront Speed", RobotMap.mecanumDriveControls1LeftFront10.getSpeed());
+		SmartDashboard.putNumber("LeftRear Speed", RobotMap.mecanumDriveControls1LeftRear11.getSpeed());
+		SmartDashboard.putNumber("RightFront Speed", RobotMap.mecanumDriveControls1RightFront12.getSpeed());
+		SmartDashboard.putNumber("RightRear Speed", RobotMap.mecanumDriveControls1RightRear13.getSpeed());
 
-		SmartDashboard.putNumber("LeftFront Position",
-				RobotMap.mecanumDriveControls1LeftFront10.getEncPosition());
-		SmartDashboard.putNumber("LeftRear Position",
-				RobotMap.mecanumDriveControls1LeftRear11.getEncPosition());
-		SmartDashboard.putNumber("RightFront Position",
-				RobotMap.mecanumDriveControls1RightFront12.getEncPosition());
-		SmartDashboard.putNumber("RightRear Position",
-				RobotMap.mecanumDriveControls1RightRear13.getEncPosition());
+		SmartDashboard.putNumber("LeftFront Position", RobotMap.mecanumDriveControls1LeftFront10.getEncPosition());
+		SmartDashboard.putNumber("LeftRear Position", RobotMap.mecanumDriveControls1LeftRear11.getEncPosition());
+		SmartDashboard.putNumber("RightFront Position", RobotMap.mecanumDriveControls1RightFront12.getEncPosition());
+		SmartDashboard.putNumber("RightRear Position", RobotMap.mecanumDriveControls1RightRear13.getEncPosition());
 
-		SmartDashboard.putNumber("Elevator Speed",
-				RobotMap.elevatorWinchMotor14.getSpeed());
+		SmartDashboard.putNumber("Elevator Speed", RobotMap.elevatorWinchMotor14.getSpeed());
 
 		// SmartDashboard.putNumber("Linear Potentiometer height",
 		// RobotMap.potentiometer.get());
 
 		// Shows the current version number on the driver station
 		String parsedVersion = VersionFinder.parseVersionFromManifest(this);
-		SmartDashboard.putString("Code Version", parsedVersion == null
-				? "<not found>"
-				: parsedVersion);
+		SmartDashboard.putString("Code Version", parsedVersion == null ? "<not found>" : parsedVersion);
 	}
 }

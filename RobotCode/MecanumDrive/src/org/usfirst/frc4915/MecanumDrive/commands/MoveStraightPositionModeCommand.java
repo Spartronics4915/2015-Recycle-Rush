@@ -26,8 +26,7 @@ public class MoveStraightPositionModeCommand extends Command {
 
 	public MoveStraightPositionModeCommand(double inputDistance) {
 		requires(driveTrain);
-		System.out.println("***MoveStraightPositionModeCommand inputDistance: "
-				+ inputDistance + "*******");
+		System.out.println("***MoveStraightPositionModeCommand inputDistance: " + inputDistance + "*******");
 		this.inputDistance = inputDistance;
 		// Use requires() here to declare subsystem dependencies
 		// eg. requires(chassis);
@@ -44,8 +43,7 @@ public class MoveStraightPositionModeCommand extends Command {
 
 		double ticksToMove = inputDistance * 12 * 1000 / (6 * Math.PI);
 
-		System.out.println("Input distance: " + inputDistance
-				+ " ft, ticks to move: " + ticksToMove);
+		System.out.println("Input distance: " + inputDistance + " ft, ticks to move: " + ticksToMove);
 
 		for (int i = 0; i < motors.size(); i++) {
 			CANTalon motor = motors.get(i);
@@ -57,8 +55,7 @@ public class MoveStraightPositionModeCommand extends Command {
 				endValue = startingTickValue - ticksToMove;
 			}
 
-			System.out.println("Motor " + i + ": starting position "
-					+ startingTickValue + ", desired position " + endValue);
+			System.out.println("Motor " + i + ": starting position " + startingTickValue + ", desired position " + endValue);
 			desiredTicksValue.add(endValue);
 		}
 	}
@@ -88,8 +85,7 @@ public class MoveStraightPositionModeCommand extends Command {
 		boolean finished = false;
 		double currentPosition = motors.get(i).getPosition();
 		Double desiredPosition = desiredTicksValue.get(i);
-		System.out.println("Motor " + i + ": current position: "
-				+ currentPosition + ", desired position " + desiredPosition);
+		System.out.println("Motor " + i + ": current position: " + currentPosition + ", desired position " + desiredPosition);
 
 		if (i >= 2) {
 			// right motors are inverted

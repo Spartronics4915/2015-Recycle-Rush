@@ -29,8 +29,7 @@ public class MecanumDrive extends Command {
 	// Called just before this Command runs the first time
 	protected void initialize() {
 		debugger = Robot.debugger;
-		debugger.logError(LoggerNames.DRIVETRAIN,
-				"Starting MecanumDrive Command");
+		debugger.logError(LoggerNames.DRIVETRAIN, "Starting MecanumDrive Command");
 	}
 
 	// Called repeatedly when this Command is scheduled to run

@@ -39,9 +39,7 @@ public class TestDistanceCalculations extends Command {
 	}
 	@Override
 	protected void end() {
-		System.out
-				.printf("The robot traveled %f meters in the x direction and %f meters in the y direction",
-						distanceX, distanceY);
+		System.out.printf("The robot traveled %f meters in the x direction and %f meters in the y direction", distanceX, distanceY);
 	}
 
 	@Override
@@ -59,10 +57,8 @@ public class TestDistanceCalculations extends Command {
 
 		previousVelocityX = currentVelocityX;
 		previousVelocityY = currentVelocityY;
-		currentVelocityX = gForceToSSI(changeInAccelerationX)
-				* milliSecondsToSSI(changeInTime);
-		currentVelocityY = gForceToSSI(changeInAccelerationY)
-				* milliSecondsToSSI(changeInTime);
+		currentVelocityX = gForceToSSI(changeInAccelerationX) * milliSecondsToSSI(changeInTime);
+		currentVelocityY = gForceToSSI(changeInAccelerationY) * milliSecondsToSSI(changeInTime);
 
 		changeInDistanceX = currentVelocityX * milliSecondsToSSI(changeInTime);
 		changeInDistanceY = currentVelocityY * milliSecondsToSSI(changeInTime);
@@ -70,9 +66,7 @@ public class TestDistanceCalculations extends Command {
 		distanceX += changeInDistanceX;
 		distanceY += changeInDistanceY;
 
-		System.out
-				.printf("The robot traveled %f meters in the x direction and %f meters in the y direction",
-						distanceX, distanceY);
+		System.out.printf("The robot traveled %f meters in the x direction and %f meters in the y direction", distanceX, distanceY);
 	}
 
 	private double gForceToSSI(double gForce) {

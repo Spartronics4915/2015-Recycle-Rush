@@ -76,18 +76,13 @@ public class MoveStraightGivenDistanceCommand extends Command {
 		endTime = System.currentTimeMillis();
 		elapsed = endTime - startTime;
 		distanceSinceElapsed = 0;
-		System.out.println("Recorded end time: " + endTime + " (difference of "
-				+ elapsed + " seconds)s");
+		System.out.println("Recorded end time: " + endTime + " (difference of " + elapsed + " seconds)s");
 		// maybe a method???
 		for (CANTalon motor : motors) {
-			double distanceForMotor = driveTrain.getDistanceForMotor(motor,
-					elapsed);
-			System.out.println("Distance for motor " + motor + ": "
-					+ distanceForMotor);
-			distanceSinceElapsed = Math.max(distanceForMotor,
-					distanceSinceElapsed);
-			System.out.println("Distance since elapsed: "
-					+ distanceSinceElapsed);
+			double distanceForMotor = driveTrain.getDistanceForMotor(motor, elapsed);
+			System.out.println("Distance for motor " + motor + ": " + distanceForMotor);
+			distanceSinceElapsed = Math.max(distanceForMotor, distanceSinceElapsed);
+			System.out.println("Distance since elapsed: " + distanceSinceElapsed);
 		}
 
 		distance += distanceSinceElapsed;

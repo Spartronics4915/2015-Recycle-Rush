@@ -69,10 +69,8 @@ public class Robot extends IterativeRobot {
 		testPreferencesItemOne = preferences.getDouble("TestTwo", 456.7);
 
 		autonomousProgramChooser = new SendableChooser();
-		autonomousProgramChooser.addDefault("Autonomous Program One",
-				new GenericTestCommand(10, "Running program one!"));
-		autonomousProgramChooser.addObject("Autonomous Program Two",
-				new GenericTestCommand(20, "Running program two!"));
+		autonomousProgramChooser.addDefault("Autonomous Program One", new GenericTestCommand(10, "Running program one!"));
+		autonomousProgramChooser.addObject("Autonomous Program Two", new GenericTestCommand(20, "Running program two!"));
 
 		SmartDashboard.putData("Autonomous Program", autonomousProgramChooser);
 
@@ -96,8 +94,7 @@ public class Robot extends IterativeRobot {
 		// Use the selected autonomous command
 		// autonomousCommand = (Command) autonomousProgramChooser.getSelected();
 		double desiredDistrance = preferences.getDouble("DesiredDistance", 9.0);
-		autonomousCommand = new MoveStraightPositionModeCommand(
-				desiredDistrance);
+		autonomousCommand = new MoveStraightPositionModeCommand(desiredDistrance);
 
 		autonomousCommand.start();
 	}

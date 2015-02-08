@@ -40,11 +40,7 @@ public class DriveTrain extends Subsystem {
 	RobotDrive robotDrive;
 	CustomDebugger debugger = Robot.debugger;
 
-	public static List<CANTalon> motors = Arrays.asList(
-			RobotMap.mecanumDriveControls1LeftFront10,
-			RobotMap.mecanumDriveControls1LeftRear11,
-			RobotMap.mecanumDriveControls1RightFront12,
-			RobotMap.mecanumDriveControls1RightRear13);
+	public static List<CANTalon> motors = Arrays.asList(RobotMap.mecanumDriveControls1LeftFront10, RobotMap.mecanumDriveControls1LeftRear11, RobotMap.mecanumDriveControls1RightFront12, RobotMap.mecanumDriveControls1RightRear13);
 
 	public static Gyro gyro = RobotMap.gyro;
 	public static Ultrasonic distanceSensor = RobotMap.distanceSensor;
@@ -92,17 +88,14 @@ public class DriveTrain extends Subsystem {
 		if ((Math.abs(joystickTwist) < 0.2)) {
 			joystickTwist = 0;
 		}
-		debugger.logError(LoggerNames.DRIVETRAIN, (joystickX + ", " + joystickY
-				+ ", " + joystickTwist));
-		if ((Math.abs(joystickX) < 0.2) && (Math.abs(joystickY) < 0.2)
-				&& (Math.abs(joystickTwist) < 0.2)) {
+		debugger.logError(LoggerNames.DRIVETRAIN, (joystickX + ", " + joystickY + ", " + joystickTwist));
+		if ((Math.abs(joystickX) < 0.2) && (Math.abs(joystickY) < 0.2) && (Math.abs(joystickTwist) < 0.2)) {
 			debugger.logError(LoggerNames.DRIVETRAIN, ("Stopping Motor"));
 			robotDrive.stopMotor();
 		} else {
 			debugger.logError(LoggerNames.DRIVETRAIN, ("Driving"));
 			robotDrive.stopMotor();
-			robotDrive.mecanumDrive_Cartesian(joystickX, joystickY,
-					joystickTwist, gyro.getAngle());
+			robotDrive.mecanumDrive_Cartesian(joystickX, joystickY, joystickTwist, gyro.getAngle());
 
 			/*
 			 * leftFront.set(60); leftRear.set(60); rightFront.set(60);
@@ -138,8 +131,7 @@ public class DriveTrain extends Subsystem {
 		debugger.logError(LoggerNames.DRIVETRAIN, ("Speed" + motor.getSpeed()));
 		debugger.setFilter(LoggerNames.DRIVETRAIN);
 		debugger.resetFilter();
-		return motor.getSpeed() * elapsed / ticksPerRevolution
-				* circumferenceOfWheel / inchesPerFoot;
+		return motor.getSpeed() * elapsed / ticksPerRevolution * circumferenceOfWheel / inchesPerFoot;
 	}
 
 	// TODO Make a method that displays the speed of a motor

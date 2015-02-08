@@ -33,14 +33,12 @@ public class GenericTestCommand extends Command {
 
 	// Called once after isFinished returns true
 	protected void end() {
-		System.out.printf("** Finished saying \"%s\" %d times.%n", message,
-				count);
+		System.out.printf("** Finished saying \"%s\" %d times.%n", message, count);
 	}
 
 	// Called when another command which requires one or more of the same
 	// subsystems is scheduled to run
 	protected void interrupted() {
-		System.out.printf("** Interrupted whilst saying \"%s\" %d times.%n",
-				message, count);
+		System.out.printf("** Interrupted whilst saying \"%s\" %d times.%n", message, count);
 	}
 }
