@@ -32,12 +32,12 @@ public class ElevatorJumpToPosition extends Command {
     // Make this return true when this Command no longer needs to run execute()
     // TODO This command doesn't end
     protected boolean isFinished() {
-        return elevator.getPosition() == ;
+        return elevator.getPosition() == height;
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	System.out.println("Elevator is in position " + );
+    	System.out.println("Elevator is in position " + elevator.getPosition());
     	elevator.stopElevator();
     }
 

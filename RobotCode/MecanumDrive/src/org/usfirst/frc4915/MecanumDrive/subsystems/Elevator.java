@@ -149,5 +149,6 @@ public class Elevator extends Subsystem {
      */
 	public double convertPositionToHeight(int positionNumber) {
 		// TODO Auto-generated method stub
+		return positionNumber;
 	}
 }
