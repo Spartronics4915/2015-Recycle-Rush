@@ -101,8 +101,6 @@ public class OI {
         SmartDashboard.putData("Move Backwards 5 feet", new MoveStraightGivenDistanceCommand(-5));
         SmartDashboard.putData("DriveStraight 1 second", new DriveStraight());
         SmartDashboard.putData("Open Large Grabber", new OpenGrabber());
-        SmartDashboard.putData("Push Small Grabber", new OpenSmallGrabber());
-        SmartDashboard.putData("Release Small Grabber", new OpenGrabber());
         SmartDashboard.putData("Close Large Grabber", new CloseGrabber());
         SmartDashboard.putData("Jump to Elevator Position", new ElevatorJumpToPosition(Elevator.POSITION_ZERO));
         SmartDashboard.putData("Jump to Elevator Position", new ElevatorJumpToPosition(Elevator.POSITION_ONE));
