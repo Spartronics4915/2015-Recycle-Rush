@@ -94,7 +94,7 @@ public class DriveTrain extends Subsystem {
         } else {
         	debugger.logError(LoggerNames.DRIVETRAIN, 	("Driving"));
         	robotDrive.stopMotor();
-        	robotDrive.mecanumDrive_Cartesian(joystickX, joystickY, joystickTwist, 0.0);
+        	robotDrive.mecanumDrive_Cartesian(joystickX, joystickY, joystickTwist, gyro.getAngle());
         	
         /*	leftFront.set(60);
         	leftRear.set(60);
@@ -105,12 +105,6 @@ public class DriveTrain extends Subsystem {
 }
     public void calibrateGyro(){
     	gyro.reset();
-    }
-    
-    public double getGyroValue(){
-    	return gyro.getAngle();
-    	
-    	
     }
     
     public void driveStraight(double speed) {
