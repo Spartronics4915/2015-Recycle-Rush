@@ -44,12 +44,11 @@ public class RobotMap {
      */
     public static CANTalon elevatorWinchMotor14;
     //Limit Switches
-    public static DigitalInput limitSwitchBottom; // May be used for elevator as a sensor for testing if at the bottom of elevator
-    public static DigitalInput limitSwitchTop; // May be used for elevator as a sensor for testing if at the top of elevator
+    // public static DigitalInput limitSwitchBottom; // May be used for elevator as a sensor for testing if at the bottom of elevator
+    // public static DigitalInput limitSwitchTop; // May be used for elevator as a sensor for testing if at the top of elevator
     // Potentiometer
-    private static int inputPort = 1; // TODO find correct port for the potentiometer
-	private static int scale = 1; // TODO find correct scale for the potentiometer
-    public static AnalogPotentiometer potentiometer;
+    //private static final int SCALE = 1; // TODO find correct scale for the potentiometer
+	//public static AnalogPotentiometer potentiometer;
     
     /**
      * GRABBER
@@ -76,34 +75,43 @@ public class RobotMap {
 		mecanumDriveControls1LeftRear11 = new CANTalon(11);
 		mecanumDriveControls1RightFront12 = new CANTalon(12);
 		mecanumDriveControls1RightRear13 = new CANTalon(13);
-//		mecanumDriveControls1LeftFront10.changeControlMode(ControlMode.Speed);
-//		mecanumDriveControls1LeftRear11.changeControlMode(ControlMode.Speed);
-//		mecanumDriveControls1RightFront12.changeControlMode(ControlMode.Speed);
-//		mecanumDriveControls1RightRear13.changeControlMode(ControlMode.Speed);
-//		mecanumDriveControls1LeftFront10.set(0);
-//		mecanumDriveControls1LeftRear11.set(0);
-//		mecanumDriveControls1RightFront12.set(0);
-//		mecanumDriveControls1RightRear13.set(0);
+		
+//      Set control mode for the CAN Talon motor controllers
+		mecanumDriveControls1LeftFront10.changeControlMode(ControlMode.Speed);
+		mecanumDriveControls1LeftRear11.changeControlMode(ControlMode.Speed);
+		mecanumDriveControls1RightFront12.changeControlMode(ControlMode.Speed);
+		mecanumDriveControls1RightRear13.changeControlMode(ControlMode.Speed);
+
+//		Makes sure the Feedback Device is a Quad Encoder
 		mecanumDriveControls1LeftFront10.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
 	    mecanumDriveControls1LeftRear11.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
 		mecanumDriveControls1RightFront12.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
 		mecanumDriveControls1RightRear13.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
+
+		//TODO confirm that these values are what we want
+		//Sets PID Values for the Mecanum Drive Train
+		mecanumDriveControls1LeftFront10.setPID(1, 0.002, 1.0, 0.0001, 255, 200, 0);
+		mecanumDriveControls1LeftRear11.setPID(1, 0.002, 1.0, 0.0001, 255, 200, 0);
+		mecanumDriveControls1RightFront12.setPID(1, 0.002, 1.0, 0.0001, 255, 200, 0);
+		mecanumDriveControls1RightRear13.setPID(1, 0.002, 1.0, 0.0001, 255, 200, 0);
+		
 		
 		driveTrainRobotDrive = new RobotDrive(mecanumDriveControls1LeftFront10, 
 				   mecanumDriveControls1LeftRear11,
 				   mecanumDriveControls1RightFront12, 
 				   mecanumDriveControls1RightRear13);
+		// Sets the max output to ???, 10ft per 1 secf -- After testing, we have decided to go with 950.
+		driveTrainRobotDrive.setMaxOutput(950);
 		
 		driveTrainRobotDrive.setSafetyEnabled(true);
 		driveTrainRobotDrive.setExpiration(0.1);
 		driveTrainRobotDrive.setSensitivity(0.5);
-		driveTrainRobotDrive.setMaxOutput(1.0);
 		
 		driveTrainRobotDrive.setInvertedMotor(RobotDrive.MotorType.kFrontRight, true);
 		driveTrainRobotDrive.setInvertedMotor(RobotDrive.MotorType.kRearRight, true);
 		
 		// Gyro instantiation
-		gyro = new Gyro(0); //Port numbers need to be decided
+		gyro = new Gyro(0); //Port numbers need to be decided TODO Setup Gyro on robot
 		
 		// Distance instantiation
 		distanceSensor = new Ultrasonic(0,1); //Port numbers need to be decided
@@ -114,11 +122,13 @@ public class RobotMap {
 		/**
 		 * ELEVATOR START
 		 */
-		//Elevator instantiation
+		//ELEVATOR instantiation
+		// TODO set limit switch configuration on the winch motor
 		elevatorWinchMotor14 = new CANTalon(14);
-		
+		elevatorWinchMotor14.changeControlMode(ControlMode.Position);
+		elevatorWinchMotor14.setFeedbackDevice(CANTalon.FeedbackDevice.AnalogPot);
+		elevatorWinchMotor14.setPID(1, 0.002, 1.0, 0.0001, 255, 200, 0); // TODO Determine PID values and Ramp Rate
 		// Potentiometer instantiation
-		potentiometer = new AnalogPotentiometer(inputPort, scale); //Port numbers need to be decided
 		
 		// TODO Limit Switches instantiation goes here
 		/**
@@ -144,7 +154,7 @@ public class RobotMap {
 		// Built in Accelerometer
 		accelerometer = new BuiltInAccelerometer();
 		accelerometer.startLiveWindowMode();
-		/**PCM_NODE_ID
+		/**
 		 * SENSORS END
 		 */
     }
