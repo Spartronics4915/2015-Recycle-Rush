@@ -119,7 +119,8 @@ public class Elevator extends Subsystem {
      * @return the position of the elevator in inches (between 0 and 54)
      */
     public double getPosition() {
-    	Robot.debugger.logError(LoggerNames.ELEVATOR, "The elevator is at position" + getPosition());
+    	// Returns the position of the elevator
+    	Robot.debugger.logError(LoggerNames.ELEVATOR, "The elevator is at position " + getPosition());
     	// TODO figure out scaling
     	return winch.getPosition();
     }
