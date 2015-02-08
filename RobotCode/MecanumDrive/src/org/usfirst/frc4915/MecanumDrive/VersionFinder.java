@@ -7,13 +7,13 @@ import java.util.jar.Attributes;
 import java.util.jar.Manifest;
 
 public class VersionFinder {
-	
+
 	public static final String VERSION_ATTRIBUTE = "Code-Version";
-	
+
 	/**
 	 * 
-	 * Attempt to read the version manifest attribute output by our
-	 * Ant build script directly into any compiled jar files.
+	 * Attempt to read the version manifest attribute output by our Ant build
+	 * script directly into any compiled jar files.
 	 *
 	 * @return Parsed version, or null if not found or invalid.
 	 *
@@ -32,20 +32,21 @@ public class VersionFinder {
 	 * http://stackoverflow.com/a/1273196
 	 * </p>
 	 * 
-	 * @param object Object to read classloader from
+	 * @param object
+	 *            Object to read classloader from
 	 * @return The manifest, or null
 	 */
 	private static Manifest findManifest(Object object) {
 
 		URLClassLoader cl = (URLClassLoader) object.getClass().getClassLoader();
 		try {
-		  URL url = cl.findResource("META-INF/MANIFEST.MF");
-		  Manifest manifest = new Manifest(url.openStream());
-		  return manifest;
+			URL url = cl.findResource("META-INF/MANIFEST.MF");
+			Manifest manifest = new Manifest(url.openStream());
+			return manifest;
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
-		
+
 		return null;
 	}
 
