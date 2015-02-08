@@ -24,7 +24,7 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class  MoveStraightPositionModeCommand extends Command {
-	public static List <CANTalon> motors = Robot.driveTrain.motors;
+	public static List <CANTalon> motors = DriveTrain.motors;
 	public double inputDistance;
 	private DriveTrain driveTrain = Robot.driveTrain;
 	

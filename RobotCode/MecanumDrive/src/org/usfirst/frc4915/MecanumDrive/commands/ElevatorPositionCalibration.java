@@ -31,7 +31,5 @@ public class ElevatorPositionCalibration extends CommandGroup {
         // arm.
     	addSequential(new ElevatorMinHeightCalibrate());
     	addSequential(new ElevatorMaxHeightCalibrate());
-    	Elevator.offset = Elevator.minimumPotentiometerValue;
-    	Elevator.scale = (Elevator.RANGE_OF_MOTION / (Elevator.maximumPotentiometerValue - Elevator.offset));
     }
 }
