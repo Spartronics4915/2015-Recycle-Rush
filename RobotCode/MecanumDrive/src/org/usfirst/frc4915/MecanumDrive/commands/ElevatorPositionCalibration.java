@@ -29,7 +29,9 @@ public class ElevatorPositionCalibration extends CommandGroup {
         // e.g. if Command1 requires chassis, and Command2 requires arm,
         // a CommandGroup containing them would require both the chassis and the
         // arm.
+    	addParallel(new ElevatorMoveToHeight());
     	addSequential(new ElevatorMinHeightCalibrate());
     	addSequential(new ElevatorMaxHeightCalibrate());
+    	addSequential(new ElevatorStop());
     }
 }

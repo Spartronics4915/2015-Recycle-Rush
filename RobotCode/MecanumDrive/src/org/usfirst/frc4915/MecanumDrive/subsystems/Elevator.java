@@ -11,32 +11,16 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 // TODO use the values between minimumPotentiometerValue and maximumPotentiometerValue rather than inches as inputs.
 public class Elevator extends Subsystem {
-    
-    // Put methods for controlling this subsystem
-    // here. Call these from Commands.
-	
-	// These positions describe the number of totes you stacking on top of. 
-	// If you need to stack on top of 3 totes, use position 3.
-	// If you need to stack on the ground, use position 0.
-	
-	// These values are in inches.
-	// We do not take into account the height of the chassis as the potentiometer will not.
-	// TODO We likely will remove this for calibrate-able values
-	public static final int POSITION_ZERO = 0; // Lowest position inches
-	public static final int POSITION_ONE = 12;
-	public static final int POSITION_TWO = 24;
-	public static final int POSITION_THREE = 36;
-	public static final int POSITION_FOUR = 48; // Highest position inches
-	
-	// TODO Use a static variable (height) that is constantly used by the motor as the position it should be in.
+
+	// TODO initialize height
 	// Not in inches. Between minimumPotentiometerValue and maximumPotentiometerValue.
 	public static double height;
 	
 	// POTENTIOMTERS : fwd --> top, rev --> bottom
 	
 	// Set by ElevatorMax/MinHeightCalibrate commands
-	public static double minimumPotentiometerValue;
-	public static double maximumPotentiometerValue;
+	public static double minimumPotentiometerValue = 1023;
+	public static double maximumPotentiometerValue = 0;
 	
 	public static final double RANGE_OF_MOTION = 54; // The elevator can go a distance between 54 inches
 	
@@ -65,7 +49,7 @@ public class Elevator extends Subsystem {
      */
     public void moveWithJoystick(Joystick joystick) {
         double joystickY = joystick.getAxis(Joystick.AxisType.kY);
-        System.out.println("Elevator joystick " + joystickY);
+        Robot.debugger.logError(LoggerNames.ELEVATOR, "Elevator joystick " + joystickY);
         if (Math.abs(joystickY) <= .2) {
             Robot.debugger.logError(LoggerNames.ELEVATOR, "Joystick value too small");
             moveElevator(0);
@@ -109,7 +93,7 @@ public class Elevator extends Subsystem {
     public double getPositionInches() {
     	double position = (getPosition() - minimumPotentiometerValue)
     					* (RANGE_OF_MOTION / (maximumPotentiometerValue - minimumPotentiometerValue));
-    	Robot.debugger.logError(LoggerNames.ELEVATOR, "The elevator is at position " + position);
+    	Robot.debugger.logError(LoggerNames.ELEVATOR, "The elevator is at position " + position + " (inches)");
     	return position;
     }
     
@@ -123,12 +107,13 @@ public class Elevator extends Subsystem {
 
     /**
      * Converts from a position between zero totes to six totes to inches.
+     * If you need to stack on top of 3 totes, use position 3.
+	 * If you need to stack on the ground, use position 0.
      * 
      * @param positionNumber the number of totes you are stacking on top of.
      * @return height in inches
      */
 	public void convertPositionToHeight(int positionNumber) {
-		
 		// find the range between the min and max Potentiometer values, divide by 54 to get 
 		// the change in value per inch and multiply by the number of inches that the totes are stacked
 		height = minimumPotentiometerValue + 

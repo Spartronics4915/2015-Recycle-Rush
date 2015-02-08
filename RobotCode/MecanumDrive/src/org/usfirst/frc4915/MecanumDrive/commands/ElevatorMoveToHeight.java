@@ -2,39 +2,39 @@ package org.usfirst.frc4915.MecanumDrive.commands;
 
 import org.usfirst.frc4915.MecanumDrive.Robot;
 import org.usfirst.frc4915.MecanumDrive.subsystems.Elevator;
-import org.usfirst.frc4915.debuggersystem.CustomDebugger.LoggerNames;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class ElevatorMinHeightCalibrate extends Command {
+public class ElevatorMoveToHeight extends Command {
 
 	Elevator elevator = Robot.elevator;
-
-    public ElevatorMinHeightCalibrate() {
+	
+    public ElevatorMoveToHeight() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
+    	requires(elevator);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Elevator.height = 0;
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-	}
+    	elevator.moveToHeight();
+    }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return elevator.isAtBottomOfElevator();
+        return false;
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.debugger.logError(LoggerNames.ELEVATOR, "Minimum position value " + Elevator.minimumPotentiometerValue);
+    	elevator.stopElevator();
     }
 
     // Called when another command which requires one or more of the same
