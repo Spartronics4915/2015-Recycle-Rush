@@ -57,7 +57,7 @@ public class Elevator extends Subsystem {
 														// joystick movement
 														// position change
 
-	public CANTalon winch = RobotMap.elevatorWinchMotor14;
+	public CANTalon winch = RobotMap.elevatorWinchMotor;
 
 	/**
 	 * Initializes the default command (WPI java default method) Called on

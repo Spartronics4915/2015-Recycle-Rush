@@ -28,13 +28,24 @@ import edu.wpi.first.wpilibj.Ultrasonic;
  * floating around.
  */
 public class RobotMap {
+
+	/**
+	 * CONSTANTS
+	 */
+	public static final int MOTOR_PORT_LEFT_FRONT = 10;
+	public static final int MOTOR_PORT_LEFT_REAR = 11;
+	public static final int MOTOR_PORT_RIGHT_FRONT = 12;
+	public static final int MOTOR_PORT_RIGHT_REAR = 13;
+	
+	public static final int MOTOR_PORT_ELEVATOR_WINCH = 14;
+	
 	/**
 	 * DRIVETRAIN
 	 */
-	public static CANTalon mecanumDriveControls1LeftFront10;
-	public static CANTalon mecanumDriveControls1LeftRear11;
-	public static CANTalon mecanumDriveControls1RightFront12;
-	public static CANTalon mecanumDriveControls1RightRear13;
+	public static CANTalon mecanumDriveControlsLeftFront;
+	public static CANTalon mecanumDriveControlsLeftRear;
+	public static CANTalon mecanumDriveControlsRightFront;
+	public static CANTalon mecanumDriveControlsRightRear;
 	public static RobotDrive driveTrainRobotDrive;
 	public static final double DEFAULT_MAX_OUTPUT = 950;
 	// Gyroscope
@@ -45,7 +56,7 @@ public class RobotMap {
 	/**
 	 * ELEVATOR
 	 */
-	public static CANTalon elevatorWinchMotor14;
+	public static CANTalon elevatorWinchMotor;
 	// Limit Switches
 	// public static DigitalInput limitSwitchBottom; // May be used for elevator
 	// as a sensor for testing if at the bottom of elevator
@@ -76,14 +87,14 @@ public class RobotMap {
 		/**
 		 * MECANUM WHEEL START
 		 */
-		mecanumDriveControls1LeftFront10 = new CANTalon(10);
-		mecanumDriveControls1LeftRear11 = new CANTalon(11);
-		mecanumDriveControls1RightFront12 = new CANTalon(12);
-		mecanumDriveControls1RightRear13 = new CANTalon(13);
+		mecanumDriveControlsLeftFront = new CANTalon(MOTOR_PORT_LEFT_FRONT);
+		mecanumDriveControlsLeftRear = new CANTalon(MOTOR_PORT_LEFT_REAR);
+		mecanumDriveControlsRightFront = new CANTalon(MOTOR_PORT_RIGHT_FRONT);
+		mecanumDriveControlsRightRear = new CANTalon(MOTOR_PORT_RIGHT_REAR);
 
 		changeControlMode(ControlMode.Speed);
 
-		driveTrainRobotDrive = new RobotDrive(mecanumDriveControls1LeftFront10, mecanumDriveControls1LeftRear11, mecanumDriveControls1RightFront12, mecanumDriveControls1RightRear13);
+		driveTrainRobotDrive = new RobotDrive(mecanumDriveControlsLeftFront, mecanumDriveControlsLeftRear, mecanumDriveControlsRightFront, mecanumDriveControlsRightRear);
 		// Sets the max output to ???, 10ft per 1 secf -- After testing, we have
 		// decided to go with 950.
 		driveTrainRobotDrive.setMaxOutput(DEFAULT_MAX_OUTPUT);
@@ -111,10 +122,10 @@ public class RobotMap {
 		 */
 		// ELEVATOR instantiation
 		// TODO set limit switch configuration on the winch motor
-		elevatorWinchMotor14 = new CANTalon(14);
-		elevatorWinchMotor14.changeControlMode(ControlMode.Position);
-		elevatorWinchMotor14.setFeedbackDevice(CANTalon.FeedbackDevice.AnalogPot);
-		elevatorWinchMotor14.setPID(1, 0.002, 1.0, 0.0001, 255, 200, 0); // TODO
+		elevatorWinchMotor = new CANTalon(MOTOR_PORT_ELEVATOR_WINCH);
+		elevatorWinchMotor.changeControlMode(ControlMode.Position);
+		elevatorWinchMotor.setFeedbackDevice(CANTalon.FeedbackDevice.AnalogPot);
+		elevatorWinchMotor.setPID(1, 0.002, 1.0, 0.0001, 255, 200, 0); // TODO
 																			// Determine
 																			// PID
 																			// values
@@ -154,24 +165,24 @@ public class RobotMap {
 
 	public static void changeControlMode(ControlMode mode) {
 		// Set control mode for the CAN Talon motor controllers
-		mecanumDriveControls1LeftFront10.changeControlMode(mode);
-		mecanumDriveControls1LeftRear11.changeControlMode(mode);
-		mecanumDriveControls1RightFront12.changeControlMode(mode);
-		mecanumDriveControls1RightRear13.changeControlMode(mode);
+		mecanumDriveControlsLeftFront.changeControlMode(mode);
+		mecanumDriveControlsLeftRear.changeControlMode(mode);
+		mecanumDriveControlsRightFront.changeControlMode(mode);
+		mecanumDriveControlsRightRear.changeControlMode(mode);
 
 		// Makes sure the Feedback Device is a Quad Encoder
-		mecanumDriveControls1LeftFront10.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
-		mecanumDriveControls1LeftRear11.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
-		mecanumDriveControls1RightFront12.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
-		mecanumDriveControls1RightRear13.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
+		mecanumDriveControlsLeftFront.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
+		mecanumDriveControlsLeftRear.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
+		mecanumDriveControlsRightFront.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
+		mecanumDriveControlsRightRear.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
 
 		// TODO confirm that these values are what we want
 		// Sets PID Values for the Mecanum Drive Train
 		if (mode.equals(ControlMode.Speed)) {
-			mecanumDriveControls1LeftFront10.setPID(1, 0.002, 1.0, 0.0001, 255, 200, 0);
-			mecanumDriveControls1LeftRear11.setPID(1, 0.002, 1.0, 0.0001, 255, 200, 0);
-			mecanumDriveControls1RightFront12.setPID(1, 0.002, 1.0, 0.0001, 255, 200, 0);
-			mecanumDriveControls1RightRear13.setPID(1, 0.002, 1.0, 0.0001, 255, 200, 0);
+			mecanumDriveControlsLeftFront.setPID(1, 0.002, 1.0, 0.0001, 255, 200, 0);
+			mecanumDriveControlsLeftRear.setPID(1, 0.002, 1.0, 0.0001, 255, 200, 0);
+			mecanumDriveControlsRightFront.setPID(1, 0.002, 1.0, 0.0001, 255, 200, 0);
+			mecanumDriveControlsRightRear.setPID(1, 0.002, 1.0, 0.0001, 255, 200, 0);
 		}
 
 	}

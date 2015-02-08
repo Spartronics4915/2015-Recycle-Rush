@@ -154,23 +154,23 @@ public class OI {
 		/**
 		 * MOTOR SPEED OUTPUT
 		 */
-		SmartDashboard.putNumber("LeftFront Speed", RobotMap.mecanumDriveControls1LeftFront10.getSpeed());
-		SmartDashboard.putNumber("LeftRear Speed", RobotMap.mecanumDriveControls1LeftRear11.getSpeed());
-		SmartDashboard.putNumber("RightFront Speed", RobotMap.mecanumDriveControls1RightFront12.getSpeed());
-		SmartDashboard.putNumber("RightRear Speed", RobotMap.mecanumDriveControls1RightRear13.getSpeed());
+		SmartDashboard.putNumber("LeftFront Speed", RobotMap.mecanumDriveControlsLeftFront.getSpeed());
+		SmartDashboard.putNumber("LeftRear Speed", RobotMap.mecanumDriveControlsLeftRear.getSpeed());
+		SmartDashboard.putNumber("RightFront Speed", RobotMap.mecanumDriveControlsRightFront.getSpeed());
+		SmartDashboard.putNumber("RightRear Speed", RobotMap.mecanumDriveControlsRightRear.getSpeed());
 
 		/**
 		 * MOTOR POSITION OUTPUT
 		 */
-		SmartDashboard.putNumber("LeftFront Position", RobotMap.mecanumDriveControls1LeftFront10.getEncPosition());
-		SmartDashboard.putNumber("LeftRear Position", RobotMap.mecanumDriveControls1LeftRear11.getEncPosition());
-		SmartDashboard.putNumber("RightFront Position", RobotMap.mecanumDriveControls1RightFront12.getEncPosition());
-		SmartDashboard.putNumber("RightRear Position", RobotMap.mecanumDriveControls1RightRear13.getEncPosition());
+		SmartDashboard.putNumber("LeftFront Position", RobotMap.mecanumDriveControlsLeftFront.getEncPosition());
+		SmartDashboard.putNumber("LeftRear Position", RobotMap.mecanumDriveControlsLeftRear.getEncPosition());
+		SmartDashboard.putNumber("RightFront Position", RobotMap.mecanumDriveControlsRightFront.getEncPosition());
+		SmartDashboard.putNumber("RightRear Position", RobotMap.mecanumDriveControlsRightRear.getEncPosition());
 
 		/**
 		 * ELEVATOR SPEED OUTPUT
 		 */
-		SmartDashboard.putNumber("Elevator Speed", RobotMap.elevatorWinchMotor14.getSpeed());
+		SmartDashboard.putNumber("Elevator Speed", RobotMap.elevatorWinchMotor.getSpeed());
 
 		// SmartDashboard.putNumber("Linear Potentiometer height",
 		// RobotMap.potentiometer.get());

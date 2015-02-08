@@ -33,14 +33,14 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  *
  */
 public class DriveTrain extends Subsystem {
-	SpeedController leftFront = RobotMap.mecanumDriveControls1LeftFront10;
-	SpeedController leftRear = RobotMap.mecanumDriveControls1LeftRear11;
-	SpeedController rightFront = RobotMap.mecanumDriveControls1RightFront12;
-	SpeedController rightRear = RobotMap.mecanumDriveControls1RightRear13;
+	SpeedController leftFront = RobotMap.mecanumDriveControlsLeftFront;
+	SpeedController leftRear = RobotMap.mecanumDriveControlsLeftRear;
+	SpeedController rightFront = RobotMap.mecanumDriveControlsRightFront;
+	SpeedController rightRear = RobotMap.mecanumDriveControlsRightRear;
 	RobotDrive robotDrive;
 	CustomDebugger debugger = Robot.debugger;
 
-	public static List<CANTalon> motors = Arrays.asList(RobotMap.mecanumDriveControls1LeftFront10, RobotMap.mecanumDriveControls1LeftRear11, RobotMap.mecanumDriveControls1RightFront12, RobotMap.mecanumDriveControls1RightRear13);
+	public static List<CANTalon> motors = Arrays.asList(RobotMap.mecanumDriveControlsLeftFront, RobotMap.mecanumDriveControlsLeftRear, RobotMap.mecanumDriveControlsRightFront, RobotMap.mecanumDriveControlsRightRear);
 
 	public static Gyro gyro = RobotMap.gyro;
 	public static Ultrasonic distanceSensor = RobotMap.distanceSensor;
