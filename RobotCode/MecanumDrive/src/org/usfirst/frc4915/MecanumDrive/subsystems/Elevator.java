@@ -9,30 +9,12 @@ import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
-// TODO use the values between minimumPotentiometerValue and maximumPotentiometerValue rather than inches as inputs.
+// TODO check the disableControl functionality. We may need to enableControl.
 public class Elevator extends Subsystem {
-
-	// Put methods for controlling this subsystem
-	// here. Call these from Commands.
 
 	// These positions describe the number of totes you stacking on top of.
 	// If you need to stack on top of 3 totes, use position 3.
 	// If you need to stack on the ground, use position 0.
-
-	// These values are in inches.
-	// We do not take into account the height of the chassis as the
-	// potentiometer will not.
-	// TODO We likely will remove this for calibrate-able values
-	public static final int POSITION_ZERO = 0; // Lowest position inches
-	public static final int POSITION_ONE = 12;
-	public static final int POSITION_TWO = 24;
-	public static final int POSITION_THREE = 36;
-	public static final int POSITION_FOUR = 48; // Highest position inches
-
-	// TODO Use a static variable (height) that is constantly used by the motor
-	// as the position it should be in.
-	// Not in inches. Between minimumPotentiometerValue and
-	// maximumPotentiometerValue.
 
 	// TODO initialize height
 	// Not in inches. Between minimumPotentiometerValue and
@@ -53,11 +35,11 @@ public class Elevator extends Subsystem {
 													// in inches
 	public static final double HEIGHT_OF_TOTE = 12;
 
-	private static final double JOYSTICK_SCALE = 10; // TODO Decide scale for
+	private static final double JOYSTICK_SCALE = -10; // TODO Decide scale for
 														// joystick movement
 														// position change
 
-	public CANTalon winch = RobotMap.elevatorWinchMotor14;
+	public CANTalon winch = RobotMap.elevatorWinchMotor;
 
 	/**
 	 * Initializes the default command (WPI java default method) Called on
@@ -75,12 +57,11 @@ public class Elevator extends Subsystem {
 	/**
 	 * Moves the elevator at a speed given by the joystick (y axis).
 	 * 
-	 * @param joystick
-	 *            Forward on joystick is up, backward is down
+	 * @param joystick Forward on joystick is up, backward is down
 	 */
 	public void moveWithJoystick(Joystick joystick) {
 		double joystickY = joystick.getAxis(Joystick.AxisType.kY);
-		System.out.println("Elevator joystick " + joystickY);
+		Robot.debugger.logError(LoggerNames.ELEVATOR, "Elevator joystick " + joystickY);
 		if (Math.abs(joystickY) <= .2) {
 			Robot.debugger.logError(LoggerNames.ELEVATOR, "Joystick value too small");
 			moveElevator(0);
@@ -88,7 +69,7 @@ public class Elevator extends Subsystem {
 			moveElevator(joystickY * JOYSTICK_SCALE);
 		}
 	}
-
+	
 	// TODO Change the functionality to increase/decrease the height value.
 	/**
 	 * Changes height based on the input
@@ -123,8 +104,9 @@ public class Elevator extends Subsystem {
 	 * @return the position of the elevator in inches (between 0 and 54)
 	 */
 	public double getPositionInches() {
-		double position = (getPosition() - minimumPotentiometerValue) * (RANGE_OF_MOTION / (maximumPotentiometerValue - minimumPotentiometerValue));
-		Robot.debugger.logError(LoggerNames.ELEVATOR, "The elevator is at position " + position);
+		double position = (getPosition() - minimumPotentiometerValue) 
+						* (RANGE_OF_MOTION / (maximumPotentiometerValue - minimumPotentiometerValue));
+		Robot.debugger.logError(LoggerNames.ELEVATOR, "The elevator is at position " + position + " (inches)");
 		return position;
 	}
 
@@ -138,18 +120,20 @@ public class Elevator extends Subsystem {
 
 	/**
 	 * Converts from a position between zero totes to six totes to inches.
+	 * If you need to stack on top of 3 totes, use position 3.
+	 * If you need to stack on the ground, use position 0.
 	 * 
 	 * @param positionNumber
 	 *            the number of totes you are stacking on top of.
-	 * @return height in inches
 	 */
-	public void convertPositionToHeight(int positionNumber) {
+	public void setHeightToPosition(int positionNumber) {
 
 		// find the range between the min and max Potentiometer values, divide
 		// by 54 to get
 		// the change in value per inch and multiply by the number of inches
 		// that the totes are stacked
 		height = minimumPotentiometerValue + ((maximumPotentiometerValue - minimumPotentiometerValue) * HEIGHT_OF_TOTE * positionNumber / RANGE_OF_MOTION);
+		Robot.debugger.logError(LoggerNames.ELEVATOR, "Elevator's height is " + height);
 	}
 
 	/**
@@ -157,6 +141,7 @@ public class Elevator extends Subsystem {
 	 * @return if the elevator is at it's max height, return
 	 */
 	public boolean isAtTopOfElevator() {
+		Robot.debugger.logError(LoggerNames.ELEVATOR, "Elevator Top LimitSwitch has been reached");
 		return winch.isFwdLimitSwitchClosed();
 	}
 
@@ -165,6 +150,7 @@ public class Elevator extends Subsystem {
 	 * @return if the elevator is at it's min height, return true
 	 */
 	public boolean isAtBottomOfElevator() {
+		Robot.debugger.logError(LoggerNames.ELEVATOR, "Elevator Bottom LimitSwitch has been reached");
 		return winch.isRevLimitSwitchClosed();
 	}
 
