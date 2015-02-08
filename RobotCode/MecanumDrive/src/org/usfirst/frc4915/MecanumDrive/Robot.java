@@ -95,7 +95,11 @@ public class Robot extends IterativeRobot {
 
     public void autonomousInit() {
         // Use the selected autonomous command
-    	autonomousCommand = (Command) autonomousProgramChooser.getSelected();
+    	// autonomousCommand = (Command) autonomousProgramChooser.getSelected();
+    	double desiredDistrance = preferences.getDouble("DesiredDistance", 9.0);
+    	autonomousCommand = new MoveStraightPositionModeCommand(desiredDistrance);
+    
+    	
     	autonomousCommand.start();
     }
 

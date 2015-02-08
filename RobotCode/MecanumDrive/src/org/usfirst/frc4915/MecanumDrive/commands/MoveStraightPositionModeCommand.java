@@ -30,6 +30,7 @@ public class  MoveStraightPositionModeCommand extends Command {
 	
     public MoveStraightPositionModeCommand(double inputDistance) {
     	requires(driveTrain); 
+    	System.out.println("***MoveStraightPositionModeCommand inputDistance: " + inputDistance + "*******");
     	this.inputDistance = inputDistance;
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
