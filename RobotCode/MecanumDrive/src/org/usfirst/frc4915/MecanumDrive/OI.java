@@ -13,14 +13,13 @@ package org.usfirst.frc4915.MecanumDrive;
 
 import org.usfirst.frc4915.MecanumDrive.commands.AutonomousCommand;
 import org.usfirst.frc4915.MecanumDrive.commands.CloseAllGrabbers;
-import org.usfirst.frc4915.MecanumDrive.commands.OpenGrabber;
-import org.usfirst.frc4915.MecanumDrive.commands.DriveStraight;
-import org.usfirst.frc4915.MecanumDrive.commands.ElevatorJumpToPosition;
-import org.usfirst.frc4915.MecanumDrive.commands.MoveStraightGivenDistanceCommand;
 import org.usfirst.frc4915.MecanumDrive.commands.CloseGrabber;
 import org.usfirst.frc4915.MecanumDrive.commands.CloseSmallGrabber;
+import org.usfirst.frc4915.MecanumDrive.commands.DriveStraight;
+import org.usfirst.frc4915.MecanumDrive.commands.ElevatorJumpToPosition;
 import org.usfirst.frc4915.MecanumDrive.commands.IntermediateOpen;
 import org.usfirst.frc4915.MecanumDrive.commands.MoveStraightPositionModeCommand;
+import org.usfirst.frc4915.MecanumDrive.commands.OpenGrabber;
 import org.usfirst.frc4915.MecanumDrive.subsystems.Elevator;
 
 import edu.wpi.first.wpilibj.Joystick;
