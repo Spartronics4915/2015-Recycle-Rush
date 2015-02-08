@@ -1,17 +1,13 @@
 package org.usfirst.frc4915.MecanumDrive.commands;
 
 import org.usfirst.frc4915.MecanumDrive.Robot;
-import org.usfirst.frc4915.MecanumDrive.RobotMap;
 import org.usfirst.frc4915.MecanumDrive.subsystems.Elevator;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-import org.usfirst.frc4915.debuggersystem.CustomDebugger;
 import org.usfirst.frc4915.debuggersystem.CustomDebugger.LoggerNames;
 
-/**
- *
- */
+
 public class ElevatorFineTune extends Command {
 
 	Elevator elevator = Robot.elevator;
@@ -29,6 +25,7 @@ public class ElevatorFineTune extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	// Constantly makes the motor move to whatever height is, and changes hieght based on the joystick
     	elevator.moveWithJoystick(Robot.oi.elevatorStick);
     }
 
