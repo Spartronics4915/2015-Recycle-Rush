@@ -46,6 +46,7 @@ public class DriveTrain extends Subsystem {
 	public static Ultrasonic distanceSensor = RobotMap.distanceSensor;
 
 	public double Throttle = 0;
+	public boolean fieldMode = false; 
 
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.
@@ -93,8 +94,13 @@ public class DriveTrain extends Subsystem {
 			debugger.logError(LoggerNames.DRIVETRAIN, ("Stopping Motor"));
 			robotDrive.stopMotor();
 		} else {
-			debugger.logError(LoggerNames.DRIVETRAIN, ("Driving"));
+			if(fieldMode == true){
+			debugger.logError(LoggerNames.DRIVETRAIN, ("Driving Field Mode"));
 			robotDrive.mecanumDrive_Cartesian(joystickX, joystickY, joystickTwist, gyro.getAngle());
+			} else {
+				debugger.logError(LoggerNames.DRIVETRAIN, ("Driving Robot Mode"));
+				robotDrive.mecanumDrive_Cartesian(joystickX, joystickY, joystickTwist, 0);
+			}
 
 			/*
 			 * leftFront.set(60); leftRear.set(60); rightFront.set(60);
@@ -141,4 +147,9 @@ public class DriveTrain extends Subsystem {
 		debugger.resetFilter();
 		robotDrive.arcadeDrive(stick);
 	}
+   
+	public boolean toggleFieldMode() {
+    	fieldMode = !fieldMode;
+    	return fieldMode;
+    }
 }
