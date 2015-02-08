@@ -34,6 +34,7 @@ public class RobotMap {
     public static CANTalon mecanumDriveControls1RightFront12;
     public static CANTalon mecanumDriveControls1RightRear13;
     public static RobotDrive driveTrainRobotDrive;
+    public static final double DEFAULT_MAX_OUTPUT = 950;
     // Gyroscope
     public static Gyro gyro;
     // Distance Sensor
@@ -75,32 +76,14 @@ public class RobotMap {
 		mecanumDriveControls1RightFront12 = new CANTalon(12);
 		mecanumDriveControls1RightRear13 = new CANTalon(13);
 		
-//      Set control mode for the CAN Talon motor controllers
-		mecanumDriveControls1LeftFront10.changeControlMode(ControlMode.Speed);
-		mecanumDriveControls1LeftRear11.changeControlMode(ControlMode.Speed);
-		mecanumDriveControls1RightFront12.changeControlMode(ControlMode.Speed);
-		mecanumDriveControls1RightRear13.changeControlMode(ControlMode.Speed);
-
-//		Makes sure the Feedback Device is a Quad Encoder
-		mecanumDriveControls1LeftFront10.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
-	    mecanumDriveControls1LeftRear11.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
-		mecanumDriveControls1RightFront12.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
-		mecanumDriveControls1RightRear13.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
-
-		//TODO confirm that these values are what we want
-		//Sets PID Values for the Mecanum Drive Train
-		mecanumDriveControls1LeftFront10.setPID(1, 0.002, 1.0, 0.0001, 255, 200, 0);
-		mecanumDriveControls1LeftRear11.setPID(1, 0.002, 1.0, 0.0001, 255, 200, 0);
-		mecanumDriveControls1RightFront12.setPID(1, 0.002, 1.0, 0.0001, 255, 200, 0);
-		mecanumDriveControls1RightRear13.setPID(1, 0.002, 1.0, 0.0001, 255, 200, 0);
-		
+		changeControlMode(ControlMode.Speed);
 		
 		driveTrainRobotDrive = new RobotDrive(mecanumDriveControls1LeftFront10, 
 				   mecanumDriveControls1LeftRear11,
 				   mecanumDriveControls1RightFront12, 
 				   mecanumDriveControls1RightRear13);
 		// Sets the max output to ???, 10ft per 1 secf -- After testing, we have decided to go with 950.
-		driveTrainRobotDrive.setMaxOutput(950);
+		driveTrainRobotDrive.setMaxOutput(DEFAULT_MAX_OUTPUT);
 		
 		driveTrainRobotDrive.setSafetyEnabled(true);
 		driveTrainRobotDrive.setExpiration(0.1);
@@ -155,5 +138,34 @@ public class RobotMap {
 		/**
 		 * SENSORS END
 		 */
+    }
+    
+    public static void changeControlMode(ControlMode mode) {
+//      Set control mode for the CAN Talon motor controllers
+		mecanumDriveControls1LeftFront10.changeControlMode(mode);
+		mecanumDriveControls1LeftRear11.changeControlMode(mode);
+		mecanumDriveControls1RightFront12.changeControlMode(mode);
+		mecanumDriveControls1RightRear13.changeControlMode(mode);
+
+//		Makes sure the Feedback Device is a Quad Encoder
+		mecanumDriveControls1LeftFront10.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
+	    mecanumDriveControls1LeftRear11.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
+		mecanumDriveControls1RightFront12.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
+		mecanumDriveControls1RightRear13.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
+
+		//TODO confirm that these values are what we want
+		//Sets PID Values for the Mecanum Drive Train
+		if(mode.equals(ControlMode.Speed)) {
+			mecanumDriveControls1LeftFront10.setPID(1, 0.002, 1.0, 0.0001, 255, 200, 0);
+			mecanumDriveControls1LeftRear11.setPID(1, 0.002, 1.0, 0.0001, 255, 200, 0);
+			mecanumDriveControls1RightFront12.setPID(1, 0.002, 1.0, 0.0001, 255, 200, 0);
+			mecanumDriveControls1RightRear13.setPID(1, 0.002, 1.0, 0.0001, 255, 200, 0);
+		} else if(mode.equals(ControlMode.Position)) {
+			mecanumDriveControls1LeftFront10.setPID(0.4, 0.002, 1.0, 0.0001, 255, 50, 0);
+			mecanumDriveControls1LeftRear11.setPID(0.4, 0.002, 1.0, 0.0001, 255, 50, 0);
+			mecanumDriveControls1RightFront12.setPID(0.4, 0.002, 1.0, 0.0001, 255, 50, 0);
+			mecanumDriveControls1RightRear13.setPID(0.4, 0.002, 1.0, 0.0001, 255, 50, 0);
+		}
+
     }
 }

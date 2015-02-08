@@ -15,7 +15,7 @@ import org.usfirst.frc4915.MecanumDrive.commands.AutonomousCommand;
 import org.usfirst.frc4915.MecanumDrive.commands.CloseGrabber;
 import org.usfirst.frc4915.MecanumDrive.commands.DriveStraight;
 import org.usfirst.frc4915.MecanumDrive.commands.ElevatorJumpToPosition;
-import org.usfirst.frc4915.MecanumDrive.commands.MoveStraightGivenDistanceCommand;
+import org.usfirst.frc4915.MecanumDrive.commands.MoveStraightPositionModeCommand;
 import org.usfirst.frc4915.MecanumDrive.commands.OpenGrabber;
 import org.usfirst.frc4915.MecanumDrive.commands.OpenSmallGrabber;
 import org.usfirst.frc4915.MecanumDrive.subsystems.Elevator;
@@ -90,18 +90,15 @@ public class OI {
         elevatorJumpToPositionThree.whenPressed(new ElevatorJumpToPosition(Elevator.POSITION_THREE));
         elevatorJumpToPositionFour = new JoystickButton(elevatorStick, 10); 
         elevatorJumpToPositionFour.whenPressed(new ElevatorJumpToPosition(Elevator.POSITION_FOUR));
-        elevatorJumpToPositionFive = new JoystickButton(elevatorStick, 11); 
-        elevatorJumpToPositionFive.whenPressed(new ElevatorJumpToPosition(Elevator.POSITION_FIVE));
-        elevatorJumpToPositionSix = new JoystickButton(elevatorStick, 6);
-        elevatorJumpToPositionSix.whenPressed(new ElevatorJumpToPosition(Elevator.POSITION_SIX));
+        
         
         driveStick = new Joystick(0);
         elevatorStick = new Joystick(1);
 
         // SmartDashboard Buttons
         SmartDashboard.putData("Autonomous Command", new AutonomousCommand());
-        SmartDashboard.putData("Move Straight 5 feet", new MoveStraightGivenDistanceCommand(5));
-        SmartDashboard.putData("Move Backwards 5 feet", new MoveStraightGivenDistanceCommand(-5));
+        SmartDashboard.putData("Move Straight 5 feet", new MoveStraightPositionModeCommand(5));
+        SmartDashboard.putData("Move Backwards 5 feet", new MoveStraightPositionModeCommand(-5));
         SmartDashboard.putData("DriveStraight 1 second", new DriveStraight());
         SmartDashboard.putData("Open Large Grabber", new OpenGrabber());
         SmartDashboard.putData("Push Small Grabber", new OpenSmallGrabber());
@@ -112,12 +109,12 @@ public class OI {
         SmartDashboard.putData("Jump to Elevator Position", new ElevatorJumpToPosition(Elevator.POSITION_TWO));
         SmartDashboard.putData("Jump to Elevator Position", new ElevatorJumpToPosition(Elevator.POSITION_THREE));
         SmartDashboard.putData("Jump to Elevator Position", new ElevatorJumpToPosition(Elevator.POSITION_FOUR));
-        SmartDashboard.putData("Jump to Elevator Position", new ElevatorJumpToPosition(Elevator.POSITION_FIVE));
-        SmartDashboard.putData("Jump to Elevator Position", new ElevatorJumpToPosition(Elevator.POSITION_SIX));
         
         // LiveWindowSendable info (Test mode)
         LiveWindow.addSensor("Other Sensors", "Accelerometer", RobotMap.accelerometer);
         LiveWindow.addSensor("Drive Train", "Distance Sensor", Robot.driveTrain.distanceSensor);
+        LiveWindow.addActuator("Grabber", "Double Solenoid", RobotMap.mommaSolenoid);
+        LiveWindow.addActuator("Grabber", "Solenoid", RobotMap.babySolenoid);
         // LiveWindow.addSensor("Elevator", "Upper limit switch", RobotMap.limitSwitchTop);
         // LiveWindow.addSensor("Elevator", "Lower limit switch", RobotMap.limitSwitchBottom);
         // LiveWindow.addSensor("Elevator", "Linear potentiometer", RobotMap.potentiometer);
