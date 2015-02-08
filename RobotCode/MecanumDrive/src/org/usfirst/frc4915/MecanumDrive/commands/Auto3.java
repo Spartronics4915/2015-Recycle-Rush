@@ -1,7 +1,10 @@
 package org.usfirst.frc4915.MecanumDrive.commands;
 
+import org.usfirst.frc4915.MecanumDrive.Robot;
 
-public class Auto3 {
+import edu.wpi.first.wpilibj.command.Command;
+
+public class Auto3 extends Command {
 	int count = 10;
 	int i;
 	String message;

@@ -1,6 +1,10 @@
 package org.usfirst.frc4915.MecanumDrive.commands;
 
-public class Auto1 {
+import org.usfirst.frc4915.MecanumDrive.Robot;
+
+import edu.wpi.first.wpilibj.command.Command;
+
+public class Auto1 extends Command {
 	int count = 10;
 	int i;
 	String message;
@@ -9,7 +13,9 @@ public class Auto1 {
     public Auto1(String message, double distance) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
+    	System.out.println("***CONSTRUCTOR TO MOVE "+distance+" FT***");
     	this.message = message;
+    	this.distance = distance;
     }
 
     // Called just before this Command runs the first time
@@ -20,7 +26,7 @@ public class Auto1 {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	System.out.printf("** %s (%d/%d)%n", message, i, count);
-    	System.out.println("****TO MOVE "+distance+" FT**");
+    	System.out.println("***TO MOVE "+distance+" FT***");
     	i++;
     }
 

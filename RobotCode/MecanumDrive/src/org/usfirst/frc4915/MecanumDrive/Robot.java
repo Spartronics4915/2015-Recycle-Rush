@@ -45,9 +45,6 @@ public class Robot extends IterativeRobot {
     SendableChooser autoChooser;
     Preferences preferences;
     
-    double Distance1;
-    double Distance2;
-    
     public static OI oi;
     public static DriveTrain driveTrain;
     public static Elevator elevator;
@@ -62,6 +59,9 @@ public class Robot extends IterativeRobot {
     	RobotMap.init();
     	
     	preferences = Preferences.getInstance();
+    	
+    	double distance1;
+    	
         driveTrain = new DriveTrain();
         elevator = new Elevator();
         grabber = new Grabber();
@@ -74,11 +74,12 @@ public class Robot extends IterativeRobot {
 
         // instantiate the command used for the autonomous period
   //      autonomousCommand = new AutonomousCommand();
-
-        Distance1 = preferences.getDouble("Distance to move straight", 3.0);
+        
+        preferences.putDouble("GetDistance", 5.0);
+        distance1 = preferences.getDouble("GetDistance", 3.0);
         
         autoChooser = new SendableChooser();
-        autoChooser.addDefault("Drive straight", new Auto1("auto1", Distance1));
+        autoChooser.addDefault("Drive straight", new Auto1("auto1", distance1));
         autoChooser.addObject("Drive backwards", new Auto2("auto2"));
         autoChooser.addObject("Drive sideways", new Auto3("auto3"));
         
