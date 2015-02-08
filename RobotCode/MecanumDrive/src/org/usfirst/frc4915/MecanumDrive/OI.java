@@ -103,14 +103,13 @@ public class OI {
         SmartDashboard.putData("Move Straight 5 feet", new MoveStraightPositionModeCommand(5));
         SmartDashboard.putData("Move Backwards 5 feet", new MoveStraightPositionModeCommand(-5));
         SmartDashboard.putData("DriveStraight 1 second", new DriveStraight());
-
         SmartDashboard.putData("Close Grabber", new CloseGrabber());
         SmartDashboard.putData("Vent", new CloseSmallGrabber());
         SmartDashboard.putData("Intermediate Open", new IntermediateOpen());
         SmartDashboard.putData("Open Grabber", new OpenGrabber());
         SmartDashboard.putData("Close All Grabbers", new CloseAllGrabbers());
-        
-        
+        SmartDashboard.putData("Open Large Grabber", new OpenGrabber());
+        SmartDashboard.putData("Close Large Grabber", new CloseGrabber());
         SmartDashboard.putData("Jump to Elevator Position", new ElevatorJumpToPosition(Elevator.POSITION_ZERO));
         SmartDashboard.putData("Jump to Elevator Position", new ElevatorJumpToPosition(Elevator.POSITION_ONE));
         SmartDashboard.putData("Jump to Elevator Position", new ElevatorJumpToPosition(Elevator.POSITION_TWO));
@@ -122,7 +121,6 @@ public class OI {
         LiveWindow.addSensor("Other Sensors", "Accelerometer", RobotMap.accelerometer);
         LiveWindow.addSensor("Drive Train", "Distance Sensor", Robot.driveTrain.distanceSensor);
         LiveWindow.addActuator("Grabber", "Double Solenoid", RobotMap.mommaSolenoid);
-        LiveWindow.addActuator("Grabber", "Solenoid", RobotMap.babySolenoid);
         // LiveWindow.addSensor("Elevator", "Upper limit switch", RobotMap.limitSwitchTop);
         // LiveWindow.addSensor("Elevator", "Lower limit switch", RobotMap.limitSwitchBottom);
         // LiveWindow.addSensor("Elevator", "Linear potentiometer", RobotMap.potentiometer);
