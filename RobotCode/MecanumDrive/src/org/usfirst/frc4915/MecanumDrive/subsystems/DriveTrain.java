@@ -94,7 +94,6 @@ public class DriveTrain extends Subsystem {
 			robotDrive.stopMotor();
 		} else {
 			debugger.logError(LoggerNames.DRIVETRAIN, ("Driving"));
-			robotDrive.stopMotor();
 			robotDrive.mecanumDrive_Cartesian(joystickX, joystickY, joystickTwist, gyro.getAngle());
 
 			/*
