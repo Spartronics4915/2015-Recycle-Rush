@@ -15,7 +15,7 @@ import org.usfirst.frc4915.MecanumDrive.commands.AutonomousCommand;
 import org.usfirst.frc4915.MecanumDrive.commands.CloseGrabber;
 import org.usfirst.frc4915.MecanumDrive.commands.DriveStraight;
 import org.usfirst.frc4915.MecanumDrive.commands.ElevatorJumpToPosition;
-import org.usfirst.frc4915.MecanumDrive.commands.MoveStraightGivenDistanceCommand;
+import org.usfirst.frc4915.MecanumDrive.commands.MoveStraightPositionModeCommand;
 import org.usfirst.frc4915.MecanumDrive.commands.OpenGrabber;
 import org.usfirst.frc4915.MecanumDrive.commands.OpenSmallGrabber;
 import org.usfirst.frc4915.MecanumDrive.subsystems.Elevator;
@@ -100,8 +100,8 @@ public class OI {
 
         // SmartDashboard Buttons
         SmartDashboard.putData("Autonomous Command", new AutonomousCommand());
-        SmartDashboard.putData("Move Straight 5 feet", new MoveStraightGivenDistanceCommand(5));
-        SmartDashboard.putData("Move Backwards 5 feet", new MoveStraightGivenDistanceCommand(-5));
+        SmartDashboard.putData("Move Straight 5 feet", new MoveStraightPositionModeCommand(5));
+        SmartDashboard.putData("Move Backwards 5 feet", new MoveStraightPositionModeCommand(-5));
         SmartDashboard.putData("DriveStraight 1 second", new DriveStraight());
         SmartDashboard.putData("Open Large Grabber", new OpenGrabber());
         SmartDashboard.putData("Push Small Grabber", new OpenSmallGrabber());
