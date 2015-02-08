@@ -16,14 +16,21 @@ import org.usfirst.frc4915.MecanumDrive.RobotMap;
 
 import edu.wpi.first.wpilibj.Gyro;
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
+
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+
+import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc4915.MecanumDrive.commands.*;
 import org.usfirst.frc4915.MecanumDrive.subsystems.*;
+import org.usfirst.frc4915.debuggersystem.CustomDebugger;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -35,12 +42,21 @@ import org.usfirst.frc4915.MecanumDrive.subsystems.*;
 public class Robot extends IterativeRobot {
 
     Command autonomousCommand;
+
     SendableChooser autoChooser;
         
+    
+    Preferences preferences;
+    double testPreferencesItemOne;
+    double testPreferencesItemTwo;
+    
+    SendableChooser autonomousProgramChooser;
+    
     public static OI oi;
     public static DriveTrain driveTrain;
     public static Elevator elevator;
     public static Grabber grabber;
+    public static CustomDebugger debugger = new CustomDebugger();
 
     /**
      * This function is run when the robot is first started up and should be
@@ -48,6 +64,8 @@ public class Robot extends IterativeRobot {
      */
     public void robotInit() {
     	RobotMap.init();
+    	
+    	preferences = Preferences.getInstance();
         driveTrain = new DriveTrain();
         elevator = new Elevator();
         grabber = new Grabber();
@@ -57,6 +75,7 @@ public class Robot extends IterativeRobot {
         // pointers. Bad news. Don't move it.
         oi = new OI();
         RobotMap.gyro.reset();
+
         // instantiate the command used for the autonomous period
   //      autonomousCommand = new AutonomousCommand();
         autoChooser = new SendableChooser();
@@ -65,7 +84,17 @@ public class Robot extends IterativeRobot {
         autoChooser.addObject("Drive sideways", new Auto3());
         
         SmartDashboard.putData("Autonomous mode chooser", autoChooser);
-   
+
+
+        testPreferencesItemOne = preferences.getDouble("TestOne", 123.4);
+        testPreferencesItemOne = preferences.getDouble("TestTwo", 456.7);
+        
+        autonomousProgramChooser = new SendableChooser();
+        autonomousProgramChooser.addDefault("Autonomous Program One", new GenericTestCommand(10, "Running program one!"));
+        autonomousProgramChooser.addObject("Autonomous Program Two", new GenericTestCommand(20, "Running program two!"));
+        
+        SmartDashboard.putData("Autonomous Program", autonomousProgramChooser);
+
         // Test for sending messages to smart dashboard
         SendUserMessage.displayMessage();
     }
@@ -88,6 +117,9 @@ public class Robot extends IterativeRobot {
         autonomousCommand.start();
         if (autonomousCommand != null) autonomousCommand.start();
         
+        // Use the selected autonomous command
+    	autonomousCommand = (Command) autonomousProgramChooser.getSelected();
+    	autonomousCommand.start();
     }
 
     /**

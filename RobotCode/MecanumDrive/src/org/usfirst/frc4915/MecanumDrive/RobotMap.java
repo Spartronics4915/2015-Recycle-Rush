@@ -44,11 +44,11 @@ public class RobotMap {
      */
     public static CANTalon elevatorWinchMotor14;
     //Limit Switches
-    public static DigitalInput limitSwitchBottom; // May be used for elevator as a sensor for testing if at the bottom of elevator
-    public static DigitalInput limitSwitchTop; // May be used for elevator as a sensor for testing if at the top of elevator
+    // public static DigitalInput limitSwitchBottom; // May be used for elevator as a sensor for testing if at the bottom of elevator
+    // public static DigitalInput limitSwitchTop; // May be used for elevator as a sensor for testing if at the top of elevator
     // Potentiometer
-    private static final int SCALE = 1; // TODO find correct scale for the potentiometer
-	public static AnalogPotentiometer potentiometer;
+    //private static final int SCALE = 1; // TODO find correct scale for the potentiometer
+	//public static AnalogPotentiometer potentiometer;
     
     /**
      * GRABBER
@@ -110,7 +110,7 @@ public class RobotMap {
 		driveTrainRobotDrive.setInvertedMotor(RobotDrive.MotorType.kRearRight, true);
 		
 		// Gyro instantiation
-		gyro = new Gyro(0); //Port numbers need to be decided
+		gyro = new Gyro(0); //Port numbers need to be decided TODO Setup Gyro on robot
 		
 		// Distance instantiation
 		distanceSensor = new Ultrasonic(0,1); //Port numbers need to be decided
@@ -124,9 +124,9 @@ public class RobotMap {
 		//ELEVATOR instantiation
 		// TODO set limit switch configuration on the winch motor
 		elevatorWinchMotor14 = new CANTalon(14);
-		elevatorWinchMotor14.changeControlMode(ControlMode.Speed);
+		elevatorWinchMotor14.changeControlMode(ControlMode.Position);
 		elevatorWinchMotor14.setFeedbackDevice(CANTalon.FeedbackDevice.AnalogPot);
-		elevatorWinchMotor14.setPID(1, 0.002, 1.0, 0.0001, 255, 200, 0);
+		elevatorWinchMotor14.setPID(1, 0.002, 1.0, 0.0001, 255, 200, 0); // TODO Determine PID values and Ramp Rate
 		// Potentiometer instantiation
 		
 		// TODO Limit Switches instantiation goes here

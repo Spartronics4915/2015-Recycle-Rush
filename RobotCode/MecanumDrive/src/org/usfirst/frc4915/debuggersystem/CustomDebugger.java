@@ -1,4 +1,4 @@
-package org.usfirst.frc4915.debuggersystem;
+	package org.usfirst.frc4915.debuggersystem;
 
 /*
  * This is a custom system that allows for easy debug logging 
@@ -142,7 +142,7 @@ public class CustomDebugger {
     public void logError(LoggerNames logger, String message) {
         loggerMap.get(logger).info(message);
     }
-
+    
     /**
      * Collection of logger names (categories)
      */
