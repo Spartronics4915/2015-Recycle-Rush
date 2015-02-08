@@ -12,12 +12,15 @@
 package org.usfirst.frc4915.MecanumDrive;
 
 import org.usfirst.frc4915.MecanumDrive.commands.AutonomousCommand;
-import org.usfirst.frc4915.MecanumDrive.commands.CloseGrabber;
+import org.usfirst.frc4915.MecanumDrive.commands.CloseAllGrabbers;
+import org.usfirst.frc4915.MecanumDrive.commands.OpenGrabber;
 import org.usfirst.frc4915.MecanumDrive.commands.DriveStraight;
 import org.usfirst.frc4915.MecanumDrive.commands.ElevatorJumpToPosition;
 import org.usfirst.frc4915.MecanumDrive.commands.MoveStraightGivenDistanceCommand;
-import org.usfirst.frc4915.MecanumDrive.commands.OpenGrabber;
-import org.usfirst.frc4915.MecanumDrive.commands.OpenSmallGrabber;
+import org.usfirst.frc4915.MecanumDrive.commands.CloseGrabber;
+import org.usfirst.frc4915.MecanumDrive.commands.CloseSmallGrabber;
+import org.usfirst.frc4915.MecanumDrive.commands.IntermediateOpen;
+import org.usfirst.frc4915.MecanumDrive.commands.MoveStraightPositionModeCommand;
 import org.usfirst.frc4915.MecanumDrive.subsystems.Elevator;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -97,18 +100,23 @@ public class OI {
 
         // SmartDashboard Buttons
         SmartDashboard.putData("Autonomous Command", new AutonomousCommand());
-        SmartDashboard.putData("Move Straight 5 feet", new MoveStraightGivenDistanceCommand(5));
-        SmartDashboard.putData("Move Backwards 5 feet", new MoveStraightGivenDistanceCommand(-5));
+        SmartDashboard.putData("Move Straight 5 feet", new MoveStraightPositionModeCommand(5));
+        SmartDashboard.putData("Move Backwards 5 feet", new MoveStraightPositionModeCommand(-5));
         SmartDashboard.putData("DriveStraight 1 second", new DriveStraight());
-        SmartDashboard.putData("Open Large Grabber", new OpenGrabber());
-        SmartDashboard.putData("Push Small Grabber", new OpenSmallGrabber());
-        SmartDashboard.putData("Release Small Grabber", new OpenGrabber());
-        SmartDashboard.putData("Close Large Grabber", new CloseGrabber());
+
+        SmartDashboard.putData("Close Grabber", new CloseGrabber());
+        SmartDashboard.putData("Vent", new CloseSmallGrabber());
+        SmartDashboard.putData("Intermediate Open", new IntermediateOpen());
+        SmartDashboard.putData("Open Grabber", new OpenGrabber());
+        SmartDashboard.putData("Close All Grabbers", new CloseAllGrabbers());
+        
+        
         SmartDashboard.putData("Jump to Elevator Position", new ElevatorJumpToPosition(Elevator.POSITION_ZERO));
         SmartDashboard.putData("Jump to Elevator Position", new ElevatorJumpToPosition(Elevator.POSITION_ONE));
         SmartDashboard.putData("Jump to Elevator Position", new ElevatorJumpToPosition(Elevator.POSITION_TWO));
         SmartDashboard.putData("Jump to Elevator Position", new ElevatorJumpToPosition(Elevator.POSITION_THREE));
         SmartDashboard.putData("Jump to Elevator Position", new ElevatorJumpToPosition(Elevator.POSITION_FOUR));
+
         
         // LiveWindowSendable info (Test mode)
         LiveWindow.addSensor("Other Sensors", "Accelerometer", RobotMap.accelerometer);
