@@ -21,20 +21,20 @@ public class Elevator extends Subsystem {
 	// If you need to stack on top of 3 totes, use position 3.
 	// If you need to stack on the ground, use position 0.
 	
-	// TODO find exact height's of positions for number of totes in inches
+	// These values are in inches.
+	// We do not take into account the height of the chassis as the potentiometer will not.
 	public static final int POSITION_ZERO = 0; // Lowest position
-	public static final int POSITION_ONE = 1;
-	public static final int POSITION_TWO = 2;
-	public static final int POSITION_THREE = 3;
-	public static final int POSITION_FOUR = 4;
-	public static final int POSITION_FIVE = 5; 
-	public static final int POSITION_SIX = 6; // Highest position
+	public static final int POSITION_ONE = 12;
+	public static final int POSITION_TWO = 24;
+	public static final int POSITION_THREE = 36;
+	public static final int POSITION_FOUR = 48; // Highest position
+	
+	public static final double CHASIS_HEIGHT = 5; // These two measurements are in inches
+	public static final double HEIGHT_OF_TOTE = 12;
 	
 	public static final double FAST_SPEED = .5; // TODO find correct speed
 	public static final double SLOW_SPEED = .1; // TODO find correct value for constant speed
 	
-	public static final double CHASIS_HEIGHT = 5; // These two measurements are in inches
-	public static final double HEIGHT_OF_TOTE = 12;
 	
 	public CANTalon winch = RobotMap.elevatorWinchMotor14;
 	
@@ -141,33 +141,33 @@ public class Elevator extends Subsystem {
     }
 
     /**
+     * Converts from a position between zero totes to six totes to inches.
      * 
-     * @param positionNumber
+     * @param positionNumber the number of totes you are stacking on top of.
+     * @return height in inches
      */
 	public double convertPositionToHeight(int positionNumber) {
+		double height;
 		switch (positionNumber) {
 		case 0:
-			positionNumber = POSITION_ZERO;
+			height = POSITION_ZERO;
 			break;
 		case 1:
-			positionNumber = POSITION_ONE;
+			height = POSITION_ONE;
 			break;
 		case 2:
-			positionNumber = POSITION_TWO;
+			height = POSITION_TWO;
 			break;
 		case 3:
-			positionNumber = POSITION_THREE;
+			height = POSITION_THREE;
 			break;
 		case 4:
-			positionNumber = POSITION_FOUR;
+			height = POSITION_FOUR;
 			break;
-		case 5:
-			positionNumber = POSITION_FIVE;
-			break;
-		case 6:
-			positionNumber = POSITION_SIX;
+		default:
+			height = POSITION_ZERO;
 			break;
 		}
-		return positionNumber;
+		return height;
 	}
 }
