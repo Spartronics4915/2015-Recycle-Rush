@@ -5,6 +5,9 @@ import org.usfirst.frc4915.MecanumDrive.subsystems.Elevator;
 import org.usfirst.frc4915.debuggersystem.CustomDebugger.LoggerNames;
 import edu.wpi.first.wpilibj.command.Command;
 
+import org.usfirst.frc4915.debuggersystem.CustomDebugger;
+import org.usfirst.frc4915.debuggersystem.CustomDebugger.LoggerNames;
+
 public class ElevatorJumpToPosition extends Command {
 	Elevator elevator = Robot.elevator;
 	// TODO use only the position (what level the elevator should go to) as an input
@@ -23,6 +26,7 @@ public class ElevatorJumpToPosition extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	height = elevator.convertPositionToHeight(positionNumber);
+    	Robot.debugger.logError(LoggerNames.ELEVATOR, "Elevator Initialized");
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -38,7 +42,8 @@ public class ElevatorJumpToPosition extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.debugger.logError(LoggerNames.ELEVATOR, "Elevator is in position " + positionNumber);
+    	System.out.println("Elevator is in position " + elevator.getPosition());
+    	Robot.debugger.logError(LoggerNames.ELEVATOR, "Elevator Ending");
     	elevator.stopElevator();
     }
 
