@@ -100,18 +100,15 @@ public class Elevator extends Subsystem {
      * Stops the elevator from moving. Used at the end of commands.
      */
     public void stopElevator() {
-    	// stops any current commands telling the elevator to move.
     	winch.disableControl();
     	System.out.println("Elevator has stopped.");
     }
     
     /**
      * TODO Make this actually work - It will drift and continually use a new point to hold the position
+     * Holds the elevator in it's current position
      */
     public void holdPosition() {
-    	/*
-    	 * Keeps the elevator in a constant position
-    	 */
     	changeControlModeWinch(ControlMode.Position);
     	winch.set(getPosition());
     }
@@ -120,7 +117,6 @@ public class Elevator extends Subsystem {
      * @return the position of the elevator in inches (between 0 and 66)
      */
     public double getPosition() {
-    	// Returns the position of the elevator
     	Robot.debugger.logError(LoggerNames.ELEVATOR, "The elevator is at position" + getPosition());
     	// TODO figure out scaling
     	return winch.getPosition();
@@ -146,8 +142,30 @@ public class Elevator extends Subsystem {
      * 
      * @param positionNumber
      */
-	public void convertPositionToHeight(int positionNumber) {
-		// TODO Auto-generated method stub
-		
+	public double convertPositionToHeight(int positionNumber) {
+		switch (positionNumber) {
+		case 0:
+			positionNumber = POSITION_ZERO;
+			break;
+		case 1:
+			positionNumber = POSITION_ONE;
+			break;
+		case 2:
+			positionNumber = POSITION_TWO;
+			break;
+		case 3:
+			positionNumber = POSITION_THREE;
+			break;
+		case 4:
+			positionNumber = POSITION_FOUR;
+			break;
+		case 5:
+			positionNumber = POSITION_FIVE;
+			break;
+		case 6:
+			positionNumber = POSITION_SIX;
+			break;
+		}
+		return positionNumber;
 	}
 }
