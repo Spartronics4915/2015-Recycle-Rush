@@ -43,7 +43,7 @@ public class Robot extends IterativeRobot {
 
     Command autonomousCommand;
     SendableChooser autoChooser;
-    Preferences preferences;
+//    Preferences preferences;
     
     public static OI oi;
     public static DriveTrain driveTrain;
@@ -58,8 +58,7 @@ public class Robot extends IterativeRobot {
     public void robotInit() {
     	RobotMap.init();
     	
-    	preferences = Preferences.getInstance();
-    	double distance1;
+ //   	preferences = Preferences.getInstance();
     	
         driveTrain = new DriveTrain();
         elevator = new Elevator();
@@ -72,14 +71,12 @@ public class Robot extends IterativeRobot {
         RobotMap.gyro.reset();
 
         // instantiate the command used for the autonomous period
-  //      autonomousCommand = new AutonomousCommand();
-        
-        
+        autonomousCommand = new AutonomousCommand();
         
         autoChooser = new SendableChooser();
-        autoChooser.addDefault("Autonomous 1", new Auto1("auto1"));
-        autoChooser.addObject("Autonomous 2", new Auto2("auto2"));
-        autoChooser.addObject("Autonomous 3", new Auto3("auto3"));
+        autoChooser.addDefault("Autonomous 1", new Auto1());
+        autoChooser.addObject("Autonomous 2", new Auto2());
+        autoChooser.addObject("Autonomous 3", new Auto3());
         
         SmartDashboard.putData("Autonomous mode chooser", autoChooser);
         
@@ -101,21 +98,13 @@ public class Robot extends IterativeRobot {
     }
 
     public void autonomousInit() {
-<<<<<<< HEAD
-        // schedule the autonomous command (example)
-        autonomousCommand = (Command) autoChooser.getSelected();
-        autonomousCommand.start();
-        if (autonomousCommand != null) autonomousCommand.start();
-        
-=======
+
         // Use the selected autonomous command
-    	// autonomousCommand = (Command) autonomousProgramChooser.getSelected();
-    	double desiredDistrance = preferences.getDouble("DesiredDistance", 9.0);
-    	autonomousCommand = new MoveStraightPositionModeCommand(desiredDistrance);
-    
+    	autonomousCommand = (Command) autoChooser.getSelected();
+    	//double desiredDistance = preferences.getDouble("DesiredDistance", 9.0);
+    	//autonomousCommand = new MoveStraightPositionModeCommand(desiredDistance);
     	
     	autonomousCommand.start();
->>>>>>> 027a0dde55c3d2688cc76d55fda9cbcde6575a33
     }
 
     /**
