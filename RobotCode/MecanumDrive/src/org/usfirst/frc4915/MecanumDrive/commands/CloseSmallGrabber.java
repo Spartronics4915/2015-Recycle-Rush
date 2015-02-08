@@ -18,11 +18,11 @@ import org.usfirst.frc4915.MecanumDrive.Robot;
 /**
  *
  */
-public class  OpenSmallGrabber extends Command {
+public class  CloseSmallGrabber extends Command {
 	
 	private boolean finished = false;
 
-    public OpenSmallGrabber() {
+    public CloseSmallGrabber() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
 
@@ -39,7 +39,7 @@ public class  OpenSmallGrabber extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.grabber.pinch();
+    	Robot.grabber.vent();
     	finished = true;
     }
 

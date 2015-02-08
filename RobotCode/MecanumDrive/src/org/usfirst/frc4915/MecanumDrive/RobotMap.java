@@ -56,6 +56,7 @@ public class RobotMap {
      */
     public static DoubleSolenoid mommaSolenoid;
     public static Solenoid babySolenoid;
+    public static Solenoid auntieSolenoid;
     
     /**
      * GENERAL SENSORS
@@ -124,6 +125,7 @@ public class RobotMap {
 		// Double Solenoid instantiation. Wiring: 0 --> Forward channel (extended). 1 --> Reverse channel (retracted).
 		mommaSolenoid = new DoubleSolenoid(PCM_NODE_ID, 0, 1); // Uses 10 as the Node ID for the PCM.
 		babySolenoid = new Solenoid(PCM_NODE_ID, 2); //Port numbers need to be decided for both solenoids
+		auntieSolenoid = new Solenoid(PCM_NODE_ID, 3);
 		/**
 		 * GRABBER END
 		 */
