@@ -59,7 +59,6 @@ public class Robot extends IterativeRobot {
     	RobotMap.init();
     	
     	preferences = Preferences.getInstance();
-    	
     	double distance1;
     	
         driveTrain = new DriveTrain();
@@ -75,13 +74,12 @@ public class Robot extends IterativeRobot {
         // instantiate the command used for the autonomous period
   //      autonomousCommand = new AutonomousCommand();
         
-        preferences.putDouble("GetDistance", 5.0);
-        distance1 = preferences.getDouble("GetDistance", 3.0);
+        
         
         autoChooser = new SendableChooser();
-        autoChooser.addDefault("Drive straight", new Auto1("auto1", distance1));
-        autoChooser.addObject("Drive backwards", new Auto2("auto2"));
-        autoChooser.addObject("Drive sideways", new Auto3("auto3"));
+        autoChooser.addDefault("Autonomous 1", new Auto1("auto1"));
+        autoChooser.addObject("Autonomous 2", new Auto2("auto2"));
+        autoChooser.addObject("Autonomous 3", new Auto3("auto3"));
         
         SmartDashboard.putData("Autonomous mode chooser", autoChooser);
         
