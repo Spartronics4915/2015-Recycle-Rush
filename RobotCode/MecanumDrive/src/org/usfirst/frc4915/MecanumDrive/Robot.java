@@ -10,11 +10,13 @@
 
 
 package org.usfirst.frc4915.MecanumDrive;
-import java.time.Instant;
+import org.usfirst.frc4915.MecanumDrive.commands.GenericTestCommand;
+import org.usfirst.frc4915.MecanumDrive.commands.MoveStraightPositionModeCommand;
+import org.usfirst.frc4915.MecanumDrive.subsystems.DriveTrain;
+import org.usfirst.frc4915.MecanumDrive.subsystems.Elevator;
+import org.usfirst.frc4915.MecanumDrive.subsystems.Grabber;
+import org.usfirst.frc4915.debuggersystem.CustomDebugger;
 
-import org.usfirst.frc4915.MecanumDrive.RobotMap;
-
-import edu.wpi.first.wpilibj.Gyro;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.command.Command;
@@ -22,10 +24,6 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
-import org.usfirst.frc4915.MecanumDrive.commands.*;
-import org.usfirst.frc4915.MecanumDrive.subsystems.*;
-import org.usfirst.frc4915.debuggersystem.CustomDebugger;
 
 /**
  * The VM is configured to automatically run this class, and to call the
