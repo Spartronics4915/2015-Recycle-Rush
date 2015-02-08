@@ -5,9 +5,6 @@ import org.usfirst.frc4915.MecanumDrive.subsystems.Elevator;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
-/**
- *
- */
 public class ElevatorPositionCalibration extends CommandGroup {
 
 	Elevator elevator = Robot.elevator;
