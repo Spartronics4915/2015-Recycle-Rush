@@ -88,17 +88,11 @@ public class DriveTrain extends Subsystem {
         	joystickTwist = 0;
         }
     	debugger.logError(LoggerNames.DRIVETRAIN, 	(joystickX + ", " + joystickY + ", " + joystickTwist));
-    	debugger.setFilter(LoggerNames.DRIVETRAIN);
-    	debugger.resetFilter();
         if ((Math.abs(joystickX) < 0.2) && (Math.abs(joystickY) < 0.2) && (Math.abs(joystickTwist) < 0.2)) {
         	debugger.logError(LoggerNames.DRIVETRAIN, ("Stopping Motor"));
-        	debugger.setFilter(LoggerNames.DRIVETRAIN);
-        	debugger.resetFilter();	
         	robotDrive.stopMotor();
         } else {
         	debugger.logError(LoggerNames.DRIVETRAIN, 	("Driving"));
-        	debugger.setFilter(LoggerNames.DRIVETRAIN);
-        	debugger.resetFilter();
         	robotDrive.stopMotor();
         	robotDrive.mecanumDrive_Cartesian(joystickX, joystickY, joystickTwist, 0.0);
         	
@@ -109,6 +103,13 @@ public class DriveTrain extends Subsystem {
         }
 
 }
+    public void calibrateGyro(){
+    	gyro.reset();
+    }
+    
+    public double getGyroValue(){
+    	return gyro.getAngle();
+    }
     
     public void driveStraight(double speed) {
     	robotDrive.mecanumDrive_Cartesian(0.0, speed, 0.0, 0.0);

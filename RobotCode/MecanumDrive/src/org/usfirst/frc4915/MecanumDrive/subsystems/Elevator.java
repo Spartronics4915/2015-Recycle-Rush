@@ -102,7 +102,7 @@ public class Elevator extends Subsystem {
     public void stopElevator() {
     	// stops any current commands telling the elevator to move.
     	winch.disableControl();
-    	System.out.println("Elevator has stopped.");
+    	Robot.debugger.logError(LoggerNames.ELEVATOR, "Elevator had stopped");
     }
     
     /**
