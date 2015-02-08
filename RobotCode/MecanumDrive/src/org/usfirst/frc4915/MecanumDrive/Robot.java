@@ -16,9 +16,11 @@ import org.usfirst.frc4915.MecanumDrive.RobotMap;
 
 import edu.wpi.first.wpilibj.Gyro;
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc4915.MecanumDrive.commands.*;
@@ -36,6 +38,12 @@ public class Robot extends IterativeRobot {
 
     Command autonomousCommand;
     
+    Preferences preferences;
+    double testPreferencesItemOne;
+    double testPreferencesItemTwo;
+    
+    SendableChooser autonomousProgramChooser;
+    
     public static OI oi;
     public static DriveTrain driveTrain;
     public static Elevator elevator;
@@ -48,6 +56,8 @@ public class Robot extends IterativeRobot {
      */
     public void robotInit() {
     	RobotMap.init();
+    	
+    	preferences = Preferences.getInstance();
         driveTrain = new DriveTrain();
         elevator = new Elevator();
         grabber = new Grabber();
@@ -57,8 +67,15 @@ public class Robot extends IterativeRobot {
         // pointers. Bad news. Don't move it.
         oi = new OI();
         RobotMap.gyro.reset();
-        // instantiate the command used for the autonomous period
-        autonomousCommand = new AutonomousCommand();
+
+        testPreferencesItemOne = preferences.getDouble("TestOne", 123.4);
+        testPreferencesItemOne = preferences.getDouble("TestTwo", 456.7);
+        
+        autonomousProgramChooser = new SendableChooser();
+        autonomousProgramChooser.addDefault("Autonomous Program One", new GenericTestCommand(10, "Running program one!"));
+        autonomousProgramChooser.addObject("Autonomous Program Two", new GenericTestCommand(20, "Running program two!"));
+        
+        SmartDashboard.putData("Autonomous Program", autonomousProgramChooser);
 
         // Test for sending messages to smart dashboard
         SendUserMessage.displayMessage();
@@ -77,8 +94,9 @@ public class Robot extends IterativeRobot {
     }
 
     public void autonomousInit() {
-        // schedule the autonomous command (example)
-        if (autonomousCommand != null) autonomousCommand.start();
+        // Use the selected autonomous command
+    	autonomousCommand = (Command) autonomousProgramChooser.getSelected();
+    	autonomousCommand.start();
     }
 
     /**
