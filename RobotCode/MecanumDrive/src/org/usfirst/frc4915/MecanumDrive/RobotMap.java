@@ -11,11 +11,14 @@
 
 package org.usfirst.frc4915.MecanumDrive;
     
-import org.usfirst.frc4915.MecanumDrive.subsystems.DriveTrain;
-import org.usfirst.frc4915.MecanumDrive.subsystems.Elevator;
-
-import edu.wpi.first.wpilibj.*;
+import edu.wpi.first.wpilibj.BuiltInAccelerometer;
+import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.CANTalon.ControlMode;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.Gyro;
+import edu.wpi.first.wpilibj.RobotDrive;
+import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.Ultrasonic;
 
 //TODO decide and finalize the input ports for each sensor
 
