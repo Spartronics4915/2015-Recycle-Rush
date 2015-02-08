@@ -121,7 +121,7 @@ public class Elevator extends Subsystem {
      */
     public double getPosition() {
     	// Returns the position of the elevator
-    	Robot.debugger.logError(LoggerNames.ELEVATOR, "The elevator is at position" + getPosition());
+    	Robot.debugger.logError(LoggerNames.ELEVATOR, "The elevator is at position " + getPosition());
     	// TODO figure out scaling
     	return winch.getPosition();
     }
@@ -145,9 +145,9 @@ public class Elevator extends Subsystem {
     /**
      * 
      * @param positionNumber
+     * @return the height of the position in inches (between 
      */
-	public void convertPositionToHeight(int positionNumber) {
+	public double convertPositionToHeight(int positionNumber) {
 		// TODO Auto-generated method stub
-		
 	}
 }
