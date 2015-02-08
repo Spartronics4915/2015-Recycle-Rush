@@ -96,7 +96,7 @@ public class RobotMap {
 		driveTrainRobotDrive.setInvertedMotor(RobotDrive.MotorType.kRearRight, true);
 		
 		// Gyro instantiation
-		gyro = new Gyro(0); //Port numbers need to be decided TODO Setup Gyro on robot
+		gyro = new Gyro(0); // Port numbers need to be decided TODO Setup Gyro on robot
 		
 		// Distance instantiation
 		distanceSensor = new Ultrasonic(0,1); //Port numbers need to be decided

@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
-// TODO use the values between minimumPotentiometerValue and maximumPotentiometerValue rather than inches as inputs.
+// TODO check the disableControl functionality. We may need to enableControl.
 public class Elevator extends Subsystem {
 
 	// TODO initialize height
@@ -26,8 +26,8 @@ public class Elevator extends Subsystem {
 	
 	public static final double CHASIS_HEIGHT = 5; // These two measurements are in inches
 	public static final double HEIGHT_OF_TOTE = 12;
-	
-	private static final double JOYSTICK_SCALE = 10; //TODO Decide scale for joystick movement position change
+
+	private static final double JOYSTICK_SCALE = -10; //TODO Decide scale for joystick movement position change
 	
 	public CANTalon winch = RobotMap.elevatorWinchMotor14;
 	
@@ -118,6 +118,7 @@ public class Elevator extends Subsystem {
 		// the change in value per inch and multiply by the number of inches that the totes are stacked
 		height = minimumPotentiometerValue + 
 				((maximumPotentiometerValue - minimumPotentiometerValue) * HEIGHT_OF_TOTE * positionNumber / RANGE_OF_MOTION);
+		Robot.debugger.logError(LoggerNames.ELEVATOR, "Elevator's height is " + height);
 	}
 	
 	/**
@@ -125,6 +126,7 @@ public class Elevator extends Subsystem {
 	 * @return if the elevator is at it's max height, return
 	 */
 	public boolean isAtTopOfElevator() {
+		Robot.debugger.logError(LoggerNames.ELEVATOR, "Elevator Top LimitSwitch has been reached");
 		return winch.isFwdLimitSwitchClosed();
 	}
 	
@@ -133,6 +135,7 @@ public class Elevator extends Subsystem {
 	 * @return if the elevator is at it's min height, return true
 	 */
 	public boolean isAtBottomOfElevator() {
+		Robot.debugger.logError(LoggerNames.ELEVATOR, "Elevator Bottom LimitSwitch has been reached");
 		return winch.isRevLimitSwitchClosed();
 	}
 	
