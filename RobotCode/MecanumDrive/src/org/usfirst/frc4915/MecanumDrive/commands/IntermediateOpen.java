@@ -11,6 +11,7 @@
 
 package org.usfirst.frc4915.MecanumDrive.commands;
 
+
 import edu.wpi.first.wpilibj.command.Command;
 
 import org.usfirst.frc4915.MecanumDrive.Robot;
@@ -18,11 +19,11 @@ import org.usfirst.frc4915.MecanumDrive.Robot;
 /**
  *
  */
-public class  ReleaseSmallGrabber extends Command {
+public class  IntermediateOpen extends Command {
 	
 	private boolean finished = false;
 
-    public ReleaseSmallGrabber() {
+    public IntermediateOpen() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
 
@@ -39,8 +40,9 @@ public class  ReleaseSmallGrabber extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.grabber.release();
-    	finished = false;
+    	Robot.grabber.block();
+    	Robot.grabber.close();
+    	finished = true;
     }
 
     // Make this return true when this Command no longer needs to run execute()

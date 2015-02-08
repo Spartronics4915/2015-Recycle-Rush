@@ -12,14 +12,17 @@
 package org.usfirst.frc4915.MecanumDrive;
 
 import org.usfirst.frc4915.MecanumDrive.commands.AutonomousCommand;
-import org.usfirst.frc4915.MecanumDrive.commands.CloseGrabber;
+import org.usfirst.frc4915.MecanumDrive.commands.CloseAllGrabbers;
+import org.usfirst.frc4915.MecanumDrive.commands.OpenGrabber;
 import org.usfirst.frc4915.MecanumDrive.commands.DriveStraight;
 import org.usfirst.frc4915.MecanumDrive.commands.ElevatorJumpToPosition;
 import org.usfirst.frc4915.MecanumDrive.commands.MoveStraightGivenDistanceCommand;
-import org.usfirst.frc4915.MecanumDrive.commands.OpenGrabber;
-import org.usfirst.frc4915.MecanumDrive.commands.OpenSmallGrabber;
+import org.usfirst.frc4915.MecanumDrive.commands.CloseGrabber;
+import org.usfirst.frc4915.MecanumDrive.commands.CloseSmallGrabber;
+import org.usfirst.frc4915.MecanumDrive.commands.IntermediateOpen;
 import org.usfirst.frc4915.MecanumDrive.subsystems.Elevator;
 
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -103,11 +106,14 @@ public class OI {
         SmartDashboard.putData("Move Straight 5 feet", new MoveStraightGivenDistanceCommand(5));
         SmartDashboard.putData("Move Backwards 5 feet", new MoveStraightGivenDistanceCommand(-5));
         SmartDashboard.putData("DriveStraight 1 second", new DriveStraight());
-        SmartDashboard.putData("Open Large Grabber", new OpenGrabber());
-        SmartDashboard.putData("Push Small Grabber", new OpenSmallGrabber());
-        SmartDashboard.putData("Release Small Grabber", new OpenGrabber());
-        SmartDashboard.putData("Close Large Grabber", new CloseGrabber());
-
+        SmartDashboard.putData("Close Grabber", new CloseGrabber());
+        SmartDashboard.putData("Vent", new CloseSmallGrabber());
+        SmartDashboard.putData("Intermediate Open", new IntermediateOpen());
+        SmartDashboard.putData("Open Grabber", new OpenGrabber());
+        SmartDashboard.putData("Close All Grabbers", new CloseAllGrabbers());
+        
+        
+        
         
         // LiveWindowSendable info (Test mode)
         LiveWindow.addSensor("Other Sensors", "Accelerometer", RobotMap.accelerometer);
