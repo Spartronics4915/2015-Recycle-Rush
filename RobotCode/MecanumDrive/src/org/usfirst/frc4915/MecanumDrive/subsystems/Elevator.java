@@ -23,11 +23,21 @@ public class Elevator extends Subsystem {
 	
 	// These values are in inches.
 	// We do not take into account the height of the chassis as the potentiometer will not.
+	// TODO We likely will remove this for calibrate-able values
 	public static final int POSITION_ZERO = 0; // Lowest position
 	public static final int POSITION_ONE = 12;
 	public static final int POSITION_TWO = 24;
 	public static final int POSITION_THREE = 36;
 	public static final int POSITION_FOUR = 48; // Highest position
+	
+	// Set by ElevatorMax/MinHeightCalibrate commands
+	public static double minimumPotentiometerValue;
+	public static double maximumPotentiometerValue;
+	
+	public static double offset;
+	public static double scale;
+	
+	public static final double RANGE_OF_MOTION = 54; // The elevator can go a distance between 54 inches
 	
 	public static final double CHASIS_HEIGHT = 5; // These two measurements are in inches
 	public static final double HEIGHT_OF_TOTE = 12;
@@ -103,7 +113,7 @@ public class Elevator extends Subsystem {
      */
     public void stopElevator() {
     	winch.disableControl();
-    	System.out.println("Elevator has stopped.");
+    	Robot.debugger.logError(LoggerNames.ELEVATOR, "Elevator had stopped");
     }
     
     /**
@@ -119,9 +129,18 @@ public class Elevator extends Subsystem {
      * @return the position of the elevator in inches (between 0 and 54)
      */
     public double getPosition() {
-    	// Returns the position of the elevator
+    	double position;
+    	position = (getPotentiometerPosition() - offset) * scale;
     	Robot.debugger.logError(LoggerNames.ELEVATOR, "The elevator is at position " + getPosition());
-    	// TODO figure out scaling
+    	// TODO figure out scaling - should use getPotentiometerPosition and min/maxPotentiometerValues.
+    	return position;
+    }
+    
+    /**
+     * @return the read value from the potentiometer (between 0 and 1023)
+     */
+    public double getPotentiometerPosition() {
+    	Robot.debugger.logError(LoggerNames.ELEVATOR, "The potentiometer reads " + winch.getPosition());
     	return winch.getPosition();
     }
     
@@ -138,6 +157,7 @@ public class Elevator extends Subsystem {
     		position = 54;
     	}
     	changeControlModeWinch(ControlMode.Position);
+    	// TODO Convert from inches back to the analog potentiometer values (0-54)
     	winch.set(position);
     }
 
@@ -170,5 +190,21 @@ public class Elevator extends Subsystem {
 			break;
 		}
 		return height;
+	}
+	
+	/**
+	 * 
+	 * @return if the elevator is at it's max height, return
+	 */
+	public boolean isAtTopOfElevator() {
+		return winch.isFwdLimitSwitchClosed();
+	}
+	
+	/**
+	 * 
+	 * @return if the elevator is at it's min height, return true
+	 */
+	public boolean isAtBottomOfElevator() {
+		return winch.isRevLimitSwitchClosed();
 	}
 }

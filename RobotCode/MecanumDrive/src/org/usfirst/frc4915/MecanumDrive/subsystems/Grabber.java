@@ -16,7 +16,6 @@ public class Grabber extends Subsystem {
 	
 
 	DoubleSolenoid mommaSolenoid = RobotMap.mommaSolenoid;
-    Solenoid babySolenoid = RobotMap.babySolenoid;
 
 
 
@@ -44,14 +43,13 @@ public class Grabber extends Subsystem {
      */
     public void vent() {
     	
-    	babySolenoid.set(true);
+    	
     }
     
     /**
      * Turn off the pneumatics for the small piston. This will relax the grip on totes.
      */
     public void block() {
-    	babySolenoid.set(false);
     }
     
 }

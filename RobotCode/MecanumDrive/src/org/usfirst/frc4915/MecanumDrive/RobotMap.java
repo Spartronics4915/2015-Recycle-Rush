@@ -55,7 +55,6 @@ public class RobotMap {
      * GRABBER
      */
     public static DoubleSolenoid mommaSolenoid;
-    public static Solenoid babySolenoid;
     public static Solenoid auntieSolenoid;
     
     /**
@@ -124,7 +123,6 @@ public class RobotMap {
 		 */
 		// Double Solenoid instantiation. Wiring: 0 --> Forward channel (extended). 1 --> Reverse channel (retracted).
 		mommaSolenoid = new DoubleSolenoid(PCM_NODE_ID, 0, 1); // Uses 10 as the Node ID for the PCM.
-		babySolenoid = new Solenoid(PCM_NODE_ID, 2); //Port numbers need to be decided for both solenoids
 		auntieSolenoid = new Solenoid(PCM_NODE_ID, 3);
 		/**
 		 * GRABBER END
@@ -162,11 +160,6 @@ public class RobotMap {
 			mecanumDriveControls1LeftRear11.setPID(1, 0.002, 1.0, 0.0001, 255, 200, 0);
 			mecanumDriveControls1RightFront12.setPID(1, 0.002, 1.0, 0.0001, 255, 200, 0);
 			mecanumDriveControls1RightRear13.setPID(1, 0.002, 1.0, 0.0001, 255, 200, 0);
-		} else if(mode.equals(ControlMode.Position)) {
-			mecanumDriveControls1LeftFront10.setPID(0.4, 0.002, 1.0, 0.0001, 255, 50, 0);
-			mecanumDriveControls1LeftRear11.setPID(0.4, 0.002, 1.0, 0.0001, 255, 50, 0);
-			mecanumDriveControls1RightFront12.setPID(0.4, 0.002, 1.0, 0.0001, 255, 50, 0);
-			mecanumDriveControls1RightRear13.setPID(0.4, 0.002, 1.0, 0.0001, 255, 50, 0);
 		}
 
     }
