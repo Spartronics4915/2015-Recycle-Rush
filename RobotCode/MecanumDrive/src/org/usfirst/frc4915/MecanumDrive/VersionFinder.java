@@ -3,7 +3,6 @@ package org.usfirst.frc4915.MecanumDrive;
 import java.io.IOException;
 import java.net.URL;
 import java.net.URLClassLoader;
-import java.util.Enumeration;
 import java.util.jar.Attributes;
 import java.util.jar.Manifest;
 

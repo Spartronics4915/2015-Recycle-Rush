@@ -12,11 +12,11 @@
 package org.usfirst.frc4915.MecanumDrive.commands;
 
 import org.usfirst.frc4915.MecanumDrive.Robot;
+import org.usfirst.frc4915.debuggersystem.CustomDebugger;
+import org.usfirst.frc4915.debuggersystem.CustomDebugger.LoggerNames;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Command;
-import org.usfirst.frc4915.debuggersystem.CustomDebugger;
-import org.usfirst.frc4915.debuggersystem.CustomDebugger.LoggerNames;
 /**
  * 
  *
