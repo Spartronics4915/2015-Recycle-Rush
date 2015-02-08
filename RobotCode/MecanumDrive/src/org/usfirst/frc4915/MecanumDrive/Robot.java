@@ -58,10 +58,12 @@ public class Robot extends IterativeRobot {
         oi = new OI();
         RobotMap.gyro.reset();
         // instantiate the command used for the autonomous period
-        autonomousCommand = new AutonomousCommand();
+  //      autonomousCommand = new AutonomousCommand();
         autoChooser = new SendableChooser();
-  //      autoChooser.addDefault("Drive straight", new Auto1());
-  //      autoChooser.addObject("Drive backwards", new Auto2());
+        autoChooser.addDefault("Drive straight", new Auto1());
+        autoChooser.addObject("Drive backwards", new Auto2());
+        autoChooser.addObject("Drive sideways", new Auto3());
+        
         SmartDashboard.putData("Autonomous mode chooser", autoChooser);
    
         // Test for sending messages to smart dashboard
@@ -83,6 +85,7 @@ public class Robot extends IterativeRobot {
     public void autonomousInit() {
         // schedule the autonomous command (example)
         autonomousCommand = (Command) autoChooser.getSelected();
+        autonomousCommand.start();
         if (autonomousCommand != null) autonomousCommand.start();
         
     }
