@@ -76,10 +76,13 @@ public class Robot extends IterativeRobot {
 		// constructed yet. Thus, their requires() statements may grab null
 		// pointers. Bad news. Don't move it.
 		oi = new OI();
-		RobotMap.gyro.reset();
+		if (RobotMap.gyro != null){
+			RobotMap.gyro.initGyro();
+		}
 
 		testPreferencesItemOne = preferences.getDouble("TestOne", 123.4);
 		testPreferencesItemOne = preferences.getDouble("TestTwo", 456.7);
+	    //preferences.putDouble("DesiredDistance", 9.0);
 
 		autonomousProgramChooser = new SendableChooser();
 		autonomousProgramChooser.addDefault("Autonomous Program One", new GenericTestCommand(10, "Running program one!"));
