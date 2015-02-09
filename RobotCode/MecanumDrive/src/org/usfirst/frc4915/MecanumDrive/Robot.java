@@ -67,6 +67,7 @@ public class Robot extends IterativeRobot {
 
 		testPreferencesItemOne = preferences.getDouble("TestOne", 123.4);
 		testPreferencesItemOne = preferences.getDouble("TestTwo", 456.7);
+	    //preferences.putDouble("DesiredDistance", 9.0);
 
 		autonomousProgramChooser = new SendableChooser();
 		autonomousProgramChooser.addDefault("Autonomous Program One", new GenericTestCommand(10, "Running program one!"));

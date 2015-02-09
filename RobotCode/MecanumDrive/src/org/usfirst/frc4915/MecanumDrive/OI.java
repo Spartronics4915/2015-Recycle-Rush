@@ -10,7 +10,7 @@
 
 package org.usfirst.frc4915.MecanumDrive;
 
-import org.usfirst.frc4915.MecanumDrive.commands.AutonomousCommand;
+import org.usfirst.frc4915.MecanumDrive.commands.AutonomousCommandGroup;
 import org.usfirst.frc4915.MecanumDrive.commands.CloseAllGrabbers;
 import org.usfirst.frc4915.MecanumDrive.commands.CloseGrabber;
 import org.usfirst.frc4915.MecanumDrive.commands.CloseSmallGrabber;
@@ -20,6 +20,7 @@ import org.usfirst.frc4915.MecanumDrive.commands.IntermediateOpen;
 import org.usfirst.frc4915.MecanumDrive.commands.MoveStraightPositionModeCommand;
 import org.usfirst.frc4915.MecanumDrive.commands.OpenGrabber;
 import org.usfirst.frc4915.MecanumDrive.subsystems.DriveTrain;
+
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -107,7 +108,7 @@ public class OI {
 		/**
 		 * AUTONOMOUS COMMAND
 		 */
-		SmartDashboard.putData("Autonomous Command", new AutonomousCommand());
+		SmartDashboard.putData("Autonomous Command", new AutonomousCommandGroup());
 		
 		/**
 		 * DRIVE STRAIGHT
