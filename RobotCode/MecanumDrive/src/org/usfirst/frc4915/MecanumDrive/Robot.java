@@ -94,7 +94,7 @@ public class Robot extends IterativeRobot {
         frame = NIVision.imaqCreateImage(NIVision.ImageType.IMAGE_RGB, 0);
 
         // the camera name (ex "cam0") can be found through the roborio web interface
-        session = NIVision.IMAQdxOpenCamera("cam0",
+        session = NIVision.IMAQdxOpenCamera("cam1",
                 NIVision.IMAQdxCameraControlMode.CameraControlModeController);
         NIVision.IMAQdxConfigureGrab(session);
 
@@ -161,6 +161,7 @@ public class Robot extends IterativeRobot {
          * grab an image, draw the circle, and provide it for the camera server
          * which will in turn send it to the dashboard.
          */
+		NIVision.IMAQdxStartAcquisition(session);
 
             NIVision.IMAQdxGrab(session, frame, 1);
             CameraServer.getInstance().setImage(frame);
