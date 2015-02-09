@@ -19,12 +19,14 @@ import org.usfirst.frc4915.MecanumDrive.commands.ElevatorJumpToPosition;
 import org.usfirst.frc4915.MecanumDrive.commands.IntermediateOpen;
 import org.usfirst.frc4915.MecanumDrive.commands.MoveStraightPositionModeCommand;
 import org.usfirst.frc4915.MecanumDrive.commands.OpenGrabber;
+import org.usfirst.frc4915.MecanumDrive.commands.ToggleDriveMode;
 import org.usfirst.frc4915.MecanumDrive.subsystems.DriveTrain;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -116,6 +118,11 @@ public class OI {
 		SmartDashboard.putData("Move Straight 9 feet", new MoveStraightPositionModeCommand(9));
 		SmartDashboard.putData("Move Backwards 9 feet", new MoveStraightPositionModeCommand(-9));
 		SmartDashboard.putData("DriveStraight 1 second", new DriveStraight());
+		
+		/**
+		 * TOGGLE FIELD ORIENTED DRIVE
+		 */
+		SmartDashboard.putData("Toggle Field Drive", new ToggleDriveMode());
 		
 		/**
 		 * GRABBER
