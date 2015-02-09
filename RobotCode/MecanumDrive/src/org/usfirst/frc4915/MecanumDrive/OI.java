@@ -10,7 +10,7 @@
 
 package org.usfirst.frc4915.MecanumDrive;
 
-import org.usfirst.frc4915.MecanumDrive.commands.AutonomousCommandGroup;
+import org.usfirst.frc4915.MecanumDrive.commands.AutonomousCommandToteStrategy;
 import org.usfirst.frc4915.MecanumDrive.commands.CloseAllGrabbers;
 import org.usfirst.frc4915.MecanumDrive.commands.CloseGrabber;
 import org.usfirst.frc4915.MecanumDrive.commands.CloseSmallGrabber;
@@ -110,7 +110,7 @@ public class OI {
 		/**
 		 * AUTONOMOUS COMMAND
 		 */
-		SmartDashboard.putData("Autonomous Command", new AutonomousCommandGroup());
+		SmartDashboard.putData("Autonomous Command", new AutonomousCommandToteStrategy());
 		
 		/**
 		 * DRIVE STRAIGHT

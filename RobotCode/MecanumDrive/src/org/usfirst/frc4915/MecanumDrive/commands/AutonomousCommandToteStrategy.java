@@ -3,9 +3,9 @@ package org.usfirst.frc4915.MecanumDrive.commands;
 import org.usfirst.frc4915.MecanumDrive.Robot;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
-public class AutonomousCommandGroup extends CommandGroup {
+public class AutonomousCommandToteStrategy extends CommandGroup {
     
-    public  AutonomousCommandGroup() {
+    public AutonomousCommandToteStrategy() {
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());

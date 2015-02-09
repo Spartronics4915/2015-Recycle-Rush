@@ -42,7 +42,16 @@ public class RobotMap {
 	// The Pneumatic Control Module's CAN Node ID. Use 10 for 4915. Use 20 for
 	// 9999.
 	public final static int PCM_NODE_ID = 10;
-	// TODO add Gyro, distanceSensor, Solenoids
+	
+	public final static int GYRO_PORT = 0;
+	
+	public final static int ULTRASONIC_PORT_FIRST = 0;
+	public final static int ULTRASONIC_PORT_SECOND = 1;
+	
+	public final static int SOLENOID_CHANNEL_MOMMA_FORWARD = 0;
+	public final static int SOLENOID_CHANNEL_MOMMA_REVERSE = 1;
+	
+	public final static int SOLENOID_CHANNEL_AUNTIE = 3;
 	
 	/**
 	 * DRIVETRAIN
@@ -83,8 +92,6 @@ public class RobotMap {
 	 */
 	public static BuiltInAccelerometer accelerometer;
 
-
-
 	public static void init() {
 
 		/**
@@ -110,12 +117,10 @@ public class RobotMap {
 		driveTrainRobotDrive.setInvertedMotor(RobotDrive.MotorType.kRearRight, true);
 
 		// Gyro instantiation
-		gyro = new Gyro(0); // Port numbers need to be decided TODO Setup Gyro
-							// on robot
+		gyro = new Gyro(GYRO_PORT); // TODO decide on ports
 
 		// Distance instantiation
-		distanceSensor = new Ultrasonic(0, 1); // Port numbers need to be
-												// decided
+		distanceSensor = new Ultrasonic(ULTRASONIC_PORT_FIRST, ULTRASONIC_PORT_SECOND); // TODO decide on ports
 		/**
 		 * MECANUM WHEEL END
 		 */
@@ -128,16 +133,12 @@ public class RobotMap {
 		elevatorWinchMotor = new CANTalon(MOTOR_PORT_ELEVATOR_WINCH);
 		elevatorWinchMotor.changeControlMode(ControlMode.Position);
 		elevatorWinchMotor.setFeedbackDevice(CANTalon.FeedbackDevice.AnalogPot);
-		elevatorWinchMotor.setPID(1, 0.002, 1.0, 0.0001, 255, 200, 0); // TODO
-																			// Determine
-																			// PID
-																			// values
-																			// and
-																			// Ramp
-																			// Rate
+		elevatorWinchMotor.setPID(1, 0.002, 1.0, 0.0001, 255, 200, 0); // TODO determine PID values and ramp rate
+		
 		// Potentiometer instantiation
-
+		
 		// TODO Limit Switches instantiation goes here
+		
 		/**
 		 * ELEVATOR END
 		 */
@@ -147,10 +148,8 @@ public class RobotMap {
 		 */
 		// Double Solenoid instantiation. Wiring: 0 --> Forward channel
 		// (extended). 1 --> Reverse channel (retracted).
-		mommaSolenoid = new DoubleSolenoid(PCM_NODE_ID, 0, 1); // Uses 10 as the
-																// Node ID for
-																// the PCM.
-		auntieSolenoid = new Solenoid(PCM_NODE_ID, 3);
+		mommaSolenoid = new DoubleSolenoid(PCM_NODE_ID, SOLENOID_CHANNEL_MOMMA_FORWARD, SOLENOID_CHANNEL_MOMMA_REVERSE); // Uses 10 as the Node ID for the PCM
+		auntieSolenoid = new Solenoid(PCM_NODE_ID, SOLENOID_CHANNEL_AUNTIE);
 		/**
 		 * GRABBER END
 		 */
