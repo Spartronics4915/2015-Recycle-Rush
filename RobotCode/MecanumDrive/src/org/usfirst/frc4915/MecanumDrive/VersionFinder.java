@@ -9,6 +9,8 @@ import java.util.jar.Manifest;
 public class VersionFinder {
 
 	public static final String VERSION_ATTRIBUTE = "Code-Version";
+	public static final String BUILT_BY_ATTRIBUTE = "Built-By";
+	public static final String BUILT_AT_ATTRIBUTE = "Built-At";
 
 	/**
 	 * 

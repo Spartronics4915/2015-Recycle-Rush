@@ -185,5 +185,11 @@ public class OI {
 		 */
 		String parsedVersion = VersionFinder.getAttribute(this, VersionFinder.VERSION_ATTRIBUTE);
 		SmartDashboard.putString("Code Version", parsedVersion == null ? "<not found>" : parsedVersion);
+
+		String parsedBuilder = VersionFinder.getAttribute(this, VersionFinder.BUILT_BY_ATTRIBUTE);
+		SmartDashboard.putString("Code Built By", parsedBuilder == null ? "<not found>" : parsedBuilder);
+
+		String parsedBuildDate = VersionFinder.getAttribute(this, VersionFinder.BUILT_AT_ATTRIBUTE);
+		SmartDashboard.putString("Code Built At", parsedBuildDate == null ? "<not found>" : parsedBuildDate);
 	}
 }
