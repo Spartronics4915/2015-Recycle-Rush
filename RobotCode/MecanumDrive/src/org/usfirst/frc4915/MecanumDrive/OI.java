@@ -183,7 +183,7 @@ public class OI {
 		/**
 		 * CODE VERSION OUTPUT
 		 */
-		String parsedVersion = VersionFinder.parseVersionFromManifest(this);
+		String parsedVersion = VersionFinder.getAttribute(this, VersionFinder.VERSION_ATTRIBUTE);
 		SmartDashboard.putString("Code Version", parsedVersion == null ? "<not found>" : parsedVersion);
 	}
 }

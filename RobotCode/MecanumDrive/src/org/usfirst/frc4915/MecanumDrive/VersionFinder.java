@@ -15,13 +15,15 @@ public class VersionFinder {
 	 * Attempt to read the version manifest attribute output by our Ant build
 	 * script directly into any compiled jar files.
 	 *
+	 * @param object Object to get the classloader from - literally anything in the project would work here
+	 * @param attribute Attribute to get
 	 * @return Parsed version, or null if not found or invalid.
 	 *
 	 */
-	public static String parseVersionFromManifest(Object object) {
+	public static String getAttribute(Object object, String attribute) {
 		Attributes attrs = findManifest(object).getMainAttributes();
-		String version = attrs.getValue(VERSION_ATTRIBUTE);
-		return version;
+		String attr = attrs.getValue(attribute);
+		return attr;
 	}
 
 	/**
