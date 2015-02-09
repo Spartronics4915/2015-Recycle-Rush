@@ -95,8 +95,8 @@ public class DriveTrain extends Subsystem {
 			robotDrive.stopMotor();
 		} else {
 			if(fieldMode == true){
-			debugger.logError(LoggerNames.DRIVETRAIN, ("Driving Field Mode"));
-			robotDrive.mecanumDrive_Cartesian(joystickX, joystickY, joystickTwist, gyro.getAngle());
+				debugger.logError(LoggerNames.DRIVETRAIN, ("Driving Field Mode"));
+				robotDrive.mecanumDrive_Cartesian(joystickX, joystickY, joystickTwist, gyro.getAngle());
 			} else {
 				debugger.logError(LoggerNames.DRIVETRAIN, ("Driving Robot Mode"));
 				robotDrive.mecanumDrive_Cartesian(joystickX, joystickY, joystickTwist, 0);
