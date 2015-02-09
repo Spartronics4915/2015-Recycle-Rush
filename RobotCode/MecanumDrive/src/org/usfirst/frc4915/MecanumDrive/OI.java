@@ -16,6 +16,8 @@ import org.usfirst.frc4915.MecanumDrive.commands.CloseGrabber;
 import org.usfirst.frc4915.MecanumDrive.commands.CloseSmallGrabber;
 import org.usfirst.frc4915.MecanumDrive.commands.DriveStraight;
 import org.usfirst.frc4915.MecanumDrive.commands.ElevatorJumpToPosition;
+import org.usfirst.frc4915.MecanumDrive.commands.ElevatorPositionCalibration;
+import org.usfirst.frc4915.MecanumDrive.commands.ElevatorStop;
 import org.usfirst.frc4915.MecanumDrive.commands.IntermediateOpen;
 import org.usfirst.frc4915.MecanumDrive.commands.MoveStraightPositionModeCommand;
 import org.usfirst.frc4915.MecanumDrive.commands.OpenGrabber;
@@ -143,7 +145,9 @@ public class OI {
 		SmartDashboard.putData("Jump to Elevator Position 2", new ElevatorJumpToPosition(2));
 		SmartDashboard.putData("Jump to Elevator Position 3", new ElevatorJumpToPosition(3));
 		SmartDashboard.putData("Jump to Elevator Position 4", new ElevatorJumpToPosition(4));
-
+		SmartDashboard.putData("ElevatorPositionCalibration", new ElevatorPositionCalibration());
+		SmartDashboard.putData("ElevatorStop", new ElevatorStop());
+		
 		/**
 		 * SENSOR OUTPUT
 		 */
