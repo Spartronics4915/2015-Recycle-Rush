@@ -123,6 +123,7 @@ public class OI {
 		 * TOGGLE FIELD ORIENTED DRIVE
 		 */
 		SmartDashboard.putData("Toggle Field Drive", new ToggleDriveMode());
+		SmartDashboard.putBoolean("Field Mode", Robot.driveTrain.fieldMode);
 		
 		/**
 		 * GRABBER
