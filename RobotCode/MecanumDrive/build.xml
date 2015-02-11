@@ -16,6 +16,14 @@
     <property file="${user.home}/wpilib/java/${version}/ant/build.properties"/>
 	
 	<property name="docs.dir" value="${build.dir}/docs"/>
+	
+	<!-- system environment variables like user.name -->
+	<property environment="env"/>
+	
+	<tstamp>
+		<!-- current time in this format: Jul 08, 04:34 PM -->
+		<format property="build-date" pattern="MMM dd, hh:mm a"/>
+	</tstamp>
 
 	<target name="javadocs">
 		<mkdir dir="${docs.dir}"/>

@@ -93,6 +93,8 @@ NONE OF THIS IS MINE. This is the standard WPI build script with two small addit
     	<attribute name="Robot-Class" value="${robot.class}"/>
     	<attribute name="Class-Path" value="."/>
 		<attribute name="Code-Version" value="${code-version}"/> <!-- git version -->
+		<attribute name="Built-By" value="${user.name}"/> <!-- user that compiled the code -->
+		<attribute name="Built-At" value="${build-date}"/> <!-- current timestamp, "Jul 08, 04:34 PM" -->
       </manifest>
 
       <fileset dir="${build.dir}" includes="**/*.class"/>
@@ -153,6 +155,8 @@ NONE OF THIS IS MINE. This is the standard WPI build script with two small addit
 		<attribute name="Robot-Class" value="${robot.class}"/>
 		<attribute name="Main-Class" value="edu.wpi.first.wpilibj.RobotBase"/>
 		<attribute name="Code-Version" value="${code-version}"/> <!-- git version -->
+		<attribute name="Built-By" value="${user.name}"/> <!-- user that compiled the code -->
+		<attribute name="Built-At" value="${build-date}"/> <!-- current timestamp, "Jul 08, 04:34 PM" -->
 	  </manifest>
 	  <fileset dir="${build.dir}" />
 	  <zipgroupfileset dir="${wpilib.sim.lib}">
