@@ -1,34 +1,30 @@
-package org.usfirst.frc4915.MecanumDrive.commands;
+package org.usfirst.frc4915.MecanumDrive.commands.debug;
 
 import org.usfirst.frc4915.MecanumDrive.Robot;
+import org.usfirst.frc4915.debuggersystem.CustomDebugger.LoggerNames;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class CloseAllGrabbers extends Command {
-
-	private boolean finished = false;
-
-	public CloseAllGrabbers() {
+public class DebuggerFilter extends Command {
+	private LoggerNames name;
+	public DebuggerFilter(LoggerNames name) {
 		// Use requires() here to declare subsystem dependencies
 		// eg. requires(chassis);
+		this.name = name;
 	}
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
-		System.out.println("ClosingAllGrabbers");
-		finished = false;
+		Robot.debugger.setFilter(name);
 	}
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		Robot.grabber.close();
-		Robot.grabber.vent();
-		finished = true;
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
-		return finished;
+		return true;
 	}
 
 	// Called once after isFinished returns true
