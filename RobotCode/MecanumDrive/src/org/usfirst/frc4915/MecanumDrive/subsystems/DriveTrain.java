@@ -13,17 +13,13 @@ import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.Gyro;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.RobotDrive;
-import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 //TODO write javadoc comments for all these methods
 
 public class DriveTrain extends Subsystem {
-	SpeedController leftFront = RobotMap.mecanumDriveControlsLeftFront;
-	SpeedController leftRear = RobotMap.mecanumDriveControlsLeftRear;
-	SpeedController rightFront = RobotMap.mecanumDriveControlsRightFront;
-	SpeedController rightRear = RobotMap.mecanumDriveControlsRightRear;
+
 	RobotDrive robotDrive;
 	CustomDebugger debugger = Robot.debugger;
 
@@ -32,7 +28,7 @@ public class DriveTrain extends Subsystem {
 	public static Gyro gyro = RobotMap.gyro;
 	public static Ultrasonic distanceSensor = RobotMap.distanceSensor;
 
-	public double Throttle = 0;
+	public double throttle = 0;
 	public boolean fieldMode = false; 
 
 	// Put methods for controlling this subsystem
@@ -66,7 +62,7 @@ public class DriveTrain extends Subsystem {
 		double joystickX = joystick.getAxis(Joystick.AxisType.kX);
 		double joystickY = joystick.getAxis(Joystick.AxisType.kY);
 		double joystickTwist = joystick.getAxis(Joystick.AxisType.kTwist);
-		Throttle = 0.50 * (joystick.getThrottle()) + 0.50;
+		throttle = 0.50 * (joystick.getThrottle()) + 0.50;
 		if ((Math.abs(joystickX) < 0.2)) {
 			joystickX = 0;
 		}
