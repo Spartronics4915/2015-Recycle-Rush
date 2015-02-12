@@ -6,7 +6,7 @@ import org.usfirst.frc4915.MecanumDrive.subsystems.DriveTrain;
 import org.usfirst.frc4915.MecanumDrive.subsystems.Elevator;
 import org.usfirst.frc4915.MecanumDrive.subsystems.Grabber;
 import org.usfirst.frc4915.debuggersystem.CustomDebugger;
-
+import org.usfirst.frc4915.MecanumDrive.commands.ToggleDriveMode;
 import com.ni.vision.NIVision;
 import com.ni.vision.NIVision.Image;
 
@@ -128,6 +128,9 @@ public class Robot extends IterativeRobot {
 		// this line or comment it out.
 		if (autonomousCommand != null)
 			autonomousCommand.cancel();
+		SmartDashboard.putData("Toggle Field Drive", new ToggleDriveMode());
+		SmartDashboard.putBoolean("Field Mode", Robot.driveTrain.fieldMode);
+				
 	}
 
 	/**
