@@ -171,6 +171,13 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+import edu.wpi.first.wpilibj.CameraServer;
+import edu.wpi.first.wpilibj.Timer;
+
+import com.ni.vision.NIVision;
+import com.ni.vision.NIVision.Image;
+
+
 /**
  * The VM is configured to automatically run this class, and to call the
  * functions corresponding to each mode, as described in the IterativeRobot
@@ -193,6 +200,12 @@ public class Robot extends IterativeRobot {
 	public static Elevator elevator;
 	public static Grabber grabber;
 	public static CustomDebugger debugger = new CustomDebugger();
+	
+    //vars for camera code
+    Image frame;
+    int session;
+
+
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -226,6 +239,15 @@ public class Robot extends IterativeRobot {
 
 		// Test for sending messages to smart dashboard
 		SendUserMessage.displayMessage();
+		
+        //Init camera
+        frame = NIVision.imaqCreateImage(NIVision.ImageType.IMAGE_RGB, 0);
+
+        // the camera name (ex "cam0") can be found through the roborio web interface
+        session = NIVision.IMAQdxOpenCamera("cam1",
+                NIVision.IMAQdxCameraControlMode.CameraControlModeController);
+        NIVision.IMAQdxConfigureGrab(session);
+
 	}
 
 	/**
@@ -284,6 +306,21 @@ public class Robot extends IterativeRobot {
 		// +"," + RobotMap.mecanumDriveControls1RightRear13.getSetpoint() );
 
 		Scheduler.getInstance().run();
+		
+    	/**
+         * grab an image, draw the circle, and provide it for the camera server
+         * which will in turn send it to the dashboard.
+         */
+		NIVision.IMAQdxStartAcquisition(session);
+
+            NIVision.IMAQdxGrab(session, frame, 1);
+            CameraServer.getInstance().setImage(frame);
+
+            /** robot code here! **/
+            Timer.delay(0.005);		// wait for a motor update time
+        
+        NIVision.IMAQdxStopAcquisition(session);
+
 	}
 
 	/**
