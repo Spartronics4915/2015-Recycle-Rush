@@ -11,7 +11,6 @@
 package org.usfirst.frc4915.MecanumDrive;
 import org.usfirst.frc4915.MecanumDrive.commands.AutonomousCommandToteStrategy;
 import org.usfirst.frc4915.MecanumDrive.commands.GenericTestCommand;
-import org.usfirst.frc4915.MecanumDrive.commands.MoveStraightPositionModeCommand;
 import org.usfirst.frc4915.MecanumDrive.subsystems.DriveTrain;
 import org.usfirst.frc4915.MecanumDrive.subsystems.Elevator;
 import org.usfirst.frc4915.MecanumDrive.subsystems.Grabber;
