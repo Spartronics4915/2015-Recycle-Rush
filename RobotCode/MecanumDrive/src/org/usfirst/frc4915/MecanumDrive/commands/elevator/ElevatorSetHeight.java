@@ -6,16 +6,19 @@ import org.usfirst.frc4915.debuggersystem.CustomDebugger.LoggerNames;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class SetHeightTo700 extends Command {
+public class ElevatorSetHeight extends Command {
 
-    public SetHeightTo700() {
+    private int targetHeight;
+
+    public ElevatorSetHeight(int targetHeight) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
+        this.targetHeight = targetHeight;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Elevator.height = 700;
+    	Elevator.height = targetHeight;
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -29,7 +32,7 @@ public class SetHeightTo700 extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.debugger.logError(LoggerNames.ELEVATOR, "Set height to 700");
+    	Robot.debugger.logError(LoggerNames.ELEVATOR, "Set height to " + targetHeight);
     }
 
     // Called when another command which requires one or more of the same
