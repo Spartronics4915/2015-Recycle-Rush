@@ -1,12 +1,11 @@
 package org.usfirst.frc4915.MecanumDrive.commands.autonomous;
 
-import org.usfirst.frc4915.MecanumDrive.Robot;
-
-import edu.wpi.first.wpilibj.command.CommandGroup;
 import org.usfirst.frc4915.MecanumDrive.commands.drive.MoveStraightPositionModeCommand;
 import org.usfirst.frc4915.MecanumDrive.commands.elevator.ElevatorMoveToHeight;
 import org.usfirst.frc4915.MecanumDrive.commands.grabber.CloseGrabber;
 import org.usfirst.frc4915.MecanumDrive.commands.grabber.OpenGrabber;
+
+import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class AutonomousCommandToteStrategy extends CommandGroup {
     
