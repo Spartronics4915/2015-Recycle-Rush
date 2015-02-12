@@ -14,9 +14,6 @@ import org.usfirst.frc4915.MecanumDrive.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-/**
- *
- */
 public class CloseGrabber extends Command {
 
 	private boolean finished = false;

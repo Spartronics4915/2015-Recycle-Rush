@@ -5,9 +5,6 @@ import org.usfirst.frc4915.MecanumDrive.subsystems.Elevator;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-/**
- *
- */
 public class ElevatorMoveToHeight extends Command {
 
 	Elevator elevator = Robot.elevator;

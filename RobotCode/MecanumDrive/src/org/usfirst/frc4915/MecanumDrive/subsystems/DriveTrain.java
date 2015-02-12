@@ -29,9 +29,6 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 //TODO write javadoc comments for all these methods
 
-/**
- *
- */
 public class DriveTrain extends Subsystem {
 	SpeedController leftFront = RobotMap.mecanumDriveControlsLeftFront;
 	SpeedController leftRear = RobotMap.mecanumDriveControlsLeftRear;
