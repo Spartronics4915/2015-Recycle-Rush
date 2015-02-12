@@ -127,11 +127,10 @@ public class Elevator extends Subsystem {
 	 */
 	public void setHeightToPosition(int positionNumber) {
 
-		// find the range between the min and max Potentiometer values, divide
-		// by 54 to get
-		// the change in value per inch and multiply by the number of inches
-		// that the totes are stacked
-		height = minimumPotentiometerValue + ((maximumPotentiometerValue - minimumPotentiometerValue) * HEIGHT_OF_TOTE * positionNumber / RANGE_OF_MOTION);
+		// find the range between the min and max Potentiometer values, divide by 54 to get
+		// the change in value per inch and multiply by the number of inches that the totes are stacked
+		height = minimumPotentiometerValue + ((maximumPotentiometerValue - minimumPotentiometerValue) 
+											 * HEIGHT_OF_TOTE * positionNumber / RANGE_OF_MOTION);
 		Robot.debugger.logError(LoggerNames.ELEVATOR, "Elevator's height is " + height);
 	}
 
