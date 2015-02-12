@@ -1,26 +1,28 @@
-package org.usfirst.frc4915.MecanumDrive.commands;
+package org.usfirst.frc4915.MecanumDrive.commands.elevator;
 
 import org.usfirst.frc4915.MecanumDrive.Robot;
+import org.usfirst.frc4915.MecanumDrive.subsystems.Elevator;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class ArcadeDrive extends Command {
+public class ElevatorMoveToHeight extends Command {
 
-	public ArcadeDrive() {
+	Elevator elevator = Robot.elevator;
+
+	public ElevatorMoveToHeight() {
 		// Use requires() here to declare subsystem dependencies
-		requires(Robot.driveTrain);
+		// eg. requires(chassis);
+		requires(elevator);
 	}
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
+		elevator.winch.enableControl();
 	}
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		// TODO read joystick value for thottle and update motor values with the
-		// modified throttle
-		Robot.driveTrain.arcadeDrive(Robot.oi.driveStick);
-
+		elevator.moveToHeight();
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
@@ -30,6 +32,7 @@ public class ArcadeDrive extends Command {
 
 	// Called once after isFinished returns true
 	protected void end() {
+		elevator.stopElevator();
 	}
 
 	// Called when another command which requires one or more of the same

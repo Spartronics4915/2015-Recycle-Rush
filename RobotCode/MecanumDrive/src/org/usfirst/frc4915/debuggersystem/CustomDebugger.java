@@ -1,45 +1,19 @@
 package org.usfirst.frc4915.debuggersystem;
 
-/*
- * This is a custom system that allows for easy debug logging 
- * and sorting from any system on the robot
- * 
- * TO ADD ON TO THE SYSTEM
- * Simply add or take away parts from the enum LoggerNames
- * at the top of the class file, the initializer will take care of the rest
- * 
- * setFilter(LoggerNames)
- * takes the desired LoggerNames enumerator that the user only wants
- * the debug log to process (ex. if only LoggerNames.DRIVETRAIN was to be
- * seen, the call of object.setFilter(LoggerNames.DRIVETRAIN) would be used)
- *
- * resetFilter()
- * resets the filter to allow all LoggerNames
- *
- * stopParentHandlerLoggerUse()
- * a private utility method that should only ever be called by customDebugger itself
- *
- * setFormatter()
- * a private utility method that the customDebugger uses for its initialization
- *
- * checkFilter()
- * returns an array of booleans that represent whether a LoggerNames at index i
- * is on or off
- *
- * logError(LoggerNames, String)
- * after constructing a customDebugger object, this is how to log errors from any system
- * in the robot code, specify what LoggerNames you would like the system to log it as
- * and then pass it the desired error or debug message, the error will print out in format:
- * Chosen LoggerNames: String
- *
- */
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.ConsoleHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * This is a custom system that allows for easy debug logging 
+ * and sorting from any system on the robot
+ * 
+ * <p>To add other categories to the system simply add or take away parts from {@link LoggerNames}
+ * at the top of the class file, the initializer will take care of the rest</p>
+ *
+ */
 public class CustomDebugger {
 
 	private Map<LoggerNames, Logger> loggerMap = new HashMap<>();
@@ -67,11 +41,11 @@ public class CustomDebugger {
 
 	/**
 	 *
-	 * Sets the internal logger filter. This turns all loggers other than
-	 * <code>logger</code> off.
+	 * Sets the internal logger filter. This turns all loggers other than <code>logger</code> off.
+	 * 
+	 * <p>You <strong>must</strong> call {@link #resetFilter} before setting another filter.</p>
 	 *
-	 * @param logger
-	 *            Logger to filter the output of
+	 * @param logger Logger to filter the output of
 	 */
 	public void setFilter(LoggerNames logger) {
 		for (Logger n : loggerMap.values()) {
@@ -84,7 +58,7 @@ public class CustomDebugger {
 	/**
 	 * Clears the filter set by {@link #setFilter}.
 	 *
-	 * This must be called before another filter is set.
+	 * <p>This <strong>must</strong> be called before another filter is set.</p>
 	 */
 	public void resetFilter() {
 		for (Logger n : loggerMap.values()) {
@@ -94,7 +68,7 @@ public class CustomDebugger {
 
 	/**
 	 * Sets the internal Java logger's <code>setUseParentHandlers</code> option
-	 * to false
+	 * to false.
 	 *
 	 * <p>
 	 * This is an important step in getting this system to even work.
@@ -123,8 +97,7 @@ public class CustomDebugger {
 	 *
 	 * Check the filter state of each logger
 	 *
-	 * @return Array representing the filter state of the Logger at index i
-	 *         relative to position in {@link LoggerNames}
+	 * @return Array representing the filter state of the Logger at index i relative to position in {@link LoggerNames}
 	 */
 	public boolean[] checkFilter() {
 		// returns an array of booleans showing if a logger is off or on (false
@@ -140,13 +113,11 @@ public class CustomDebugger {
 	}
 
 	/**
-	 *
+	 * 
 	 * Outputs a message to a specified logger.
 	 *
-	 * @param logger
-	 *            Logger to throw the error with
-	 * @param message
-	 *            Message to send to <code>logger</code>
+	 * @param logger Logger to throw the error with
+	 * @param message Message to send to <code>logger</code>
 	 */
 	public void logError(LoggerNames logger, String message) {
 		loggerMap.get(logger).info(message);
