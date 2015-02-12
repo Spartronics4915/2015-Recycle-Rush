@@ -9,8 +9,8 @@
 // it from being updated in the future.
 
 package org.usfirst.frc4915.MecanumDrive;
+import org.usfirst.frc4915.MecanumDrive.commands.AutonomousCommandToteStrategy;
 import org.usfirst.frc4915.MecanumDrive.commands.GenericTestCommand;
-import org.usfirst.frc4915.MecanumDrive.commands.MoveStraightPositionModeCommand;
 import org.usfirst.frc4915.MecanumDrive.subsystems.DriveTrain;
 import org.usfirst.frc4915.MecanumDrive.subsystems.Elevator;
 import org.usfirst.frc4915.MecanumDrive.subsystems.Grabber;
@@ -23,7 +23,6 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.Timer;
 
@@ -82,7 +81,7 @@ public class Robot extends IterativeRobot {
 
 		testPreferencesItemOne = preferences.getDouble("TestOne", 123.4);
 		testPreferencesItemOne = preferences.getDouble("TestTwo", 456.7);
-	    //preferences.putDouble("DesiredDistance", 9.0);
+	    preferences.getString("DesiredDistance", "9.0");
 
 		autonomousProgramChooser = new SendableChooser();
 		autonomousProgramChooser.addDefault("Autonomous Program One", new GenericTestCommand(10, "Running program one!"));
@@ -118,8 +117,8 @@ public class Robot extends IterativeRobot {
 	public void autonomousInit() {
 		// Use the selected autonomous command
 		// autonomousCommand = (Command) autonomousProgramChooser.getSelected();
-		double desiredDistrance = preferences.getDouble("DesiredDistance", 9.0);
-		autonomousCommand = new MoveStraightPositionModeCommand(desiredDistrance);
+		//double desiredDistrance = preferences.getDouble("DesiredDistance", 9.0);
+		autonomousCommand = new AutonomousCommandToteStrategy();
 
 		autonomousCommand.start();
 	}
@@ -159,6 +158,14 @@ public class Robot extends IterativeRobot {
 		// +"," + RobotMap.mecanumDriveControls1RightRear13.getSetpoint() );
 
 		Scheduler.getInstance().run();
+		
+		SmartDashboard.putNumber("Elevator Height", Elevator.height);
+		SmartDashboard.putBoolean("Elevator At Top", elevator.isAtTopOfElevator());
+		SmartDashboard.putBoolean("Elevator At Bottom", elevator.isAtBottomOfElevator());
+		SmartDashboard.putNumber("Elevator Potentiometer Value", elevator.getPosition());
+		SmartDashboard.putNumber("Elevator P", elevator.winch.getP());
+		SmartDashboard.putNumber("Elevator I", elevator.winch.getI());
+		SmartDashboard.putNumber("Elevator D", elevator.winch.getD());
 		
     	/**
          * grab an image, draw the circle, and provide it for the camera server

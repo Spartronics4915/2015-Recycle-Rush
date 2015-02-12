@@ -25,10 +25,16 @@ public class AutonomousCommandToteStrategy extends CommandGroup {
     	
     	
     	addSequential(new ElevatorMoveToHeight()); //should be parallel
+    	System.out.println("Moving Elevator");
+    	addSequential(new ElevatorMoveToHeight());
+    	System.out.println("Moving Grabber");
     	addSequential(new CloseGrabber());
+    	System.out.println("Driving 15 ft");
     	addSequential(new MoveStraightGivenDistanceCommand(-15));
+    	System.out.println("Moving Grabber");
     	addSequential(new OpenGrabber());
     	addSequential(new MoveStraightGivenDistanceCommand(-1));
+    	System.out.println("Driving 1 ft");
     	
     	//Below should use commands to avoid bugs
     	//Robot.elevator.setHeightToPosition(0);

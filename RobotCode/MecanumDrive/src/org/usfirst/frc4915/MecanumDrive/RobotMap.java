@@ -32,17 +32,17 @@ public class RobotMap {
 	/**
 	 * CONSTANTS
 	 */
-	public static final int MOTOR_PORT_LEFT_FRONT = 10;
-	public static final int MOTOR_PORT_LEFT_REAR = 11;
-	public static final int MOTOR_PORT_RIGHT_FRONT = 12;
-	public static final int MOTOR_PORT_RIGHT_REAR = 13;
+	public static final int MOTOR_PORT_LEFT_FRONT = 20;
+	public static final int MOTOR_PORT_LEFT_REAR = 21;
+	public static final int MOTOR_PORT_RIGHT_FRONT = 22;
+	public static final int MOTOR_PORT_RIGHT_REAR = 23;
 	
-	public static final int MOTOR_PORT_ELEVATOR_WINCH = 14;
+	public static final int MOTOR_PORT_ELEVATOR_WINCH = 24;
 	
 	/**
 	 * The Pneumatic Control Module's CAN Node ID. Use 10 for 4915. Use 20 for 9999
 	 */
-	public final static int PCM_NODE_ID = 10;
+	public final static int PCM_NODE_ID = 20;
 	
 	public final static int GYRO_PORT = 0;
 	
@@ -134,7 +134,8 @@ public class RobotMap {
 		elevatorWinchMotor = new CANTalon(MOTOR_PORT_ELEVATOR_WINCH);
 		elevatorWinchMotor.changeControlMode(ControlMode.Position);
 		elevatorWinchMotor.setFeedbackDevice(CANTalon.FeedbackDevice.AnalogPot);
-		elevatorWinchMotor.setPID(1, 0.002, 1.0, 0.0001, 255, 200, 0); // TODO determine PID values and ramp rate
+		elevatorWinchMotor.setPID(25, 0, 0, 0.0001, 255, 17, 0); // TODO determine PID values and ramp rate
+		// P = 25 I = 0 D = 0 ==> Pretty accurate. Overshoots about one inch, and has a little error afterwards.
 		
 		// Potentiometer instantiation
 		

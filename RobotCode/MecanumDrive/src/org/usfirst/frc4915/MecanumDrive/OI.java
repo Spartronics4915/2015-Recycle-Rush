@@ -10,7 +10,6 @@
 
 package org.usfirst.frc4915.MecanumDrive;
 
-import org.usfirst.frc4915.MecanumDrive.commands.AutonomousCommandToteStrategy;
 import org.usfirst.frc4915.MecanumDrive.commands.CloseAllGrabbers;
 import org.usfirst.frc4915.MecanumDrive.commands.CloseGrabber;
 import org.usfirst.frc4915.MecanumDrive.commands.CloseSmallGrabber;
@@ -21,8 +20,11 @@ import org.usfirst.frc4915.MecanumDrive.commands.ElevatorStop;
 import org.usfirst.frc4915.MecanumDrive.commands.IntermediateOpen;
 import org.usfirst.frc4915.MecanumDrive.commands.MoveStraightPositionModeCommand;
 import org.usfirst.frc4915.MecanumDrive.commands.OpenGrabber;
+import org.usfirst.frc4915.MecanumDrive.commands.SetHeightTo700;
+import org.usfirst.frc4915.MecanumDrive.commands.SetHeightTo850;
 import org.usfirst.frc4915.MecanumDrive.commands.ToggleDriveMode;
 import org.usfirst.frc4915.MecanumDrive.subsystems.DriveTrain;
+import org.usfirst.frc4915.MecanumDrive.subsystems.Elevator;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -112,13 +114,13 @@ public class OI {
 		/**
 		 * AUTONOMOUS COMMAND
 		 */
-		SmartDashboard.putData("Autonomous Command", new AutonomousCommandToteStrategy());
+		//SmartDashboard.putData("Autonomous Command", new AutonomousCommandToteStrategy());
 		
 		/**
 		 * DRIVE STRAIGHT
 		 */
-		SmartDashboard.putData("Move Straight 9 feet", new MoveStraightPositionModeCommand(9));
-		SmartDashboard.putData("Move Backwards 9 feet", new MoveStraightPositionModeCommand(-9));
+		SmartDashboard.putData("Move Straight 3 feet", new MoveStraightPositionModeCommand(3));
+		SmartDashboard.putData("Move Backwards 3 feet", new MoveStraightPositionModeCommand(-3));
 		SmartDashboard.putData("DriveStraight 1 second", new DriveStraight());
 		
 		/**
@@ -148,6 +150,12 @@ public class OI {
 		SmartDashboard.putData("Jump to Elevator Position 4", new ElevatorJumpToPosition(4));
 		SmartDashboard.putData("ElevatorPositionCalibration", new ElevatorPositionCalibration());
 		SmartDashboard.putData("ElevatorStop", new ElevatorStop());
+		SmartDashboard.putNumber("Elevator Height", Elevator.height);
+		SmartDashboard.putBoolean("Elevator At Top", Robot.elevator.isAtTopOfElevator());
+		SmartDashboard.putBoolean("Elevator At Bottom", Robot.elevator.isAtBottomOfElevator());
+		SmartDashboard.putNumber("Elevator Potentiometer Value", Robot.elevator.getPosition());
+		SmartDashboard.putData("Set height to 700", new SetHeightTo700());
+		SmartDashboard.putData("Set height to 850", new SetHeightTo850());
 		
 		/**
 		 * SENSOR OUTPUT
