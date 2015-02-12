@@ -75,7 +75,7 @@ public class MoveStraightPositionModeCommand extends Command {
 
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
-		// checking to see if the front motors have finished
+		// checking to see if the front motors have finished regardless of driving direction
 		if (inputDistance > 0)
 			return isMotorFinished(0) || isMotorFinished(2);
 		else

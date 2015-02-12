@@ -1,6 +1,8 @@
 package org.usfirst.frc4915.MecanumDrive.commands;
 
 import org.usfirst.frc4915.MecanumDrive.Robot;
+
+import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class AutonomousCommandToteStrategy extends CommandGroup {
@@ -27,14 +29,12 @@ public class AutonomousCommandToteStrategy extends CommandGroup {
     	System.out.println("Moving Grabber");
     	addSequential(new CloseGrabber());
     	System.out.println("Driving 15 ft");
-    	addSequential(new MoveStraightGivenDistanceCommand(-15));
+    	addSequential(new MoveStraightPositionModeCommand(-5));
     	System.out.println("Moving Grabber");
     	addSequential(new OpenGrabber());
-    	addSequential(new MoveStraightGivenDistanceCommand(-1));
+    	addSequential(new MoveStraightPositionModeCommand(-1));
     	System.out.println("Driving 1 ft");
+
     	
-    	Robot.elevator.setHeightToPosition(0);
-    	Robot.grabber.close();
-    	Robot.grabber.open();
     }
 }
