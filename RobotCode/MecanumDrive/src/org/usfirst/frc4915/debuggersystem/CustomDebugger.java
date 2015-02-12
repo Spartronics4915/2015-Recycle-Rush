@@ -1,5 +1,11 @@
 package org.usfirst.frc4915.debuggersystem;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.logging.ConsoleHandler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /*
  * This is a custom system that allows for easy debug logging 
  * and sorting from any system on the robot
@@ -33,12 +39,6 @@ package org.usfirst.frc4915.debuggersystem;
  * Chosen LoggerNames: String
  *
  */
-
-import java.util.HashMap;
-import java.util.Map;
-import java.util.logging.ConsoleHandler;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class CustomDebugger {
 

@@ -6,9 +6,6 @@ import org.usfirst.frc4915.debuggersystem.CustomDebugger.LoggerNames;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-/**
- *
- */
 public class SetHeightTo700 extends Command {
 
     public SetHeightTo700() {
