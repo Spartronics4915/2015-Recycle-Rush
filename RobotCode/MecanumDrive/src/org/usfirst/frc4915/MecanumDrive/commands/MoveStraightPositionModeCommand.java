@@ -22,11 +22,13 @@ import edu.wpi.first.wpilibj.command.Command;
 public class MoveStraightPositionModeCommand extends Command {
 	public static List<CANTalon> motors = DriveTrain.motors;
 	public double inputDistance;
+	public double inputSpeed;
 	private DriveTrain driveTrain = Robot.driveTrain;
 
-	public MoveStraightPositionModeCommand(double inputDistance) {
+	public MoveStraightPositionModeCommand(double inputDistance, double inputSpeed) {
 		requires(driveTrain);
 		System.out.println("***MoveStraightPositionModeCommand inputDistance: " + inputDistance + "*******");
+		System.out.println("***MoveStraightPositionModeCommand inputSpeed: " + inputSpeed + "*******");
 		this.inputDistance = inputDistance;
 		// Use requires() here to declare subsystem dependencies
 		// eg. requires(chassis);
@@ -68,9 +70,9 @@ public class MoveStraightPositionModeCommand extends Command {
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
 		if (inputDistance < 0)
-			driveTrain.driveStraight(0.7);
+			driveTrain.driveStraight(.7);
 		else
-			driveTrain.driveStraight(-0.7);
+			driveTrain.driveStraight(-.7);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
