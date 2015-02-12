@@ -1,18 +1,17 @@
 package org.usfirst.frc4915.MecanumDrive;
 
-import org.usfirst.frc4915.MecanumDrive.commands.CloseAllGrabbers;
-import org.usfirst.frc4915.MecanumDrive.commands.CloseGrabber;
-import org.usfirst.frc4915.MecanumDrive.commands.CloseSmallGrabber;
-import org.usfirst.frc4915.MecanumDrive.commands.DriveStraight;
-import org.usfirst.frc4915.MecanumDrive.commands.ElevatorJumpToPosition;
-import org.usfirst.frc4915.MecanumDrive.commands.ElevatorPositionCalibration;
-import org.usfirst.frc4915.MecanumDrive.commands.ElevatorStop;
-import org.usfirst.frc4915.MecanumDrive.commands.IntermediateOpen;
-import org.usfirst.frc4915.MecanumDrive.commands.MoveStraightPositionModeCommand;
-import org.usfirst.frc4915.MecanumDrive.commands.OpenGrabber;
-import org.usfirst.frc4915.MecanumDrive.commands.SetHeightTo700;
-import org.usfirst.frc4915.MecanumDrive.commands.SetHeightTo850;
-import org.usfirst.frc4915.MecanumDrive.commands.ToggleDriveMode;
+import org.usfirst.frc4915.MecanumDrive.commands.grabber.CloseAllGrabbers;
+import org.usfirst.frc4915.MecanumDrive.commands.grabber.CloseGrabber;
+import org.usfirst.frc4915.MecanumDrive.commands.grabber.CloseSmallGrabber;
+import org.usfirst.frc4915.MecanumDrive.commands.drive.DriveStraight;
+import org.usfirst.frc4915.MecanumDrive.commands.elevator.ElevatorJumpToPosition;
+import org.usfirst.frc4915.MecanumDrive.commands.elevator.ElevatorPositionCalibration;
+import org.usfirst.frc4915.MecanumDrive.commands.elevator.ElevatorStop;
+import org.usfirst.frc4915.MecanumDrive.commands.grabber.IntermediateOpen;
+import org.usfirst.frc4915.MecanumDrive.commands.drive.MoveStraightPositionModeCommand;
+import org.usfirst.frc4915.MecanumDrive.commands.grabber.OpenGrabber;
+import org.usfirst.frc4915.MecanumDrive.commands.elevator.ElevatorSetHeight;
+import org.usfirst.frc4915.MecanumDrive.commands.drive.ToggleDriveMode;
 import org.usfirst.frc4915.MecanumDrive.subsystems.DriveTrain;
 import org.usfirst.frc4915.MecanumDrive.subsystems.Elevator;
 
@@ -143,8 +142,8 @@ public class OI {
 		SmartDashboard.putBoolean("Elevator At Top", Robot.elevator.isAtTopOfElevator());
 		SmartDashboard.putBoolean("Elevator At Bottom", Robot.elevator.isAtBottomOfElevator());
 		SmartDashboard.putNumber("Elevator Potentiometer Value", Robot.elevator.getPosition());
-		SmartDashboard.putData("Set height to 700", new SetHeightTo700());
-		SmartDashboard.putData("Set height to 850", new SetHeightTo850());
+		SmartDashboard.putData("Set height to 700", new ElevatorSetHeight(700));
+		SmartDashboard.putData("Set height to 850", new ElevatorSetHeight(850));
 		
 		/**
 		 * SENSOR OUTPUT

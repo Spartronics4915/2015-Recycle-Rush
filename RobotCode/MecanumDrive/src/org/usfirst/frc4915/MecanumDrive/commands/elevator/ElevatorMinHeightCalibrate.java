@@ -1,12 +1,16 @@
-package org.usfirst.frc4915.MecanumDrive.commands;
+package org.usfirst.frc4915.MecanumDrive.commands.elevator;
 
 import org.usfirst.frc4915.MecanumDrive.Robot;
+import org.usfirst.frc4915.MecanumDrive.subsystems.Elevator;
 import org.usfirst.frc4915.debuggersystem.CustomDebugger.LoggerNames;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class DebuggerFilterReset extends Command {
-	public DebuggerFilterReset(LoggerNames name) {
+public class ElevatorMinHeightCalibrate extends Command {
+
+	Elevator elevator = Robot.elevator;
+
+	public ElevatorMinHeightCalibrate() {
 		// Use requires() here to declare subsystem dependencies
 		// eg. requires(chassis);
 	}
@@ -17,16 +21,18 @@ public class DebuggerFilterReset extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		Robot.debugger.resetFilter();
+		Elevator.height = 400; // By experimentation, the actual minimum is close to 550
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
-		return true;
+		return elevator.isAtBottomOfElevator();
 	}
 
 	// Called once after isFinished returns true
 	protected void end() {
+		Elevator.minimumPotentiometerValue = elevator.getPositionInches();
+		Robot.debugger.logError(LoggerNames.ELEVATOR, "Minimum position value " + Elevator.minimumPotentiometerValue);
 	}
 
 	// Called when another command which requires one or more of the same

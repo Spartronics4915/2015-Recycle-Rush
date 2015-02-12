@@ -1,31 +1,35 @@
-package org.usfirst.frc4915.MecanumDrive.commands;
+package org.usfirst.frc4915.MecanumDrive.commands.grabber;
 
 import org.usfirst.frc4915.MecanumDrive.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class ArcadeDrive extends Command {
+public class OpenGrabber extends Command {
 
-	public ArcadeDrive() {
+	private boolean finished = false;
+
+	public OpenGrabber() {
 		// Use requires() here to declare subsystem dependencies
-		requires(Robot.driveTrain);
+		// eg. requires(chassis);
 	}
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
+		System.out.println("Closing");
+		finished = false;
 	}
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		// TODO read joystick value for thottle and update motor values with the
-		// modified throttle
-		Robot.driveTrain.arcadeDrive(Robot.oi.driveStick);
+		Robot.grabber.vent();
+		Robot.grabber.close();
 
+		finished = true;
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
-		return false;
+		return finished;
 	}
 
 	// Called once after isFinished returns true
