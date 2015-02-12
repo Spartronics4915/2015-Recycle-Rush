@@ -4,6 +4,9 @@ import edu.wpi.first.wpilibj.command.Command;
 
 import org.usfirst.frc4915.MecanumDrive.Robot;
 
+import org.usfirst.frc4915.debuggersystem.CustomDebugger;
+import org.usfirst.frc4915.debuggersystem.CustomDebugger.LoggerNames;
+
 /**
  *
  */
@@ -18,7 +21,7 @@ public class ToggleDriveMode extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.driveTrain.toggleFieldMode();
+    	Robot.debugger.logError(LoggerNames.DRIVETRAIN,"Toggling Drive Mode");
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -27,11 +30,13 @@ public class ToggleDriveMode extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
+    	
         return true;
     }
 
     // Called once after isFinished returns true
     protected void end() {
+    	Robot.driveTrain.toggleFieldMode();
     }
 
     // Called when another command which requires one or more of the same
