@@ -9,7 +9,6 @@ import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
-// TODO check the disableControl functionality. We may need to enableControl.
 public class Elevator extends Subsystem {
 
 	// These positions describe the number of totes you stacking on top of.
@@ -19,13 +18,13 @@ public class Elevator extends Subsystem {
 	// TODO initialize height
 	// Not in inches. Between minimumPotentiometerValue and
 	// maximumPotentiometerValue.
-	public static double height;
+	public static double height = 700;
 
 	// POTENTIOMTERS : fwd --> top, rev --> bottom
 
 	// Set by ElevatorMax/MinHeightCalibrate commands
-	public static double minimumPotentiometerValue = 1023;
-	public static double maximumPotentiometerValue = 0;
+	public static double minimumPotentiometerValue = 0;
+	public static double maximumPotentiometerValue = 1023;
 
 	public static final double RANGE_OF_MOTION = 54; // The elevator can go a
 														// distance between 54
@@ -35,7 +34,7 @@ public class Elevator extends Subsystem {
 													// in inches
 	public static final double HEIGHT_OF_TOTE = 12;
 
-	private static final double JOYSTICK_SCALE = -10; // TODO Decide scale for
+	private static final double JOYSTICK_SCALE = -1; // TODO Decide scale for
 														// joystick movement
 														// position change
 
@@ -141,7 +140,9 @@ public class Elevator extends Subsystem {
 	 * @return if the elevator is at it's max height, return
 	 */
 	public boolean isAtTopOfElevator() {
-		Robot.debugger.logError(LoggerNames.ELEVATOR, "Elevator Top LimitSwitch has been reached");
+		if (winch.isFwdLimitSwitchClosed()) {
+			Robot.debugger.logError(LoggerNames.ELEVATOR, "Elevator Top LimitSwitch has been reached");
+		}
 		return winch.isFwdLimitSwitchClosed();
 	}
 
@@ -150,14 +151,16 @@ public class Elevator extends Subsystem {
 	 * @return if the elevator is at it's min height, return true
 	 */
 	public boolean isAtBottomOfElevator() {
-		Robot.debugger.logError(LoggerNames.ELEVATOR, "Elevator Bottom LimitSwitch has been reached");
+		if (winch.isRevLimitSwitchClosed()) {
+			Robot.debugger.logError(LoggerNames.ELEVATOR, "Elevator Bottom LimitSwitch has been reached");
+		}
 		return winch.isRevLimitSwitchClosed();
 	}
 
 	/**
 	 * Makes sure that the height value doesn't increase or decrease beyond the
-	 * min/maximum values Also, if the limit switch is pressed (fwd --> top, rev
-	 * --> bottom) it will update maximum/minimum potentiometer values.
+	 * min/maximum values Also, if the limit switch is pressed (fwd --> top ~973, rev
+	 * --> bottom ~550) it will update maximum/minimum potentiometer values.
 	 */
 	public void keepHeightInRange() {
 		if (isAtTopOfElevator()) {

@@ -1,29 +1,21 @@
 package org.usfirst.frc4915.MecanumDrive.commands;
 
 import org.usfirst.frc4915.MecanumDrive.Robot;
-
-
-import org.usfirst.frc4915.debuggersystem.CustomDebugger;
+import org.usfirst.frc4915.MecanumDrive.subsystems.Elevator;
 import org.usfirst.frc4915.debuggersystem.CustomDebugger.LoggerNames;
+
 import edu.wpi.first.wpilibj.command.Command;
-/**
- *
- */
 
+public class SetHeightTo700 extends Command {
 
-
-public class ToggleDriveMode extends Command {
-
-	
-	
-    public ToggleDriveMode() {
+    public SetHeightTo700() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.debugger.logError(LoggerNames.DRIVETRAIN,"Toggling Drive Mode");
+    	Elevator.height = 700;
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -32,19 +24,16 @@ public class ToggleDriveMode extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	
         return true;
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.driveTrain.toggleFieldMode();
+    	Robot.debugger.logError(LoggerNames.ELEVATOR, "Set height to 700");
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
     }
-    
-
 }

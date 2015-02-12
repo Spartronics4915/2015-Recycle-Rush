@@ -5,9 +5,6 @@ import org.usfirst.frc4915.MecanumDrive.subsystems.Elevator;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-/**
- *
- */
 public class ElevatorMoveToHeight extends Command {
 
 	Elevator elevator = Robot.elevator;
@@ -20,6 +17,7 @@ public class ElevatorMoveToHeight extends Command {
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
+		elevator.winch.enableControl();
 	}
 
 	// Called repeatedly when this Command is scheduled to run
