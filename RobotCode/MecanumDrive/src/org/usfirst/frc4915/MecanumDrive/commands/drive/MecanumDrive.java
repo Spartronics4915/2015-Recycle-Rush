@@ -1,33 +1,31 @@
-package org.usfirst.frc4915.MecanumDrive.commands;
+package org.usfirst.frc4915.MecanumDrive.commands.drive;
 
 import org.usfirst.frc4915.MecanumDrive.Robot;
-import org.usfirst.frc4915.MecanumDrive.subsystems.Elevator;
+import org.usfirst.frc4915.debuggersystem.CustomDebugger;
 import org.usfirst.frc4915.debuggersystem.CustomDebugger.LoggerNames;
 
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Command;
 
-public class ElevatorFineTune extends Command {
+public class MecanumDrive extends Command {
+	CustomDebugger debugger;
 
-	Elevator elevator = Robot.elevator;
-
-	public ElevatorFineTune() {
+	public MecanumDrive() {
 		// Use requires() here to declare subsystem dependencies
 		// eg. requires(chassis);
-		requires(Robot.elevator);
-
+		requires(Robot.driveTrain);
 	}
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
-		elevator.winch.enableControl();
-		Robot.debugger.logError(LoggerNames.ELEVATOR, "ElevatorFineTune initialized");
+		debugger = Robot.debugger;
+		debugger.logError(LoggerNames.DRIVETRAIN, "Starting MecanumDrive Command");
 	}
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		// Constantly makes the motor move to whatever height is, and changes
-		// hieght based on the joystick
-		elevator.moveWithJoystick(Robot.oi.elevatorStick);
+		Joystick joystickDrive = Robot.oi.driveStick;
+		Robot.driveTrain.mecanumDrive(joystickDrive);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
@@ -37,8 +35,7 @@ public class ElevatorFineTune extends Command {
 
 	// Called once after isFinished returns true
 	protected void end() {
-		Robot.debugger.logError(LoggerNames.ELEVATOR, "ElevatorFineTune deactivated");
-		elevator.stopElevator();
+		Robot.driveTrain.getRobotDrive().stopMotor();
 	}
 
 	// Called when another command which requires one or more of the same
