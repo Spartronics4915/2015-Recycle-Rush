@@ -9,6 +9,7 @@
 // it from being updated in the future.
 
 package org.usfirst.frc4915.MecanumDrive;
+
 import org.usfirst.frc4915.MecanumDrive.commands.AutonomousCommandToteStrategy;
 import org.usfirst.frc4915.MecanumDrive.commands.GenericTestCommand;
 import org.usfirst.frc4915.MecanumDrive.subsystems.DriveTrain;
@@ -16,19 +17,18 @@ import org.usfirst.frc4915.MecanumDrive.subsystems.Elevator;
 import org.usfirst.frc4915.MecanumDrive.subsystems.Grabber;
 import org.usfirst.frc4915.debuggersystem.CustomDebugger;
 
+import com.ni.vision.NIVision;
+import com.ni.vision.NIVision.Image;
+
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Preferences;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj.CameraServer;
-import edu.wpi.first.wpilibj.Timer;
-
-import com.ni.vision.NIVision;
-import com.ni.vision.NIVision.Image;
-
 
 /**
  * The VM is configured to automatically run this class, and to call the
