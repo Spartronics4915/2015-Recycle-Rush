@@ -61,33 +61,26 @@ public class DriveTrain extends Subsystem {
 		double joystickX = joystick.getAxis(Joystick.AxisType.kX);
 		double joystickY = joystick.getAxis(Joystick.AxisType.kY);
 		double joystickTwist = joystick.getAxis(Joystick.AxisType.kTwist);
+
 		throttle = 0.50 * (joystick.getThrottle()) + 0.50;
-		if ((Math.abs(joystickX) < 0.2)) {
-			joystickX = 0;
-		}
-		if ((Math.abs(joystickY) < 0.2)) {
-			joystickY = 0;
-		}
-		if ((Math.abs(joystickTwist) < 0.2)) {
-			joystickTwist = 0;
-		}
+
+		boolean deadZoneX = Math.abs(joystickX) < 0.2;
+		boolean deadZoneY = Math.abs(joystickY) < 0.2;
+		boolean deadZoneTwist = Math.abs(joystickTwist) < 0.2;
+
+		if (deadZoneX) joystickX = 0;
+		if (deadZoneY) joystickY = 0;
+		if (deadZoneTwist) joystickTwist = 0;
+
 		debugger.logError(LoggerNames.DRIVETRAIN, (joystickX + ", " + joystickY + ", " + joystickTwist));
-		if ((Math.abs(joystickX) < 0.2) && (Math.abs(joystickY) < 0.2) && (Math.abs(joystickTwist) < 0.2)) {
+
+		if (deadZoneX && deadZoneY && deadZoneTwist) {
 			debugger.logError(LoggerNames.DRIVETRAIN, ("Stopping Motor"));
 			robotDrive.stopMotor();
 		} else {
-			if(fieldMode == true){
-				debugger.logError(LoggerNames.DRIVETRAIN, ("Driving Field Mode"));
-				robotDrive.mecanumDrive_Cartesian(joystickX, joystickY, joystickTwist, gyro.getAngle());
-			} else {
-				debugger.logError(LoggerNames.DRIVETRAIN, ("Driving Robot Mode"));
-				robotDrive.mecanumDrive_Cartesian(joystickX, joystickY, joystickTwist, 0);
-			}
+			debugger.logError(LoggerNames.DRIVETRAIN, String.format("Driving %s Mode", fieldMode ? "field" : "robot"));
 
-			/*
-			 * leftFront.set(60); leftRear.set(60); rightFront.set(60);
-			 * rightRear.set(60);
-			 */
+			robotDrive.mecanumDrive_Cartesian(joystickX, joystickY, joystickTwist, fieldMode ? gyro.getAngle() : 0);
 		}
 
 	}
@@ -128,7 +121,6 @@ public class DriveTrain extends Subsystem {
 	}
    
 	public boolean toggleFieldMode() {
-    	fieldMode = !fieldMode;
-    	return fieldMode;
+		return fieldMode = !fieldMode;
     }
 }
