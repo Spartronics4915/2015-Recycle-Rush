@@ -77,3 +77,4 @@ run
 *.iws
 /.apt_generated/
 UNKNOWN*
+sysProps.xml

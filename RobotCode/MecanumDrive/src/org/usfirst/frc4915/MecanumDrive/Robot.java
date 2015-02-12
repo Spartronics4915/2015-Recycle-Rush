@@ -9,8 +9,8 @@
 // it from being updated in the future.
 
 package org.usfirst.frc4915.MecanumDrive;
+import org.usfirst.frc4915.MecanumDrive.commands.AutonomousCommandToteStrategy;
 import org.usfirst.frc4915.MecanumDrive.commands.GenericTestCommand;
-import org.usfirst.frc4915.MecanumDrive.commands.MoveStraightPositionModeCommand;
 import org.usfirst.frc4915.MecanumDrive.subsystems.DriveTrain;
 import org.usfirst.frc4915.MecanumDrive.subsystems.Elevator;
 import org.usfirst.frc4915.MecanumDrive.subsystems.Grabber;
@@ -81,7 +81,7 @@ public class Robot extends IterativeRobot {
 
 		testPreferencesItemOne = preferences.getDouble("TestOne", 123.4);
 		testPreferencesItemOne = preferences.getDouble("TestTwo", 456.7);
-	    //preferences.putDouble("DesiredDistance", 9.0);
+	    preferences.getString("DesiredDistance", "9.0");
 
 		autonomousProgramChooser = new SendableChooser();
 		autonomousProgramChooser.addDefault("Autonomous Program One", new GenericTestCommand(10, "Running program one!"));
@@ -117,8 +117,8 @@ public class Robot extends IterativeRobot {
 	public void autonomousInit() {
 		// Use the selected autonomous command
 		// autonomousCommand = (Command) autonomousProgramChooser.getSelected();
-		double desiredDistrance = preferences.getDouble("DesiredDistance", 9.0);
-		autonomousCommand = new MoveStraightPositionModeCommand(desiredDistrance);
+		//double desiredDistrance = preferences.getDouble("DesiredDistance", 9.0);
+		autonomousCommand = new AutonomousCommandToteStrategy();
 
 		autonomousCommand.start();
 	}
