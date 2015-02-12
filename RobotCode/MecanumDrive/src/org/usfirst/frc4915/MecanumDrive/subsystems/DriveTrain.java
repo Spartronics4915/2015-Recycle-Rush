@@ -135,7 +135,8 @@ public class DriveTrain extends Subsystem {
 		robotDrive.arcadeDrive(stick);
 	}
    
-	public void toggleFieldMode() {
+	public boolean toggleFieldMode() {
     	fieldMode = !fieldMode;
+    	return fieldMode;
     }
 }
