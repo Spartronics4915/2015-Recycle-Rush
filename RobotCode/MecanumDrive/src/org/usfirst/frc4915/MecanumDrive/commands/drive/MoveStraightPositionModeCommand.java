@@ -60,9 +60,9 @@ public class MoveStraightPositionModeCommand extends Command {
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
 		if (inputDistance < 0)
-			driveTrain.driveStraight(.5);
+			driveTrain.driveStraight(.7);
 		else
-			driveTrain.driveStraight(-.5);
+			driveTrain.driveStraight(-.7);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
