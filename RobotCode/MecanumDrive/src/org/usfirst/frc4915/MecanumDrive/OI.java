@@ -14,7 +14,8 @@ import org.usfirst.frc4915.MecanumDrive.commands.elevator.ElevatorSetHeight;
 import org.usfirst.frc4915.MecanumDrive.commands.drive.ToggleDriveMode;
 import org.usfirst.frc4915.MecanumDrive.subsystems.DriveTrain;
 import org.usfirst.frc4915.MecanumDrive.subsystems.Elevator;
-
+import org.usfirst.frc4915.debuggersystem.CustomDebugger.LoggerNames;
+import org.usfirst.frc4915.MecanumDrive.commands.debug.*;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -144,6 +145,17 @@ public class OI {
 		SmartDashboard.putNumber("Elevator Potentiometer Value", Robot.elevator.getPosition());
 		SmartDashboard.putData("Set height to 700", new ElevatorSetHeight(700));
 		SmartDashboard.putData("Set height to 850", new ElevatorSetHeight(850));
+		
+		/*
+		 * Debugger buttons
+		 */
+		
+		SmartDashboard.putData("Set debugger to drivetrain", new DebuggerFilter(LoggerNames.DRIVETRAIN));
+		SmartDashboard.putData("Set debugger to grabber", new DebuggerFilter(LoggerNames.GRABBER));
+		SmartDashboard.putData("Set debugger to general", new DebuggerFilter(LoggerNames.GENERAL));
+		SmartDashboard.putData("Set debugger to autonomous", new DebuggerFilter(LoggerNames.AUTONOMOUS));
+		SmartDashboard.putData("Set debugger to elevator", new DebuggerFilter(LoggerNames.ELEVATOR));
+		SmartDashboard.putData("Reset debugger filter", new DebuggerFilterReset());
 		
 		/*
 		 * SENSOR OUTPUT
