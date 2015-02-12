@@ -14,6 +14,18 @@
     <property file="${user.home}/wpilib/wpilib.properties"/>
     <property file="build.properties"/>
     <property file="${user.home}/wpilib/java/${version}/ant/build.properties"/>
+	
+	<property name="docs.dir" value="${build.dir}/docs"/>
+
+	<target name="javadocs">
+		<mkdir dir="${docs.dir}"/>
+		
+		<javadoc
+		sourcepath="src"
+		destdir="${docs.dir}"
+		use="true"
+		/>
+	</target>
 
     <!-- <import file="${wpilib.ant.dir}/build.xml"/> -->
     <!-- We need to use a custom script for versions. -->
