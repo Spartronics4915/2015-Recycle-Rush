@@ -2,7 +2,7 @@ package org.usfirst.frc4915.MecanumDrive.subsystems;
 
 import org.usfirst.frc4915.MecanumDrive.Robot;
 import org.usfirst.frc4915.MecanumDrive.RobotMap;
-import org.usfirst.frc4915.MecanumDrive.commands.ElevatorFineTune;
+import org.usfirst.frc4915.MecanumDrive.commands.elevator.ElevatorFineTune;
 import org.usfirst.frc4915.debuggersystem.CustomDebugger.LoggerNames;
 
 import edu.wpi.first.wpilibj.CANTalon;

@@ -1,4 +1,4 @@
-package org.usfirst.frc4915.MecanumDrive.commands;
+package org.usfirst.frc4915.MecanumDrive.commands.drive;
 
 import java.util.List;
 

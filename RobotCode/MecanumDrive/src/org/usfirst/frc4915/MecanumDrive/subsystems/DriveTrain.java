@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.usfirst.frc4915.MecanumDrive.Robot;
 import org.usfirst.frc4915.MecanumDrive.RobotMap;
-import org.usfirst.frc4915.MecanumDrive.commands.MecanumDrive;
+import org.usfirst.frc4915.MecanumDrive.commands.drive.MecanumDrive;
 import org.usfirst.frc4915.debuggersystem.CustomDebugger;
 import org.usfirst.frc4915.debuggersystem.CustomDebugger.LoggerNames;
 

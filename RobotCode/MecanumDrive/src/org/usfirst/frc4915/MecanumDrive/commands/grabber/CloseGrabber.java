@@ -1,29 +1,31 @@
-package org.usfirst.frc4915.MecanumDrive.commands;
+package org.usfirst.frc4915.MecanumDrive.commands.grabber;
 
 import org.usfirst.frc4915.MecanumDrive.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class IntermediateOpen extends Command {
+public class CloseGrabber extends Command {
 
 	private boolean finished = false;
 
-	public IntermediateOpen() {
+	public CloseGrabber() {
 		// Use requires() here to declare subsystem dependencies
 		// eg. requires(chassis);
+		requires(Robot.grabber);
 	}
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
-		System.out.println("Releasing");
+		System.out.println("Opening");
 		finished = false;
 	}
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		Robot.grabber.block();
-		Robot.grabber.close();
+		Robot.grabber.vent();
+		Robot.grabber.open();
 		finished = true;
+
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

@@ -1,30 +1,34 @@
-package org.usfirst.frc4915.MecanumDrive.commands;
+package org.usfirst.frc4915.MecanumDrive.commands.grabber;
 
 import org.usfirst.frc4915.MecanumDrive.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class DriveStraight extends Command {
+public class CloseAllGrabbers extends Command {
 
-	public DriveStraight() {
+	private boolean finished = false;
+
+	public CloseAllGrabbers() {
 		// Use requires() here to declare subsystem dependencies
-		requires(Robot.driveTrain);
-		setTimeout(1);
+		// eg. requires(chassis);
 	}
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
-		System.out.println("Drive Straight");
-		Robot.driveTrain.driveStraight(.2);
+		System.out.println("ClosingAllGrabbers");
+		finished = false;
 	}
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
+		Robot.grabber.close();
+		Robot.grabber.vent();
+		finished = true;
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
-		return isTimedOut();
+		return finished;
 	}
 
 	// Called once after isFinished returns true
