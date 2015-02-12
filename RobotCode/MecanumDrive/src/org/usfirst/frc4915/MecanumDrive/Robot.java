@@ -7,10 +7,8 @@ import org.usfirst.frc4915.MecanumDrive.subsystems.Elevator;
 import org.usfirst.frc4915.MecanumDrive.subsystems.Grabber;
 import org.usfirst.frc4915.debuggersystem.CustomDebugger;
 
-import com.ni.vision.NIVision;
 import com.ni.vision.NIVision.Image;
 
-import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.Timer;
