@@ -6,7 +6,7 @@ import org.usfirst.frc4915.debuggersystem.CustomDebugger.LoggerNames;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class DebuggerFilterReset extends Command {
-	public DebuggerFilterReset(LoggerNames name) {
+	public DebuggerFilterReset() {
 		// Use requires() here to declare subsystem dependencies
 		// eg. requires(chassis);
 	}
