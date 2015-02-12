@@ -54,8 +54,7 @@ public class DriveTrain extends Subsystem {
 	 * of this, we do not want to use setMaxOutput, because the value set in
 	 * RobotMap.java is needed to be the same.
 	 * 
-	 * @param joystick
-	 *            that controls the robot movement
+	 * @param joystick Joystick controlling the robot movement
 	 */
 	public void mecanumDrive(Joystick joystick) {
 
@@ -92,6 +91,7 @@ public class DriveTrain extends Subsystem {
 		}
 
 	}
+	
 	public void calibrateGyro() {
 		gyro.reset();
 	}
@@ -101,13 +101,9 @@ public class DriveTrain extends Subsystem {
 	}
 
 	/**
-	 * 
-	 * @param motor
-	 *            is the motor on the wheels with an encoder used to determine
-	 *            the distance traveled.
-	 * @param elapsed
-	 *            is the time since the last sampling of the motor.
-	 * @return the distance traveled since the last sampling of the encoder.
+	 * @param motor Motor with an encoder to determine distance traveled.
+	 * @param elapsed Time since the last sampling of the motor.
+	 * @return Distance traveled since the last sampling of the encoder.
 	 */
 	// TODO Make this actually work
 	// calculates the distance traveled using the wheel circumference and the
