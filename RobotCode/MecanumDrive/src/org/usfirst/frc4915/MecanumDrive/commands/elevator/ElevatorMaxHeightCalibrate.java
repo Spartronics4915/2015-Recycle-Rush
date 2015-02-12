@@ -1,21 +1,18 @@
-package org.usfirst.frc4915.MecanumDrive.commands;
+package org.usfirst.frc4915.MecanumDrive.commands.elevator;
 
 import org.usfirst.frc4915.MecanumDrive.Robot;
 import org.usfirst.frc4915.MecanumDrive.subsystems.Elevator;
+import org.usfirst.frc4915.debuggersystem.CustomDebugger.LoggerNames;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-/**
- *
- */
-public class ElevatorMoveToHeight extends Command {
+public class ElevatorMaxHeightCalibrate extends Command {
 
 	Elevator elevator = Robot.elevator;
 
-	public ElevatorMoveToHeight() {
+	public ElevatorMaxHeightCalibrate() {
 		// Use requires() here to declare subsystem dependencies
 		// eg. requires(chassis);
-		requires(elevator);
 	}
 
 	// Called just before this Command runs the first time
@@ -24,17 +21,18 @@ public class ElevatorMoveToHeight extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		elevator.moveToHeight();
+		Elevator.height = 1023; // Through experimentation, the maximum is closer to 973
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
-		return false;
+		return elevator.isAtTopOfElevator();
 	}
 
 	// Called once after isFinished returns true
 	protected void end() {
-		elevator.stopElevator();
+		Elevator.maximumPotentiometerValue = elevator.getPositionInches();
+		Robot.debugger.logError(LoggerNames.ELEVATOR, "Maximum position value " + Elevator.maximumPotentiometerValue);
 	}
 
 	// Called when another command which requires one or more of the same

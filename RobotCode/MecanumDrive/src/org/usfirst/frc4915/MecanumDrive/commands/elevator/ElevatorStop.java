@@ -1,21 +1,23 @@
-package org.usfirst.frc4915.MecanumDrive.commands;
+package org.usfirst.frc4915.MecanumDrive.commands.elevator;
 
 import org.usfirst.frc4915.MecanumDrive.Robot;
+import org.usfirst.frc4915.MecanumDrive.subsystems.Elevator;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class DriveStraight extends Command {
+public class ElevatorStop extends Command {
 
-	public DriveStraight() {
+	Elevator elevator = Robot.elevator;
+
+	public ElevatorStop() {
 		// Use requires() here to declare subsystem dependencies
-		requires(Robot.driveTrain);
-		setTimeout(1);
+		// eg. requires(chassis);
+		requires(elevator);
 	}
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
-		System.out.println("Drive Straight");
-		Robot.driveTrain.driveStraight(.2);
+		elevator.stopElevator();
 	}
 
 	// Called repeatedly when this Command is scheduled to run
@@ -24,7 +26,7 @@ public class DriveStraight extends Command {
 
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
-		return isTimedOut();
+		return true;
 	}
 
 	// Called once after isFinished returns true

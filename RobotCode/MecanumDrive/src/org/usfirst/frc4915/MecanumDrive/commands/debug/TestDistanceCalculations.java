@@ -1,10 +1,11 @@
-package org.usfirst.frc4915.MecanumDrive.commands;
+package org.usfirst.frc4915.MecanumDrive.commands.debug;
 
 import org.usfirst.frc4915.MecanumDrive.Robot;
 import org.usfirst.frc4915.MecanumDrive.RobotMap;
 
 import edu.wpi.first.wpilibj.BuiltInAccelerometer;
 import edu.wpi.first.wpilibj.command.Command;
+
 /*
  * A test using the accelerometer to determine the distance traveled
  * provides constant feedback of distance traveled very time execute is called

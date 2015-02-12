@@ -1,31 +1,30 @@
-package org.usfirst.frc4915.MecanumDrive.commands;
+package org.usfirst.frc4915.MecanumDrive.commands.debug;
 
 import org.usfirst.frc4915.MecanumDrive.Robot;
+import org.usfirst.frc4915.debuggersystem.CustomDebugger.LoggerNames;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class ArcadeDrive extends Command {
-
-	public ArcadeDrive() {
+public class DebuggerFilter extends Command {
+	private LoggerNames name;
+	public DebuggerFilter(LoggerNames name) {
 		// Use requires() here to declare subsystem dependencies
-		requires(Robot.driveTrain);
+		// eg. requires(chassis);
+		this.name = name;
 	}
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
+		Robot.debugger.setFilter(name);
 	}
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		// TODO read joystick value for thottle and update motor values with the
-		// modified throttle
-		Robot.driveTrain.arcadeDrive(Robot.oi.driveStick);
-
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
-		return false;
+		return true;
 	}
 
 	// Called once after isFinished returns true
