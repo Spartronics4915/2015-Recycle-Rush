@@ -9,6 +9,7 @@
 // it from being updated in the future.
 
 package org.usfirst.frc4915.MecanumDrive;
+import org.usfirst.frc4915.MecanumDrive.commands.AutonomousCommandToteStrategy;
 import org.usfirst.frc4915.MecanumDrive.commands.GenericTestCommand;
 import org.usfirst.frc4915.MecanumDrive.commands.MoveStraightPositionModeCommand;
 import org.usfirst.frc4915.MecanumDrive.subsystems.DriveTrain;
@@ -23,7 +24,6 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.Timer;
 
@@ -94,13 +94,13 @@ public class Robot extends IterativeRobot {
 		SendUserMessage.displayMessage();
 		
         //Init camera
-        frame = NIVision.imaqCreateImage(NIVision.ImageType.IMAGE_RGB, 0);
+/*        frame = NIVision.imaqCreateImage(NIVision.ImageType.IMAGE_RGB, 0);
 
         // the camera name (ex "cam0") can be found through the roborio web interface
         session = NIVision.IMAQdxOpenCamera("cam1",
                 NIVision.IMAQdxCameraControlMode.CameraControlModeController);
         NIVision.IMAQdxConfigureGrab(session);
-
+*/
 	}
 
 	/**
@@ -118,9 +118,10 @@ public class Robot extends IterativeRobot {
 	public void autonomousInit() {
 		// Use the selected autonomous command
 		// autonomousCommand = (Command) autonomousProgramChooser.getSelected();
-		double desiredDistrance = preferences.getDouble("DesiredDistance", 9.0);
-		autonomousCommand = new MoveStraightPositionModeCommand(desiredDistrance,0.7);
-
+		//double desiredDistance = preferences.getDouble("DesiredDistance", 9.0);
+		//autonomousCommand = new MoveStraightPositionModeCommand(DesiredDistance,0.7);
+		
+		autonomousCommand = new AutonomousCommandToteStrategy();
 		autonomousCommand.start();
 	}
 
@@ -164,15 +165,15 @@ public class Robot extends IterativeRobot {
          * grab an image, draw the circle, and provide it for the camera server
          * which will in turn send it to the dashboard.
          */
-		NIVision.IMAQdxStartAcquisition(session);
+/*		NIVision.IMAQdxStartAcquisition(session);
 
             NIVision.IMAQdxGrab(session, frame, 1);
             CameraServer.getInstance().setImage(frame);
-
+*/
             /** robot code here! **/
             Timer.delay(0.005);		// wait for a motor update time
         
-        NIVision.IMAQdxStopAcquisition(session);
+//        NIVision.IMAQdxStopAcquisition(session);
 
 	}
 
