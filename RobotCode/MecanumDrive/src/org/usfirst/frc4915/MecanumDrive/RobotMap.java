@@ -134,7 +134,8 @@ public class RobotMap {
 		elevatorWinchMotor = new CANTalon(MOTOR_PORT_ELEVATOR_WINCH);
 		elevatorWinchMotor.changeControlMode(ControlMode.Position);
 		elevatorWinchMotor.setFeedbackDevice(CANTalon.FeedbackDevice.AnalogPot);
-		elevatorWinchMotor.setPID(1, 0.002, 1.0, 0.0001, 255, 200, 0); // TODO determine PID values and ramp rate
+		elevatorWinchMotor.setPID(25, 0, 0, 0.0001, 255, 17, 0); // TODO determine PID values and ramp rate
+		// P = 25 I = 0 D = 0 ==> Pretty accurate. Overshoots about one inch, and has a little error afterwards.
 		
 		// Potentiometer instantiation
 		

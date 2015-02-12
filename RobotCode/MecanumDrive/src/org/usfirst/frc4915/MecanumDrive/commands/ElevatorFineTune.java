@@ -19,6 +19,7 @@ public class ElevatorFineTune extends Command {
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
+		elevator.winch.enableControl();
 		Robot.debugger.logError(LoggerNames.ELEVATOR, "ElevatorFineTune initialized");
 	}
 

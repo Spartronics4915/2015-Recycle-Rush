@@ -23,7 +23,6 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.Timer;
 
@@ -159,6 +158,14 @@ public class Robot extends IterativeRobot {
 		// +"," + RobotMap.mecanumDriveControls1RightRear13.getSetpoint() );
 
 		Scheduler.getInstance().run();
+		
+		SmartDashboard.putNumber("Elevator Height", Elevator.height);
+		SmartDashboard.putBoolean("Elevator At Top", elevator.isAtTopOfElevator());
+		SmartDashboard.putBoolean("Elevator At Bottom", elevator.isAtBottomOfElevator());
+		SmartDashboard.putNumber("Elevator Potentiometer Value", elevator.getPosition());
+		SmartDashboard.putNumber("Elevator P", elevator.winch.getP());
+		SmartDashboard.putNumber("Elevator I", elevator.winch.getI());
+		SmartDashboard.putNumber("Elevator D", elevator.winch.getD());
 		
     	/**
          * grab an image, draw the circle, and provide it for the camera server

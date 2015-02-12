@@ -20,6 +20,7 @@ public class ElevatorMoveToHeight extends Command {
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
+		elevator.winch.enableControl();
 	}
 
 	// Called repeatedly when this Command is scheduled to run
