@@ -24,9 +24,10 @@ import edu.wpi.first.wpilibj.command.Command;
 public class MoveStraightGivenDistanceCommand extends Command {
 	public static List<CANTalon> motors = DriveTrain.motors;
 	public double inputDistance;
+	public double speed;
 	private DriveTrain driveTrain = Robot.driveTrain;
 
-	public MoveStraightGivenDistanceCommand(double inputDistance) {
+	public MoveStraightGivenDistanceCommand(double inputDistance, double speed) {
 		requires(driveTrain);
 		this.inputDistance = inputDistance;
 		// Use requires() here to declare subsystem dependencies
@@ -65,10 +66,10 @@ public class MoveStraightGivenDistanceCommand extends Command {
 		// backwards.
 		if (inputDistance < 0) {
 			System.out.println("Driving backwards...");
-			driveTrain.driveStraight(-1);
+			driveTrain.driveStraight(-speed);
 		} else {
 			System.out.println("Driving forwards...");
-			driveTrain.driveStraight(1);
+			driveTrain.driveStraight(speed);
 		}
 		// creates a loop to track the distance traveled
 		// uses the time to determine the distance traveled since the last time

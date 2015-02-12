@@ -117,8 +117,8 @@ public class OI {
 		/**
 		 * DRIVE STRAIGHT
 		 */
-		SmartDashboard.putData("Move Straight 9 feet", new MoveStraightPositionModeCommand(9));
-		SmartDashboard.putData("Move Backwards 9 feet", new MoveStraightPositionModeCommand(-9));
+		SmartDashboard.putData("Move Straight 9 feet", new MoveStraightPositionModeCommand(9,0.7));
+		SmartDashboard.putData("Move Backwards 9 feet", new MoveStraightPositionModeCommand(-9,0.7));
 		SmartDashboard.putData("DriveStraight 1 second", new DriveStraight());
 		
 		/**

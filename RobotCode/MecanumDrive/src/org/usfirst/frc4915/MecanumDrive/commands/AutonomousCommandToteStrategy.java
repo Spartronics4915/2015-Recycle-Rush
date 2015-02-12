@@ -23,11 +23,11 @@ public class AutonomousCommandToteStrategy extends CommandGroup {
         // a CommandGroup containing them would require both the chassis and the
         // arm.
     	
-    	addSequential(new ElevatorMoveToHeight());
-    	addSequential(new CloseGrabber());
-    	addSequential(new MoveStraightGivenDistanceCommand(-15));
-    	addSequential(new OpenGrabber());
-    	addSequential(new MoveStraightGivenDistanceCommand(-1));
+    	//addSequential(new ElevatorMoveToHeight());
+    	//addSequential(new CloseGrabber());
+    	addSequential(new MoveStraightPositionModeCommand(-5,0.5));
+   // 	addSequential(new OpenGrabber());
+   // 	addSequential(new MoveStraightPositionModeCommand(-1));
     	
     	Robot.elevator.setHeightToPosition(0);
     	Robot.grabber.close();
