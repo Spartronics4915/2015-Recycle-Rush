@@ -34,7 +34,7 @@ public class Elevator extends Subsystem {
 													// in inches
 	public static final double HEIGHT_OF_TOTE = 12;
 
-	private static final double JOYSTICK_SCALE = -1; // TODO Decide scale for
+	private static final double JOYSTICK_SCALE = -5; // TODO Decide scale for
 														// joystick movement
 														// position change
 
