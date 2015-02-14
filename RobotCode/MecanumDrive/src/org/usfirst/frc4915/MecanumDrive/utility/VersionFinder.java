@@ -1,4 +1,4 @@
-package org.usfirst.frc4915.MecanumDrive;
+package org.usfirst.frc4915.MecanumDrive.utility;
 
 import java.io.IOException;
 import java.net.URL;
