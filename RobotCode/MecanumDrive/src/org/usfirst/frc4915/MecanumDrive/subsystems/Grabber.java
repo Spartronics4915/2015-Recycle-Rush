@@ -24,7 +24,7 @@ public class Grabber extends Subsystem {
 	 * wide totes.
 	 */
 	public void open() {
-		primarySolenoid.set(true);
+		primarySolenoid.set(false);
 	}
 
 	/**
@@ -32,7 +32,7 @@ public class Grabber extends Subsystem {
 	 * totes.
 	 */
 	public void close() {
-		primarySolenoid.set(false);
+		primarySolenoid.set(true);
 	}
 	
 	/**
