@@ -1,6 +1,5 @@
 package org.usfirst.frc4915.MecanumDrive;
 
-import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandToteStrategy;
 import org.usfirst.frc4915.MecanumDrive.commands.debug.GenericTestCommand;
 import org.usfirst.frc4915.MecanumDrive.commands.drive.ToggleDriveMode;
 import org.usfirst.frc4915.MecanumDrive.subsystems.DriveTrain;
@@ -59,6 +58,7 @@ public class Robot extends IterativeRobot {
 		driveTrain = new DriveTrain();
 		elevator = new Elevator();
 		grabber = new Grabber();
+		
 		// OI must be constructed after subsystems. If the OI creates Commands
 		// (which it very likely will), subsystems are not guaranteed to be
 		// constructed yet. Thus, their requires() statements may grab null
@@ -111,9 +111,6 @@ public class Robot extends IterativeRobot {
 		// Use the selected autonomous command
 		// autonomousCommand = (Command) autonomousProgramChooser.getSelected();
 		//double desiredDistrance = preferences.getDouble("DesiredDistance", 9.0);
-		autonomousCommand = new AutonomousCommandToteStrategy();
-
-		autonomousCommand.start();
 	}
 
 	/**
@@ -156,13 +153,15 @@ public class Robot extends IterativeRobot {
 
 		Scheduler.getInstance().run();
 		
-		SmartDashboard.putNumber("Elevator Height", Elevator.height);
+		SmartDashboard.putNumber("Elevator Height", Elevator.setPoint);
 		SmartDashboard.putBoolean("Elevator At Top", elevator.isAtTopOfElevator());
 		SmartDashboard.putBoolean("Elevator At Bottom", elevator.isAtBottomOfElevator());
 		SmartDashboard.putNumber("Elevator Potentiometer Value", elevator.getPosition());
 		SmartDashboard.putNumber("Elevator P", elevator.winch.getP());
 		SmartDashboard.putNumber("Elevator I", elevator.winch.getI());
 		SmartDashboard.putNumber("Elevator D", elevator.winch.getD());
+		SmartDashboard.putNumber("Maximum height value: ", Elevator.maximumPotentiometerValue);
+		SmartDashboard.putNumber("Minimum height value: ", Elevator.minimumPotentiometerValue);
 		
     	/**
          * grab an image, draw the circle, and provide it for the camera server
