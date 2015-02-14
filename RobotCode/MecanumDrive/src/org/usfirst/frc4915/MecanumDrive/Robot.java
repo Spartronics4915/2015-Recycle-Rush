@@ -114,6 +114,7 @@ public class Robot extends IterativeRobot {
 		autonomousCommand = new AutonomousCommandToteStrategy();
 
 		autonomousCommand.start();
+		elevator.setHieghtToCurrentPosition();
 	}
 
 	/**
@@ -131,6 +132,7 @@ public class Robot extends IterativeRobot {
 		if (autonomousCommand != null){
 			autonomousCommand.cancel();
 		}
+		elevator.setHieghtToCurrentPosition();
 	}
 
 	/**

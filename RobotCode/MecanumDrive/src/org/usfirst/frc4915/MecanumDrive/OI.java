@@ -8,6 +8,7 @@ import org.usfirst.frc4915.MecanumDrive.commands.drive.ToggleDriveMode;
 import org.usfirst.frc4915.MecanumDrive.commands.elevator.ElevatorJumpToPosition;
 import org.usfirst.frc4915.MecanumDrive.commands.elevator.ElevatorPositionCalibration;
 import org.usfirst.frc4915.MecanumDrive.commands.elevator.ElevatorSetHeight;
+import org.usfirst.frc4915.MecanumDrive.commands.elevator.ElevatorSetSafety;
 import org.usfirst.frc4915.MecanumDrive.commands.elevator.ElevatorStop;
 import org.usfirst.frc4915.MecanumDrive.commands.grabber.CloseGrabber;
 import org.usfirst.frc4915.MecanumDrive.commands.grabber.IntermediateOpen;
@@ -156,7 +157,8 @@ public class OI {
 		SmartDashboard.putData("Set height to 700", new ElevatorSetHeight(700));
 		SmartDashboard.putData("Set height to 850", new ElevatorSetHeight(850));
 		SmartDashboard.putNumber("Position of Elevator: ", Robot.elevator.getElevatorLevel());
-		
+		SmartDashboard.putData("Disable Elevator Safety", new ElevatorSetSafety(false));
+		SmartDashboard.putData("Enable Elevator Safety", new ElevatorSetSafety(true));
 		
 		/*
 		 * Debugger buttons

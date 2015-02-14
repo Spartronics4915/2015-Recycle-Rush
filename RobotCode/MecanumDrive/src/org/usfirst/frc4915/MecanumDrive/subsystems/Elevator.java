@@ -26,7 +26,9 @@ public class Elevator extends Subsystem {
 	public static double minimumPotentiometerValue = 0;
 	public static double maximumPotentiometerValue = 1023;
 
-	public static final double RANGE_OF_MOTION = 54; // The elevator can go a
+	public static boolean SAFETY = true;
+	
+	public static final double RANGE_OF_MOTION = 53; // The elevator can go a
 														// distance between 54
 														// inches
 
@@ -86,7 +88,9 @@ public class Elevator extends Subsystem {
 	 * first
 	 */
 	public void moveToHeight() {
-		keepHeightInRange();
+		if (SAFETY) {
+			keepHeightInRange();
+		}
 		winch.set(setPoint);
 	}
 	
@@ -146,7 +150,7 @@ public class Elevator extends Subsystem {
 	 * @return Level of Elevator in number of totes
 	 */
 	public double getElevatorLevel() {
-		return ((54 * (winch.getPosition())) / (maximumPotentiometerValue - minimumPotentiometerValue)) / 12;
+		return ((RANGE_OF_MOTION * (winch.getPosition())) / (maximumPotentiometerValue - minimumPotentiometerValue)) / 12;
 	}
 
 	/**
@@ -178,9 +182,11 @@ public class Elevator extends Subsystem {
 	 */
 	public void keepHeightInRange() {
 		if (isAtTopOfElevator()) {
+			winch.enableBrakeMode(true);
 			maximumPotentiometerValue = getPosition();
 		}
 		if (isAtBottomOfElevator()) {
+			winch.enableBrakeMode(true);
 			minimumPotentiometerValue = getPosition();
 		}
 		if (setPoint > maximumPotentiometerValue) {
