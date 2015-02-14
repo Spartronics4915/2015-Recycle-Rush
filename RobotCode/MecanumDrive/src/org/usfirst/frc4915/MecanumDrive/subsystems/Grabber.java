@@ -2,7 +2,6 @@ package org.usfirst.frc4915.MecanumDrive.subsystems;
 
 import org.usfirst.frc4915.MecanumDrive.RobotMap;
 
-import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -26,7 +25,7 @@ public class Grabber extends Subsystem {
 	 * wide totes.
 	 */
 	public void open() {
-		primarySolenoid.set(true);
+		primarySolenoid.set(false);
 	}
 
 	/**
@@ -35,7 +34,7 @@ public class Grabber extends Subsystem {
 	 */
 
 	public void close() {
-		primarySolenoid.set(false);
+		primarySolenoid.set(true);
 	}
 	
 	/**
