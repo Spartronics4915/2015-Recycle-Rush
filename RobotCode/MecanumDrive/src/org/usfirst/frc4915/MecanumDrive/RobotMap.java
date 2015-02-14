@@ -39,8 +39,8 @@ public class RobotMap {
 	public final static int ULTRASONIC_PORT_FIRST = 0;
 	public final static int ULTRASONIC_PORT_SECOND = 1;
 	
-	public final static int SOLENOID_CHANNEL_MOMMA_FORWARD = 0;
-	public final static int SOLENOID_CHANNEL_MOMMA_REVERSE = 1;
+	public final static int SOLENOID_CHANNEL_PRIMARY = 0;
+	public final static int SOLENOID_CHANNEL_SECONDARY = 1;
 	
 	public final static int SOLENOID_CHANNEL_AUNTIE = 3;
 	
@@ -86,9 +86,8 @@ public class RobotMap {
 	/*
 	 * GRABBER
 	 */
-	public static Solenoid forwardSolenoid;
-	public static Solenoid reverseSolenoid;
-	public static Solenoid auntieSolenoid;
+	public static Solenoid primarySolenoid;
+	public static Solenoid secondarySolenoid;
 
 	/*
 	 * GENERAL SENSORS
@@ -165,9 +164,8 @@ public class RobotMap {
 		// Double Solenoid instantiation. Wiring: 0 --> Forward channel
 		// (extended). 1 --> Reverse channel (retracted).
 		//mommaSolenoid = new DoubleSolenoid(PCM_NODE_ID, SOLENOID_CHANNEL_MOMMA_FORWARD, SOLENOID_CHANNEL_MOMMA_REVERSE); // Uses 10 as the Node ID for the PCM
-		forwardSolenoid = new Solenoid(PCM_NODE_ID, SOLENOID_CHANNEL_MOMMA_FORWARD);
-		reverseSolenoid = new Solenoid(PCM_NODE_ID,SOLENOID_CHANNEL_MOMMA_REVERSE);
-		auntieSolenoid = new Solenoid(PCM_NODE_ID, SOLENOID_CHANNEL_AUNTIE);
+		primarySolenoid = new Solenoid(PCM_NODE_ID, SOLENOID_CHANNEL_PRIMARY);
+		secondarySolenoid = new Solenoid(PCM_NODE_ID,SOLENOID_CHANNEL_SECONDARY); 
 
 		/*
 		 * GRABBER END

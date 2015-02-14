@@ -162,8 +162,8 @@ public class OI {
 		 */
 		LiveWindow.addSensor("Other Sensors", "Accelerometer", RobotMap.accelerometer);
 		LiveWindow.addSensor("Drive Train", "Distance Sensor", DriveTrain.distanceSensor);
-		LiveWindow.addActuator("Grabber Reverse Solenoid", "Solenoid", RobotMap.reverseSolenoid);
-		LiveWindow.addActuator("Grabber Forward Solenoid", "Solenoid", RobotMap.forwardSolenoid);
+		LiveWindow.addActuator("Grabber Primary Solenoid", "Solenoid", RobotMap.primarySolenoid);
+		LiveWindow.addActuator("Grabber Secondary Solenoid", "Solenoid", RobotMap.secondarySolenoid);
 
 		/*
 		 * MOTOR SPEED OUTPUT
