@@ -145,6 +145,7 @@ public class OI {
 		SmartDashboard.putNumber("Elevator Potentiometer Value", Robot.elevator.getPosition());
 		SmartDashboard.putData("Set height to 700", new ElevatorSetHeight(700));
 		SmartDashboard.putData("Set height to 850", new ElevatorSetHeight(850));
+		SmartDashboard.putNumber("Position of Elevator: ", Robot.elevator.getElevatorLevel());
 		
 		/*
 		 * Debugger buttons

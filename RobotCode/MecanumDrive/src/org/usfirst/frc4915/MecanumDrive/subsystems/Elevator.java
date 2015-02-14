@@ -140,6 +140,14 @@ public class Elevator extends Subsystem {
 											 * HEIGHT_OF_TOTE * positionNumber / RANGE_OF_MOTION);
 		Robot.debugger.logError(LoggerNames.ELEVATOR, "Elevator's height is " + height);
 	}
+	
+	/**
+	 * 
+	 * @return Level of Elevator in number of totes
+	 */
+	public double getElevatorLevel() {
+		return ((54 * (winch.getPosition())) / (maximumPotentiometerValue - minimumPotentiometerValue)) / 12;
+	}
 
 	/**
 	 * 
