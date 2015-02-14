@@ -77,8 +77,6 @@ public class Robot extends IterativeRobot {
 
 		SmartDashboard.putData("Autonomous Program", autonomousProgramChooser);
 
-		// Test for sending messages to smart dashboard
-		SendUserMessage.displayMessage();
 		
         //Init camera
 		
