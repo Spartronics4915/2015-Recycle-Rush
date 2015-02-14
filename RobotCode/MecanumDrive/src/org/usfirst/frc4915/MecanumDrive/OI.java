@@ -15,6 +15,7 @@ import org.usfirst.frc4915.MecanumDrive.commands.grabber.IntermediateOpen;
 import org.usfirst.frc4915.MecanumDrive.commands.grabber.OpenGrabber;
 import org.usfirst.frc4915.MecanumDrive.subsystems.DriveTrain;
 import org.usfirst.frc4915.MecanumDrive.subsystems.Elevator;
+import org.usfirst.frc4915.MecanumDrive.utility.VersionFinder;
 import org.usfirst.frc4915.debuggersystem.CustomDebugger.LoggerNames;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -150,16 +151,13 @@ public class OI {
 		SmartDashboard.putData("Jump to Elevator Position 4", new ElevatorJumpToPosition(4));
 		SmartDashboard.putData("ElevatorPositionCalibration", new ElevatorPositionCalibration());
 		SmartDashboard.putData("ElevatorStop", new ElevatorStop());
-		SmartDashboard.putNumber("Elevator Height", Elevator.setPoint);
 		SmartDashboard.putBoolean("Elevator At Top", Robot.elevator.isAtTopOfElevator());
 		SmartDashboard.putBoolean("Elevator At Bottom", Robot.elevator.isAtBottomOfElevator());
 		SmartDashboard.putNumber("Elevator Potentiometer Value", Robot.elevator.getPosition());
 		SmartDashboard.putData("Set height to 700", new ElevatorSetHeight(700));
 		SmartDashboard.putData("Set height to 850", new ElevatorSetHeight(850));
-		SmartDashboard.putNumber("Position of Elevator: ", Robot.elevator.getElevatorLevel());
 		SmartDashboard.putData("Disable Elevator Safety", new ElevatorSetSafety(false));
-		SmartDashboard.putData("Enable Elevator Safety", new ElevatorSetSafety(true));
-		
+		SmartDashboard.putData("Enable Elevator Safety", new ElevatorSetSafety(true));		
 		/*
 		 * Debugger buttons
 		 */

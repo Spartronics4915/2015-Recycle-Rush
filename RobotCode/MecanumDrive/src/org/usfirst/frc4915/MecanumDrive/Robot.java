@@ -78,8 +78,6 @@ public class Robot extends IterativeRobot {
 
 		SmartDashboard.putData("Autonomous Program", autonomousProgramChooser);
 
-		// Test for sending messages to smart dashboard
-		SendUserMessage.displayMessage();
 		
         //Init camera
 		
@@ -155,7 +153,7 @@ public class Robot extends IterativeRobot {
 
 		Scheduler.getInstance().run();
 		
-		SmartDashboard.putNumber("Elevator Height", Elevator.setPoint);
+		SmartDashboard.putNumber("Elevator SetPoint", Elevator.setPoint);
 		SmartDashboard.putBoolean("Elevator At Top", elevator.isAtTopOfElevator());
 		SmartDashboard.putBoolean("Elevator At Bottom", elevator.isAtBottomOfElevator());
 		SmartDashboard.putNumber("Elevator Potentiometer Value", elevator.getPosition());
@@ -164,6 +162,7 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putNumber("Elevator D", elevator.winch.getD());
 		SmartDashboard.putNumber("Maximum height value: ", Elevator.maximumPotentiometerValue);
 		SmartDashboard.putNumber("Minimum height value: ", Elevator.minimumPotentiometerValue);
+		SmartDashboard.putNumber("Position of Elevator: ", Robot.elevator.getElevatorLevel());
 		
     	/**
          * grab an image, draw the circle, and provide it for the camera server
