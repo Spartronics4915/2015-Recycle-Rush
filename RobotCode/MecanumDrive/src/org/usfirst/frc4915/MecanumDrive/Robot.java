@@ -1,11 +1,15 @@
 package org.usfirst.frc4915.MecanumDrive;
 
+import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandContainerStrategy;
+import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandJustDrive;
 import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandToteStrategy;
-import org.usfirst.frc4915.MecanumDrive.commands.debug.GenericTestCommand;
+import org.usfirst.frc4915.MecanumDrive.commands.debug.DebuggerFilter;
 import org.usfirst.frc4915.MecanumDrive.subsystems.DriveTrain;
 import org.usfirst.frc4915.MecanumDrive.subsystems.Elevator;
 import org.usfirst.frc4915.MecanumDrive.subsystems.Grabber;
 import org.usfirst.frc4915.debuggersystem.CustomDebugger;
+import org.usfirst.frc4915.debuggersystem.CustomDebugger.LoggerNames;
+
 
 import com.ni.vision.NIVision.Image;
 
@@ -34,6 +38,7 @@ public class Robot extends IterativeRobot {
 	double testPreferencesItemTwo;
 
 	SendableChooser autonomousProgramChooser;
+	SendableChooser Debugger;
 
 	public static OI oi;
 	public static DriveTrain driveTrain;
@@ -72,10 +77,21 @@ public class Robot extends IterativeRobot {
 	    preferences.getString("DesiredDistance", "9.0");
 
 		autonomousProgramChooser = new SendableChooser();
-		autonomousProgramChooser.addDefault("Autonomous Program One", new GenericTestCommand(10, "Running program one!"));
-		autonomousProgramChooser.addObject("Autonomous Program Two", new GenericTestCommand(20, "Running program two!"));
+		autonomousProgramChooser.addDefault("Autonomous Just Drive", new AutonomousCommandJustDrive());
+		autonomousProgramChooser.addObject("Autonomous Container", new AutonomousCommandContainerStrategy());
+		autonomousProgramChooser.addObject("Autonomous Tote", new AutonomousCommandToteStrategy());
 
 		SmartDashboard.putData("Autonomous Program", autonomousProgramChooser);
+		
+		Debugger = new SendableChooser();
+		Debugger.addDefault("General", new DebuggerFilter(LoggerNames.GENERAL));
+		Debugger.addObject("Grabber", new DebuggerFilter(LoggerNames.GRABBER));
+		Debugger.addObject("Drivetrain", new DebuggerFilter(LoggerNames.DRIVETRAIN));
+		Debugger.addObject("Autonomous", new DebuggerFilter(LoggerNames.AUTONOMOUS));
+		Debugger.addObject("Elevator", new DebuggerFilter(LoggerNames.ELEVATOR));
+		
+		SmartDashboard.putData("Debugger Filter", Debugger);
+
 
 		// Test for sending messages to smart dashboard
 		SendUserMessage.displayMessage();
@@ -111,9 +127,9 @@ public class Robot extends IterativeRobot {
 
 	public void autonomousInit() {
 		// Use the selected autonomous command
-		// autonomousCommand = (Command) autonomousProgramChooser.getSelected();
+		autonomousCommand = (Command) autonomousProgramChooser.getSelected();
 		//double desiredDistrance = preferences.getDouble("DesiredDistance", 9.0);
-		autonomousCommand = new AutonomousCommandToteStrategy();
+		//autonomousCommand = new AutonomousCommandToteStrategy();
 
 		autonomousCommand.start();
 	}

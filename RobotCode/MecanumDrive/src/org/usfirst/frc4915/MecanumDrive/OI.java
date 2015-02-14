@@ -4,10 +4,12 @@ import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandJus
 import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandToteStrategy;
 import org.usfirst.frc4915.MecanumDrive.commands.debug.DebuggerFilter;
 import org.usfirst.frc4915.MecanumDrive.commands.debug.DebuggerFilterReset;
+import org.usfirst.frc4915.MecanumDrive.commands.drive.StrafeCommand;
 import org.usfirst.frc4915.MecanumDrive.subsystems.Elevator;
 import org.usfirst.frc4915.debuggersystem.CustomDebugger.LoggerNames;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.Sendable;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -92,13 +94,13 @@ public class OI {
 		/*
 		 * AUTONOMOUS COMMAND
 		 */
-		SmartDashboard.putData("Autonomous Command Tote", new AutonomousCommandToteStrategy());
-		SmartDashboard.putData("Autonomous Command Drive", new AutonomousCommandJustDrive());
-		SmartDashboard.putData("Autonomous Command Container", new AutonomousCommandContainerStrategy());
+		//SmartDashboard.putData("Autonomous Command ", new AutonomousCommand());
+		//SmartDashboard.putData("Autonomous Command Drive", new AutonomousCommandJustDrive());
+		//SmartDashboard.putData("Autonomous Command Container", new AutonomousCommandContainerStrategy());
 		/*
 		 * DRIVE STRAIGHT
 		 */
-		//SmartDashboard.putData("Move Straight 3 feet", new MoveStraightPositionModeCommand(3, 0.7));
+		SmartDashboard.putData("Strafe 3 feet", new StrafeCommand(3, 0.7));
 		//SmartDashboard.putData("Move Backwards 3 feet", new MoveStraightPositionModeCommand(-3, 0.7));
 		//SmartDashboard.putData("DriveStraight 1 second", new DriveStraight());
 		
@@ -136,8 +138,8 @@ public class OI {
 		//SmartDashboard.putData("Set height to 700", new SetHeightTo700());
 		//SmartDashboard.putData("Set height to 850", new SetHeightTo850());
 		/*
-		 * Debugger buttons
-		 */
+		 * DEBUGGER BUTTONS
+		 
 		
 		SmartDashboard.putData("Set debugger to drivetrain", new DebuggerFilter(LoggerNames.DRIVETRAIN));
 		SmartDashboard.putData("Set debugger to grabber", new DebuggerFilter(LoggerNames.GRABBER));
@@ -145,6 +147,11 @@ public class OI {
 		SmartDashboard.putData("Set debugger to autonomous", new DebuggerFilter(LoggerNames.AUTONOMOUS));
 		SmartDashboard.putData("Set debugger to elevator", new DebuggerFilter(LoggerNames.ELEVATOR));
 		SmartDashboard.putData("Reset debugger filter", new DebuggerFilterReset());
+		
+		
+		*/
+		
+		
 		
 		/*
 		 * SENSOR OUTPUT

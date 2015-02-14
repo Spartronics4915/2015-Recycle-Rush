@@ -9,16 +9,16 @@ import org.usfirst.frc4915.MecanumDrive.subsystems.DriveTrain;
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.command.Command;
 
-public class MoveStraightPositionModeCommand extends Command {
+public class StrafeCommand extends Command {
 	public static List<CANTalon> motors = DriveTrain.motors;
 	public double inputDistance;
 	public double inputSpeed;
 	private DriveTrain driveTrain = Robot.driveTrain;
 
-	public MoveStraightPositionModeCommand(double inputDistance, double inputSpeed) {
+	public StrafeCommand(double inputDistance, double inputSpeed) {
 		requires(driveTrain);
-		System.out.println("***MoveStraightPositionModeCommand inputDistance: " + inputDistance + "*******");
-		System.out.println("***MoveStraightPositionModeCommand inputSpeed: " + inputSpeed + "*******");
+		System.out.println("***StrafeCommand inputDistance: " + inputDistance + "*******");
+		System.out.println("***StrafeCommand inputSpeed: " + inputSpeed + "*******");
 		this.inputDistance = inputDistance;
 		// Use requires() here to declare subsystem dependencies
 		// eg. requires(chassis);
@@ -36,14 +36,14 @@ public class MoveStraightPositionModeCommand extends Command {
 		double ticksToMove = inputDistance * 12 * 1000 / (6 * Math.PI);
 
 		System.out.println("Input distance: " + inputDistance + " ft, ticks to move: " + ticksToMove);
-
+		System.out.println("*************READY TO DRIVE**************");
 		for (int i = 0; i < motors.size(); i++) {
 			CANTalon motor = motors.get(i);
 
 			double startingTickValue = motor.getPosition();
 			double endValue = startingTickValue + ticksToMove;
-			if (i >= 2) {
-				// right motors are inverted
+			if (i == 0 || i == 2) {
+				// right motors are inverted and we are reversing the front motors
 				endValue = startingTickValue - ticksToMove;
 			}
 
