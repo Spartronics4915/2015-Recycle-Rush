@@ -1,29 +1,12 @@
 package org.usfirst.frc4915.MecanumDrive;
-
-<<<<<<< HEAD
+import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandContainerStrategy;
+import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandJustDrive;
+import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandToteStrategy;
 import org.usfirst.frc4915.MecanumDrive.commands.debug.DebuggerFilter;
 import org.usfirst.frc4915.MecanumDrive.commands.debug.DebuggerFilterReset;
 import org.usfirst.frc4915.MecanumDrive.subsystems.Elevator;
 import org.usfirst.frc4915.debuggersystem.CustomDebugger.LoggerNames;
 
-=======
-import org.usfirst.frc4915.MecanumDrive.commands.grabber.CloseAllGrabbers;
-import org.usfirst.frc4915.MecanumDrive.commands.grabber.CloseGrabber;
-import org.usfirst.frc4915.MecanumDrive.commands.grabber.CloseSmallGrabber;
-import org.usfirst.frc4915.MecanumDrive.commands.drive.DriveStraight;
-import org.usfirst.frc4915.MecanumDrive.commands.elevator.ElevatorJumpToPosition;
-import org.usfirst.frc4915.MecanumDrive.commands.elevator.ElevatorPositionCalibration;
-import org.usfirst.frc4915.MecanumDrive.commands.elevator.ElevatorStop;
-import org.usfirst.frc4915.MecanumDrive.commands.grabber.IntermediateOpen;
-import org.usfirst.frc4915.MecanumDrive.commands.drive.MoveStraightPositionModeCommand;
-import org.usfirst.frc4915.MecanumDrive.commands.grabber.OpenGrabber;
-import org.usfirst.frc4915.MecanumDrive.commands.elevator.ElevatorSetHeight;
-import org.usfirst.frc4915.MecanumDrive.commands.drive.ToggleDriveMode;
-import org.usfirst.frc4915.MecanumDrive.subsystems.DriveTrain;
-import org.usfirst.frc4915.MecanumDrive.subsystems.Elevator;
-import org.usfirst.frc4915.debuggersystem.CustomDebugger.LoggerNames;
-import org.usfirst.frc4915.MecanumDrive.commands.debug.*;
->>>>>>> 13f2656a8edac18ed4f15b5259a7a8169a5ea824
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -109,8 +92,9 @@ public class OI {
 		/*
 		 * AUTONOMOUS COMMAND
 		 */
-		//SmartDashboard.putData("Autonomous Command", new AutonomousCommandToteStrategy());
-		
+		SmartDashboard.putData("Autonomous Command Tote", new AutonomousCommandToteStrategy());
+		SmartDashboard.putData("Autonomous Command Drive", new AutonomousCommandJustDrive());
+		SmartDashboard.putData("Autonomous Command Container", new AutonomousCommandContainerStrategy());
 		/*
 		 * DRIVE STRAIGHT
 		 */
@@ -148,15 +132,9 @@ public class OI {
 		SmartDashboard.putNumber("Elevator Height", Elevator.height);
 		SmartDashboard.putBoolean("Elevator At Top", Robot.elevator.isAtTopOfElevator());
 		SmartDashboard.putBoolean("Elevator At Bottom", Robot.elevator.isAtBottomOfElevator());
-<<<<<<< HEAD
 		//SmartDashboard.putNumber("Elevator Potentiometer Value", Robot.elevator.getPosition());
 		//SmartDashboard.putData("Set height to 700", new SetHeightTo700());
 		//SmartDashboard.putData("Set height to 850", new SetHeightTo850());
-=======
-		SmartDashboard.putNumber("Elevator Potentiometer Value", Robot.elevator.getPosition());
-		SmartDashboard.putData("Set height to 700", new ElevatorSetHeight(700));
-		SmartDashboard.putData("Set height to 850", new ElevatorSetHeight(850));
-		
 		/*
 		 * Debugger buttons
 		 */
@@ -167,7 +145,6 @@ public class OI {
 		SmartDashboard.putData("Set debugger to autonomous", new DebuggerFilter(LoggerNames.AUTONOMOUS));
 		SmartDashboard.putData("Set debugger to elevator", new DebuggerFilter(LoggerNames.ELEVATOR));
 		SmartDashboard.putData("Reset debugger filter", new DebuggerFilterReset());
->>>>>>> 13f2656a8edac18ed4f15b5259a7a8169a5ea824
 		
 		/*
 		 * SENSOR OUTPUT
@@ -212,14 +189,6 @@ public class OI {
 		String parsedBuildDate = VersionFinder.getAttribute(this, VersionFinder.BUILT_AT_ATTRIBUTE);
 		SmartDashboard.putString("Code Built At", parsedBuildDate == null ? "<not found>" : parsedBuildDate);
 		
-		/** 
-		 * DEBUGGER
-		 */
-		SmartDashboard.putData("Reset Debugger filter", new DebuggerFilterReset());
-		SmartDashboard.putData("Debugger Filter for Autonomous", new DebuggerFilter(LoggerNames.AUTONOMOUS));
-		SmartDashboard.putData("Debugger Filter for Drivetrain", new DebuggerFilter(LoggerNames.DRIVETRAIN));
-		SmartDashboard.putData("Debugger Filter for Elevator", new DebuggerFilter(LoggerNames.ELEVATOR));
-		SmartDashboard.putData("Debugger Filter for General", new DebuggerFilter(LoggerNames.GENERAL));
-		SmartDashboard.putData("Debugger Filter for Grabber", new DebuggerFilter(LoggerNames.GRABBER));
+		
 	}
 }

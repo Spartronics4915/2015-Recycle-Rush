@@ -1,30 +1,30 @@
 package org.usfirst.frc4915.debuggersystem;
 import javax.swing.*;
 import edu.wpi.first.wpilibj.smartdashboard.*;
-import edu.wpi.first.wpilibj.smartdashboard.
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-public class CheckBox extends AbstractValueWidget {
+//public class CheckBox extends AbstractValueWidget {
 
-    public static final DataType[] TYPES = {DataType.BOOLEAN};
+//    public static final DataType[] TYPES = {DataType.BOOLEAN};
 
-    public final BooleanProperty editable = new BooleanProperty(this, "Editable", true);
+//    public final BooleanProperty editable = new BooleanProperty(this, "Editable", true);
     
-    private EditableBooleanValueCheckBox valueField;
+//    private EditableBooleanValueCheckBox valueField;
 
-    public void init() {
-        setResizable(false);
+//    public void init() {
+//        setResizable(false);
 
-        setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
+//        setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 
-        valueField = new EditableBooleanValueCheckBox(getFieldName());
+//        valueField = new EditableBooleanValueCheckBox(getFieldName());
 
-        add(valueField);
-    }
+//        add(valueField);
+//    }
 
-    @Override
-    public void propertyChanged(Property property) {
-        if (property == editable) {
-            valueField.setEnabled(editable.getValue());
-        }
-    }
-}
+//    @Override
+//    public void propertyChanged(Property property) {
+//        if (property == editable) {
+//            valueField.setEnabled(editable.getValue());
+//        }
+//    }
+//}
