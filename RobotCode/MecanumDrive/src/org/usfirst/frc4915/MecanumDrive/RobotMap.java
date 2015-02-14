@@ -141,6 +141,13 @@ public class RobotMap {
 		elevatorWinchMotor.setFeedbackDevice(CANTalon.FeedbackDevice.AnalogPot);
 		elevatorWinchMotor.setPID(25, 0, 0, 0.0001, 255, 17, 0); // TODO determine PID values and ramp rate
 		// P = 25 I = 0 D = 0 ==> Pretty accurate. Overshoots about one inch, and has a little error afterwards.
+		elevatorWinchMotor.setForwardSoftLimit(1023); // The absolute maximum height that the elevator can be
+		elevatorWinchMotor.setReverseSoftLimit(450); // The greater minimum height that the elevator can be
+		elevatorWinchMotor.enableForwardSoftLimit(true);
+		elevatorWinchMotor.enableReverseSoftLimit(true);
+		elevatorWinchMotor.ConfigFwdLimitSwitchNormallyOpen(true);
+		elevatorWinchMotor.ConfigRevLimitSwitchNormallyOpen(true);
+		elevatorWinchMotor.enableBrakeMode(true);
 		
 		// Potentiometer instantiation
 		

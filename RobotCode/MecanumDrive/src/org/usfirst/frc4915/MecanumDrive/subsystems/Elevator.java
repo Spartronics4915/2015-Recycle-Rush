@@ -34,7 +34,7 @@ public class Elevator extends Subsystem {
 													// in inches
 	public static final double HEIGHT_OF_TOTE = 12;
 
-	private static final double JOYSTICK_SCALE = -1; // TODO Decide scale for
+	private static final double JOYSTICK_SCALE = -5; // TODO Decide scale for
 														// joystick movement
 														// position change
 
@@ -127,11 +127,10 @@ public class Elevator extends Subsystem {
 	 */
 	public void setHeightToPosition(int positionNumber) {
 
-		// find the range between the min and max Potentiometer values, divide
-		// by 54 to get
-		// the change in value per inch and multiply by the number of inches
-		// that the totes are stacked
-		height = minimumPotentiometerValue + ((maximumPotentiometerValue - minimumPotentiometerValue) * HEIGHT_OF_TOTE * positionNumber / RANGE_OF_MOTION);
+		// find the range between the min and max Potentiometer values, divide by 54 to get
+		// the change in value per inch and multiply by the number of inches that the totes are stacked
+		height = minimumPotentiometerValue + ((maximumPotentiometerValue - minimumPotentiometerValue) 
+											 * HEIGHT_OF_TOTE * positionNumber / RANGE_OF_MOTION);
 		Robot.debugger.logError(LoggerNames.ELEVATOR, "Elevator's height is " + height);
 	}
 
