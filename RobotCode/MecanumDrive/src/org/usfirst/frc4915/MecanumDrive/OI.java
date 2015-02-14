@@ -1,19 +1,22 @@
 package org.usfirst.frc4915.MecanumDrive;
 
-import org.usfirst.frc4915.MecanumDrive.commands.grabber.CloseGrabber;
+import org.usfirst.frc4915.MecanumDrive.commands.debug.DebuggerFilter;
+import org.usfirst.frc4915.MecanumDrive.commands.debug.DebuggerFilterReset;
 import org.usfirst.frc4915.MecanumDrive.commands.drive.DriveStraight;
+import org.usfirst.frc4915.MecanumDrive.commands.drive.MoveStraightPositionModeCommand;
+import org.usfirst.frc4915.MecanumDrive.commands.drive.ToggleDriveMode;
 import org.usfirst.frc4915.MecanumDrive.commands.elevator.ElevatorJumpToPosition;
 import org.usfirst.frc4915.MecanumDrive.commands.elevator.ElevatorPositionCalibration;
-import org.usfirst.frc4915.MecanumDrive.commands.elevator.ElevatorStop;
-import org.usfirst.frc4915.MecanumDrive.commands.grabber.IntermediateOpen;
-import org.usfirst.frc4915.MecanumDrive.commands.drive.MoveStraightPositionModeCommand;
-import org.usfirst.frc4915.MecanumDrive.commands.grabber.OpenGrabber;
 import org.usfirst.frc4915.MecanumDrive.commands.elevator.ElevatorSetHeight;
-import org.usfirst.frc4915.MecanumDrive.commands.drive.ToggleDriveMode;
+import org.usfirst.frc4915.MecanumDrive.commands.elevator.ElevatorStop;
+import org.usfirst.frc4915.MecanumDrive.commands.grabber.CloseGrabber;
+import org.usfirst.frc4915.MecanumDrive.commands.grabber.IntermediateOpen;
+import org.usfirst.frc4915.MecanumDrive.commands.grabber.OpenGrabber;
 import org.usfirst.frc4915.MecanumDrive.subsystems.DriveTrain;
 import org.usfirst.frc4915.MecanumDrive.subsystems.Elevator;
+import org.usfirst.frc4915.MecanumDrive.utility.VersionFinder;
 import org.usfirst.frc4915.debuggersystem.CustomDebugger.LoggerNames;
-import org.usfirst.frc4915.MecanumDrive.commands.debug.*;
+
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -132,6 +135,7 @@ public class OI {
 		/*
 		 * GRABBER
 		 */
+
 		SmartDashboard.putData("Close Grabber", new CloseGrabber());
 		SmartDashboard.putData("Intermediate Open", new IntermediateOpen());
 		SmartDashboard.putData("Open Grabber", new OpenGrabber());
@@ -146,12 +150,13 @@ public class OI {
 		SmartDashboard.putData("Jump to Elevator Position 4", new ElevatorJumpToPosition(4));
 		SmartDashboard.putData("ElevatorPositionCalibration", new ElevatorPositionCalibration());
 		SmartDashboard.putData("ElevatorStop", new ElevatorStop());
-		SmartDashboard.putNumber("Elevator Height", Elevator.height);
+		SmartDashboard.putNumber("Elevator Height", Elevator.setPoint);
 		SmartDashboard.putBoolean("Elevator At Top", Robot.elevator.isAtTopOfElevator());
 		SmartDashboard.putBoolean("Elevator At Bottom", Robot.elevator.isAtBottomOfElevator());
 		SmartDashboard.putNumber("Elevator Potentiometer Value", Robot.elevator.getPosition());
 		SmartDashboard.putData("Set height to 700", new ElevatorSetHeight(700));
 		SmartDashboard.putData("Set height to 850", new ElevatorSetHeight(850));
+		
 		
 		/*
 		 * Debugger buttons
@@ -199,13 +204,8 @@ public class OI {
 		/*
 		 * CODE VERSION OUTPUT
 		 */
-		String parsedVersion = VersionFinder.getAttribute(this, VersionFinder.VERSION_ATTRIBUTE);
-		SmartDashboard.putString("Code Version", parsedVersion == null ? "<not found>" : parsedVersion);
-
-		String parsedBuilder = VersionFinder.getAttribute(this, VersionFinder.BUILT_BY_ATTRIBUTE);
-		SmartDashboard.putString("Code Built By", parsedBuilder == null ? "<not found>" : parsedBuilder);
-
-		String parsedBuildDate = VersionFinder.getAttribute(this, VersionFinder.BUILT_AT_ATTRIBUTE);
-		SmartDashboard.putString("Code Built At", parsedBuildDate == null ? "<not found>" : parsedBuildDate);
+		SmartDashboard.putString("Code Version", VersionFinder.getAttribute(this, VersionFinder.VERSION_ATTRIBUTE));
+		SmartDashboard.putString("Code Built By", VersionFinder.getAttribute(this, VersionFinder.BUILT_BY_ATTRIBUTE));
+		SmartDashboard.putString("Code Built At", VersionFinder.getAttribute(this, VersionFinder.BUILT_AT_ATTRIBUTE));
 	}
 }

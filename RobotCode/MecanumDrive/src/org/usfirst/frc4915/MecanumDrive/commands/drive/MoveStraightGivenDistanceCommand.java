@@ -4,10 +4,10 @@ import java.util.List;
 
 import org.usfirst.frc4915.MecanumDrive.Robot;
 import org.usfirst.frc4915.MecanumDrive.subsystems.DriveTrain;
+import org.usfirst.frc4915.debuggersystem.CustomDebugger;
 
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.command.Command;
-import org.usfirst.frc4915.debuggersystem.CustomDebugger;
 
 public class MoveStraightGivenDistanceCommand extends Command {
 	public static List<CANTalon> motors = DriveTrain.motors;
