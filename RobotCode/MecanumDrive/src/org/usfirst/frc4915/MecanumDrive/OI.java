@@ -91,7 +91,7 @@ public class OI {
 		/*
 		 * JOYSTICK BUTTONS (ELEVATOR)
 		 */
-		elevatorJumpToPositionZero = new JoystickButton(elevatorStick, 2);
+		elevatorJumpToPositionZero = new JoystickButton(elevatorStick, 6);
 		elevatorJumpToPositionZero.whenPressed(new ElevatorJumpToPosition(0));
 		elevatorJumpToPositionOne = new JoystickButton(elevatorStick, 7);
 		elevatorJumpToPositionOne.whenPressed(new ElevatorJumpToPosition(1));

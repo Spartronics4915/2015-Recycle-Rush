@@ -69,7 +69,7 @@ public class RobotMap {
 	 * ELEVATOR
 	 */
 	public static CANTalon elevatorWinchMotor;
-	private static final int FWD_SOFT_LIMIT = 700;
+	private static final int FWD_SOFT_LIMIT = 1023;
 	private static final int REV_SOFT_LIMIT = 0;
 
 	/*
