@@ -18,7 +18,7 @@ public class ElevatorSetHeight extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Elevator.height = targetHeight;
+    	Elevator.setPoint = targetHeight;
     }
 
     // Called repeatedly when this Command is scheduled to run

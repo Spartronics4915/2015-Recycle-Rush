@@ -149,7 +149,7 @@ public class OI {
 		SmartDashboard.putData("Jump to Elevator Position 4", new ElevatorJumpToPosition(4));
 		SmartDashboard.putData("ElevatorPositionCalibration", new ElevatorPositionCalibration());
 		SmartDashboard.putData("ElevatorStop", new ElevatorStop());
-		SmartDashboard.putNumber("Elevator Height", Elevator.height);
+		SmartDashboard.putNumber("Elevator Height", Elevator.setPoint);
 		SmartDashboard.putBoolean("Elevator At Top", Robot.elevator.isAtTopOfElevator());
 		SmartDashboard.putBoolean("Elevator At Bottom", Robot.elevator.isAtBottomOfElevator());
 		SmartDashboard.putNumber("Elevator Potentiometer Value", Robot.elevator.getPosition());

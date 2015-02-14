@@ -153,7 +153,7 @@ public class Robot extends IterativeRobot {
 
 		Scheduler.getInstance().run();
 		
-		SmartDashboard.putNumber("Elevator Height", Elevator.height);
+		SmartDashboard.putNumber("Elevator Height", Elevator.setPoint);
 		SmartDashboard.putBoolean("Elevator At Top", elevator.isAtTopOfElevator());
 		SmartDashboard.putBoolean("Elevator At Bottom", elevator.isAtBottomOfElevator());
 		SmartDashboard.putNumber("Elevator Potentiometer Value", elevator.getPosition());

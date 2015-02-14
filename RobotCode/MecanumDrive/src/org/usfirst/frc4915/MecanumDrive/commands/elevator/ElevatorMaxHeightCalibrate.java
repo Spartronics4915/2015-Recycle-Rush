@@ -21,7 +21,7 @@ public class ElevatorMaxHeightCalibrate extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		Elevator.height = 700; // Through experimentation, the maximum is closer to 973
+		Elevator.setPoint = 700; // Through experimentation, the maximum is closer to 973
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
