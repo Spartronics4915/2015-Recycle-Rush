@@ -3,6 +3,7 @@ package org.usfirst.frc4915.MecanumDrive.commands.grabber;
 import org.usfirst.frc4915.MecanumDrive.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
+import org.usfirst.frc4915.debuggersystem.CustomDebugger;
 
 public class OpenGrabber extends Command {
 
@@ -15,7 +16,7 @@ public class OpenGrabber extends Command {
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
-		System.out.println("Closing");
+        Robot.debugger.logError(CustomDebugger.LoggerNames.GRABBER, "Closing");
 		finished = false;
 	}
 

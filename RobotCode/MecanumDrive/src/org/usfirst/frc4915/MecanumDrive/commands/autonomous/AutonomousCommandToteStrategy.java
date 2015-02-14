@@ -1,11 +1,13 @@
 package org.usfirst.frc4915.MecanumDrive.commands.autonomous;
 
+import org.usfirst.frc4915.MecanumDrive.Robot;
 import org.usfirst.frc4915.MecanumDrive.commands.drive.MoveStraightPositionModeCommand;
 import org.usfirst.frc4915.MecanumDrive.commands.elevator.ElevatorMoveToHeight;
 import org.usfirst.frc4915.MecanumDrive.commands.grabber.CloseGrabber;
 import org.usfirst.frc4915.MecanumDrive.commands.grabber.OpenGrabber;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import org.usfirst.frc4915.debuggersystem.CustomDebugger;
 
 public class AutonomousCommandToteStrategy extends CommandGroup {
     
@@ -29,16 +31,16 @@ public class AutonomousCommandToteStrategy extends CommandGroup {
     	
     	
     	addSequential(new ElevatorMoveToHeight()); //should be parallel
-    	System.out.println("Moving Elevator");
+        Robot.debugger.logError(CustomDebugger.LoggerNames.DRIVETRAIN, "Moving Elevator");
     	addSequential(new ElevatorMoveToHeight());
-    	System.out.println("Moving Grabber");
+        Robot.debugger.logError(CustomDebugger.LoggerNames.DRIVETRAIN, "Moving Grabber");
     	addSequential(new CloseGrabber());
-    	System.out.println("Driving 15 ft");
+        Robot.debugger.logError(CustomDebugger.LoggerNames.DRIVETRAIN, "Driving 15 ft");
     	addSequential(new MoveStraightPositionModeCommand(-5));
-    	System.out.println("Moving Grabber");
+        Robot.debugger.logError(CustomDebugger.LoggerNames.DRIVETRAIN, "Moving Grabber");
     	addSequential(new OpenGrabber());
     	addSequential(new MoveStraightPositionModeCommand(-1));
-    	System.out.println("Driving 1 ft");
+        Robot.debugger.logError(CustomDebugger.LoggerNames.DRIVETRAIN, "Driving 1 ft");
     	
     	//Below should use commands to avoid bugs
     	//Robot.elevator.setHeightToPosition(0);
