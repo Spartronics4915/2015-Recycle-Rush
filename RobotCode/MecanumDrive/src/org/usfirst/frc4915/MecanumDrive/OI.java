@@ -103,11 +103,11 @@ public class OI {
 		 * Grabber Buttons
 		 */
 		
-		grabberOpen = new JoystickButton(driveStick, 7);
+		grabberOpen = new JoystickButton(elevatorStick, 3);
 		grabberOpen.whenPressed(new OpenGrabber());
-		grabberClosed = new JoystickButton(driveStick, 8);
+		grabberClosed = new JoystickButton(elevatorStick, 2);
 		grabberClosed.whenPressed(new CloseGrabber());
-		grabberIntermediate = new JoystickButton(driveStick, 9);
+		grabberIntermediate = new JoystickButton(elevatorStick, 4);
 		grabberIntermediate.whenPressed(new IntermediateOpen());
 		
 		
