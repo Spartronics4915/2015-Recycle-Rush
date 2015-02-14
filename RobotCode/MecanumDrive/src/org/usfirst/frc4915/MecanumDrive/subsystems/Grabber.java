@@ -10,28 +10,28 @@ public class Grabber extends Subsystem {
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.
 
-	DoubleSolenoid mommaSolenoid = RobotMap.mommaSolenoid;
+	//DoubleSolenoid mommaSolenoid = RobotMap.mommaSolenoid;
 
 	public void initDefaultCommand() {
 		// Set the default command for a subsystem here.
 		// setDefaultCommand(new MySpecialCommand());
 	}
 
-	/**
-	 * Extend the large piston. This will move arms to position for picking up
-	 * wide totes.
-	 */
-	public void open() {
-		mommaSolenoid.set(DoubleSolenoid.Value.kForward);
-	}
+//	/**
+//	 * Extend the large piston. This will move arms to position for picking up
+//	 * wide totes.
+//	 */
+//	public void open() {
+//		mommaSolenoid.set(DoubleSolenoid.Value.kForward);
+//	}
 
 	/**
 	 * Retract the large piston. This will go the position for grabbing narrow
 	 * totes.
 	 */
-	public void close() {
-		mommaSolenoid.set(DoubleSolenoid.Value.kReverse);
-	}
+//	public void close() {
+//		mommaSolenoid.set(DoubleSolenoid.Value.kReverse);
+//	}
 
 	/**
 	 * Extend the small piston. This will tighten the grip on the totes so they

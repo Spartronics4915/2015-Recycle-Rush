@@ -132,7 +132,7 @@ public class Elevator extends Subsystem {
 	 * @param positionNumber
 	 *            the number of totes you are stacking on top of.
 	 */
-	public void setHeightToPosition(int positionNumber) {
+	public void setHeightToPosition(double positionNumber) {
 
 		// find the range between the min and max Potentiometer values, divide by 54 to get
 		// the change in value per inch and multiply by the number of inches that the totes are stacked

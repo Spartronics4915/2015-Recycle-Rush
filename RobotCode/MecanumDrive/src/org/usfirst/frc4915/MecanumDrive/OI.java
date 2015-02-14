@@ -1,15 +1,15 @@
 package org.usfirst.frc4915.MecanumDrive;
 
-import org.usfirst.frc4915.MecanumDrive.commands.grabber.CloseAllGrabbers;
-import org.usfirst.frc4915.MecanumDrive.commands.grabber.CloseGrabber;
-import org.usfirst.frc4915.MecanumDrive.commands.grabber.CloseSmallGrabber;
+//import org.usfirst.frc4915.MecanumDrive.commands.grabber.CloseAllGrabbers;
+//import org.usfirst.frc4915.MecanumDrive.commands.grabber.CloseGrabber;
+//import org.usfirst.frc4915.MecanumDrive.commands.grabber.CloseSmallGrabber;
 import org.usfirst.frc4915.MecanumDrive.commands.drive.DriveStraight;
 import org.usfirst.frc4915.MecanumDrive.commands.elevator.ElevatorJumpToPosition;
 import org.usfirst.frc4915.MecanumDrive.commands.elevator.ElevatorPositionCalibration;
 import org.usfirst.frc4915.MecanumDrive.commands.elevator.ElevatorStop;
-import org.usfirst.frc4915.MecanumDrive.commands.grabber.IntermediateOpen;
+//import org.usfirst.frc4915.MecanumDrive.commands.grabber.IntermediateOpen;
 import org.usfirst.frc4915.MecanumDrive.commands.drive.MoveStraightPositionModeCommand;
-import org.usfirst.frc4915.MecanumDrive.commands.grabber.OpenGrabber;
+//import org.usfirst.frc4915.MecanumDrive.commands.grabber.OpenGrabber;
 import org.usfirst.frc4915.MecanumDrive.commands.elevator.ElevatorSetHeight;
 import org.usfirst.frc4915.MecanumDrive.commands.drive.ToggleDriveMode;
 import org.usfirst.frc4915.MecanumDrive.subsystems.DriveTrain;
@@ -121,13 +121,13 @@ public class OI {
 		/*
 		 * GRABBER
 		 */
-		SmartDashboard.putData("Close Grabber", new CloseGrabber());
-		SmartDashboard.putData("Vent", new CloseSmallGrabber());
-		SmartDashboard.putData("Intermediate Open", new IntermediateOpen());
-		SmartDashboard.putData("Open Grabber", new OpenGrabber());
-		SmartDashboard.putData("Close All Grabbers", new CloseAllGrabbers());
-		SmartDashboard.putData("Open Large Grabber", new OpenGrabber());
-		SmartDashboard.putData("Close Large Grabber", new CloseGrabber());
+//		SmartDashboard.putData("Close Grabber", new CloseGrabber());
+//		SmartDashboard.putData("Vent", new CloseSmallGrabber());
+//		SmartDashboard.putData("Intermediate Open", new IntermediateOpen());
+//		SmartDashboard.putData("Open Grabber", new OpenGrabber());
+//		SmartDashboard.putData("Close All Grabbers", new CloseAllGrabbers());
+//		SmartDashboard.putData("Open Large Grabber", new OpenGrabber());
+//		SmartDashboard.putData("Close Large Grabber", new CloseGrabber());
 		
 		/*
 		 * ELEVATOR
@@ -145,6 +145,8 @@ public class OI {
 		SmartDashboard.putNumber("Elevator Potentiometer Value", Robot.elevator.getPosition());
 		SmartDashboard.putData("Set height to 700", new ElevatorSetHeight(700));
 		SmartDashboard.putData("Set height to 850", new ElevatorSetHeight(850));
+		SmartDashboard.putNumber("Maximum height value: ", Elevator.maximumPotentiometerValue);
+		SmartDashboard.putNumber("Minimum height value: ", Elevator.minimumPotentiometerValue);
 		
 		/*
 		 * Debugger buttons

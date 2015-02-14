@@ -57,7 +57,9 @@ public class Robot extends IterativeRobot {
 		preferences = Preferences.getInstance();
 		driveTrain = new DriveTrain();
 		elevator = new Elevator();
-		grabber = new Grabber();
+		if (grabber != null) {
+			grabber = new Grabber();
+		}
 		// OI must be constructed after subsystems. If the OI creates Commands
 		// (which it very likely will), subsystems are not guaranteed to be
 		// constructed yet. Thus, their requires() statements may grab null
