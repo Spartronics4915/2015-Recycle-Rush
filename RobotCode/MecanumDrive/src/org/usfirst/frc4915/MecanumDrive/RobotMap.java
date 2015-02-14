@@ -86,7 +86,8 @@ public class RobotMap {
 	/*
 	 * GRABBER
 	 */
-	public static DoubleSolenoid mommaSolenoid;
+	public static Solenoid forwardSolenoid;
+	public static Solenoid reverseSolenoid;
 	public static Solenoid auntieSolenoid;
 
 	/*
@@ -163,7 +164,9 @@ public class RobotMap {
 		 */
 		// Double Solenoid instantiation. Wiring: 0 --> Forward channel
 		// (extended). 1 --> Reverse channel (retracted).
-		mommaSolenoid = new DoubleSolenoid(PCM_NODE_ID, SOLENOID_CHANNEL_MOMMA_FORWARD, SOLENOID_CHANNEL_MOMMA_REVERSE); // Uses 10 as the Node ID for the PCM
+		//mommaSolenoid = new DoubleSolenoid(PCM_NODE_ID, SOLENOID_CHANNEL_MOMMA_FORWARD, SOLENOID_CHANNEL_MOMMA_REVERSE); // Uses 10 as the Node ID for the PCM
+		forwardSolenoid = new Solenoid(PCM_NODE_ID, SOLENOID_CHANNEL_MOMMA_FORWARD);
+		reverseSolenoid = new Solenoid(PCM_NODE_ID,SOLENOID_CHANNEL_MOMMA_REVERSE);
 		auntieSolenoid = new Solenoid(PCM_NODE_ID, SOLENOID_CHANNEL_AUNTIE);
 
 		/*
