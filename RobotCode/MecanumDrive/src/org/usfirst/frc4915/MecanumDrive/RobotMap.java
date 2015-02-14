@@ -120,7 +120,7 @@ public class RobotMap {
 		/*
 		 * Gyro instantiation
 		 */
-		gyro = new Gyro(GYRO_PORT); // TODO decide on ports
+		gyro = new Gyro(GYRO_PORT);
 
 		/*
 		 * Distance instantiation
