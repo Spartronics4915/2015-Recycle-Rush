@@ -1,8 +1,6 @@
 package org.usfirst.frc4915.MecanumDrive;
 
-import org.usfirst.frc4915.MecanumDrive.commands.grabber.CloseAllGrabbers;
 import org.usfirst.frc4915.MecanumDrive.commands.grabber.CloseGrabber;
-import org.usfirst.frc4915.MecanumDrive.commands.grabber.CloseSmallGrabber;
 import org.usfirst.frc4915.MecanumDrive.commands.drive.DriveStraight;
 import org.usfirst.frc4915.MecanumDrive.commands.elevator.ElevatorJumpToPosition;
 import org.usfirst.frc4915.MecanumDrive.commands.elevator.ElevatorPositionCalibration;
@@ -99,7 +97,20 @@ public class OI {
 		elevatorJumpToPositionThree.whenPressed(new ElevatorJumpToPosition(3));
 		elevatorJumpToPositionFour = new JoystickButton(elevatorStick, 10);
 		elevatorJumpToPositionFour.whenPressed(new ElevatorJumpToPosition(4));
-
+		
+		
+		/*
+		 * Grabber Buttons
+		 */
+		
+		grabberOpen = new JoystickButton(driveStick, 7);
+		grabberOpen.whenPressed(new OpenGrabber());
+		grabberClosed = new JoystickButton(driveStick, 8);
+		grabberClosed.whenPressed(new CloseGrabber());
+		grabberIntermediate = new JoystickButton(driveStick, 9);
+		grabberIntermediate.whenPressed(new IntermediateOpen());
+		
+		
 		/*
 		 * AUTONOMOUS COMMAND
 		 */
@@ -122,12 +133,8 @@ public class OI {
 		 * GRABBER
 		 */
 		SmartDashboard.putData("Close Grabber", new CloseGrabber());
-		SmartDashboard.putData("Vent", new CloseSmallGrabber());
 		SmartDashboard.putData("Intermediate Open", new IntermediateOpen());
 		SmartDashboard.putData("Open Grabber", new OpenGrabber());
-		SmartDashboard.putData("Close All Grabbers", new CloseAllGrabbers());
-		SmartDashboard.putData("Open Large Grabber", new OpenGrabber());
-		SmartDashboard.putData("Close Large Grabber", new CloseGrabber());
 		
 		/*
 		 * ELEVATOR
