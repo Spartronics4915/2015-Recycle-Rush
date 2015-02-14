@@ -1,6 +1,5 @@
 package org.usfirst.frc4915.MecanumDrive;
 
-import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandToteStrategy;
 import org.usfirst.frc4915.MecanumDrive.commands.debug.GenericTestCommand;
 import org.usfirst.frc4915.MecanumDrive.subsystems.DriveTrain;
 import org.usfirst.frc4915.MecanumDrive.subsystems.Elevator;
@@ -111,9 +110,6 @@ public class Robot extends IterativeRobot {
 		// Use the selected autonomous command
 		// autonomousCommand = (Command) autonomousProgramChooser.getSelected();
 		//double desiredDistrance = preferences.getDouble("DesiredDistance", 9.0);
-		autonomousCommand = new AutonomousCommandToteStrategy();
-
-		autonomousCommand.start();
 	}
 
 	/**
