@@ -5,9 +5,9 @@ import org.usfirst.frc4915.MecanumDrive.commands.drive.MoveStraightPositionModeC
 import org.usfirst.frc4915.MecanumDrive.commands.elevator.ElevatorMoveToHeight;
 import org.usfirst.frc4915.MecanumDrive.commands.grabber.CloseGrabber;
 import org.usfirst.frc4915.MecanumDrive.commands.grabber.OpenGrabber;
+import org.usfirst.frc4915.debuggersystem.CustomDebugger;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
-import org.usfirst.frc4915.debuggersystem.CustomDebugger;
 
 public class AutonomousCommandToteStrategy extends CommandGroup {
     
