@@ -89,7 +89,10 @@ public class Robot extends IterativeRobot {
 		
         // session = NIVision.IMAQdxOpenCamera("cam1", NIVision.IMAQdxCameraControlMode.CameraControlModeController);
         // NIVision.IMAQdxConfigureGrab(session);
-
+		
+		if (elevator != null) {
+			elevator.setHieghtToCurrentPosition();
+		}
 	}
 
 	/**
@@ -125,11 +128,12 @@ public class Robot extends IterativeRobot {
 		// teleop starts running. If you want the autonomous to
 		// continue until interrupted by another command, remove
 		// this line or comment it out.
-		if (autonomousCommand != null)
+		if (autonomousCommand != null){
 			autonomousCommand.cancel();
+		}
 		SmartDashboard.putData("Toggle Field Drive", new ToggleDriveMode());
 		SmartDashboard.putBoolean("Field Mode", Robot.driveTrain.fieldMode);
-				
+		
 	}
 
 	/**

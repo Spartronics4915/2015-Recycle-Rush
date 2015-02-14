@@ -22,17 +22,17 @@ public class RobotMap {
 	/*
 	 * CONSTANTS
 	 */
-	public static final int MOTOR_PORT_LEFT_FRONT = 20;
-	public static final int MOTOR_PORT_LEFT_REAR = 21;
-	public static final int MOTOR_PORT_RIGHT_FRONT = 22;
-	public static final int MOTOR_PORT_RIGHT_REAR = 23;
+	public static final int MOTOR_PORT_LEFT_FRONT = 10;
+	public static final int MOTOR_PORT_LEFT_REAR = 11;
+	public static final int MOTOR_PORT_RIGHT_FRONT = 12;
+	public static final int MOTOR_PORT_RIGHT_REAR = 13;
 	
-	public static final int MOTOR_PORT_ELEVATOR_WINCH = 24;
+	public static final int MOTOR_PORT_ELEVATOR_WINCH = 14;
 	
 	/*
 	 * The Pneumatic Control Module's CAN Node ID. Use 10 for 4915. Use 20 for 9999
 	 */
-	public final static int PCM_NODE_ID = 20;
+	public final static int PCM_NODE_ID = 10;
 	
 	public final static int GYRO_PORT = 0;
 	
@@ -52,6 +52,7 @@ public class RobotMap {
 	public static CANTalon mecanumDriveControlsRightFront;
 	public static CANTalon mecanumDriveControlsRightRear;
 	public static RobotDrive driveTrainRobotDrive;
+	// TODO explain the reason for this number
 	public static final double DEFAULT_MAX_OUTPUT = 950;
 
 	/*
@@ -85,7 +86,8 @@ public class RobotMap {
 	/*
 	 * GRABBER
 	 */
-	public static DoubleSolenoid mommaSolenoid;
+	public static Solenoid forwardSolenoid;
+	public static Solenoid reverseSolenoid;
 	public static Solenoid auntieSolenoid;
 
 	/*
@@ -162,7 +164,9 @@ public class RobotMap {
 		 */
 		// Double Solenoid instantiation. Wiring: 0 --> Forward channel
 		// (extended). 1 --> Reverse channel (retracted).
-		mommaSolenoid = new DoubleSolenoid(PCM_NODE_ID, SOLENOID_CHANNEL_MOMMA_FORWARD, SOLENOID_CHANNEL_MOMMA_REVERSE); // Uses 10 as the Node ID for the PCM
+		//mommaSolenoid = new DoubleSolenoid(PCM_NODE_ID, SOLENOID_CHANNEL_MOMMA_FORWARD, SOLENOID_CHANNEL_MOMMA_REVERSE); // Uses 10 as the Node ID for the PCM
+		forwardSolenoid = new Solenoid(PCM_NODE_ID, SOLENOID_CHANNEL_MOMMA_FORWARD);
+		reverseSolenoid = new Solenoid(PCM_NODE_ID,SOLENOID_CHANNEL_MOMMA_REVERSE);
 		auntieSolenoid = new Solenoid(PCM_NODE_ID, SOLENOID_CHANNEL_AUNTIE);
 
 		/*
