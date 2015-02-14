@@ -16,14 +16,14 @@ public class OpenGrabber extends Command {
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
-        Robot.debugger.logError(CustomDebugger.LoggerNames.GRABBER, "Closing");
+        Robot.debugger.logError(CustomDebugger.LoggerNames.GRABBER, "Opening");
 		finished = false;
 	}
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
 		Robot.grabber.vent();
-		Robot.grabber.close();
+		Robot.grabber.open();
 
 		finished = true;
 	}
