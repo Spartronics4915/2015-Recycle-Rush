@@ -1,6 +1,7 @@
 package org.usfirst.frc4915.MecanumDrive.commands.drive;
 
 import org.usfirst.frc4915.MecanumDrive.Robot;
+import org.usfirst.frc4915.debuggersystem.CustomDebugger;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -14,7 +15,7 @@ public class DriveStraight extends Command {
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
-		System.out.println("Drive Straight");
+        Robot.debugger.logError(CustomDebugger.LoggerNames.DRIVETRAIN, "Drive Straight");
 		Robot.driveTrain.driveStraight(.2);
 	}
 
