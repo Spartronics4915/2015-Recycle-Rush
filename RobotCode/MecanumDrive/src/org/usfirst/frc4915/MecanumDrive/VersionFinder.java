@@ -25,7 +25,7 @@ public class VersionFinder {
 	public static String getAttribute(Object object, String attribute) {
 		Attributes attrs = findManifest(object).getMainAttributes();
 		String attr = attrs.getValue(attribute);
-		return attr;
+		return attr == null ? "<not found>" : attr;
 	}
 
 	/**

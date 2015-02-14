@@ -162,8 +162,8 @@ public class OI {
 		 */
 		LiveWindow.addSensor("Other Sensors", "Accelerometer", RobotMap.accelerometer);
 		LiveWindow.addSensor("Drive Train", "Distance Sensor", DriveTrain.distanceSensor);
-		LiveWindow.addActuator("Grabber Reverse Solenoid", "Solenoid", RobotMap.reverseSolenoid);
-		LiveWindow.addActuator("Grabber Forward Solenoid", "Solenoid", RobotMap.forwardSolenoid);
+		LiveWindow.addActuator("Grabber Primary Solenoid", "Solenoid", RobotMap.primarySolenoid);
+		LiveWindow.addActuator("Grabber Secondary Solenoid", "Solenoid", RobotMap.secondarySolenoid);
 
 		/*
 		 * MOTOR SPEED OUTPUT
@@ -192,13 +192,8 @@ public class OI {
 		/*
 		 * CODE VERSION OUTPUT
 		 */
-		String parsedVersion = VersionFinder.getAttribute(this, VersionFinder.VERSION_ATTRIBUTE);
-		SmartDashboard.putString("Code Version", parsedVersion == null ? "<not found>" : parsedVersion);
-
-		String parsedBuilder = VersionFinder.getAttribute(this, VersionFinder.BUILT_BY_ATTRIBUTE);
-		SmartDashboard.putString("Code Built By", parsedBuilder == null ? "<not found>" : parsedBuilder);
-
-		String parsedBuildDate = VersionFinder.getAttribute(this, VersionFinder.BUILT_AT_ATTRIBUTE);
-		SmartDashboard.putString("Code Built At", parsedBuildDate == null ? "<not found>" : parsedBuildDate);
+		SmartDashboard.putString("Code Version", VersionFinder.getAttribute(this, VersionFinder.VERSION_ATTRIBUTE));
+		SmartDashboard.putString("Code Built By", VersionFinder.getAttribute(this, VersionFinder.BUILT_BY_ATTRIBUTE));
+		SmartDashboard.putString("Code Built At", VersionFinder.getAttribute(this, VersionFinder.BUILT_AT_ATTRIBUTE));
 	}
 }
