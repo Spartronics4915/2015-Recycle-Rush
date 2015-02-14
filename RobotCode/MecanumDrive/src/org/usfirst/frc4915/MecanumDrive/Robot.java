@@ -57,9 +57,8 @@ public class Robot extends IterativeRobot {
 		preferences = Preferences.getInstance();
 		driveTrain = new DriveTrain();
 		elevator = new Elevator();
-		if (grabber != null) {
-			grabber = new Grabber();
-		}
+		grabber = new Grabber();
+		
 		// OI must be constructed after subsystems. If the OI creates Commands
 		// (which it very likely will), subsystems are not guaranteed to be
 		// constructed yet. Thus, their requires() statements may grab null
@@ -161,6 +160,8 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putNumber("Elevator P", elevator.winch.getP());
 		SmartDashboard.putNumber("Elevator I", elevator.winch.getI());
 		SmartDashboard.putNumber("Elevator D", elevator.winch.getD());
+		SmartDashboard.putNumber("Maximum height value: ", Elevator.maximumPotentiometerValue);
+		SmartDashboard.putNumber("Minimum height value: ", Elevator.minimumPotentiometerValue);
 		
     	/**
          * grab an image, draw the circle, and provide it for the camera server
