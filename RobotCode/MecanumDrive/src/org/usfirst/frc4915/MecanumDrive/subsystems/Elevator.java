@@ -18,7 +18,7 @@ public class Elevator extends Subsystem {
 	// TODO initialize height
 	// Not in inches. Between minimumPotentiometerValue and
 	// maximumPotentiometerValue.
-	public static double height = 700;
+	public static double height;
 
 	// POTENTIOMTERS : fwd --> top, rev --> bottom
 
@@ -89,6 +89,13 @@ public class Elevator extends Subsystem {
 		keepHeightInRange();
 		winch.set(height);
 	}
+	
+	/**
+	 * Sets the height to where it currently is so that the elevator should not go up or down.
+	 */
+	public void setHieghtToCurrentPosition() {
+		height = getPosition();
+	}
 
 	/**
 	 * Stops the winch from winding. This may still have the elevator fall under
@@ -158,8 +165,8 @@ public class Elevator extends Subsystem {
 
 	/**
 	 * Makes sure that the height value doesn't increase or decrease beyond the
-	 * min/maximum values Also, if the limit switch is pressed (fwd --> top ~973, rev
-	 * --> bottom ~550) it will update maximum/minimum potentiometer values.
+	 * min/maximum values Also, if the limit switch is pressed (fwd --> top ~700?, rev
+	 * --> bottom ~0) it will update maximum/minimum potentiometer values.
 	 */
 	public void keepHeightInRange() {
 		if (isAtTopOfElevator()) {

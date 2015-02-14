@@ -21,7 +21,7 @@ public class ElevatorMinHeightCalibrate extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		Elevator.height = 400; // By experimentation, the actual minimum is close to 550
+		Elevator.height = 0; // By experimentation, the actual minimum is close to 550
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
