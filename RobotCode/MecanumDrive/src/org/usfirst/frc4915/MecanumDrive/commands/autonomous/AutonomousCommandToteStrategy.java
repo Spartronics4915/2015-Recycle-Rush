@@ -30,8 +30,12 @@ public class AutonomousCommandToteStrategy extends CommandGroup {
     	addSequential(new ElevatorJumpToPosition(0));
     	System.out.println("Moving Grabber");
     	addSequential(new CloseGrabber());
+    	System.out.println("Moving Elevator");
+    	addSequential(new ElevatorJumpToPosition(1));
     	System.out.println("Driving 11 ft");
     	addSequential(new MoveStraightPositionModeCommand(-11, 0.7));
+    	System.out.println("Moving Elevator");
+    	addSequential(new ElevatorJumpToPosition(0));
     	System.out.println("Moving Grabber");
     	addSequential(new OpenGrabber());
     	addSequential(new MoveStraightPositionModeCommand(-1, 0.7));

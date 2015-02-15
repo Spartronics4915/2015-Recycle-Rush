@@ -30,6 +30,8 @@ public class AutonomousCommandContainerStrategy extends CommandGroup {
     	addSequential(new ElevatorJumpToPosition(1.5));
     	System.out.println("Moving Grabber");
     	addSequential(new CloseGrabber());
+    	System.out.println("Moving Elevator");
+    	addSequential(new ElevatorJumpToPosition(2.5));
     	System.out.println("Driving 11 ft");
     	addSequential(new MoveStraightPositionModeCommand(11, 0.7));
 }
