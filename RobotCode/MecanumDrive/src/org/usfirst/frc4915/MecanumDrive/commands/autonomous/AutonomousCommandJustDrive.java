@@ -2,6 +2,7 @@ package org.usfirst.frc4915.MecanumDrive.commands.autonomous;
 
 import org.usfirst.frc4915.MecanumDrive.commands.drive.MoveStraightPositionModeCommand;
 import org.usfirst.frc4915.MecanumDrive.commands.drive.StrafeCommand;
+import org.usfirst.frc4915.MecanumDrive.commands.elevator.ElevatorJumpToPosition;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
@@ -28,6 +29,6 @@ public class AutonomousCommandJustDrive extends CommandGroup {
         // a CommandGroup containing them would require both the chassis and the
         // arm.
     	
-    	addSequential( new StrafeCommand(3, 0.7));
+    	addSequential( new MoveStraightPositionModeCommand(5, 0.7));
     }
 }
