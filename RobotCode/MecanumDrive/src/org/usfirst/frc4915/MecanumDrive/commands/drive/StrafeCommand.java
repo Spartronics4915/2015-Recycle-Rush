@@ -5,21 +5,20 @@ import java.util.List;
 
 import org.usfirst.frc4915.MecanumDrive.Robot;
 import org.usfirst.frc4915.MecanumDrive.subsystems.DriveTrain;
-import org.usfirst.frc4915.debuggersystem.CustomDebugger;
 
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.command.Command;
 
-public class MoveStraightPositionModeCommand extends Command {
+public class StrafeCommand extends Command {
 	public static List<CANTalon> motors = DriveTrain.motors;
 	public double inputDistance;
 	public double inputSpeed;
 	private DriveTrain driveTrain = Robot.driveTrain;
 
-	public MoveStraightPositionModeCommand(double inputDistance, double inputSpeed) {
+	public StrafeCommand(double inputDistance, double inputSpeed) {
 		requires(driveTrain);
-		System.out.println("***MoveStraightPositionModeCommand inputDistance: " + inputDistance + "*******");
-		System.out.println("***MoveStraightPositionModeCommand inputSpeed: " + inputSpeed + "*******");
+		System.out.println("***StrafeCommand inputDistance: " + inputDistance + "*******");
+		System.out.println("***StrafeCommand inputSpeed: " + inputSpeed + "*******");
 		this.inputDistance = inputDistance;
 		// Use requires() here to declare subsystem dependencies
 		// eg. requires(chassis);
@@ -36,19 +35,19 @@ public class MoveStraightPositionModeCommand extends Command {
 
 		double ticksToMove = inputDistance * 12 * 1000 / (6 * Math.PI);
 
-        Robot.debugger.logError(CustomDebugger.LoggerNames.DRIVETRAIN, "Input distance: " + inputDistance + " ft, ticks to move: " + ticksToMove);
-
+		System.out.println("Input distance: " + inputDistance + " ft, ticks to move: " + ticksToMove);
+		System.out.println("*************READY TO DRIVE**************");
 		for (int i = 0; i < motors.size(); i++) {
 			CANTalon motor = motors.get(i);
 
 			double startingTickValue = motor.getPosition();
 			double endValue = startingTickValue + ticksToMove;
-			if (i >= 2) {
-				// right motors are inverted
+			if (i == 0 || i == 2) {
+				// right motors are inverted and we are reversing the front motors
 				endValue = startingTickValue - ticksToMove;
 			}
 
-            Robot.debugger.logError(CustomDebugger.LoggerNames.DRIVETRAIN, "Motor " + i + ": starting position " + startingTickValue + ", desired position " + endValue);
+			System.out.println("Motor " + i + ": starting position " + startingTickValue + ", desired position " + endValue);
 			desiredTicksValue.add(endValue);
 		}
 	}
@@ -70,16 +69,16 @@ public class MoveStraightPositionModeCommand extends Command {
 	protected boolean isFinished() {
 		// checking to see if the front motors have finished regardless of driving direction
 		// checking to see if the front motors have finished (regardless of what direction the robot is driving)
-		if (inputDistance > 0){
-			return isMotorFinished(0) || isMotorFinished(2);}
-		else{
-			return isMotorFinished(1) || isMotorFinished(3);}
+		if (inputDistance > 0)
+			return isMotorFinished(0) || isMotorFinished(2);
+		else
+			return isMotorFinished(1) || isMotorFinished(3);
 	}
 	private boolean isMotorFinished(int i) {
 		boolean finished = false;
 		double currentPosition = motors.get(i).getPosition();
 		Double desiredPosition = desiredTicksValue.get(i);
-        Robot.debugger.logError(CustomDebugger.LoggerNames.DRIVETRAIN, "Motor " + i + ": current position: " + currentPosition + ", desired position " + desiredPosition);
+		System.out.println("Motor " + i + ": current position: " + currentPosition + ", desired position " + desiredPosition);
 
 		if (i >= 2) {
 			// right motors are inverted
@@ -100,14 +99,14 @@ public class MoveStraightPositionModeCommand extends Command {
 	}
 	// Called once after isFinished returns true
 	protected void end() {
-        Robot.debugger.logError(CustomDebugger.LoggerNames.DRIVETRAIN, "Stopping motor");
+		System.out.println("Stopping motor");
 		driveTrain.getRobotDrive().stopMotor();
 	}
 
 	// Called when another command which requires one or more of the same
 	// subsystems is scheduled to run
 	protected void interrupted() {
-        Robot.debugger.logError(CustomDebugger.LoggerNames.DRIVETRAIN, "Command interrupted!");
+		System.out.println("Command interrupted!");
 		end();
 	}
 }
