@@ -1,11 +1,19 @@
-package org.usfirst.frc4915.MecanumDrive.commands;
+package org.usfirst.frc4915.MecanumDrive.commands.autonomous;
 
-import org.usfirst.frc4915.MecanumDrive.Robot;
+import org.usfirst.frc4915.MecanumDrive.commands.drive.MoveStraightPositionModeCommand;
+import org.usfirst.frc4915.MecanumDrive.commands.drive.StrafeCommand;
+import org.usfirst.frc4915.MecanumDrive.commands.elevator.ElevatorMoveToHeight;
+import org.usfirst.frc4915.MecanumDrive.commands.grabber.CloseGrabber;
+import org.usfirst.frc4915.MecanumDrive.commands.grabber.OpenGrabber;
+
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
-public class AutonomousCommandToteStrategy extends CommandGroup {
+/**
+ *
+ */
+public class AutonomousCommandJustDrive extends CommandGroup {
     
-    public AutonomousCommandToteStrategy() {
+    public  AutonomousCommandJustDrive() {
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
@@ -28,6 +36,7 @@ public class AutonomousCommandToteStrategy extends CommandGroup {
     	addSequential(new MoveStraightPositionModeCommand(4,0.7));
     	addSequential(new OpenGrabber());
     	addSequential(new MoveStraightPositionModeCommand(1,0.2));
-    	
+
+    	addSequential( new StrafeCommand(3, 0.7));
     }
 }

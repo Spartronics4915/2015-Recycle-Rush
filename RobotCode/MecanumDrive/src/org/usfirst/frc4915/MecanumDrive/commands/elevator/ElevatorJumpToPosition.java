@@ -1,4 +1,4 @@
-package org.usfirst.frc4915.MecanumDrive.commands;
+package org.usfirst.frc4915.MecanumDrive.commands.elevator;
 
 import org.usfirst.frc4915.MecanumDrive.Robot;
 import org.usfirst.frc4915.MecanumDrive.subsystems.Elevator;
@@ -11,12 +11,12 @@ public class ElevatorJumpToPosition extends Command {
 
 	// Position number -- number of totes that you would need to stack on top
 	// of.
-	private int positionNumber;
+	private double positionNumber;
 
-	public ElevatorJumpToPosition(int position) {
+	public ElevatorJumpToPosition(double d) {
 		// Use requires() here to declare subsystem dependencies
 		// eg. requires(chassis);
-		positionNumber = position;
+		positionNumber = d;
 	}
 
 	// Called just before this Command runs the first time

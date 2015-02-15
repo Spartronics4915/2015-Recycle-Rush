@@ -1,7 +1,8 @@
-package org.usfirst.frc4915.MecanumDrive.commands;
+package org.usfirst.frc4915.MecanumDrive.commands.elevator;
 
 import org.usfirst.frc4915.MecanumDrive.Robot;
 import org.usfirst.frc4915.MecanumDrive.subsystems.Elevator;
+import org.usfirst.frc4915.debuggersystem.CustomDebugger.LoggerNames;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
@@ -26,6 +27,7 @@ public class ElevatorPositionCalibration extends CommandGroup {
 		// e.g. if Command1 requires chassis, and Command2 requires arm,
 		// a CommandGroup containing them would require both the chassis and the
 		// arm.
+		Robot.debugger.logError(LoggerNames.ELEVATOR, "ElevatorPositionCalibration Running");
 		addParallel(new ElevatorMoveToHeight());
 		addSequential(new ElevatorMinHeightCalibrate());
 		addSequential(new ElevatorMaxHeightCalibrate());

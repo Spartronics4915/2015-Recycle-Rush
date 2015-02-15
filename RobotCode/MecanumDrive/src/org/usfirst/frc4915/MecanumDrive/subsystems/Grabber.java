@@ -5,9 +5,6 @@ import org.usfirst.frc4915.MecanumDrive.RobotMap;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
-/**
- *
- */
 public class Grabber extends Subsystem {
 
 	// Put methods for controlling this subsystem

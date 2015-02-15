@@ -25,15 +25,25 @@
 		<format property="build-date" pattern="MMM dd, hh:mm a"/>
 	</tstamp>
 
-	<target name="javadocs">
-		<mkdir dir="${docs.dir}"/>
-		
-		<javadoc
-		sourcepath="src"
-		destdir="${docs.dir}"
-		use="true"
-		/>
+	<target name="javadoc">
+		<macro-javadocs />
 	</target>
+
+	<target name="javadocs">
+		<macro-javadocs />
+	</target>
+
+	<macrodef name="macro-javadocs">
+		<sequential>
+			<mkdir dir="${docs.dir}"/>
+
+			<javadoc
+			sourcepath="src"
+			destdir="${docs.dir}"
+			use="true"
+			/>
+		</sequential>
+	</macrodef>
 
     <!-- <import file="${wpilib.ant.dir}/build.xml"/> -->
     <!-- We need to use a custom script for versions. -->
