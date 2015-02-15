@@ -6,6 +6,7 @@ import org.usfirst.frc4915.MecanumDrive.commands.elevator.ElevatorFineTune;
 import org.usfirst.frc4915.debuggersystem.CustomDebugger.LoggerNames;
 
 import edu.wpi.first.wpilibj.CANTalon;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -25,7 +26,8 @@ public class Elevator extends Subsystem {
 	// Set by ElevatorMax/MinHeightCalibrate commands
 	public static double minimumPotentiometerValue = 0;
 	public static double maximumPotentiometerValue = 1023;
-
+	public static double slackMinimum = 0;
+	
 	public static boolean SAFETY = true;
 	
 	public static final double RANGE_OF_MOTION = 53; // The elevator can go a
@@ -41,7 +43,8 @@ public class Elevator extends Subsystem {
 														// position change
 
 	public CANTalon winch = RobotMap.elevatorWinchMotor;
-
+	public DigitalInput slackLimitSwitch = RobotMap.slackLimitSwitch;
+	
 	/**
 	 * Initializes the default command (WPI java default method) Called on
 	 * initialization of the subsystem
@@ -189,6 +192,7 @@ public class Elevator extends Subsystem {
 			winch.enableBrakeMode(true);
 			minimumPotentiometerValue = getPosition();
 		}
+		keepWinchTight();
 		if (setPoint > maximumPotentiometerValue) {
 			setPoint = maximumPotentiometerValue;
 		}
@@ -196,6 +200,27 @@ public class Elevator extends Subsystem {
 			setPoint = minimumPotentiometerValue;
 		}
 		Robot.debugger.logError(LoggerNames.ELEVATOR, "Elevator's height is " + setPoint);
+	}
+
+	//TODO Add Javadoc comment
+	public void keepWinchTight() {
+		if (elevatorIsSlack() && slackMinimum == 0) {
+			slackMinimum = getPosition();
+		}
+		if (setPoint < slackMinimum) {
+			setPoint = slackMinimum;
+		}
+		if (!elevatorIsSlack()) {
+			slackMinimum = 0;
+		}
+	}
+	
+	/**
+	 * Is the elevator cable slack and about to unwind?
+	 * @return true if the elevator is slack, false if not.
+	 */
+	private boolean elevatorIsSlack() {
+		return slackLimitSwitch.get();
 	}
 
 }

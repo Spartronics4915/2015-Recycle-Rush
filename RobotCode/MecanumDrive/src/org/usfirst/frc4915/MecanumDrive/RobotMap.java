@@ -3,6 +3,7 @@ package org.usfirst.frc4915.MecanumDrive;
 import edu.wpi.first.wpilibj.BuiltInAccelerometer;
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.CANTalon.ControlMode;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Gyro;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Solenoid;
@@ -71,19 +72,7 @@ public class RobotMap {
 	public static CANTalon elevatorWinchMotor;
 	private static final int FWD_SOFT_LIMIT = 1023;
 	private static final int REV_SOFT_LIMIT = 0;
-
-	/*
-	 * Limit Switches
-	 */
-
-	// public static DigitalInput limitSwitchBottom; // May be used for elevator
-	// as a sensor for testing if at the bottom of elevator
-	// public static DigitalInput limitSwitchTop; // May be used for elevator as
-	// a sensor for testing if at the top of elevator
-	// Potentiometer
-	// private static final int SCALE = 1; // TODO find correct scale for the
-	// potentiometer
-	// public static AnalogPotentiometer potentiometer;
+	public static DigitalInput slackLimitSwitch;
 
 	/*
 	 * GRABBER
@@ -151,6 +140,7 @@ public class RobotMap {
 		elevatorWinchMotor.ConfigFwdLimitSwitchNormallyOpen(true);
 		elevatorWinchMotor.ConfigRevLimitSwitchNormallyOpen(true);
 		elevatorWinchMotor.enableBrakeMode(true);
+		slackLimitSwitch = new DigitalInput(0);
 		
 		// Potentiometer instantiation
 		

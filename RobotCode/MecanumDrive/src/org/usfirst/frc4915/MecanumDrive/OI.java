@@ -153,9 +153,6 @@ public class OI {
 		SmartDashboard.putData("ElevatorStop", new ElevatorStop());
 		SmartDashboard.putBoolean("Elevator At Top", Robot.elevator.isAtTopOfElevator());
 		SmartDashboard.putBoolean("Elevator At Bottom", Robot.elevator.isAtBottomOfElevator());
-		SmartDashboard.putNumber("Elevator Potentiometer Value", Robot.elevator.getPosition());
-		SmartDashboard.putData("Set height to 700", new ElevatorSetHeight(700));
-		SmartDashboard.putData("Set height to 850", new ElevatorSetHeight(850));
 		SmartDashboard.putData("Disable Elevator Safety", new ElevatorSetSafety(false));
 		SmartDashboard.putData("Enable Elevator Safety", new ElevatorSetSafety(true));		
 		/*
