@@ -50,7 +50,7 @@ public class CustomDebugger {
 	public void setFilter(LoggerNames logger) {
 		for (Logger n : loggerMap.values()) {
 			if (!n.getName().equalsIgnoreCase(logger.name())) {
-				n.setLevel(Level.ALL);
+				n.setLevel(Level.OFF);
 			}
 		}
 	}
@@ -62,7 +62,7 @@ public class CustomDebugger {
 	 */
 	public void resetFilter() {
 		for (Logger n : loggerMap.values()) {
-			n.setLevel(Level.OFF);
+			n.setLevel(Level.ALL);
 		}
 	}
 

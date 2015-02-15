@@ -39,7 +39,7 @@ public class Robot extends IterativeRobot {
 	public static DriveTrain driveTrain;
 	public static Elevator elevator;
 	public static Grabber grabber;
-	public static CustomDebugger debugger = new CustomDebugger();
+	public static CustomDebugger debugger;
 	
     //vars for camera code
     Image frame;
@@ -53,7 +53,8 @@ public class Robot extends IterativeRobot {
 	 */
 	public void robotInit() {
 		RobotMap.init();
-
+		
+		debugger = new CustomDebugger();
 		preferences = Preferences.getInstance();
 		driveTrain = new DriveTrain();
 		elevator = new Elevator();
