@@ -4,11 +4,11 @@ import org.usfirst.frc4915.MecanumDrive.commands.elevator.ElevatorJumpToPosition
 import org.usfirst.frc4915.MecanumDrive.commands.grabber.CloseGrabber;
 import org.usfirst.frc4915.MecanumDrive.commands.grabber.OpenGrabber;
 
+
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class AutonomousCommandToteStrategy extends CommandGroup {
-    
-    public AutonomousCommandToteStrategy() {
+        public AutonomousCommandToteStrategy() {
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
@@ -35,5 +35,6 @@ public class AutonomousCommandToteStrategy extends CommandGroup {
     	System.out.println("Driving backwards 12 ft");
     	addSequential(new MoveStraightPositionModeCommand(-12, 0.7));
  
+
 }
 }

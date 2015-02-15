@@ -63,6 +63,7 @@ public class Robot extends IterativeRobot {
 		driveTrain = new DriveTrain();
 		elevator = new Elevator();
 		grabber = new Grabber();
+		
 		// OI must be constructed after subsystems. If the OI creates Commands
 		// (which it very likely will), subsystems are not guaranteed to be
 		// constructed yet. Thus, their requires() statements may grab null
@@ -93,8 +94,6 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putData("Debugger Filter", Debugger);
 
 
-		// Test for sending messages to smart dashboard
-		SendUserMessage.displayMessage();
 		
         //Init camera
        // frame = NIVision.imaqCreateImage(NIVision.ImageType.IMAGE_RGB, 0);
@@ -110,7 +109,10 @@ public class Robot extends IterativeRobot {
 		
         // session = NIVision.IMAQdxOpenCamera("cam1", NIVision.IMAQdxCameraControlMode.CameraControlModeController);
         // NIVision.IMAQdxConfigureGrab(session);
-
+		
+		if (elevator != null) {
+			elevator.setHieghtToCurrentPosition();
+		}
 	}
 
 	/**
@@ -130,7 +132,7 @@ public class Robot extends IterativeRobot {
 		autonomousCommand = (Command) autonomousProgramChooser.getSelected();
 		//double desiredDistrance = preferences.getDouble("DesiredDistance", 9.0);
 		//autonomousCommand = new AutonomousCommandToteStrategy();
-
+		autonomousCommand = new AutonomousCommandToteStrategy();
 		autonomousCommand.start();
 	}
 
@@ -146,8 +148,10 @@ public class Robot extends IterativeRobot {
 		// teleop starts running. If you want the autonomous to
 		// continue until interrupted by another command, remove
 		// this line or comment it out.
-		if (autonomousCommand != null)
+		if (autonomousCommand != null){
 			autonomousCommand.cancel();
+		}
+		elevator.setHieghtToCurrentPosition();
 	}
 
 	/**
@@ -170,13 +174,16 @@ public class Robot extends IterativeRobot {
 
 		Scheduler.getInstance().run();
 		
-		SmartDashboard.putNumber("Elevator Height", Elevator.height);
+		SmartDashboard.putNumber("Elevator SetPoint", Elevator.setPoint);
 		SmartDashboard.putBoolean("Elevator At Top", elevator.isAtTopOfElevator());
 		SmartDashboard.putBoolean("Elevator At Bottom", elevator.isAtBottomOfElevator());
 		SmartDashboard.putNumber("Elevator Potentiometer Value", elevator.getPosition());
 		SmartDashboard.putNumber("Elevator P", elevator.winch.getP());
 		SmartDashboard.putNumber("Elevator I", elevator.winch.getI());
 		SmartDashboard.putNumber("Elevator D", elevator.winch.getD());
+		SmartDashboard.putNumber("Maximum height value: ", Elevator.maximumPotentiometerValue);
+		SmartDashboard.putNumber("Minimum height value: ", Elevator.minimumPotentiometerValue);
+		SmartDashboard.putNumber("Position of Elevator: ", Robot.elevator.getElevatorLevel());
 		
     	/**
          * grab an image, draw the circle, and provide it for the camera server

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.usfirst.frc4915.MecanumDrive.Robot;
 import org.usfirst.frc4915.MecanumDrive.subsystems.DriveTrain;
+import org.usfirst.frc4915.debuggersystem.CustomDebugger;
 
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.command.Command;
@@ -36,7 +37,7 @@ public class MoveStraightGivenDistanceCommand extends Command {
 		// the distance traveled
 		elapsed = 0;
 		startTime = System.currentTimeMillis();
-		System.out.println("Start time recorded: " + startTime);
+		Robot.debugger.logError(CustomDebugger.LoggerNames.DRIVETRAIN, "Start time recorded: " + startTime);
 		endTime = 0;
 		// creates a variable to keep track of the time.
 		distance = 0;
@@ -51,10 +52,10 @@ public class MoveStraightGivenDistanceCommand extends Command {
 		// This loop allows for a negative input that will have the robot run
 		// backwards.
 		if (inputDistance < 0) {
-			System.out.println("Driving backwards...");
+            Robot.debugger.logError(CustomDebugger.LoggerNames.DRIVETRAIN, "Driving backwards...");
 			driveTrain.driveStraight(-1);
 		} else {
-			System.out.println("Driving forwards...");
+            Robot.debugger.logError(CustomDebugger.LoggerNames.DRIVETRAIN, "Driving forwards...");
 			driveTrain.driveStraight(1);
 		}
 		// creates a loop to track the distance traveled
@@ -63,37 +64,37 @@ public class MoveStraightGivenDistanceCommand extends Command {
 		endTime = System.currentTimeMillis();
 		elapsed = endTime - startTime;
 		distanceSinceElapsed = 0;
-		System.out.println("Recorded end time: " + endTime + " (difference of " + elapsed + " seconds)s");
+        Robot.debugger.logError(CustomDebugger.LoggerNames.DRIVETRAIN, "Recorded end time: " + endTime + " (difference of " + elapsed + " seconds)s");
 		// maybe a method???
 		for (CANTalon motor : motors) {
 			double distanceForMotor = driveTrain.getDistanceForMotor(motor, elapsed);
-			System.out.println("Distance for motor " + motor + ": " + distanceForMotor);
+            Robot.debugger.logError(CustomDebugger.LoggerNames.DRIVETRAIN, "Distance for motor " + motor + ": " + distanceForMotor);
 			distanceSinceElapsed = Math.max(distanceForMotor, distanceSinceElapsed);
-			System.out.println("Distance since elapsed: " + distanceSinceElapsed);
+            Robot.debugger.logError(CustomDebugger.LoggerNames.DRIVETRAIN, "Distance since elapsed: " + distanceSinceElapsed);
 		}
 
 		distance += distanceSinceElapsed;
 		startTime = endTime;
-		System.out.println("Completed movement of " + distance + " ft.");
+        Robot.debugger.logError(CustomDebugger.LoggerNames.DRIVETRAIN, "Completed movement of " + distance + " ft.");
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
 		boolean finished = (Math.abs(distance) > Math.abs(inputDistance));
-		System.out.println("Testing if finished: " + finished);
+        Robot.debugger.logError(CustomDebugger.LoggerNames.DRIVETRAIN, "Testing if finished: " + finished);
 		return finished;
 	}
 
 	// Called once after isFinished returns true
 	protected void end() {
-		System.out.println("Stopping motor");
+        Robot.debugger.logError(CustomDebugger.LoggerNames.DRIVETRAIN, "Stopping motor");
 		driveTrain.getRobotDrive().stopMotor();
 	}
 
 	// Called when another command which requires one or more of the same
 	// subsystems is scheduled to run
 	protected void interrupted() {
-		System.out.println("Command interrupted!");
+        Robot.debugger.logError(CustomDebugger.LoggerNames.DRIVETRAIN, "Command interrupted!");
 		end();
 	}
 }

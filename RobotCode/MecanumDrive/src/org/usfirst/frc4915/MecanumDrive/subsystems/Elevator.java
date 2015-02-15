@@ -18,7 +18,7 @@ public class Elevator extends Subsystem {
 	// TODO initialize height
 	// Not in inches. Between minimumPotentiometerValue and
 	// maximumPotentiometerValue.
-	public static double height = 700;
+	public static double setPoint;
 
 	// POTENTIOMTERS : fwd --> top, rev --> bottom
 
@@ -26,7 +26,9 @@ public class Elevator extends Subsystem {
 	public static double minimumPotentiometerValue = 0;
 	public static double maximumPotentiometerValue = 1023;
 
-	public static final double RANGE_OF_MOTION = 54; // The elevator can go a
+	public static boolean SAFETY = true;
+	
+	public static final double RANGE_OF_MOTION = 53; // The elevator can go a
 														// distance between 54
 														// inches
 
@@ -77,7 +79,7 @@ public class Elevator extends Subsystem {
 	 *            + goes up, - goes down
 	 */
 	public void moveElevator(double heightChange) {
-		height += heightChange;
+		setPoint += heightChange;
 		moveToHeight();
 	}
 
@@ -86,8 +88,17 @@ public class Elevator extends Subsystem {
 	 * first
 	 */
 	public void moveToHeight() {
-		keepHeightInRange();
-		winch.set(height);
+		if (SAFETY) {
+			keepHeightInRange();
+		}
+		winch.set(setPoint);
+	}
+	
+	/**
+	 * Sets the height to where it currently is so that the elevator should not go up or down.
+	 */
+	public void setHieghtToCurrentPosition() {
+		setPoint = getPosition();
 	}
 
 	/**
@@ -129,9 +140,17 @@ public class Elevator extends Subsystem {
 
 		// find the range between the min and max Potentiometer values, divide by 54 to get
 		// the change in value per inch and multiply by the number of inches that the totes are stacked
-		height = minimumPotentiometerValue + ((maximumPotentiometerValue - minimumPotentiometerValue) 
+		setPoint = minimumPotentiometerValue + ((maximumPotentiometerValue - minimumPotentiometerValue) 
 											 * HEIGHT_OF_TOTE * positionNumber / RANGE_OF_MOTION);
-		Robot.debugger.logError(LoggerNames.ELEVATOR, "Elevator's height is " + height);
+		Robot.debugger.logError(LoggerNames.ELEVATOR, "Elevator's height is " + setPoint);
+	}
+	
+	/**
+	 * 
+	 * @return Level of Elevator in number of totes
+	 */
+	public double getElevatorLevel() {
+		return ((RANGE_OF_MOTION * (winch.getPosition())) / (maximumPotentiometerValue - minimumPotentiometerValue)) / 12;
 	}
 
 	/**
@@ -158,25 +177,25 @@ public class Elevator extends Subsystem {
 
 	/**
 	 * Makes sure that the height value doesn't increase or decrease beyond the
-	 * min/maximum values Also, if the limit switch is pressed (fwd --> top ~973, rev
-	 * --> bottom ~550) it will update maximum/minimum potentiometer values.
+	 * min/maximum values Also, if the limit switch is pressed (fwd --> top ~700?, rev
+	 * --> bottom ~0) it will update maximum/minimum potentiometer values.
 	 */
 	public void keepHeightInRange() {
 		if (isAtTopOfElevator()) {
+			winch.enableBrakeMode(true);
 			maximumPotentiometerValue = getPosition();
-			height = getPosition();
 		}
 		if (isAtBottomOfElevator()) {
+			winch.enableBrakeMode(true);
 			minimumPotentiometerValue = getPosition();
-			height = getPosition();
 		}
-		if (height > maximumPotentiometerValue) {
-			height = maximumPotentiometerValue;
+		if (setPoint > maximumPotentiometerValue) {
+			setPoint = maximumPotentiometerValue;
 		}
-		if (height < minimumPotentiometerValue) {
-			height = minimumPotentiometerValue;
+		if (setPoint < minimumPotentiometerValue) {
+			setPoint = minimumPotentiometerValue;
 		}
-		Robot.debugger.logError(LoggerNames.ELEVATOR, "Elevator's height is " + height);
+		Robot.debugger.logError(LoggerNames.ELEVATOR, "Elevator's height is " + setPoint);
 	}
 
 }
