@@ -27,16 +27,14 @@ public class AutonomousCommandToteStrategy extends CommandGroup {
         // a CommandGroup containing them would require both the chassis and the
         // arm.
 
-    	System.out.println("Moving Elevator");
+    	System.out.println("Moving Elevator (level 0)");
     	addSequential(new ElevatorJumpToPosition(0));
-    	System.out.println("Moving Grabber");
+    	System.out.println("Closing Grabber");
     	addSequential(new CloseGrabber());
-    	System.out.println("Driving 11 ft");
-    	addSequential(new MoveStraightPositionModeCommand(-11, 0.7));
-    	System.out.println("Moving Grabber");
-    	addSequential(new OpenGrabber());
-    	addSequential(new MoveStraightPositionModeCommand(-1, 0.7));
-    	System.out.println("Driving 1 ft");
+    	System.out.println("Moving Elevator (level 1)");
+    	addSequential(new ElevatorJumpToPosition(1));
+    	System.out.println("Driving back 12 ft");
+    	addSequential(new MoveStraightPositionModeCommand(-12, 0.7));
 
 //    public AutonomousCommandToteStrategy() {
 //        // Add Commands here:
