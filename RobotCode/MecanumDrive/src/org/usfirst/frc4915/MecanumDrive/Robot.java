@@ -1,12 +1,17 @@
 package org.usfirst.frc4915.MecanumDrive;
 
+import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandContainerStrategy;
+import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandJustDrive;
 import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandToteStrategy;
 import org.usfirst.frc4915.MecanumDrive.commands.debug.GenericTestCommand;
 import org.usfirst.frc4915.MecanumDrive.commands.drive.ToggleDriveMode;
+import org.usfirst.frc4915.MecanumDrive.commands.debug.DebuggerFilter;
 import org.usfirst.frc4915.MecanumDrive.subsystems.DriveTrain;
 import org.usfirst.frc4915.MecanumDrive.subsystems.Elevator;
 import org.usfirst.frc4915.MecanumDrive.subsystems.Grabber;
 import org.usfirst.frc4915.debuggersystem.CustomDebugger;
+import org.usfirst.frc4915.debuggersystem.CustomDebugger.LoggerNames;
+
 
 import com.ni.vision.NIVision.Image;
 
@@ -35,6 +40,7 @@ public class Robot extends IterativeRobot {
 	double testPreferencesItemTwo;
 
 	SendableChooser autonomousProgramChooser;
+	SendableChooser Debugger;
 
 	public static OI oi;
 	public static DriveTrain driveTrain;
@@ -74,13 +80,30 @@ public class Robot extends IterativeRobot {
 	    preferences.getString("DesiredDistance", "9.0");
 
 		autonomousProgramChooser = new SendableChooser();
-		autonomousProgramChooser.addDefault("Autonomous Program One", new GenericTestCommand(10, "Running program one!"));
-		autonomousProgramChooser.addObject("Autonomous Program Two", new GenericTestCommand(20, "Running program two!"));
+		autonomousProgramChooser.addDefault("Autonomous Just Drive", new AutonomousCommandJustDrive());
+		autonomousProgramChooser.addObject("Autonomous Container", new AutonomousCommandContainerStrategy());
+		autonomousProgramChooser.addObject("Autonomous Tote", new AutonomousCommandToteStrategy());
 
 		SmartDashboard.putData("Autonomous Program", autonomousProgramChooser);
+		
+		Debugger = new SendableChooser();
+		Debugger.addDefault("General", new DebuggerFilter(LoggerNames.GENERAL));
+		Debugger.addObject("Grabber", new DebuggerFilter(LoggerNames.GRABBER));
+		Debugger.addObject("Drivetrain", new DebuggerFilter(LoggerNames.DRIVETRAIN));
+		Debugger.addObject("Autonomous", new DebuggerFilter(LoggerNames.AUTONOMOUS));
+		Debugger.addObject("Elevator", new DebuggerFilter(LoggerNames.ELEVATOR));
+		
+		SmartDashboard.putData("Debugger Filter", Debugger);
+
 
 		
         //Init camera
+       // frame = NIVision.imaqCreateImage(NIVision.ImageType.IMAGE_RGB, 0);
+
+        // the camera name (ex "cam0") can be found through the roborio web interface
+        //session = NIVision.IMAQdxOpenCamera("cam1",
+       //         NIVision.IMAQdxCameraControlMode.CameraControlModeController);
+      //  NIVision.IMAQdxConfigureGrab(session);
 		
         // frame = NIVision.imaqCreateImage(NIVision.ImageType.IMAGE_RGB, 0);
 
@@ -108,10 +131,10 @@ public class Robot extends IterativeRobot {
 
 	public void autonomousInit() {
 		// Use the selected autonomous command
-		// autonomousCommand = (Command) autonomousProgramChooser.getSelected();
+		autonomousCommand = (Command) autonomousProgramChooser.getSelected();
 		//double desiredDistrance = preferences.getDouble("DesiredDistance", 9.0);
+		//autonomousCommand = new AutonomousCommandToteStrategy();
 		autonomousCommand = new AutonomousCommandToteStrategy();
-		elevator.setHieghtToCurrentPosition();
 		autonomousCommand.start();
 	}
 
@@ -170,6 +193,11 @@ public class Robot extends IterativeRobot {
          * grab an image, draw the circle, and provide it for the camera server
          * which will in turn send it to the dashboard.
          */
+
+		//NIVision.IMAQdxStartAcquisition(session);
+
+         //   NIVision.IMAQdxGrab(session, frame, 1);
+          //  CameraServer.getInstance().setImage(frame);
 		// NIVision.IMAQdxStartAcquisition(session);
 
         // NIVision.IMAQdxGrab(session, frame, 1);
@@ -177,7 +205,8 @@ public class Robot extends IterativeRobot {
 
         /** robot code here! **/
         Timer.delay(0.005);		// wait for a motor update time
-        
+
+       // NIVision.IMAQdxStopAcquisition(session);
         // NIVision.IMAQdxStopAcquisition(session);
 
 	}
