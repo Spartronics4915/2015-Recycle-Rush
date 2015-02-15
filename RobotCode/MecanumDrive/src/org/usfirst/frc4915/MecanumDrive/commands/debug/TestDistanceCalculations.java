@@ -32,6 +32,8 @@ public class TestDistanceCalculations extends Command {
 	long previousTime;
 	long currentTime;
 	long changeInTime;
+	
+	double metersToFeet = 3.2808;
 
 	BuiltInAccelerometer accelerometer = RobotMap.accelerometer;
 
@@ -61,8 +63,8 @@ public class TestDistanceCalculations extends Command {
 		currentVelocityX = gForceToSSI(changeInAccelerationX) * milliSecondsToSSI(changeInTime);
 		currentVelocityY = gForceToSSI(changeInAccelerationY) * milliSecondsToSSI(changeInTime);
 
-		changeInDistanceX = currentVelocityX * milliSecondsToSSI(changeInTime);
-		changeInDistanceY = currentVelocityY * milliSecondsToSSI(changeInTime);
+		changeInDistanceX = currentVelocityX * milliSecondsToSSI(changeInTime)*metersToFeet;
+		changeInDistanceY = currentVelocityY * milliSecondsToSSI(changeInTime)*metersToFeet;
 
 		distanceX += changeInDistanceX;
 		distanceY += changeInDistanceY;
