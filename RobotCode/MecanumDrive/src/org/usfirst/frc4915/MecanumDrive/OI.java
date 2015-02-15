@@ -8,6 +8,7 @@ import org.usfirst.frc4915.MecanumDrive.commands.drive.ToggleDriveMode;
 import org.usfirst.frc4915.MecanumDrive.commands.elevator.ElevatorJumpToPosition;
 import org.usfirst.frc4915.MecanumDrive.commands.elevator.ElevatorPositionCalibration;
 import org.usfirst.frc4915.MecanumDrive.commands.elevator.ElevatorSetHeight;
+import org.usfirst.frc4915.MecanumDrive.commands.elevator.ElevatorSetSafety;
 import org.usfirst.frc4915.MecanumDrive.commands.elevator.ElevatorStop;
 import org.usfirst.frc4915.MecanumDrive.commands.grabber.CloseGrabber;
 import org.usfirst.frc4915.MecanumDrive.commands.grabber.IntermediateOpen;
@@ -90,7 +91,7 @@ public class OI {
 		/*
 		 * JOYSTICK BUTTONS (ELEVATOR)
 		 */
-		elevatorJumpToPositionZero = new JoystickButton(elevatorStick, 2);
+		elevatorJumpToPositionZero = new JoystickButton(elevatorStick, 6);
 		elevatorJumpToPositionZero.whenPressed(new ElevatorJumpToPosition(0));
 		elevatorJumpToPositionOne = new JoystickButton(elevatorStick, 7);
 		elevatorJumpToPositionOne.whenPressed(new ElevatorJumpToPosition(1));
@@ -150,14 +151,13 @@ public class OI {
 		SmartDashboard.putData("Jump to Elevator Position 4", new ElevatorJumpToPosition(4));
 		SmartDashboard.putData("ElevatorPositionCalibration", new ElevatorPositionCalibration());
 		SmartDashboard.putData("ElevatorStop", new ElevatorStop());
-		SmartDashboard.putNumber("Elevator Height", Elevator.setPoint);
 		SmartDashboard.putBoolean("Elevator At Top", Robot.elevator.isAtTopOfElevator());
 		SmartDashboard.putBoolean("Elevator At Bottom", Robot.elevator.isAtBottomOfElevator());
 		SmartDashboard.putNumber("Elevator Potentiometer Value", Robot.elevator.getPosition());
 		SmartDashboard.putData("Set height to 700", new ElevatorSetHeight(700));
 		SmartDashboard.putData("Set height to 850", new ElevatorSetHeight(850));
-		
-		
+		SmartDashboard.putData("Disable Elevator Safety", new ElevatorSetSafety(false));
+		SmartDashboard.putData("Enable Elevator Safety", new ElevatorSetSafety(true));		
 		/*
 		 * Debugger buttons
 		 */
