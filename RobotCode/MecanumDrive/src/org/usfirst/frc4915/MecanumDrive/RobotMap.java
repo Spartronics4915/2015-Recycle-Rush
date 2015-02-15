@@ -3,7 +3,6 @@ package org.usfirst.frc4915.MecanumDrive;
 import edu.wpi.first.wpilibj.BuiltInAccelerometer;
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.CANTalon.ControlMode;
-import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Gyro;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Solenoid;
@@ -22,25 +21,25 @@ public class RobotMap {
 	/*
 	 * CONSTANTS
 	 */
-	public static final int MOTOR_PORT_LEFT_FRONT = 20;
-	public static final int MOTOR_PORT_LEFT_REAR = 21;
-	public static final int MOTOR_PORT_RIGHT_FRONT = 22;
-	public static final int MOTOR_PORT_RIGHT_REAR = 23;
+	public static final int MOTOR_PORT_LEFT_FRONT = 10;
+	public static final int MOTOR_PORT_LEFT_REAR = 11;
+	public static final int MOTOR_PORT_RIGHT_FRONT = 12;
+	public static final int MOTOR_PORT_RIGHT_REAR = 13;
 	
-	public static final int MOTOR_PORT_ELEVATOR_WINCH = 24;
+	public static final int MOTOR_PORT_ELEVATOR_WINCH = 14;
 	
 	/*
 	 * The Pneumatic Control Module's CAN Node ID. Use 10 for 4915. Use 20 for 9999
 	 */
-	public final static int PCM_NODE_ID = 20;
+	public final static int PCM_NODE_ID = 10;
 	
 	public final static int GYRO_PORT = 0;
 	
 	public final static int ULTRASONIC_PORT_FIRST = 0;
 	public final static int ULTRASONIC_PORT_SECOND = 1;
 	
-	public final static int SOLENOID_CHANNEL_MOMMA_FORWARD = 0;
-	public final static int SOLENOID_CHANNEL_MOMMA_REVERSE = 1;
+	public final static int SOLENOID_CHANNEL_PRIMARY = 0;
+	public final static int SOLENOID_CHANNEL_SECONDARY = 1;
 	
 	public final static int SOLENOID_CHANNEL_AUNTIE = 3;
 	
@@ -52,7 +51,9 @@ public class RobotMap {
 	public static CANTalon mecanumDriveControlsRightFront;
 	public static CANTalon mecanumDriveControlsRightRear;
 	public static RobotDrive driveTrainRobotDrive;
+	// TODO explain the reason for this number
 	public static final double DEFAULT_MAX_OUTPUT = 950;
+
 
 	/*
 	 * Gyroscope
@@ -68,6 +69,8 @@ public class RobotMap {
 	 * ELEVATOR
 	 */
 	public static CANTalon elevatorWinchMotor;
+	private static final int FWD_SOFT_LIMIT = 1023;
+	private static final int REV_SOFT_LIMIT = 0;
 
 	/*
 	 * Limit Switches
@@ -85,8 +88,8 @@ public class RobotMap {
 	/*
 	 * GRABBER
 	 */
-	public static DoubleSolenoid mommaSolenoid;
-	public static Solenoid auntieSolenoid;
+	public static Solenoid primarySolenoid;
+	public static Solenoid secondarySolenoid;
 
 	/*
 	 * GENERAL SENSORS
@@ -141,8 +144,8 @@ public class RobotMap {
 		elevatorWinchMotor.setFeedbackDevice(CANTalon.FeedbackDevice.AnalogPot);
 		elevatorWinchMotor.setPID(25, 0, 0, 0.0001, 255, 17, 0); // TODO determine PID values and ramp rate
 		// P = 25 I = 0 D = 0 ==> Pretty accurate. Overshoots about one inch, and has a little error afterwards.
-		elevatorWinchMotor.setForwardSoftLimit(1023); // The absolute maximum height that the elevator can be
-		elevatorWinchMotor.setReverseSoftLimit(450); // The greater minimum height that the elevator can be
+		elevatorWinchMotor.setForwardSoftLimit(FWD_SOFT_LIMIT); // The absolute maximum height that the elevator can be
+		elevatorWinchMotor.setReverseSoftLimit(REV_SOFT_LIMIT); // The greater minimum height that the elevator can be
 		elevatorWinchMotor.enableForwardSoftLimit(true);
 		elevatorWinchMotor.enableReverseSoftLimit(true);
 		elevatorWinchMotor.ConfigFwdLimitSwitchNormallyOpen(true);
@@ -162,8 +165,9 @@ public class RobotMap {
 		 */
 		// Double Solenoid instantiation. Wiring: 0 --> Forward channel
 		// (extended). 1 --> Reverse channel (retracted).
-		mommaSolenoid = new DoubleSolenoid(PCM_NODE_ID, SOLENOID_CHANNEL_MOMMA_FORWARD, SOLENOID_CHANNEL_MOMMA_REVERSE); // Uses 10 as the Node ID for the PCM
-		auntieSolenoid = new Solenoid(PCM_NODE_ID, SOLENOID_CHANNEL_AUNTIE);
+		//mommaSolenoid = new DoubleSolenoid(PCM_NODE_ID, SOLENOID_CHANNEL_MOMMA_FORWARD, SOLENOID_CHANNEL_MOMMA_REVERSE); // Uses 10 as the Node ID for the PCM
+		primarySolenoid = new Solenoid(PCM_NODE_ID, SOLENOID_CHANNEL_PRIMARY);
+		secondarySolenoid = new Solenoid(PCM_NODE_ID,SOLENOID_CHANNEL_SECONDARY); 
 
 		/*
 		 * GRABBER END

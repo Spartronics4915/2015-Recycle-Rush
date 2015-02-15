@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.usfirst.frc4915.MecanumDrive.Robot;
 import org.usfirst.frc4915.MecanumDrive.subsystems.DriveTrain;
+import org.usfirst.frc4915.debuggersystem.CustomDebugger;
 
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.command.Command;
@@ -17,8 +18,8 @@ public class MoveStraightPositionModeCommand extends Command {
 
 	public MoveStraightPositionModeCommand(double inputDistance, double inputSpeed) {
 		requires(driveTrain);
-		System.out.println("***MoveStraightPositionModeCommand inputDistance: " + inputDistance + "*******");
-		System.out.println("***MoveStraightPositionModeCommand inputSpeed: " + inputSpeed + "*******");
+
+        Robot.debugger.logError(CustomDebugger.LoggerNames.DRIVETRAIN, "***MoveStraightPositionModeCommand inputDistance: " + inputDistance + "*******");
 		this.inputDistance = inputDistance;
 		this.inputSpeed = inputSpeed;
 		// Use requires() here to declare subsystem dependencies
@@ -36,7 +37,7 @@ public class MoveStraightPositionModeCommand extends Command {
 
 		double ticksToMove = inputDistance * 12 * 1000 / (6 * Math.PI);
 
-		System.out.println("Input distance: " + inputDistance + " ft, ticks to move: " + ticksToMove);
+        Robot.debugger.logError(CustomDebugger.LoggerNames.DRIVETRAIN, "Input distance: " + inputDistance + " ft, ticks to move: " + ticksToMove);
 
 		for (int i = 0; i < motors.size(); i++) {
 			CANTalon motor = motors.get(i);
@@ -48,7 +49,8 @@ public class MoveStraightPositionModeCommand extends Command {
 				endValue = startingTickValue - ticksToMove;
 			}
 			System.out.println("!!!!!!!!!"+inputSpeed+"!!!!!!!!!!!");
-			System.out.println("Motor " + i + ": starting position " + startingTickValue + ", desired position " + endValue);
+            Robot.debugger.logError(CustomDebugger.LoggerNames.DRIVETRAIN, "Motor " + i + ": starting position " + startingTickValue + ", desired position " + endValue);
+
 			desiredTicksValue.add(endValue);
 		}
 	}
@@ -83,8 +85,10 @@ public class MoveStraightPositionModeCommand extends Command {
 	private boolean isMotorFinished(int i) {
 		boolean finished = false;
 		double currentPosition = motors.get(i).getPosition();
+
 		double desiredPosition = desiredTicksValue.get(i);
 		System.out.println("Motor " + i + ": current position: " + currentPosition + ", desired position " + desiredPosition);
+
 
 		if (i >= 2) {
 			// right motors are inverted
@@ -105,14 +109,14 @@ public class MoveStraightPositionModeCommand extends Command {
 	}
 	// Called once after isFinished returns true
 	protected void end() {
-		System.out.println("Stopping motor");
+        Robot.debugger.logError(CustomDebugger.LoggerNames.DRIVETRAIN, "Stopping motor");
 		driveTrain.getRobotDrive().stopMotor();
 	}
 
 	// Called when another command which requires one or more of the same
 	// subsystems is scheduled to run
 	protected void interrupted() {
-		System.out.println("Command interrupted!");
+        Robot.debugger.logError(CustomDebugger.LoggerNames.DRIVETRAIN, "Command interrupted!");
 		end();
 	}
 }
