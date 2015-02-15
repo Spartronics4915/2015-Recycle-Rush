@@ -17,6 +17,8 @@ public class ElevatorJumpToPosition extends Command {
 
 		// Use requires() here to declare subsystem dependencies
 		// eg. requires(chassis);
+		requires(Robot.grabber);
+		requires(Robot.elevator);
 		positionNumber = d;
 	}
 

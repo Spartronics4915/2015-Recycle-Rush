@@ -12,7 +12,8 @@ public class ElevatorMoveToHeight extends Command {
 	public ElevatorMoveToHeight() {
 		// Use requires() here to declare subsystem dependencies
 		// eg. requires(chassis);
-		requires(elevator);
+		requires(Robot.grabber);
+		requires(Robot.elevator);
 	}
 
 	// Called just before this Command runs the first time
