@@ -80,8 +80,10 @@ public class DriveTrain extends Subsystem {
 		} else {
 			debugger.logError(LoggerNames.DRIVETRAIN, String.format("Driving %s Mode", fieldMode ? "field" : "robot"));
 
-			robotDrive.mecanumDrive_Cartesian(joystickX, joystickY, joystickTwist, fieldMode ? gyro.getAngle() : 0);
+			robotDrive.mecanumDrive_Cartesian(joystickX, joystickY, joystickTwist, 0);
+					//, fieldMode ? gyro.getAngle() : 0);
 		}
+		debugger.logError(LoggerNames.DRIVETRAIN,"Gyro Angle: " + gyro.getAngle());
 
 	}
 	
