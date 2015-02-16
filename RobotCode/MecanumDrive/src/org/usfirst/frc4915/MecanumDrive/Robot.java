@@ -119,13 +119,13 @@ public class Robot extends IterativeRobot {
 
 	private void displayVersioningOnSmartDashboard() {
 		String parsedVersion = VersionFinder.getAttribute(this, VersionFinder.VERSION_ATTRIBUTE);
-		DriverStation.reportError("Code Version " + parsedVersion == null ? "<not found>" : parsedVersion, false);
+		DriverStation.reportError("Code Version " + parsedVersion + "\n", false);
 
 		String parsedBuilder = VersionFinder.getAttribute(this, VersionFinder.BUILT_BY_ATTRIBUTE);
-		DriverStation.reportError("Code Built By " + parsedBuilder == null ? "<not found>" : parsedBuilder, false);
+		DriverStation.reportError("Code Built By " + parsedBuilder + "\n", false);
 
 		String parsedBuildDate = VersionFinder.getAttribute(this, VersionFinder.BUILT_AT_ATTRIBUTE);
-		DriverStation.reportError("Code Built At " + parsedBuildDate == null ? "<not found>" : parsedBuildDate, false);		
+		DriverStation.reportError("Code Built At " + parsedBuildDate + "\n", false);		
 	}
 
 	/**

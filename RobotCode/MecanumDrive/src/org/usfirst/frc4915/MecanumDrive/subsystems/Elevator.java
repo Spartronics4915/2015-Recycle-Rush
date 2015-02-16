@@ -27,7 +27,7 @@ public class Elevator extends Subsystem {
 	public static double maximumPotentiometerValue = 1023;
 	public static double slackMinimum = 0;
 	
-	public static final double APPROXIMATE_OFFSET = 500;
+	public static final double APPROXIMATE_OFFSET = 410;
 	public static boolean needToApproximate = true;
 	
 	public static boolean didSaveTopValue = false;
