@@ -1,6 +1,7 @@
 package org.usfirst.frc4915.MecanumDrive.commands.autonomous;
 import org.usfirst.frc4915.MecanumDrive.commands.drive.MoveStraightPositionModeCommand;
 import org.usfirst.frc4915.MecanumDrive.commands.elevator.ElevatorJumpToPosition;
+import org.usfirst.frc4915.MecanumDrive.commands.elevator.ElevatorMoveToHeight;
 import org.usfirst.frc4915.MecanumDrive.commands.grabber.CloseGrabber;
 import org.usfirst.frc4915.MecanumDrive.commands.grabber.OpenGrabber;
 
@@ -25,6 +26,9 @@ public class AutonomousCommandContainerStrategy extends CommandGroup {
         // e.g. if Command1 requires chassis, and Command2 requires arm,
         // a CommandGroup containing them would require both the chassis and the
         // arm.
+    	
+    	addParallel(new ElevatorMoveToHeight());
+    	System.out.printf("%s","Hey!");
 
     	System.out.println("Moving Elevator (level 1.5)");
     	addSequential(new ElevatorJumpToPosition(1.5));

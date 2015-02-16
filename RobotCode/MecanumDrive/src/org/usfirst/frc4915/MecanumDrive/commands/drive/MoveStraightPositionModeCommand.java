@@ -65,12 +65,13 @@ public class MoveStraightPositionModeCommand extends Command {
 		
 		System.out.println("+++++++++"+inputSpeed+"++++++++");
 		
-		if (inputDistance < 0)
+		if (inputDistance < 0) {
 			//driveTrain.driveStraight(inputSpeed);
 			driveTrain.driveStraight(.7);
-		else 
+		} else {
 			//driveTrain.driveStraight(-inputSpeed);
 			driveTrain.driveStraight(-.7);
+		}
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
