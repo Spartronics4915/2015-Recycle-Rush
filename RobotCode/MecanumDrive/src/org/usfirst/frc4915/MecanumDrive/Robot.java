@@ -22,6 +22,13 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+import edu.wpi.first.wpilibj.CameraServer;
+import edu.wpi.first.wpilibj.Timer;
+
+import com.ni.vision.NIVision;
+import com.ni.vision.NIVision.Image;
+
+
 /**
  * The VM is configured to automatically run this class, and to call the
  * functions corresponding to each mode, as described in the IterativeRobot
@@ -96,6 +103,7 @@ public class Robot extends IterativeRobot {
 
 		
         //Init camera
+
        // frame = NIVision.imaqCreateImage(NIVision.ImageType.IMAGE_RGB, 0);
 
         // the camera name (ex "cam0") can be found through the roborio web interface
@@ -129,10 +137,14 @@ public class Robot extends IterativeRobot {
 
 	public void autonomousInit() {
 		// Use the selected autonomous command
+
 		autonomousCommand = (Command) autonomousProgramChooser.getSelected();
 		//double desiredDistrance = preferences.getDouble("DesiredDistance", 9.0);
 		//autonomousCommand = new AutonomousCommandToteStrategy();
 		autonomousCommand = new AutonomousCommandToteStrategy();
+		//double desiredDistance = preferences.getDouble("DesiredDistance", 9.0);
+		//autonomousCommand = new AutonomousCommandToteStrategy();
+		elevator.setHieghtToCurrentPosition();
 		autonomousCommand.start();
 	}
 
@@ -189,6 +201,7 @@ public class Robot extends IterativeRobot {
          * grab an image, draw the circle, and provide it for the camera server
          * which will in turn send it to the dashboard.
          */
+
 
 		//NIVision.IMAQdxStartAcquisition(session);
 

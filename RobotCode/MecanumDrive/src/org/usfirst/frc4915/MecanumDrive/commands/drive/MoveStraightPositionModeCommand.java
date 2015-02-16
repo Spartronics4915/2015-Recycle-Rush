@@ -22,7 +22,9 @@ public class MoveStraightPositionModeCommand extends Command {
 		requires(driveTrain);
 		System.out.println("***MoveStraightPositionModeCommand inputDistance: " + inputDistance + "*******");
 		System.out.println("***MoveStraightPositionModeCommand inputSpeed: " + inputSpeed + "*******");
+		Robot.debugger.logError(CustomDebugger.LoggerNames.DRIVETRAIN, "***MoveStraightPositionModeCommand inputDistance: " + inputDistance + "*******");
 		this.inputDistance = inputDistance;
+		this.inputSpeed = inputSpeed;
 		// Use requires() here to declare subsystem dependencies
 		// eg. requires(chassis);
 	}
@@ -49,8 +51,9 @@ public class MoveStraightPositionModeCommand extends Command {
 				// right motors are inverted
 				endValue = startingTickValue - ticksToMove;
 			}
-
+			System.out.println("!!!!!!!!!"+inputSpeed+"!!!!!!!!!!!");
             Robot.debugger.logError(CustomDebugger.LoggerNames.DRIVETRAIN, "Motor " + i + ": starting position " + startingTickValue + ", desired position " + endValue);
+
 			desiredTicksValue.add(endValue);
 		}
 	}
@@ -62,9 +65,14 @@ public class MoveStraightPositionModeCommand extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
+		
+		System.out.println("+++++++++"+inputSpeed+"++++++++");
+		
 		if (inputDistance < 0)
+			//driveTrain.driveStraight(inputSpeed);
 			driveTrain.driveStraight(.7);
-		else
+		else 
+			//driveTrain.driveStraight(-inputSpeed);
 			driveTrain.driveStraight(-.7);
 	}
 
@@ -80,8 +88,10 @@ public class MoveStraightPositionModeCommand extends Command {
 	private boolean isMotorFinished(int i) {
 		boolean finished = false;
 		double currentPosition = motors.get(i).getPosition();
-		Double desiredPosition = desiredTicksValue.get(i);
-        Robot.debugger.logError(CustomDebugger.LoggerNames.DRIVETRAIN, "Motor " + i + ": current position: " + currentPosition + ", desired position " + desiredPosition);
+
+		double desiredPosition = desiredTicksValue.get(i);
+		System.out.println("Motor " + i + ": current position: " + currentPosition + ", desired position " + desiredPosition);
+
 
 		if (i >= 2) {
 			// right motors are inverted

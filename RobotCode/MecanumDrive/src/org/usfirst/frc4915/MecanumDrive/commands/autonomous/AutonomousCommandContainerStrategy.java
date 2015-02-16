@@ -26,11 +26,12 @@ public class AutonomousCommandContainerStrategy extends CommandGroup {
         // a CommandGroup containing them would require both the chassis and the
         // arm.
 
-    	System.out.println("Moving Elevator");
+    	System.out.println("Moving Elevator (level 1.5)");
     	addSequential(new ElevatorJumpToPosition(1.5));
-    	System.out.println("Moving Grabber");
+    	System.out.println("Closing Grabber");
     	addSequential(new CloseGrabber());
     	System.out.println("Moving Elevator");
+    	System.out.println("Moving Elevator (level 2.5)");
     	addSequential(new ElevatorJumpToPosition(2.5));
     	System.out.println("Driving back 12 ft");
     	addSequential(new MoveStraightPositionModeCommand(-12, 0.7));

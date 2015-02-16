@@ -1,4 +1,7 @@
 package org.usfirst.frc4915.MecanumDrive;
+import org.usfirst.frc4915.MecanumDrive.commands.debug.DebuggerFilter;
+import org.usfirst.frc4915.MecanumDrive.commands.debug.DebuggerFilterReset;
+import org.usfirst.frc4915.MecanumDrive.commands.drive.MoveStraightPositionModeCommand;
 import org.usfirst.frc4915.MecanumDrive.commands.drive.StrafeCommand;
 import org.usfirst.frc4915.MecanumDrive.commands.elevator.ElevatorJumpToPosition;
 import org.usfirst.frc4915.MecanumDrive.commands.elevator.ElevatorPositionCalibration;
@@ -11,6 +14,7 @@ import org.usfirst.frc4915.MecanumDrive.commands.grabber.OpenGrabber;
 import org.usfirst.frc4915.MecanumDrive.subsystems.DriveTrain;
 import org.usfirst.frc4915.MecanumDrive.subsystems.Elevator;
 import org.usfirst.frc4915.MecanumDrive.utility.VersionFinder;
+import org.usfirst.frc4915.debuggersystem.CustomDebugger.LoggerNames;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -22,7 +26,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
-	// // CREATING BUTTONS
+	// CREATING BUTTONS
 	// One type of button is a joystick button which is any button on a
 	// joystick.
 	// You create one by telling it which joystick it's on and which button
@@ -107,8 +111,7 @@ public class OI {
 		grabberClosed.whenPressed(new CloseGrabber());
 		grabberIntermediate = new JoystickButton(elevatorStick, 4);
 		grabberIntermediate.whenPressed(new IntermediateOpen());
-		
-		/*
+		 /*
 		 * AUTONOMOUS COMMAND
 		 */
 		//SmartDashboard.putData("Autonomous Command ", new AutonomousCommand());
@@ -117,9 +120,11 @@ public class OI {
 		/*
 		 * DRIVE STRAIGHT
 		 */
+		SmartDashboard.putData("Move Straight 5 feet", new MoveStraightPositionModeCommand(5,0.7));
 		SmartDashboard.putData("Strafe 3 feet", new StrafeCommand(3, 0.7));
 		//SmartDashboard.putData("Move Backwards 3 feet", new MoveStraightPositionModeCommand(-3, 0.7));
 		//SmartDashboard.putData("DriveStraight 1 second", new DriveStraight());
+
 		
 		/*
 		 * TOGGLE FIELD ORIENTED DRIVE
@@ -134,10 +139,12 @@ public class OI {
 		SmartDashboard.putData("Close Grabber", new CloseGrabber());
 		SmartDashboard.putData("Intermediate Open", new IntermediateOpen());
 		SmartDashboard.putData("Open Grabber", new OpenGrabber());
+
 		
 		/*
 		 * ELEVATOR
 		 */
+
 		//SmartDashboard.putData("Jump to Elevator Position 0", new ElevatorJumpToPosition(0));
 		//SmartDashboard.putData("Jump to Elevator Position 1", new ElevatorJumpToPosition(1));
 		//SmartDashboard.putData("Jump to Elevator Position 2", new ElevatorJumpToPosition(2));
@@ -151,6 +158,7 @@ public class OI {
 		//SmartDashboard.putNumber("Elevator Potentiometer Value", Robot.elevator.getPosition());
 		//SmartDashboard.putData("Set height to 700", new SetHeightTo700());
 		//SmartDashboard.putData("Set height to 850", new SetHeightTo850());
+
 		SmartDashboard.putData("Jump to Elevator Position 0", new ElevatorJumpToPosition(0));
 		SmartDashboard.putData("Jump to Elevator Position 1", new ElevatorJumpToPosition(1));
 		SmartDashboard.putData("Jump to Elevator Position 2", new ElevatorJumpToPosition(2));
@@ -165,8 +173,10 @@ public class OI {
 		SmartDashboard.putData("Set height to 850", new ElevatorSetHeight(850));
 		SmartDashboard.putData("Disable Elevator Safety", new ElevatorSetSafety(false));
 		SmartDashboard.putData("Enable Elevator Safety", new ElevatorSetSafety(true));		
+
 		/*
 		 * DEBUGGER BUTTONS
+		 * */
 		 
 		
 		SmartDashboard.putData("Set debugger to drivetrain", new DebuggerFilter(LoggerNames.DRIVETRAIN));
@@ -177,16 +187,14 @@ public class OI {
 		SmartDashboard.putData("Reset debugger filter", new DebuggerFilterReset());
 		
 		
-		*/
+		
 		
 		
 		
 		/*
 		 * SENSOR OUTPUT
 		 */
-		//LiveWindow.addSensor("Other Sensors", "Accelerometer", RobotMap.accelerometer);
-		//LiveWindow.addSensor("Drive Train", "Distance Sensor", DriveTrain.distanceSensor);
-		//LiveWindow.addActuator("Grabber", "Double Solenoid", RobotMap.mommaSolenoid);
+
 		LiveWindow.addSensor("Other Sensors", "Accelerometer", RobotMap.accelerometer);
 		LiveWindow.addSensor("Drive Train", "Distance Sensor", DriveTrain.distanceSensor);
 		LiveWindow.addActuator("Grabber Primary Solenoid", "Solenoid", RobotMap.primarySolenoid);
@@ -232,5 +240,10 @@ public class OI {
 		SmartDashboard.putString("Code Version", VersionFinder.getAttribute(this, VersionFinder.VERSION_ATTRIBUTE));
 		SmartDashboard.putString("Code Built By", VersionFinder.getAttribute(this, VersionFinder.BUILT_BY_ATTRIBUTE));
 		SmartDashboard.putString("Code Built At", VersionFinder.getAttribute(this, VersionFinder.BUILT_AT_ATTRIBUTE));
+
+		SmartDashboard.putString("Code Version", VersionFinder.getAttribute(this, VersionFinder.VERSION_ATTRIBUTE));
+		SmartDashboard.putString("Code Built By", VersionFinder.getAttribute(this, VersionFinder.BUILT_BY_ATTRIBUTE));
+		SmartDashboard.putString("Code Built At", VersionFinder.getAttribute(this, VersionFinder.BUILT_AT_ATTRIBUTE));
+
 	}
 }

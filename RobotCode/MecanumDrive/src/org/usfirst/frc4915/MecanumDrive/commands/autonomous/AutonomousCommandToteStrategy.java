@@ -7,8 +7,8 @@ import org.usfirst.frc4915.MecanumDrive.commands.grabber.OpenGrabber;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
-public class AutonomousCommandToteStrategy extends CommandGroup {
-        public AutonomousCommandToteStrategy() {
+public class AutonomousCommandToteStrategy extends CommandGroup {    
+    public AutonomousCommandToteStrategy() {
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
@@ -28,14 +28,18 @@ public class AutonomousCommandToteStrategy extends CommandGroup {
 
         addParallel(new ElevatorMoveToHeight());
     	System.out.println("Moving Elevator");
+    	System.out.println("Moving Elevator (level 0)");
     	addSequential(new ElevatorJumpToPosition(0));
-    	System.out.println("Moving Grabber");
+    	System.out.println("Closing Grabber");
     	addSequential(new CloseGrabber());
     	System.out.println("Moving Elevator");
     	addSequential(new ElevatorJumpToPosition(1));
     	System.out.println("Driving backwards 12 ft");
     	addSequential(new MoveStraightPositionModeCommand(-12, 0.7));
- 
+    	System.out.println("Moving Elevator (level 1)");
+    	addSequential(new ElevatorJumpToPosition(1));
+    	System.out.println("Driving back 12 ft");
+    	addSequential(new MoveStraightPositionModeCommand(-12, 0.7));
 
-}
+    }
 }
