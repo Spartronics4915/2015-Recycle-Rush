@@ -62,7 +62,8 @@ public class DriveTrain extends Subsystem {
 		double joystickY = joystick.getAxis(Joystick.AxisType.kY);
 		double joystickTwist = joystick.getAxis(Joystick.AxisType.kTwist);
 
-		throttle = 0.50 * (joystick.getThrottle()) + 0.50;
+		throttle = 0.40 * (-joystick.getThrottle()) + 0.60;
+		debugger.logError(LoggerNames.DRIVETRAIN, "Throttle Value: " + throttle);
 
 		boolean deadZoneX = Math.abs(joystickX) < 0.2;
 		boolean deadZoneY = Math.abs(joystickY) < 0.2;
@@ -71,17 +72,22 @@ public class DriveTrain extends Subsystem {
 		if (deadZoneX) joystickX = 0;
 		if (deadZoneY) joystickY = 0;
 		if (deadZoneTwist) joystickTwist = 0;
+		
+		double throttleX = throttle*joystickX;
+		double throttleY = throttle*joystickY;
+		double throttleTwist = throttle*joystickTwist;
 
-		debugger.logError(LoggerNames.DRIVETRAIN, (joystickX + ", " + joystickY + ", " + joystickTwist));
-
+		debugger.logError(LoggerNames.DRIVETRAIN, ("Joystick: "+ joystickX + ", " + joystickY + ", " + joystickTwist));
+		debugger.logError(LoggerNames.DRIVETRAIN, ("Throttle: "+ throttleX + ", " + throttleY + ", " + throttleTwist));
 		if (deadZoneX && deadZoneY && deadZoneTwist) {
 			debugger.logError(LoggerNames.DRIVETRAIN, ("Stopping Motor"));
 			robotDrive.stopMotor();
 		} else {
-			debugger.logError(LoggerNames.DRIVETRAIN, String.format("Driving %s Mode", fieldMode ? "field" : "robot"));
-
-			robotDrive.mecanumDrive_Cartesian(joystickX, joystickY, joystickTwist, fieldMode ? gyro.getAngle() : 0);
+			
+			robotDrive.mecanumDrive_Cartesian(throttleX, throttleY, throttleTwist, 0);
+					//, fieldMode ? gyro.getAngle() : 0);
 		}
+		debugger.logError(LoggerNames.DRIVETRAIN,"Gyro Angle: " + gyro.getAngle());
 
 	}
 	
