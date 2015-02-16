@@ -21,6 +21,7 @@ public class RobotMap {
 	/*
 	 * CONSTANTS
 	 */
+
 	public static final int MOTOR_PORT_LEFT_FRONT =10;
 	public static final int MOTOR_PORT_LEFT_REAR = 11;
 	public static final int MOTOR_PORT_RIGHT_FRONT = 12;
@@ -123,7 +124,7 @@ public class RobotMap {
 		/*
 		 * Gyro instantiation
 		 */
-		gyro = new Gyro(GYRO_PORT); // TODO decide on ports
+		gyro = new Gyro(GYRO_PORT);
 
 		/*
 		 * Distance instantiation

@@ -3,6 +3,8 @@ package org.usfirst.frc4915.MecanumDrive;
 import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandContainerStrategy;
 import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandJustDrive;
 import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandToteStrategy;
+import org.usfirst.frc4915.MecanumDrive.commands.debug.GenericTestCommand;
+import org.usfirst.frc4915.MecanumDrive.commands.drive.ToggleDriveMode;
 import org.usfirst.frc4915.MecanumDrive.commands.debug.DebuggerFilter;
 import org.usfirst.frc4915.MecanumDrive.subsystems.DriveTrain;
 import org.usfirst.frc4915.MecanumDrive.subsystems.Elevator;
@@ -75,9 +77,9 @@ public class Robot extends IterativeRobot {
 		// constructed yet. Thus, their requires() statements may grab null
 		// pointers. Bad news. Don't move it.
 		oi = new OI();
-		if (RobotMap.gyro != null){
-			RobotMap.gyro.initGyro();
-		}
+		//if (RobotMap.gyro != null){
+		//	RobotMap.gyro.initGyro();
+		//}
 
 		testPreferencesItemOne = preferences.getDouble("TestOne", 123.4);
 		testPreferencesItemOne = preferences.getDouble("TestTwo", 456.7);
@@ -141,6 +143,10 @@ public class Robot extends IterativeRobot {
 		if (autonomousCommand != null){
 			autonomousCommand.cancel();
 		}
+
+		SmartDashboard.putData("Toggle Field Drive", new ToggleDriveMode());
+		SmartDashboard.putBoolean("Field Mode", Robot.driveTrain.fieldMode);
+
 		// Init camera
 		frame = NIVision.imaqCreateImage(NIVision.ImageType.IMAGE_RGB, 0);
 		
@@ -175,6 +181,7 @@ public class Robot extends IterativeRobot {
 		}
 		
 	
+
 
 		elevator.setHieghtToCurrentPosition();
 		
