@@ -89,10 +89,8 @@ public class OI {
 		/*
 		 * JOYSTICK BUTTONS (ELEVATOR)
 		 */
-<<<<<<< HEAD
-
-=======
->>>>>>> e234c23db517a6dcc0fcac4a2edd59942de06aa6
+		
+		
 		elevatorJumpToPositionZero = new JoystickButton(elevatorStick, 6);
 		elevatorJumpToPositionZero.whenPressed(new ElevatorJumpToPosition(0));
 		elevatorJumpToPositionOne = new JoystickButton(elevatorStick, 7);
@@ -115,12 +113,9 @@ public class OI {
 		grabberClosed.whenPressed(new CloseGrabber());
 		grabberIntermediate = new JoystickButton(elevatorStick, 4);
 		grabberIntermediate.whenPressed(new IntermediateOpen());
-<<<<<<< HEAD
 		
 		/*
-=======
 		 /*
->>>>>>> e234c23db517a6dcc0fcac4a2edd59942de06aa6
 		 * AUTONOMOUS COMMAND
 		 */
 		//SmartDashboard.putData("Autonomous Command ", new AutonomousCommand());
@@ -149,30 +144,11 @@ public class OI {
 		SmartDashboard.putData("Intermediate Open", new IntermediateOpen());
 		SmartDashboard.putData("Open Grabber", new OpenGrabber());
 
-<<<<<<< HEAD
-		/*
-		 * ELEVATOR
-		 */
-=======
 		
 		/*
 		 * ELEVATOR
 		 */
 
-		//SmartDashboard.putData("Jump to Elevator Position 0", new ElevatorJumpToPosition(0));
-		//SmartDashboard.putData("Jump to Elevator Position 1", new ElevatorJumpToPosition(1));
-		//SmartDashboard.putData("Jump to Elevator Position 2", new ElevatorJumpToPosition(2));
-		//SmartDashboard.putData("Jump to Elevator Position 3", new ElevatorJumpToPosition(3));
-		//SmartDashboard.putData("Jump to Elevator Position 4", new ElevatorJumpToPosition(4));
-		//SmartDashboard.putData("ElevatorPositionCalibration", new ElevatorPositionCalibration());
-		//SmartDashboard.putData("ElevatorStop", new ElevatorStop());
-		SmartDashboard.putNumber("Elevator Height", Elevator.CHASIS_HEIGHT);
-		SmartDashboard.putBoolean("Elevator At Top", Robot.elevator.isAtTopOfElevator());
-		SmartDashboard.putBoolean("Elevator At Bottom", Robot.elevator.isAtBottomOfElevator());
-		//SmartDashboard.putNumber("Elevator Potentiometer Value", Robot.elevator.getPosition());
-		//SmartDashboard.putData("Set height to 700", new SetHeightTo700());
-		//SmartDashboard.putData("Set height to 850", new SetHeightTo850());
->>>>>>> e234c23db517a6dcc0fcac4a2edd59942de06aa6
 
 		SmartDashboard.putData("Jump to Elevator Position 0", new ElevatorJumpToPosition(0));
 		SmartDashboard.putData("Jump to Elevator Position 1", new ElevatorJumpToPosition(1));
@@ -188,10 +164,7 @@ public class OI {
 		SmartDashboard.putData("Set height to 850", new ElevatorSetHeight(850));
 		SmartDashboard.putData("Disable Elevator Safety", new ElevatorSetSafety(false));
 		SmartDashboard.putData("Enable Elevator Safety", new ElevatorSetSafety(true));		
-<<<<<<< HEAD
-=======
 
->>>>>>> e234c23db517a6dcc0fcac4a2edd59942de06aa6
 		/*
 		 * DEBUGGER BUTTONS
 		 * */
@@ -213,12 +186,6 @@ public class OI {
 		 * SENSOR OUTPUT
 		 */
 
-<<<<<<< HEAD
-		//LiveWindow.addSensor("Other Sensors", "Accelerometer", RobotMap.accelerometer);
-		//LiveWindow.addSensor("Drive Train", "Distance Sensor", DriveTrain.distanceSensor);
-		//LiveWindow.addActuator("Grabber", "Double Solenoid", RobotMap.mommaSolenoid);
-=======
->>>>>>> e234c23db517a6dcc0fcac4a2edd59942de06aa6
 		LiveWindow.addSensor("Other Sensors", "Accelerometer", RobotMap.accelerometer);
 		LiveWindow.addSensor("Drive Train", "Distance Sensor", DriveTrain.distanceSensor);
 		LiveWindow.addActuator("Grabber Primary Solenoid", "Solenoid", RobotMap.primarySolenoid);
@@ -251,22 +218,7 @@ public class OI {
 		/*
 		 * CODE VERSION OUTPUT
 		 */
-<<<<<<< HEAD
-=======
-		String parsedVersion = VersionFinder.getAttribute(this, VersionFinder.VERSION_ATTRIBUTE);
-		SmartDashboard.putString("Code Version", parsedVersion == null ? "<not found>" : parsedVersion);
 
-		String parsedBuilder = VersionFinder.getAttribute(this, VersionFinder.BUILT_BY_ATTRIBUTE);
-		SmartDashboard.putString("Code Built By", parsedBuilder == null ? "<not found>" : parsedBuilder);
-
-		String parsedBuildDate = VersionFinder.getAttribute(this, VersionFinder.BUILT_AT_ATTRIBUTE);
-		SmartDashboard.putString("Code Built At", parsedBuildDate == null ? "<not found>" : parsedBuildDate);
-		
-		
-		SmartDashboard.putString("Code Version", VersionFinder.getAttribute(this, VersionFinder.VERSION_ATTRIBUTE));
-		SmartDashboard.putString("Code Built By", VersionFinder.getAttribute(this, VersionFinder.BUILT_BY_ATTRIBUTE));
-		SmartDashboard.putString("Code Built At", VersionFinder.getAttribute(this, VersionFinder.BUILT_AT_ATTRIBUTE));
->>>>>>> e234c23db517a6dcc0fcac4a2edd59942de06aa6
 
 		SmartDashboard.putString("Code Version", VersionFinder.getAttribute(this, VersionFinder.VERSION_ATTRIBUTE));
 		SmartDashboard.putString("Code Built By", VersionFinder.getAttribute(this, VersionFinder.BUILT_BY_ATTRIBUTE));

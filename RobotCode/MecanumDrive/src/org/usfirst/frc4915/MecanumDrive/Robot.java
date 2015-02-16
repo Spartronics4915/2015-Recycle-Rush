@@ -2,6 +2,7 @@ package org.usfirst.frc4915.MecanumDrive;
 
 import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandContainerStrategy;
 import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandJustDrive;
+import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandStacking;
 import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandToteStrategy;
 import org.usfirst.frc4915.MecanumDrive.commands.debug.DebuggerFilter;
 import org.usfirst.frc4915.MecanumDrive.subsystems.DriveTrain;
@@ -9,7 +10,6 @@ import org.usfirst.frc4915.MecanumDrive.subsystems.Elevator;
 import org.usfirst.frc4915.MecanumDrive.subsystems.Grabber;
 import org.usfirst.frc4915.debuggersystem.CustomDebugger;
 import org.usfirst.frc4915.debuggersystem.CustomDebugger.LoggerNames;
-
 
 import com.ni.vision.NIVision.Image;
 
@@ -21,7 +21,6 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.Timer;
 
@@ -86,9 +85,11 @@ public class Robot extends IterativeRobot {
 
 		autonomousProgramChooser = new SendableChooser();
 		autonomousProgramChooser.addDefault("Autonomous Just Drive", new AutonomousCommandJustDrive());
-		autonomousProgramChooser.addObject("Autonomous Container", new AutonomousCommandContainerStrategy());
-		autonomousProgramChooser.addObject("Autonomous Tote", new AutonomousCommandToteStrategy());
+		autonomousProgramChooser.addObject("Autonomous Container Strategy", new AutonomousCommandContainerStrategy());
+		autonomousProgramChooser.addObject("Autonomous Tote Strategy", new AutonomousCommandToteStrategy());
+		autonomousProgramChooser.addObject("Autonomous Stacking Strategy", new AutonomousCommandStacking());
 
+		
 		SmartDashboard.putData("Autonomous Program", autonomousProgramChooser);
 		
 		Debugger = new SendableChooser();
@@ -139,19 +140,11 @@ public class Robot extends IterativeRobot {
 		// Use the selected autonomous command
 
 		autonomousCommand = (Command) autonomousProgramChooser.getSelected();
-<<<<<<< HEAD
+
 		//double desiredDistance = preferences.getDouble("DesiredDistance", 9.0);
 		//autonomousCommand = new AutonomousCommandToteStrategy();
 		elevator.setHieghtToCurrentPosition();
 		
-=======
-		//double desiredDistrance = preferences.getDouble("DesiredDistance", 9.0);
-		//autonomousCommand = new AutonomousCommandToteStrategy();
-		autonomousCommand = new AutonomousCommandToteStrategy();
-		//double desiredDistance = preferences.getDouble("DesiredDistance", 9.0);
-		//autonomousCommand = new AutonomousCommandToteStrategy();
-		elevator.setHieghtToCurrentPosition();
->>>>>>> e234c23db517a6dcc0fcac4a2edd59942de06aa6
 		autonomousCommand.start();
 	}
 

@@ -28,7 +28,6 @@ public class AutonomousCommandContainerStrategy extends CommandGroup {
         // arm.
     	
     	addParallel(new ElevatorMoveToHeight());
-    	System.out.printf("%s","Hey!");
 
     	System.out.println("Moving Elevator (level 1.5)");
     	addSequential(new ElevatorJumpToPosition(1.5));
@@ -38,5 +37,5 @@ public class AutonomousCommandContainerStrategy extends CommandGroup {
     	addSequential(new ElevatorJumpToPosition(2.5));
     	System.out.println("Driving back 12 ft");
     	addSequential(new MoveStraightPositionModeCommand(-12, 0.7));
-}
+    }
 }

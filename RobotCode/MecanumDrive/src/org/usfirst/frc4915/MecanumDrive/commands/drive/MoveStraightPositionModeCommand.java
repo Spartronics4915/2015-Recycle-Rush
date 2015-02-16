@@ -18,14 +18,11 @@ public class MoveStraightPositionModeCommand extends Command {
 
 	public MoveStraightPositionModeCommand(double inputDistance, double inputSpeed) {
 		requires(driveTrain);
-<<<<<<< HEAD
-
-        Robot.debugger.logError(CustomDebugger.LoggerNames.DRIVETRAIN, "***MoveStraightPositionModeCommand inputDistance: " + inputDistance + "*******");
-=======
+		
 		System.out.println("***MoveStraightPositionModeCommand inputDistance: " + inputDistance + "*******");
 		System.out.println("***MoveStraightPositionModeCommand inputSpeed: " + inputSpeed + "*******");
 		Robot.debugger.logError(CustomDebugger.LoggerNames.DRIVETRAIN, "***MoveStraightPositionModeCommand inputDistance: " + inputDistance + "*******");
->>>>>>> e234c23db517a6dcc0fcac4a2edd59942de06aa6
+
 		this.inputDistance = inputDistance;
 		this.inputSpeed = inputSpeed;
 		// Use requires() here to declare subsystem dependencies
