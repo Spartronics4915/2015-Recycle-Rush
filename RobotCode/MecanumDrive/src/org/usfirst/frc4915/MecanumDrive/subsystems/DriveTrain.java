@@ -93,6 +93,10 @@ public class DriveTrain extends Subsystem {
 		robotDrive.mecanumDrive_Cartesian(0.0, speed, 0.0, 0.0);
 	}
 
+		public void driveSideways(double speed){
+			robotDrive.mecanumDrive_Cartesian(speed, 0.0, 0.0, 0.0);
+		}
+		
 	/**
 	 * @param motor Motor with an encoder to determine distance traveled.
 	 * @param elapsed Time since the last sampling of the motor.

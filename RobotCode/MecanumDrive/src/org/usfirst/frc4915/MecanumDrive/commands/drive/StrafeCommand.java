@@ -42,8 +42,8 @@ public class StrafeCommand extends Command {
 
 			double startingTickValue = motor.getPosition();
 			double endValue = startingTickValue + ticksToMove;
-			if (i == 0 || i == 2) {
-				// right motors are inverted and we are reversing the front motors
+			if (i == 1 || i == 3) {
+				// right motors are inverted and we are reversing the back motors
 				endValue = startingTickValue - ticksToMove;
 			}
 
@@ -60,14 +60,13 @@ public class StrafeCommand extends Command {
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
 		if (inputDistance < 0)
-			driveTrain.driveStraight(.7);
+			driveTrain.driveSideways(.7);
 		else
-			driveTrain.driveStraight(-.7);
+			driveTrain.driveSideways(-.7);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
-		// checking to see if the front motors have finished regardless of driving direction
 		// checking to see if the front motors have finished (regardless of what direction the robot is driving)
 		if (inputDistance > 0)
 			return isMotorFinished(0) || isMotorFinished(2);
@@ -80,7 +79,7 @@ public class StrafeCommand extends Command {
 		Double desiredPosition = desiredTicksValue.get(i);
 		System.out.println("Motor " + i + ": current position: " + currentPosition + ", desired position " + desiredPosition);
 
-		if (i >= 2) {
+		if (i == 1 || i == 3) {
 			// right motors are inverted
 			if (inputDistance < 0) {
 				finished = currentPosition >= desiredPosition;
