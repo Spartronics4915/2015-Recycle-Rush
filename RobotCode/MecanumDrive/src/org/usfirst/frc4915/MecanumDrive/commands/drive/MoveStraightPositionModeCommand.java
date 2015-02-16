@@ -107,7 +107,7 @@ public class MoveStraightPositionModeCommand extends Command {
 	// Called when another command which requires one or more of the same
 	// subsystems is scheduled to run
 	protected void interrupted() {
-        Robot.debugger.logError(CustomDebugger.LoggerNames.DRIVETRAIN, "Command interrupted!");
+        Robot.debugger.logError(CustomDebugger.LoggerNames.DRIVETRAIN, "MoveStraightPositionModeCommand interrupted!");
 		end();
 	}
 }
