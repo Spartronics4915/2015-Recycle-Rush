@@ -17,8 +17,9 @@ public class MoveStraightPositionModeCommand extends Command {
 	private DriveTrain driveTrain = Robot.driveTrain;
 
 	public MoveStraightPositionModeCommand(double inputDistance, double inputSpeed) {
-		requires(driveTrain);
 		
+		requires(driveTrain);
+	
 		System.out.println("***MoveStraightPositionModeCommand inputDistance: " + inputDistance + "*******");
 		System.out.println("***MoveStraightPositionModeCommand inputSpeed: " + inputSpeed + "*******");
 		Robot.debugger.logError(CustomDebugger.LoggerNames.DRIVETRAIN, "***MoveStraightPositionModeCommand inputDistance: " + inputDistance + "*******");
