@@ -4,10 +4,9 @@ import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandCon
 import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandJustDrive;
 import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandStacking;
 import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandToteStrategy;
-import org.usfirst.frc4915.MecanumDrive.commands.debug.GenericTestCommand;
-import org.usfirst.frc4915.MecanumDrive.commands.drive.ToggleDriveMode;
 import org.usfirst.frc4915.MecanumDrive.commands.debug.DebuggerFilter;
 import org.usfirst.frc4915.MecanumDrive.commands.drive.StrafeCommand;
+import org.usfirst.frc4915.MecanumDrive.commands.drive.ToggleDriveMode;
 import org.usfirst.frc4915.MecanumDrive.subsystems.DriveTrain;
 import org.usfirst.frc4915.MecanumDrive.subsystems.Elevator;
 import org.usfirst.frc4915.MecanumDrive.subsystems.Grabber;
@@ -15,8 +14,11 @@ import org.usfirst.frc4915.MecanumDrive.utility.VersionFinder;
 import org.usfirst.frc4915.debuggersystem.CustomDebugger;
 import org.usfirst.frc4915.debuggersystem.CustomDebugger.LoggerNames;
 
+import com.ni.vision.NIVision;
 import com.ni.vision.NIVision.Image;
+import com.ni.vision.VisionException;
 
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Preferences;
@@ -47,9 +49,10 @@ public class Robot extends IterativeRobot {
 
 	Command autonomousCommand;
 
-	Preferences preferences;
+	public static Preferences preferences;
 	double testPreferencesItemOne;
 	double testPreferencesItemTwo;
+	double testPreferencesItemThree;
 
 	SendableChooser autonomousProgramChooser;
 	SendableChooser Debugger;
@@ -92,8 +95,13 @@ public class Robot extends IterativeRobot {
 		//}
 
 		testPreferencesItemOne = preferences.getDouble("TestOne", 123.4);
-		testPreferencesItemOne = preferences.getDouble("TestTwo", 456.7);
+		testPreferencesItemTwo = preferences.getDouble("TestTwo", 456.7);
+		preferences.putDouble("TestThree", 987.65);
+		testPreferencesItemThree = preferences.getDouble("TestThree", 1.11);
 	    preferences.getString("DesiredDistance", "9.0");
+	    debugger.logError(LoggerNames.GENERAL, "TestOne = "+testPreferencesItemOne);
+	    debugger.logError(LoggerNames.GENERAL, "TestThree = "+testPreferencesItemThree);
+	    debugger.logError(LoggerNames.GENERAL, preferences.getString("DesiredDistance", "9.0"));
 
 		autonomousProgramChooser = new SendableChooser();
 		autonomousProgramChooser.addDefault("Autonomous Just Drive", new AutonomousCommandJustDrive());
@@ -111,26 +119,35 @@ public class Robot extends IterativeRobot {
 		Debugger.addObject("Autonomous", new DebuggerFilter(LoggerNames.AUTONOMOUS));
 		Debugger.addObject("Elevator", new DebuggerFilter(LoggerNames.ELEVATOR));
 		
+<<<<<<< HEAD
 		SmartDashboard.putData("Debugger Filter", Debugger);
 		
 		
 
 		displayOnSmartDashboardVersioning();
 
+=======
+		SmartDashboard.putData("Debugger Filter ", Debugger);
+		displayVersioningOnSmartDashboard();	
+>>>>>>> d0e0f5b997176876fc793a14d755bfd45315883c
 		if (elevator != null) {
 			elevator.setHieghtToCurrentPosition();
+			Elevator.minimumPotentiometerValue = preferences.getDouble("minimumPotentiometerValue", 0);
+			Elevator.maximumPotentiometerValue = preferences.getDouble("maximumPotentiometerValue", 1023);
+			debugger.logError(LoggerNames.ELEVATOR, "MaximumPotentiometerValue = " + Elevator.maximumPotentiometerValue);
+			debugger.logError(LoggerNames.ELEVATOR, "MinimumPotentiometerValue = " + Elevator.minimumPotentiometerValue);
 		}
 	}
 
-	private void displayOnSmartDashboardVersioning() {
+	private void displayVersioningOnSmartDashboard() {
 		String parsedVersion = VersionFinder.getAttribute(this, VersionFinder.VERSION_ATTRIBUTE);
-		DriverStation.reportError("Code Version" + parsedVersion == null ? "<not found>" : parsedVersion, false);
+		DriverStation.reportError("Code Version " + parsedVersion + "\n", false);
 
 		String parsedBuilder = VersionFinder.getAttribute(this, VersionFinder.BUILT_BY_ATTRIBUTE);
-		DriverStation.reportError("Code Built By" + parsedBuilder == null ? "<not found>" : parsedBuilder, false);
+		DriverStation.reportError("Code Built By " + parsedBuilder + "\n", false);
 
 		String parsedBuildDate = VersionFinder.getAttribute(this, VersionFinder.BUILT_AT_ATTRIBUTE);
-		DriverStation.reportError("Code Built At" + parsedBuildDate == null ? "<not found>" : parsedBuildDate, false);		
+		DriverStation.reportError("Code Built At " + parsedBuildDate + "\n", false);		
 	}
 
 	/**
@@ -161,7 +178,9 @@ public class Robot extends IterativeRobot {
 		elevator.setHieghtToCurrentPosition();
 		// Tells the elevator to approximate the other maximum when it hits a limit switch
 		elevator.needToApproximate = true;
-		
+		Elevator.needToApproximate = true;
+		Elevator.didSaveTopValue = false;
+		Elevator.didSaveBottomValue = false;
 		autonomousCommand.start();
 	}
 
@@ -184,7 +203,9 @@ public class Robot extends IterativeRobot {
 		// wanting to go to a random position (default zero)
 		elevator.setHieghtToCurrentPosition();
 		// Tells the elevator to approximate the other maximum when it hits a limit switch
-		elevator.needToApproximate = true;
+		Elevator.needToApproximate = true;
+		Elevator.didSaveTopValue = false;
+		Elevator.didSaveBottomValue = false;
 
 		SmartDashboard.putData("Toggle Field Drive", new ToggleDriveMode());
 		SmartDashboard.putBoolean("Field Mode", Robot.driveTrain.fieldMode);
@@ -227,25 +248,13 @@ public class Robot extends IterativeRobot {
 	 * This function is called periodically during operator control
 	 */
 	public void teleopPeriodic() {
-		// long now = Instant.now().toEpochMilli();
-		// System.out.println("LeftFront Position: encVelocity | setPoint," +
-		// now +","+ RobotMap.mecanumDriveControls1LeftFront10.getEncVelocity()
-		// +"," + RobotMap.mecanumDriveControls1LeftFront10.getSetpoint() );
-		// System.out.println("LeftRear Position: encVelocity | setPoint," + now
-		// +","+ RobotMap.mecanumDriveControls1LeftRear11.getEncVelocity() +","
-		// + RobotMap.mecanumDriveControls1LeftRear11.getSetpoint() );
-		// System.out.println("RightFront Position: encVelocity | setPoint," +
-		// now +","+ RobotMap.mecanumDriveControls1RightFront12.getEncVelocity()
-		// +"," + RobotMap.mecanumDriveControls1RightFront12.getSetpoint() );
-		// System.out.println("RightRear Position: encVelocity | setPoint," +
-		// now +","+ RobotMap.mecanumDriveControls1RightRear13.getEncVelocity()
-		// +"," + RobotMap.mecanumDriveControls1RightRear13.getSetpoint() );
-
 		Scheduler.getInstance().run();
 		
+		// Elevator debug information
 		SmartDashboard.putNumber("Elevator SetPoint", Elevator.setPoint);
 		SmartDashboard.putBoolean("Elevator At Top", elevator.isAtTopOfElevator());
 		SmartDashboard.putBoolean("Elevator At Bottom", elevator.isAtBottomOfElevator());
+		SmartDashboard.putBoolean("Elevator is Slack", elevator.elevatorIsSlack());
 		SmartDashboard.putNumber("Elevator Potentiometer Value", elevator.getPosition());
 		SmartDashboard.putNumber("Elevator P", elevator.winch.getP());
 		SmartDashboard.putNumber("Elevator I", elevator.winch.getI());
@@ -253,6 +262,7 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putNumber("Maximum height value: ", Elevator.maximumPotentiometerValue);
 		SmartDashboard.putNumber("Minimum height value: ", Elevator.minimumPotentiometerValue);
 		SmartDashboard.putNumber("Position Number of Elevator: ", Robot.elevator.getElevatorLevel());
+		SmartDashboard.putBoolean("Safety Enabled", Elevator.SAFETY);
 		
 
 		if (cam1available)
@@ -325,7 +335,7 @@ public class Robot extends IterativeRobot {
 		
 	}
 	public void cameragrab(int sessionid){
-System.out.println("camera session: "+ sessionid);
+		System.out.println("camera session: "+ sessionid);
 		NIVision.IMAQdxGrab(sessionid, frame, 1);
 		CameraServer.getInstance().setImage(frame);
 		
