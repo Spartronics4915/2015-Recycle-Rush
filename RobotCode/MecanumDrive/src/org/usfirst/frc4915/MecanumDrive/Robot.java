@@ -3,8 +3,8 @@ package org.usfirst.frc4915.MecanumDrive;
 import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandContainerStrategy;
 import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandJustDrive;
 import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandToteStrategy;
-import org.usfirst.frc4915.MecanumDrive.commands.drive.ToggleDriveMode;
 import org.usfirst.frc4915.MecanumDrive.commands.debug.DebuggerFilter;
+import org.usfirst.frc4915.MecanumDrive.commands.drive.ToggleDriveMode;
 import org.usfirst.frc4915.MecanumDrive.subsystems.DriveTrain;
 import org.usfirst.frc4915.MecanumDrive.subsystems.Elevator;
 import org.usfirst.frc4915.MecanumDrive.subsystems.Grabber;
@@ -12,8 +12,11 @@ import org.usfirst.frc4915.MecanumDrive.utility.VersionFinder;
 import org.usfirst.frc4915.debuggersystem.CustomDebugger;
 import org.usfirst.frc4915.debuggersystem.CustomDebugger.LoggerNames;
 
+import com.ni.vision.NIVision;
 import com.ni.vision.NIVision.Image;
+import com.ni.vision.VisionException;
 
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Preferences;
@@ -23,10 +26,6 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
-import edu.wpi.first.wpilibj.CameraServer;
-import com.ni.vision.NIVision;
-import com.ni.vision.VisionException;
 /**
  * The VM is configured to automatically run this class, and to call the
  * functions corresponding to each mode, as described in the IterativeRobot
