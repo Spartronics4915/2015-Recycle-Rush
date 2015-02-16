@@ -12,8 +12,7 @@ public class ElevatorSetSafety extends Command {
 	private boolean safety;
 	
     public ElevatorSetSafety(boolean value) {
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
+		// DON'T require Robot.elevator
     	safety = value;
     }
 
