@@ -62,7 +62,7 @@ public class DriveTrain extends Subsystem {
 		double joystickY = joystick.getAxis(Joystick.AxisType.kY);
 		double joystickTwist = joystick.getAxis(Joystick.AxisType.kTwist);
 
-		throttle = 0.50 * (-joystick.getThrottle()) + 0.50;
+		throttle = 0.40 * (-joystick.getThrottle()) + 0.60;
 		debugger.logError(LoggerNames.DRIVETRAIN, "Throttle Value: " + throttle);
 
 		boolean deadZoneX = Math.abs(joystickX) < 0.2;
