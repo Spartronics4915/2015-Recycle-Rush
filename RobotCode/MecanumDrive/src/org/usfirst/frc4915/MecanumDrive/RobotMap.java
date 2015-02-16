@@ -34,7 +34,7 @@ public class RobotMap {
 	 * The Pneumatic Control Module's CAN Node ID. Use 10 for 4915. Use 20 for 9999
 	 */
 	
-	public final static int PCM_NODE_ID = 0;
+	public final static int PCM_NODE_ID = 10;
 	
 	public final static int GYRO_PORT = 0;
 	
