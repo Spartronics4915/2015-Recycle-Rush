@@ -141,7 +141,7 @@ public class Robot extends IterativeRobot {
 		autonomousCommand = (Command) autonomousProgramChooser.getSelected();
 		//double desiredDistrance = preferences.getDouble("DesiredDistance", 9.0);
 		//autonomousCommand = new AutonomousCommandToteStrategy();
-		autonomousCommand = new AutonomousCommandToteStrategy();
+	//	autonomousCommand = new AutonomousCommandToteStrategy();
 		//double desiredDistance = preferences.getDouble("DesiredDistance", 9.0);
 		//autonomousCommand = new AutonomousCommandToteStrategy();
 		elevator.setHieghtToCurrentPosition();

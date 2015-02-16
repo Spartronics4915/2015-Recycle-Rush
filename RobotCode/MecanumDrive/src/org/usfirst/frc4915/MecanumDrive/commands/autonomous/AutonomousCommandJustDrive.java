@@ -32,11 +32,6 @@ public class AutonomousCommandJustDrive extends CommandGroup {
         // arm.
     	
     	addSequential( new MoveStraightPositionModeCommand(5, 0.7));
-    	addSequential(new ElevatorMoveToHeight());
-    	addSequential(new CloseGrabber());
-    	addSequential(new MoveStraightPositionModeCommand(4,0.7));
-    	addSequential(new OpenGrabber());
-    	addSequential(new MoveStraightPositionModeCommand(1,0.2));
-    	addSequential( new StrafeCommand(3, 0.7));
+    	
     }
 }

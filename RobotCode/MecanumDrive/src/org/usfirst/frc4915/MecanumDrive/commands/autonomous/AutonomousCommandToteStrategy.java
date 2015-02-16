@@ -27,15 +27,10 @@ public class AutonomousCommandToteStrategy extends CommandGroup {
         // arm.
 
         addParallel(new ElevatorMoveToHeight());
-    	System.out.println("Moving Elevator");
     	System.out.println("Moving Elevator (level 0)");
     	addSequential(new ElevatorJumpToPosition(0));
     	System.out.println("Closing Grabber");
     	addSequential(new CloseGrabber());
-    	System.out.println("Moving Elevator");
-    	addSequential(new ElevatorJumpToPosition(1));
-    	System.out.println("Driving backwards 12 ft");
-    	addSequential(new MoveStraightPositionModeCommand(-12, 0.7));
     	System.out.println("Moving Elevator (level 1)");
     	addSequential(new ElevatorJumpToPosition(1));
     	System.out.println("Driving back 12 ft");
