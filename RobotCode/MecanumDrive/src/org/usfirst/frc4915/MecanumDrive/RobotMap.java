@@ -19,7 +19,7 @@ import edu.wpi.first.wpilibj.Ultrasonic;
 public class RobotMap {
 
 	/*
-	 * Robot Number- Should be 1 for 4915 and 2 for 9999.
+	 * Robot Number- Should be ROBOT_Team Number for the robot in use. For G1 use ROBOT_4915, for G2 use ROBOT_9999.
 	 */
 	
 	public static final int ROBOT_9999 = 20;
