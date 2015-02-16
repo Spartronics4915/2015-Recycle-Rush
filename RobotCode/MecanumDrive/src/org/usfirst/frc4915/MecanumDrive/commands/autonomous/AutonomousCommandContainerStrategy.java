@@ -25,7 +25,7 @@ public class AutonomousCommandContainerStrategy extends CommandGroup {
         // e.g. if Command1 requires chassis, and Command2 requires arm,
         // a CommandGroup containing them would require both the chassis and the
         // arm.
-
+    	System.out.println("***Running Container Command***");
     	System.out.println("Moving Elevator (level 1.5)");
     	addSequential(new ElevatorJumpToPosition(1.5));
     	System.out.println("Closing Grabber");

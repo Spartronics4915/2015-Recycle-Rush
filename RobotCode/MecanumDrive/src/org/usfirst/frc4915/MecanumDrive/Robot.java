@@ -4,12 +4,12 @@ import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandCon
 import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandJustDrive;
 import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandToteStrategy;
 import org.usfirst.frc4915.MecanumDrive.commands.debug.DebuggerFilter;
+import org.usfirst.frc4915.MecanumDrive.commands.drive.StrafeCommand;
 import org.usfirst.frc4915.MecanumDrive.subsystems.DriveTrain;
 import org.usfirst.frc4915.MecanumDrive.subsystems.Elevator;
 import org.usfirst.frc4915.MecanumDrive.subsystems.Grabber;
 import org.usfirst.frc4915.debuggersystem.CustomDebugger;
 import org.usfirst.frc4915.debuggersystem.CustomDebugger.LoggerNames;
-
 
 import com.ni.vision.NIVision.Image;
 
@@ -21,7 +21,6 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.Timer;
 
@@ -99,6 +98,8 @@ public class Robot extends IterativeRobot {
 		Debugger.addObject("Elevator", new DebuggerFilter(LoggerNames.ELEVATOR));
 		
 		SmartDashboard.putData("Debugger Filter", Debugger);
+		
+		
 
 
 		
@@ -141,7 +142,7 @@ public class Robot extends IterativeRobot {
 		autonomousCommand = (Command) autonomousProgramChooser.getSelected();
 		//double desiredDistrance = preferences.getDouble("DesiredDistance", 9.0);
 		//autonomousCommand = new AutonomousCommandToteStrategy();
-	//	autonomousCommand = new AutonomousCommandToteStrategy();
+		//autonomousCommand = new StrafeCommand(3, 0.7);
 		//double desiredDistance = preferences.getDouble("DesiredDistance", 9.0);
 		//autonomousCommand = new AutonomousCommandToteStrategy();
 		elevator.setHieghtToCurrentPosition();
