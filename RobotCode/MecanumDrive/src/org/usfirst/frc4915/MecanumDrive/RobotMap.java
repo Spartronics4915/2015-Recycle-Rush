@@ -18,29 +18,22 @@ import edu.wpi.first.wpilibj.Ultrasonic;
  * floating around.
  */
 public class RobotMap {
-
-	/*
-	 * Robot Number- Should be ROBOT_Team Number for the robot in use. For G1 use ROBOT_4915, for G2 use ROBOT_9999.
-	 */
-	
-	public static final int ROBOT_9999 = 20;
-	public static final int ROBOT_4915 = 10;
-	public static final int ROBOT_NUMBER = ROBOT_4915;
 	
 	/*
 	 * CONSTANTS
 	 */
 
-	public static final int MOTOR_PORT_LEFT_FRONT = 0;
-	public static final int MOTOR_PORT_LEFT_REAR = 1;
-	public static final int MOTOR_PORT_RIGHT_FRONT = 2;
-	public static final int MOTOR_PORT_RIGHT_REAR = 3;
+	public static final int MOTOR_PORT_LEFT_FRONT = 10;
+	public static final int MOTOR_PORT_LEFT_REAR = 11;
+	public static final int MOTOR_PORT_RIGHT_FRONT = 12;
+	public static final int MOTOR_PORT_RIGHT_REAR = 13;
 	
-	public static final int MOTOR_PORT_ELEVATOR_WINCH = 4;
+	public static final int MOTOR_PORT_ELEVATOR_WINCH = 14;
 	
 	/*
 	 * The Pneumatic Control Module's CAN Node ID. Use 10 for 4915. Use 20 for 9999
 	 */
+	
 	public final static int PCM_NODE_ID = 0;
 	
 	public final static int GYRO_PORT = 0;
@@ -63,7 +56,6 @@ public class RobotMap {
 	public static RobotDrive driveTrainRobotDrive;
 	// TODO explain the reason for this number
 	public static final double DEFAULT_MAX_OUTPUT = 950;
-
 
 	/*
 	 * Gyroscope
@@ -99,10 +91,10 @@ public class RobotMap {
 		/*
 		 * MECANUM WHEEL START
 		 */
-		mecanumDriveControlsLeftFront = new CANTalon(MOTOR_PORT_LEFT_FRONT+ROBOT_NUMBER);
-		mecanumDriveControlsLeftRear = new CANTalon(MOTOR_PORT_LEFT_REAR+ROBOT_NUMBER);
-		mecanumDriveControlsRightFront = new CANTalon(MOTOR_PORT_RIGHT_FRONT+ROBOT_NUMBER);
-		mecanumDriveControlsRightRear = new CANTalon(MOTOR_PORT_RIGHT_REAR+ROBOT_NUMBER);
+		mecanumDriveControlsLeftFront = new CANTalon(MOTOR_PORT_LEFT_FRONT);
+		mecanumDriveControlsLeftRear = new CANTalon(MOTOR_PORT_LEFT_REAR);
+		mecanumDriveControlsRightFront = new CANTalon(MOTOR_PORT_RIGHT_FRONT);
+		mecanumDriveControlsRightRear = new CANTalon(MOTOR_PORT_RIGHT_REAR);
 
 		changeControlMode(ControlMode.Speed);
 
@@ -137,7 +129,7 @@ public class RobotMap {
 		 */
 		// ELEVATOR instantiation
 		// TODO set limit switch configuration on the winch motor
-		elevatorWinchMotor = new CANTalon(MOTOR_PORT_ELEVATOR_WINCH+ROBOT_NUMBER);
+		elevatorWinchMotor = new CANTalon(MOTOR_PORT_ELEVATOR_WINCH);
 		elevatorWinchMotor.changeControlMode(ControlMode.Position);
 		elevatorWinchMotor.setFeedbackDevice(CANTalon.FeedbackDevice.AnalogPot);
 		elevatorWinchMotor.setPID(15, .01, 0.001, 0.0001, 25, 1, 0); //Values we determined after the gearbox was lubricated
@@ -160,8 +152,8 @@ public class RobotMap {
 		// Double Solenoid instantiation. Wiring: 0 --> Forward channel
 		// (extended). 1 --> Reverse channel (retracted).
 		//mommaSolenoid = new DoubleSolenoid(PCM_NODE_ID, SOLENOID_CHANNEL_MOMMA_FORWARD, SOLENOID_CHANNEL_MOMMA_REVERSE); // Uses 10 as the Node ID for the PCM
-		primarySolenoid = new Solenoid(PCM_NODE_ID+ROBOT_NUMBER, SOLENOID_CHANNEL_PRIMARY);
-		secondarySolenoid = new Solenoid(PCM_NODE_ID+ROBOT_NUMBER,SOLENOID_CHANNEL_SECONDARY); 
+		primarySolenoid = new Solenoid(PCM_NODE_ID, SOLENOID_CHANNEL_PRIMARY);
+		secondarySolenoid = new Solenoid(PCM_NODE_ID,SOLENOID_CHANNEL_SECONDARY); 
 
 		/*
 		 * GRABBER END
