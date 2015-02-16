@@ -46,7 +46,7 @@ public class Elevator extends Subsystem {
 														// position change
 
 	public CANTalon winch = RobotMap.elevatorWinchMotor;
-	public DigitalInput slackLimitSwitch = RobotMap.slackLimitSwitch;
+	public DigitalInput bottomLimitSwitch = RobotMap.bottomLimitSwitch;
 	
 	/**
 	 * Initializes the default command (WPI java default method) Called on
@@ -176,10 +176,10 @@ public class Elevator extends Subsystem {
 	 * @return if the elevator is at it's min height, return true
 	 */
 	public boolean isAtBottomOfElevator() {
-		if (winch.isRevLimitSwitchClosed()) {
+		if (bottomLimitSwitch.get()) {
 			Robot.debugger.logError(LoggerNames.ELEVATOR, "Elevator Bottom LimitSwitch has been reached");
 		}
-		return winch.isRevLimitSwitchClosed();
+		return bottomLimitSwitch.get();
 	}
 
 	/**
@@ -235,7 +235,7 @@ public class Elevator extends Subsystem {
 	 * @return true if the elevator is slack, false if not.
 	 */
 	private boolean elevatorIsSlack() {
-		return slackLimitSwitch.get();
+		return winch.isRevLimitSwitchClosed();
 	}
 
 }

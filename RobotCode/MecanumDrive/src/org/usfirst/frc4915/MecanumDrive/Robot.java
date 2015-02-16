@@ -305,7 +305,7 @@ public class Robot extends IterativeRobot {
 		
 	}
 	public void cameragrab(int sessionid){
-System.out.println("camera session: "+ sessionid);
+		System.out.println("camera session: "+ sessionid);
 		NIVision.IMAQdxGrab(sessionid, frame, 1);
 		CameraServer.getInstance().setImage(frame);
 		
