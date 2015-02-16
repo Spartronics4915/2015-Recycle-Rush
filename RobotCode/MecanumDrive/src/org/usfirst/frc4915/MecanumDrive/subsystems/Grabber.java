@@ -37,13 +37,13 @@ public class Grabber extends Subsystem {
 		primarySolenoid.set(true);
 	}
 	
-	/**
-	 * extends the piston a small amount to relax the grip on the totes
-	 */
-	public void smallOpen(){
-		secondarySolenoid.set(false);
-		primarySolenoid.set(true);
-	}
+//	/**
+//	 * extends the piston a small amount to relax the grip on the totes
+//	 */
+//	public void smallOpen(){
+//		secondarySolenoid.set(false);
+//		primarySolenoid.set(true);
+//	}
 
 	/**
 	 * vents the system

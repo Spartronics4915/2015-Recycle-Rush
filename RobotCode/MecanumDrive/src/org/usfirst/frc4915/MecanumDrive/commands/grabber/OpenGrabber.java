@@ -24,7 +24,6 @@ public class OpenGrabber extends Command {
 	protected void execute() {
 		Robot.grabber.vent();
 		Robot.grabber.open();
-
 		finished = true;
 	}
 

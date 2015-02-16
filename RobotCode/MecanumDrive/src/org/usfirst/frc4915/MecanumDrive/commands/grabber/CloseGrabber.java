@@ -23,10 +23,9 @@ public class CloseGrabber extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		Robot.grabber.vent();
+		Robot.grabber.block();
 		Robot.grabber.close();
 		finished = true;
-
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
