@@ -7,12 +7,13 @@ import org.usfirst.frc4915.MecanumDrive.commands.debug.DebuggerFilter;
 import org.usfirst.frc4915.MecanumDrive.subsystems.DriveTrain;
 import org.usfirst.frc4915.MecanumDrive.subsystems.Elevator;
 import org.usfirst.frc4915.MecanumDrive.subsystems.Grabber;
+import org.usfirst.frc4915.MecanumDrive.utility.VersionFinder;
 import org.usfirst.frc4915.debuggersystem.CustomDebugger;
 import org.usfirst.frc4915.debuggersystem.CustomDebugger.LoggerNames;
 
-
 import com.ni.vision.NIVision.Image;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.Timer;
@@ -93,7 +94,7 @@ public class Robot extends IterativeRobot {
 		
 		SmartDashboard.putData("Debugger Filter", Debugger);
 
-
+		displayOnSmartDashboardVersioning();
 		
         //Init camera
        // frame = NIVision.imaqCreateImage(NIVision.ImageType.IMAGE_RGB, 0);
@@ -115,6 +116,17 @@ public class Robot extends IterativeRobot {
 		}
 	}
 
+	private void displayOnSmartDashboardVersioning() {
+		String parsedVersion = VersionFinder.getAttribute(this, VersionFinder.VERSION_ATTRIBUTE);
+		DriverStation.reportError("Code Version" + parsedVersion == null ? "<not found>" : parsedVersion, false);
+
+		String parsedBuilder = VersionFinder.getAttribute(this, VersionFinder.BUILT_BY_ATTRIBUTE);
+		DriverStation.reportError("Code Built By" + parsedBuilder == null ? "<not found>" : parsedBuilder, false);
+
+		String parsedBuildDate = VersionFinder.getAttribute(this, VersionFinder.BUILT_AT_ATTRIBUTE);
+		DriverStation.reportError("Code Built At" + parsedBuildDate == null ? "<not found>" : parsedBuildDate, false);		
+	}
+
 	/**
 	 * This function is called when the disabled button is hit. You can use it
 	 * to reset subsystems before shutting down.
@@ -133,6 +145,11 @@ public class Robot extends IterativeRobot {
 		//double desiredDistrance = preferences.getDouble("DesiredDistance", 9.0);
 		//autonomousCommand = new AutonomousCommandToteStrategy();
 		autonomousCommand = new AutonomousCommandToteStrategy();
+		// Sets the setPoint to where-ever it is to prevent the elevator
+		// wanting to go to a random position (default zero)
+		elevator.setHieghtToCurrentPosition();
+		// Tells the elevator to approximate the other maximum when it hits a limit switch
+		elevator.needToApproximate = true;
 		autonomousCommand.start();
 	}
 
@@ -151,7 +168,11 @@ public class Robot extends IterativeRobot {
 		if (autonomousCommand != null){
 			autonomousCommand.cancel();
 		}
+		// Sets the setPoint to where-ever it is to prevent the elevator
+		// wanting to go to a random position (default zero)
 		elevator.setHieghtToCurrentPosition();
+		// Tells the elevator to approximate the other maximum when it hits a limit switch
+		elevator.needToApproximate = true;
 	}
 
 	/**
