@@ -4,14 +4,12 @@ import org.usfirst.frc4915.MecanumDrive.commands.debug.DebuggerFilterReset;
 import org.usfirst.frc4915.MecanumDrive.commands.drive.StrafeCommand;
 import org.usfirst.frc4915.MecanumDrive.commands.elevator.ElevatorJumpToPosition;
 import org.usfirst.frc4915.MecanumDrive.commands.elevator.ElevatorPositionCalibration;
-import org.usfirst.frc4915.MecanumDrive.commands.elevator.ElevatorSetHeight;
 import org.usfirst.frc4915.MecanumDrive.commands.elevator.ElevatorSetSafety;
 import org.usfirst.frc4915.MecanumDrive.commands.elevator.ElevatorStop;
 import org.usfirst.frc4915.MecanumDrive.commands.grabber.CloseGrabber;
 import org.usfirst.frc4915.MecanumDrive.commands.grabber.IntermediateOpen;
 import org.usfirst.frc4915.MecanumDrive.commands.grabber.OpenGrabber;
 import org.usfirst.frc4915.MecanumDrive.subsystems.DriveTrain;
-import org.usfirst.frc4915.MecanumDrive.subsystems.Elevator;
 import org.usfirst.frc4915.MecanumDrive.utility.VersionFinder;
 import org.usfirst.frc4915.debuggersystem.CustomDebugger.LoggerNames;
 
