@@ -154,7 +154,8 @@ public class OI {
 		SmartDashboard.putBoolean("Elevator At Top", Robot.elevator.isAtTopOfElevator());
 		SmartDashboard.putBoolean("Elevator At Bottom", Robot.elevator.isAtBottomOfElevator());
 		SmartDashboard.putData("Disable Elevator Safety", new ElevatorSetSafety(false));
-		SmartDashboard.putData("Enable Elevator Safety", new ElevatorSetSafety(true));		
+		SmartDashboard.putData("Enable Elevator Safety", new ElevatorSetSafety(true));
+		
 		/*
 		 * DEBUGGER BUTTONS
 		*/ 
