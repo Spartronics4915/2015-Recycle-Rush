@@ -41,6 +41,7 @@
 			sourcepath="src"
 			destdir="${docs.dir}"
 			use="true"
+            linksource="true"
 			/>
 		</sequential>
 	</macrodef>

@@ -2,10 +2,10 @@ package org.usfirst.frc4915.MecanumDrive.commands.autonomous;
 
 import org.usfirst.frc4915.MecanumDrive.commands.drive.MoveStraightPositionModeCommand;
 import org.usfirst.frc4915.MecanumDrive.commands.drive.StrafeCommand;
-import org.usfirst.frc4915.MecanumDrive.commands.elevator.ElevatorJumpToPosition;
 import org.usfirst.frc4915.MecanumDrive.commands.elevator.ElevatorMoveToHeight;
 import org.usfirst.frc4915.MecanumDrive.commands.grabber.CloseGrabber;
 import org.usfirst.frc4915.MecanumDrive.commands.grabber.OpenGrabber;
+import org.usfirst.frc4915.MecanumDrive.commands.elevator.ElevatorJumpToPosition;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
@@ -33,6 +33,5 @@ public class AutonomousCommandJustDrive extends CommandGroup {
         // arm.
     	System.out.println("***Running Just Drive Command***");
     	addSequential( new MoveStraightPositionModeCommand(5, 0.7));
-    	
     }
 }

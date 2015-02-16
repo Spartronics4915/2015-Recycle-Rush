@@ -17,12 +17,13 @@ public class MoveStraightPositionModeCommand extends Command {
 	private DriveTrain driveTrain = Robot.driveTrain;
 
 	public MoveStraightPositionModeCommand(double inputDistance, double inputSpeed) {
-		requires(Robot.grabber);
-		requires(Robot.elevator);
+		
 		requires(driveTrain);
+	
 		System.out.println("***MoveStraightPositionModeCommand inputDistance: " + inputDistance + "*******");
 		System.out.println("***MoveStraightPositionModeCommand inputSpeed: " + inputSpeed + "*******");
 		Robot.debugger.logError(CustomDebugger.LoggerNames.DRIVETRAIN, "***MoveStraightPositionModeCommand inputDistance: " + inputDistance + "*******");
+
 		this.inputDistance = inputDistance;
 		this.inputSpeed = inputSpeed;
 		// Use requires() here to declare subsystem dependencies
@@ -68,22 +69,23 @@ public class MoveStraightPositionModeCommand extends Command {
 		
 		System.out.println("+++++++++"+inputSpeed+"++++++++");
 		
-		if (inputDistance < 0)
+		if (inputDistance < 0) {
 			//driveTrain.driveStraight(inputSpeed);
 			driveTrain.driveStraight(.7);
-		else 
+		} else {
 			//driveTrain.driveStraight(-inputSpeed);
 			driveTrain.driveStraight(-.7);
+		}
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
 		// checking to see if the front motors have finished regardless of driving direction
 		// checking to see if the front motors have finished (regardless of what direction the robot is driving)
-		if (inputDistance > 0){
-			return isMotorFinished(0) || isMotorFinished(2);}
-		else{
-			return isMotorFinished(1) || isMotorFinished(3);}
+		if (inputDistance > 0)
+			return isMotorFinished(0) || isMotorFinished(2);
+		else
+			return isMotorFinished(1) || isMotorFinished(3);
 	}
 	private boolean isMotorFinished(int i) {
 		boolean finished = false;
@@ -119,7 +121,7 @@ public class MoveStraightPositionModeCommand extends Command {
 	// Called when another command which requires one or more of the same
 	// subsystems is scheduled to run
 	protected void interrupted() {
-        Robot.debugger.logError(CustomDebugger.LoggerNames.DRIVETRAIN, "Command interrupted!");
+        Robot.debugger.logError(CustomDebugger.LoggerNames.DRIVETRAIN, "MoveStraightPositionModeCommand interrupted!");
 		end();
 	}
 }
