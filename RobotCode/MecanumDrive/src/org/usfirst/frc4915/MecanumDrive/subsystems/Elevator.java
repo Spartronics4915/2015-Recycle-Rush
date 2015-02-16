@@ -234,7 +234,7 @@ public class Elevator extends Subsystem {
 	 * Is the elevator cable slack and about to unwind?
 	 * @return true if the elevator is slack, false if not.
 	 */
-	private boolean elevatorIsSlack() {
+	public boolean elevatorIsSlack() {
 		return winch.isRevLimitSwitchClosed();
 	}
 

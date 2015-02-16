@@ -227,6 +227,7 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putNumber("Elevator SetPoint", Elevator.setPoint);
 		SmartDashboard.putBoolean("Elevator At Top", elevator.isAtTopOfElevator());
 		SmartDashboard.putBoolean("Elevator At Bottom", elevator.isAtBottomOfElevator());
+		SmartDashboard.putBoolean("Elevator is Slack", elevator.elevatorIsSlack());
 		SmartDashboard.putNumber("Elevator Potentiometer Value", elevator.getPosition());
 		SmartDashboard.putNumber("Elevator P", elevator.winch.getP());
 		SmartDashboard.putNumber("Elevator I", elevator.winch.getI());
