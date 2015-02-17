@@ -34,10 +34,8 @@ public class RobotMap {
 	/*
 	 * The Pneumatic Control Module's CAN Node ID. Use 10 for 4915. Use 20 for 9999
 	 */
-	
 	public final static int PCM_NODE_ID = 10;
-	
-	public final static int GYRO_PORT = 0;
+		public final static int GYRO_PORT = 0;
 	
 	public final static int ULTRASONIC_PORT_FIRST = 0;
 	public final static int ULTRASONIC_PORT_SECOND = 1;
@@ -74,7 +72,9 @@ public class RobotMap {
 	public static CANTalon elevatorWinchMotor;
 	private static final int FWD_SOFT_LIMIT = 1023;
 	private static final int REV_SOFT_LIMIT = 0;
+	public static DigitalInput slackLimitSwitch;
 	public static DigitalInput bottomLimitSwitch;
+
 
 	/*
 	 * GRABBER
@@ -140,7 +140,12 @@ public class RobotMap {
 		elevatorWinchMotor.ConfigFwdLimitSwitchNormallyOpen(true);
 		elevatorWinchMotor.ConfigRevLimitSwitchNormallyOpen(true);
 		elevatorWinchMotor.enableBrakeMode(true);
-
+		//slackLimitSwitch = new DigitalInput(1);
+		//bottomLimitSwitch = new DigitalInput(5);
+		
+		// Potentiometer instantiation
+		
+		// TODO Limit Switches instantiation goes here
 		bottomLimitSwitch = new DigitalInput(5);
 		
 		/*
