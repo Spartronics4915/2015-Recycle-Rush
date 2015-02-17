@@ -1,5 +1,5 @@
 package org.usfirst.frc4915.MecanumDrive;
-import org.usfirst.frc4915.MecanumDrive.commands.debug.DebuggerFilter;
+import org.usfirst.frc4915.MecanumDrive.commands.debug.ShowOnly;
 import org.usfirst.frc4915.MecanumDrive.commands.debug.DebuggerFilterReset;
 import org.usfirst.frc4915.MecanumDrive.commands.drive.MoveStraightPositionModeCommand;
 import org.usfirst.frc4915.MecanumDrive.commands.drive.StrafeCommand;
@@ -164,11 +164,11 @@ public class OI {
 		 * */
 		 
 		
-		SmartDashboard.putData("Set debugger to drivetrain", new DebuggerFilter(LoggerNames.DRIVETRAIN));
-		SmartDashboard.putData("Set debugger to grabber", new DebuggerFilter(LoggerNames.GRABBER));
-		SmartDashboard.putData("Set debugger to general", new DebuggerFilter(LoggerNames.GENERAL));
-		SmartDashboard.putData("Set debugger to autonomous", new DebuggerFilter(LoggerNames.AUTONOMOUS));
-		SmartDashboard.putData("Set debugger to elevator", new DebuggerFilter(LoggerNames.ELEVATOR));
+		SmartDashboard.putData("Set debugger to drivetrain", new ShowOnly(LoggerNames.DRIVETRAIN));
+		SmartDashboard.putData("Set debugger to grabber", new ShowOnly(LoggerNames.GRABBER));
+		SmartDashboard.putData("Set debugger to general", new ShowOnly(LoggerNames.GENERAL));
+		SmartDashboard.putData("Set debugger to autonomous", new ShowOnly(LoggerNames.AUTONOMOUS));
+		SmartDashboard.putData("Set debugger to elevator", new ShowOnly(LoggerNames.ELEVATOR));
 		SmartDashboard.putData("Reset debugger filter", new DebuggerFilterReset());
 		
 
@@ -181,7 +181,7 @@ public class OI {
 		LiveWindow.addActuator("Grabber Primary Solenoid", "Solenoid", RobotMap.primarySolenoid);
 		LiveWindow.addActuator("Grabber Secondary Solenoid", "Solenoid", RobotMap.secondarySolenoid);
 		SmartDashboard.putNumber("Gyro Angle", RobotMap.gyro.getAngle());
-
+	
 		/*
 		 * CODE VERSION OUTPUT
 		 */

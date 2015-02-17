@@ -24,7 +24,7 @@ public class Grabber extends Subsystem {
 	 * Extend the large piston. This will move arms to position for picking up
 	 * wide totes.
 	 */
-	public void open() {
+	public void primaryOff() {
 		primarySolenoid.set(false);
 	}
 
@@ -33,29 +33,29 @@ public class Grabber extends Subsystem {
 	 * totes.
 	 */
 
-	public void close() {
+	public void primaryOn() {
 		primarySolenoid.set(true);
 	}
 	
-	/**
-	 * extends the piston a small amount to relax the grip on the totes
-	 */
-	public void smallOpen(){
-		secondarySolenoid.set(false);
-		primarySolenoid.set(true);
-	}
+//	/**
+//	 * extends the piston a small amount to relax the grip on the totes
+//	 */
+//	public void smallOpen(){
+//		secondarySolenoid.set(false);
+//		primarySolenoid.set(true);
+//	}
 
 	/**
 	 * vents the system
 	 */
-	public void vent() {
+	public void secondaryOff() {
 		secondarySolenoid.set(false);
 	}
 
 	/**
 	 * closes the secondary solenoid to block air outflow
 	 */
-	public void block() {
+	public void secondaryOn() {
 		secondarySolenoid.set(true);
 	}
 
