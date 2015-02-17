@@ -2,6 +2,7 @@ package org.usfirst.frc4915.MecanumDrive.commands.autonomous;
 import org.usfirst.frc4915.MecanumDrive.commands.drive.MoveStraightPositionModeCommand;
 import org.usfirst.frc4915.MecanumDrive.commands.drive.StopDriveTrain;
 import org.usfirst.frc4915.MecanumDrive.commands.drive.StrafeCommand;
+import org.usfirst.frc4915.MecanumDrive.commands.drive.Turn90Degrees;
 import org.usfirst.frc4915.MecanumDrive.commands.drive.Wait;
 import org.usfirst.frc4915.MecanumDrive.commands.elevator.ElevatorIsAbovePositionNumber;
 import org.usfirst.frc4915.MecanumDrive.commands.elevator.ElevatorIsBelowPositionNumber;
@@ -9,6 +10,7 @@ import org.usfirst.frc4915.MecanumDrive.commands.elevator.ElevatorJumpToPosition
 import org.usfirst.frc4915.MecanumDrive.commands.elevator.ElevatorMoveToHeight;
 import org.usfirst.frc4915.MecanumDrive.commands.grabber.CloseGrabber;
 import org.usfirst.frc4915.MecanumDrive.commands.grabber.OpenGrabber;
+
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class AutonomousCommandStacking extends CommandGroup {
@@ -70,7 +72,8 @@ public class AutonomousCommandStacking extends CommandGroup {
     	//inches
     	addSequential(new ElevatorJumpToPosition(1));
     	addSequential(new ElevatorIsAbovePositionNumber(12), 2);
-    	addSequential(new StrafeCommand(-9.5,0.7)); //going left 9.5 ft // prefer
+    	addSequential(new Turn90Degrees(false));
+    	addSequential(new MoveStraightPositionModeCommand(-9.5,0.7)); //going left 9.5 ft // prefer
     	addSequential(new ElevatorJumpToPosition(0));
     	addSequential(new ElevatorIsBelowPositionNumber(0.5), 3);
     	addSequential(new OpenGrabber());
