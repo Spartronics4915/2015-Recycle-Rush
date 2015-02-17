@@ -146,15 +146,8 @@ public class OI {
 		/*
 		 * ELEVATOR
 		 */
-		SmartDashboard.putData("Jump to Elevator Position 0", new ElevatorJumpToPosition(0));
-		SmartDashboard.putData("Jump to Elevator Position 1", new ElevatorJumpToPosition(1));
-		SmartDashboard.putData("Jump to Elevator Position 2", new ElevatorJumpToPosition(2));
-		SmartDashboard.putData("Jump to Elevator Position 3", new ElevatorJumpToPosition(3));
-		SmartDashboard.putData("Jump to Elevator Position 4", new ElevatorJumpToPosition(4));
 		SmartDashboard.putData("ElevatorPositionCalibration", new ElevatorPositionCalibration());
 		SmartDashboard.putData("ElevatorStop", new ElevatorStop());
-		SmartDashboard.putBoolean("Elevator At Top", Robot.elevator.isAtTopOfElevator());
-		SmartDashboard.putBoolean("Elevator At Bottom", Robot.elevator.isAtBottomOfElevator());
 		SmartDashboard.putData("Disable Elevator Safety", new ElevatorSetSafety(false));
 		SmartDashboard.putData("Enable Elevator Safety", new ElevatorSetSafety(true));
 		
