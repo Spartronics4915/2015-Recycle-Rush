@@ -172,7 +172,8 @@ public class OI {
 		LiveWindow.addSensor("Drive Train", "Distance Sensor", DriveTrain.distanceSensor);
 		LiveWindow.addActuator("Grabber Primary Solenoid", "Solenoid", RobotMap.primarySolenoid);
 		LiveWindow.addActuator("Grabber Secondary Solenoid", "Solenoid", RobotMap.secondarySolenoid);
-		SmartDashboard.putNumber("Gyro Angle", RobotMap.gyro.getAngle());
+		SmartDashboard.putNumber("Gyro Angle", Robot.driveTrain.gyroHeading);
+		SmartDashboard.putNumber("Turn Rate", Robot.driveTrain.deltaGyro);
 
 		/*
 		 * CODE VERSION OUTPUT
