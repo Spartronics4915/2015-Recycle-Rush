@@ -4,8 +4,9 @@ import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandCon
 import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandJustDrive;
 import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandStacking;
 import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandToteStrategy;
+import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandTwoContainers;
 import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandTwoTotesOneContainer;
-import org.usfirst.frc4915.MecanumDrive.commands.debug.DebuggerFilter;
+//import org.usfirst.frc4915.MecanumDrive.commands.debug.DebuggerFilter;
 import org.usfirst.frc4915.MecanumDrive.commands.drive.ToggleDriveMode;
 import org.usfirst.frc4915.MecanumDrive.subsystems.DriveTrain;
 import org.usfirst.frc4915.MecanumDrive.subsystems.Elevator;
@@ -110,15 +111,19 @@ public class Robot extends IterativeRobot {
 		autonomousProgramChooser.addObject("Autonomous Tote Strategy", new AutonomousCommandToteStrategy());
 		autonomousProgramChooser.addObject("Autonomous Stacking Strategy", new AutonomousCommandStacking());
 		autonomousProgramChooser.addObject("Autonomous Two Totes One Container Strategy", new AutonomousCommandTwoTotesOneContainer());
-	
-		SmartDashboard.putData("Autonomous Program", autonomousProgramChooser);
+		autonomousProgramChooser.addObject("Autonomous Two Container Strategy", new AutonomousCommandTwoContainers());
+
 		
+		SmartDashboard.putData("Autonomous Program", autonomousProgramChooser);
+	/*	
 		Debugger = new SendableChooser();
 		Debugger.addDefault("General", new DebuggerFilter(LoggerNames.GENERAL));
 		Debugger.addObject("Grabber", new DebuggerFilter(LoggerNames.GRABBER));
 		Debugger.addObject("Drivetrain", new DebuggerFilter(LoggerNames.DRIVETRAIN));
 		Debugger.addObject("Autonomous", new DebuggerFilter(LoggerNames.AUTONOMOUS));
 		Debugger.addObject("Elevator", new DebuggerFilter(LoggerNames.ELEVATOR));
+		
+		*/
 
 		SmartDashboard.putData("Debugger Filter ", Debugger);
 		displayVersioningOnSmartDashboard();	

@@ -43,7 +43,7 @@ public class AutonomousCommandTwoContainers extends CommandGroup {
     	addSequential(new ElevatorJumpToPosition(2.5));
     	addSequential(new ElevatorIsAbovePositionNumber(30), 1.2);
     	System.out.println("Driving forward 7.5 ft");
-    	addSequential(new MoveStraightPositionModeCommand(7.5, 0.7));
+    	addSequential(new MoveStraightPositionModeCommand(2, 0.7)); // //
     	
     	System.out.println("Moving Elevator (level 1.5)"); //puts down container
     	addSequential(new ElevatorJumpToPosition(1.5));
@@ -55,9 +55,9 @@ public class AutonomousCommandTwoContainers extends CommandGroup {
     	addSequential(new ElevatorJumpToPosition(2.5));
     	addSequential(new ElevatorIsAbovePositionNumber(30), 1.2);
     	System.out.println("Driving backward 7.5 ft");
-    	addSequential(new MoveStraightPositionModeCommand(-7.5, 0.7));
+    	addSequential(new MoveStraightPositionModeCommand(-2, 0.7)); // //
     	
-    	addSequential(new StrafeCommand(6.75, 0.7));   //right
+    	addSequential(new StrafeCommand(6.75, 0.7));   // right //
     	System.out.println("Moving Elevator (level 1.5)"); 
     	addSequential(new ElevatorJumpToPosition(1.5));
     	addSequential(new ElevatorIsBelowPositionNumber(18), 1.2);
@@ -66,8 +66,8 @@ public class AutonomousCommandTwoContainers extends CommandGroup {
     	System.out.println("Moving Elevator (level 2.5)");
     	addSequential(new ElevatorJumpToPosition(2.5));
     	addSequential(new ElevatorIsAbovePositionNumber(30), 1.2);
-    	System.out.println("Driving forward 10.5 ft");
-    	addSequential(new MoveStraightPositionModeCommand(10.5, 0.7));
+    	System.out.println("Driving forward 11 ft");
+    	addSequential(new MoveStraightPositionModeCommand(2, 0.7)); // //
     	
     	System.out.println("Moving Elevator (level 1.5)"); //puts down container
     	addSequential(new ElevatorJumpToPosition(1.5));
