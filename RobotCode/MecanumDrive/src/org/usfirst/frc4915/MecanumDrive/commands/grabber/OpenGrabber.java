@@ -22,9 +22,8 @@ public class OpenGrabber extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		Robot.grabber.vent();
-		Robot.grabber.open();
-
+		Robot.grabber.secondaryOff();
+		Robot.grabber.primaryOff();
 		finished = true;
 	}
 

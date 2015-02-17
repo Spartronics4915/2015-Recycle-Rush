@@ -173,7 +173,7 @@ public class OI {
 		LiveWindow.addActuator("Grabber Primary Solenoid", "Solenoid", RobotMap.primarySolenoid);
 		LiveWindow.addActuator("Grabber Secondary Solenoid", "Solenoid", RobotMap.secondarySolenoid);
 		SmartDashboard.putNumber("Gyro Angle", RobotMap.gyro.getAngle());
-
+	
 		/*
 		 * CODE VERSION OUTPUT
 		 */
