@@ -81,13 +81,13 @@ public class StrafeCommand extends Command {
 		
 		if (i == 1 || i == 3) {
 			// right motors are inverted
-			if (inputDistance < 0) {
+			if (inputDistance > 0) {
 				finished = currentPosition >= desiredPosition;
 			} else {
 				finished = currentPosition <= desiredPosition;
 			}
 		} else {
-			if (inputDistance < 0) {
+			if (inputDistance > 0) {
 				finished = currentPosition <= desiredPosition;
 			} else {
 				finished = currentPosition >= desiredPosition;
