@@ -12,6 +12,7 @@ public class IntermediateOpen extends Command {
 	public IntermediateOpen() {
 		// Use requires() here to declare subsystem dependencies
 		// eg. requires(chassis);
+		requires(Robot.grabber);
 	}
 
 	// Called just before this Command runs the first time
@@ -22,8 +23,8 @@ public class IntermediateOpen extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		Robot.grabber.block();
-		Robot.grabber.open();
+		Robot.grabber.secondaryOn();
+		Robot.grabber.primaryOff();
 		finished = true;
 	}
 

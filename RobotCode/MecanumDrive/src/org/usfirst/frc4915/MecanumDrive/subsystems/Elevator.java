@@ -27,7 +27,7 @@ public class Elevator extends Subsystem {
 	public static double maximumPotentiometerValue = 1023;
 	public static double slackMinimum = 0;
 	
-	public static final double APPROXIMATE_OFFSET = 410;
+	public static final double APPROXIMATE_OFFSET = 430;
 	public static boolean needToApproximate = true;
 	
 	public static boolean didSaveTopValue = false;
@@ -43,9 +43,7 @@ public class Elevator extends Subsystem {
 													// in inches
 	public static final double HEIGHT_OF_TOTE = 12;
 
-	private static final double JOYSTICK_SCALE = -5; // TODO Decide scale for
-														// joystick movement
-														// position change
+	private static final double JOYSTICK_SCALE = -18;
 	
 	private static double previousJoystickY = 0;
 	
@@ -70,10 +68,11 @@ public class Elevator extends Subsystem {
 	public void moveWithJoystick(Joystick joystick) {
 		double joystickY = joystick.getAxis(Joystick.AxisType.kY);
 		Robot.debugger.logError(LoggerNames.ELEVATOR, "Elevator joystick " + joystickY);
-		if (Math.abs(joystickY) <= .2) {
+		if (Math.abs(joystickY) <= .1) {
 			Robot.debugger.logError(LoggerNames.ELEVATOR, "Joystick value too small");
+			joystickY = 0;
 			moveElevator(0);
-		} else if (shouldStopElevator(joystickY)){
+		} if (shouldStopElevator(joystickY)){
 			setPoint = getPosition();
 			moveElevator(0);
 		} else {
@@ -89,7 +88,7 @@ public class Elevator extends Subsystem {
 	 * @return true if the change in joystick value is more than 1 (so from + to -, or from - to +)
 	 */
 	private boolean shouldStopElevator(double joystickY) {
-		return (Math.abs(joystickY - previousJoystickY) >= 1);
+		return ((joystickY >= 0) && (previousJoystickY < 0) || ((joystickY <= 0) && (previousJoystickY > 0)));
 	}
 
 	/**
@@ -139,6 +138,15 @@ public class Elevator extends Subsystem {
 		Robot.debugger.logError(LoggerNames.ELEVATOR, "The elevator is at position " + position + " (inches)");
 		return position;
 	}
+	
+	/**
+	 * @return the position number of the elevator -- how many totes 
+	 * could be below it. Between 0 and 5.
+	 */
+	public double getPositionNumber() {
+		double positionNumber = getPositionInches() / HEIGHT_OF_TOTE;
+		return positionNumber;
+	}
 
 	/**
 	 * @return the read value from the potentiometer (between 0 and 1023)
@@ -163,14 +171,6 @@ public class Elevator extends Subsystem {
 		setPoint = minimumPotentiometerValue + ((maximumPotentiometerValue - minimumPotentiometerValue) 
 											 * HEIGHT_OF_TOTE * positionNumber / RANGE_OF_MOTION);
 		Robot.debugger.logError(LoggerNames.ELEVATOR, "Elevator's height is " + setPoint);
-	}
-	
-	/**
-	 * 
-	 * @return Level of Elevator in number of totes
-	 */
-	public double getElevatorLevel() {
-		return ((RANGE_OF_MOTION * (winch.getPosition())) / (maximumPotentiometerValue - minimumPotentiometerValue)) / 12;
 	}
 
 	/**

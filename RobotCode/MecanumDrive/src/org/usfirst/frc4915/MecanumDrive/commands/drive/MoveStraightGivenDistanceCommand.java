@@ -12,9 +12,10 @@ import edu.wpi.first.wpilibj.command.Command;
 public class MoveStraightGivenDistanceCommand extends Command {
 	public static List<CANTalon> motors = DriveTrain.motors;
 	public double inputDistance;
+	public double speed;
 	private DriveTrain driveTrain = Robot.driveTrain;
 
-	public MoveStraightGivenDistanceCommand(double inputDistance) {
+	public MoveStraightGivenDistanceCommand(double inputDistance, double speed) {
 		requires(driveTrain);
 		this.inputDistance = inputDistance;
 		// Use requires() here to declare subsystem dependencies

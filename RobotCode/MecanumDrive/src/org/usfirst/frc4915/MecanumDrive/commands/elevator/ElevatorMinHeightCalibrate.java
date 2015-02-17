@@ -11,8 +11,7 @@ public class ElevatorMinHeightCalibrate extends Command {
 	Elevator elevator = Robot.elevator;
 
 	public ElevatorMinHeightCalibrate() {
-		// Use requires() here to declare subsystem dependencies
-		// eg. requires(chassis);
+		// DON'T require Robot.elevator
 	}
 
 	// Called just before this Command runs the first time

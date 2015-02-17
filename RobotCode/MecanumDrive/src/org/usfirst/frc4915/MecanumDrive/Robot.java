@@ -2,8 +2,9 @@ package org.usfirst.frc4915.MecanumDrive;
 
 import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandContainerStrategy;
 import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandJustDrive;
+import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandStacking;
 import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandToteStrategy;
-import org.usfirst.frc4915.MecanumDrive.commands.debug.DebuggerFilter;
+import org.usfirst.frc4915.MecanumDrive.commands.debug.ShowOnly;
 import org.usfirst.frc4915.MecanumDrive.commands.drive.ToggleDriveMode;
 import org.usfirst.frc4915.MecanumDrive.subsystems.DriveTrain;
 import org.usfirst.frc4915.MecanumDrive.subsystems.Elevator;
@@ -26,6 +27,18 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
+import edu.wpi.first.wpilibj.CameraServer;
+import edu.wpi.first.wpilibj.Timer;
+
+import com.ni.vision.NIVision;
+import com.ni.vision.NIVision.Image;
+
+
+import edu.wpi.first.wpilibj.CameraServer;
+import com.ni.vision.NIVision;
+import com.ni.vision.VisionException;
+
 /**
  * The VM is configured to automatically run this class, and to call the
  * functions corresponding to each mode, as described in the IterativeRobot
@@ -49,7 +62,7 @@ public class Robot extends IterativeRobot {
 	public static DriveTrain driveTrain;
 	public static Elevator elevator;
 	public static Grabber grabber;
-	public static CustomDebugger debugger = new CustomDebugger();
+	public static CustomDebugger debugger;
 	
 	// vars for camera code
 	private Image frame;
@@ -68,6 +81,7 @@ public class Robot extends IterativeRobot {
 	public void robotInit() {
 		RobotMap.init();
 
+		debugger = new CustomDebugger();
 		preferences = Preferences.getInstance();
 		driveTrain = new DriveTrain();
 		elevator = new Elevator();
@@ -93,20 +107,23 @@ public class Robot extends IterativeRobot {
 
 		autonomousProgramChooser = new SendableChooser();
 		autonomousProgramChooser.addDefault("Autonomous Just Drive", new AutonomousCommandJustDrive());
-		autonomousProgramChooser.addObject("Autonomous Container", new AutonomousCommandContainerStrategy());
-		autonomousProgramChooser.addObject("Autonomous Tote", new AutonomousCommandToteStrategy());
+		autonomousProgramChooser.addObject("Autonomous Container Strategy", new AutonomousCommandContainerStrategy());
+		autonomousProgramChooser.addObject("Autonomous Tote Strategy", new AutonomousCommandToteStrategy());
+		autonomousProgramChooser.addObject("Autonomous Stacking Strategy", new AutonomousCommandStacking());
 
+		
 		SmartDashboard.putData("Autonomous Program", autonomousProgramChooser);
 		
 		Debugger = new SendableChooser();
-		Debugger.addDefault("General", new DebuggerFilter(LoggerNames.GENERAL));
-		Debugger.addObject("Grabber", new DebuggerFilter(LoggerNames.GRABBER));
-		Debugger.addObject("Drivetrain", new DebuggerFilter(LoggerNames.DRIVETRAIN));
-		Debugger.addObject("Autonomous", new DebuggerFilter(LoggerNames.AUTONOMOUS));
-		Debugger.addObject("Elevator", new DebuggerFilter(LoggerNames.ELEVATOR));
+		Debugger.addDefault("General", new ShowOnly(LoggerNames.GENERAL));
+		Debugger.addObject("Grabber", new ShowOnly(LoggerNames.GRABBER));
+		Debugger.addObject("Drivetrain", new ShowOnly(LoggerNames.DRIVETRAIN));
+		Debugger.addObject("Autonomous", new ShowOnly(LoggerNames.AUTONOMOUS));
+		Debugger.addObject("Elevator", new ShowOnly(LoggerNames.ELEVATOR));
 		
 		SmartDashboard.putData("Debugger Filter ", Debugger);
 		displayVersioningOnSmartDashboard();	
+
 		if (elevator != null) {
 			elevator.setHieghtToCurrentPosition();
 			Elevator.minimumPotentiometerValue = preferences.getDouble("minimumPotentiometerValue", 0);
@@ -142,17 +159,21 @@ public class Robot extends IterativeRobot {
 
 	public void autonomousInit() {
 		// Use the selected autonomous command
+
 		autonomousCommand = (Command) autonomousProgramChooser.getSelected();
-		//double desiredDistrance = preferences.getDouble("DesiredDistance", 9.0);
+
+		//double desiredDistance = preferences.getDouble("DesiredDistance", 9.0);
 		//autonomousCommand = new AutonomousCommandToteStrategy();
-		autonomousCommand = new AutonomousCommandToteStrategy();
+
 		// Sets the setPoint to where-ever it is to prevent the elevator
 		// wanting to go to a random position (default zero)
 		elevator.setHieghtToCurrentPosition();
 		// Tells the elevator to approximate the other maximum when it hits a limit switch
+
 		Elevator.needToApproximate = true;
 		Elevator.didSaveTopValue = false;
 		Elevator.didSaveBottomValue = false;
+
 		autonomousCommand.start();
 	}
 
@@ -228,14 +249,12 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putBoolean("Elevator At Bottom", elevator.isAtBottomOfElevator());
 		SmartDashboard.putBoolean("Elevator is Slack", elevator.elevatorIsSlack());
 		SmartDashboard.putNumber("Elevator Potentiometer Value", elevator.getPosition());
-		SmartDashboard.putNumber("Elevator P", elevator.winch.getP());
-		SmartDashboard.putNumber("Elevator I", elevator.winch.getI());
-		SmartDashboard.putNumber("Elevator D", elevator.winch.getD());
 		SmartDashboard.putNumber("Maximum height value: ", Elevator.maximumPotentiometerValue);
 		SmartDashboard.putNumber("Minimum height value: ", Elevator.minimumPotentiometerValue);
-		SmartDashboard.putNumber("Position Number of Elevator: ", Robot.elevator.getElevatorLevel());
+		SmartDashboard.putNumber("Position Number of Elevator: ", Robot.elevator.getPositionNumber());
 		SmartDashboard.putBoolean("Safety Enabled", Elevator.SAFETY);
 		
+
 		if (cam1available)
 		{
 			cameragrab(session1);
