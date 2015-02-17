@@ -146,6 +146,10 @@ public class OI {
 		/*
 		 * ELEVATOR
 		 */
+		
+		SmartDashboard.putString("TEST BUTTON OI", "button");
+		
+		
 		SmartDashboard.putData("Jump to Elevator Position 0", new ElevatorJumpToPosition(0));
 		SmartDashboard.putData("Jump to Elevator Position 1", new ElevatorJumpToPosition(1));
 		SmartDashboard.putData("Jump to Elevator Position 2", new ElevatorJumpToPosition(2));

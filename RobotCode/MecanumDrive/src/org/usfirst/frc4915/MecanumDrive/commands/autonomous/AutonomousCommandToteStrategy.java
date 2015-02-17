@@ -46,8 +46,8 @@ public class AutonomousCommandToteStrategy extends CommandGroup {
     	addSequential(new ElevatorJumpToPosition(1));
     	//position
     	addSequential(new ElevatorIsBelowPositionNumber(12), 1.2);
-    	System.out.println("Driving back 9 ft");
-    	addSequential(new MoveStraightPositionModeCommand(-9, 0.7));
+    	System.out.println("Driving back 9.5 ft");
+    	addSequential(new MoveStraightPositionModeCommand(-9.5, 0.7));
     	
     	System.out.println("Moving Elevator (level 0)"); //puts down tote  
     	addSequential(new ElevatorJumpToPosition(0));

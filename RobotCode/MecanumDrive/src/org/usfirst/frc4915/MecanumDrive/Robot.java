@@ -110,10 +110,11 @@ public class Robot extends IterativeRobot {
 		autonomousProgramChooser.addObject("Autonomous Container Strategy", new AutonomousCommandContainerStrategy());
 		autonomousProgramChooser.addObject("Autonomous Tote Strategy", new AutonomousCommandToteStrategy());
 		autonomousProgramChooser.addObject("Autonomous Stacking Strategy", new AutonomousCommandStacking());
-		autonomousProgramChooser.addObject("Autonomous Two Totes One Container Strategy", new AutonomousCommandTwoTotesOneContainer());
-		autonomousProgramChooser.addObject("Autonomous Two Container Strategy", new AutonomousCommandTwoContainers());
+		//autonomousProgramChooser.addObject("Autonomous Two Totes One Container Strategy", new AutonomousCommandTwoTotesOneContainer());
+		//autonomousProgramChooser.addObject("Autonomous Two Container Strategy", new AutonomousCommandTwoContainers());
 
-		
+		SmartDashboard.putString("TEST BUTTON", "button");
+
 		SmartDashboard.putData("Autonomous Program", autonomousProgramChooser);
 	/*	
 		Debugger = new SendableChooser();
@@ -125,7 +126,7 @@ public class Robot extends IterativeRobot {
 		
 		*/
 
-		SmartDashboard.putData("Debugger Filter ", Debugger);
+		//SmartDashboard.putData("Debugger Filter ", Debugger);
 		displayVersioningOnSmartDashboard();	
 
 		if (elevator != null) {

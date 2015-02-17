@@ -1,5 +1,6 @@
 package org.usfirst.frc4915.MecanumDrive.commands.autonomous;
 import org.usfirst.frc4915.MecanumDrive.commands.drive.MoveStraightPositionModeCommand;
+import org.usfirst.frc4915.MecanumDrive.commands.drive.StopDriveTrain;
 import org.usfirst.frc4915.MecanumDrive.commands.drive.StrafeCommand;
 import org.usfirst.frc4915.MecanumDrive.commands.drive.Wait;
 import org.usfirst.frc4915.MecanumDrive.commands.elevator.ElevatorIsAbovePositionNumber;
@@ -32,6 +33,7 @@ public class AutonomousCommandStacking extends CommandGroup {
         // arm.
 
     	addParallel(new ElevatorMoveToHeight());
+    	addParallel(new StopDriveTrain());
     	
     	System.out.println("Moving Elevator (level 1.2)");
     	addSequential(new ElevatorJumpToPosition(1.2));
@@ -42,19 +44,19 @@ public class AutonomousCommandStacking extends CommandGroup {
     	System.out.println("Moving Elevator (level 2.8)");
     	addSequential(new ElevatorJumpToPosition(2.8));
     	addSequential(new ElevatorIsAbovePositionNumber(34), 1.2);
-    	System.out.println("Driving back 12 ft");
-    	addSequential(new MoveStraightPositionModeCommand(1.1, 0.7));
+    	System.out.println("Driving back 9.5 ft");
+    	addSequential(new MoveStraightPositionModeCommand(9.5, 0.7));
     	addSequential(new OpenGrabber());
     	addSequential(new Wait(1));
     	System.out.println("Moving Elevator (level 0)");
     	addSequential(new ElevatorJumpToPosition(0));
-    	addSequential(new ElevatorIsBelowPositionNumber(0.5), 3);
+    	addSequential(new ElevatorIsBelowPositionNumber(0.5), 2.5);
     	addSequential(new CloseGrabber());
     	addSequential(new Wait(.5));
     	//inches
     	addSequential(new ElevatorJumpToPosition(1));
     	addSequential(new ElevatorIsAbovePositionNumber(12), 2);
-    	addSequential(new StrafeCommand(-9,0.7)); //going left 9 ft
+    	addSequential(new StrafeCommand(-9.5,0.7)); //going left 9.5 ft // prefer
     	addSequential(new ElevatorJumpToPosition(0));
     	addSequential(new ElevatorIsBelowPositionNumber(0.5), 3);
     	addSequential(new OpenGrabber());
