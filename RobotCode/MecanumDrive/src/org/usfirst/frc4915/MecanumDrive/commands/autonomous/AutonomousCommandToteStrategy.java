@@ -34,7 +34,6 @@ public class AutonomousCommandToteStrategy extends CommandGroup {
     	System.out.println("++++++RUNNING AUTONOMOUS COMMAND TOTE STRATEGY");
     	addParallel(new ElevatorMoveToHeight());
     	addParallel(new StopDriveTrain());
-    	
     	System.out.println("Moving Elevator (level 0)");
     	addSequential(new ElevatorJumpToPosition(0));
     	//inches
@@ -47,6 +46,8 @@ public class AutonomousCommandToteStrategy extends CommandGroup {
     	//position
     	addSequential(new ElevatorIsBelowPositionNumber(12), 1.2);
     	System.out.println("Driving back 12 ft");
+    	// FIXME Change the drive value to -12 
+    	addSequential(new MoveStraightPositionModeCommand(-2, 0.7));
     	addSequential(new MoveStraightPositionModeCommand(-2, 0.7));
     	
     	System.out.println("Moving Elevator (level 0)");
@@ -55,7 +56,6 @@ public class AutonomousCommandToteStrategy extends CommandGroup {
     	addSequential(new ElevatorIsBelowPositionNumber(.5), 2);
     	addSequential(new OpenGrabber());
     	
-
 
    
     }

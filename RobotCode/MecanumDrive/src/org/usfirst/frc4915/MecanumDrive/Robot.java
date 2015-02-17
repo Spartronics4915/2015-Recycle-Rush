@@ -4,6 +4,7 @@ import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandCon
 import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandJustDrive;
 import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandStacking;
 import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandToteStrategy;
+import org.usfirst.frc4915.MecanumDrive.commands.drive.StrafeCommand;
 import org.usfirst.frc4915.MecanumDrive.commands.debug.ShowOnly;
 import org.usfirst.frc4915.MecanumDrive.commands.drive.ToggleDriveMode;
 import org.usfirst.frc4915.MecanumDrive.subsystems.DriveTrain;
@@ -27,7 +28,6 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.Timer;
 
@@ -38,7 +38,6 @@ import com.ni.vision.NIVision.Image;
 import edu.wpi.first.wpilibj.CameraServer;
 import com.ni.vision.NIVision;
 import com.ni.vision.VisionException;
-
 /**
  * The VM is configured to automatically run this class, and to call the
  * functions corresponding to each mode, as described in the IterativeRobot
@@ -80,7 +79,6 @@ public class Robot extends IterativeRobot {
 	 */
 	public void robotInit() {
 		RobotMap.init();
-
 		debugger = new CustomDebugger();
 		preferences = Preferences.getInstance();
 		driveTrain = new DriveTrain();
@@ -114,16 +112,18 @@ public class Robot extends IterativeRobot {
 		
 		SmartDashboard.putData("Autonomous Program", autonomousProgramChooser);
 		
-		Debugger = new SendableChooser();
-		Debugger.addDefault("General", new ShowOnly(LoggerNames.GENERAL));
-		Debugger.addObject("Grabber", new ShowOnly(LoggerNames.GRABBER));
-		Debugger.addObject("Drivetrain", new ShowOnly(LoggerNames.DRIVETRAIN));
-		Debugger.addObject("Autonomous", new ShowOnly(LoggerNames.AUTONOMOUS));
-		Debugger.addObject("Elevator", new ShowOnly(LoggerNames.ELEVATOR));
+	//	Debugger = new SendableChooser();
+	//	Debugger.addDefault("General", new ShowOnly(LoggerNames.GENERAL));
+	//	Debugger.addObject("Grabber", new ShowOnly(LoggerNames.GRABBER));
+	//	Debugger.addObject("Drivetrain", new ShowOnly(LoggerNames.DRIVETRAIN));
+	//	Debugger.addObject("Autonomous", new ShowOnly(LoggerNames.AUTONOMOUS));
+	//	Debugger.addObject("Elevator", new ShowOnly(LoggerNames.ELEVATOR));
 		
-		SmartDashboard.putData("Debugger Filter ", Debugger);
-		displayVersioningOnSmartDashboard();	
+	//	SmartDashboard.putData("Debugger Filter", Debugger);
 
+		//SmartDashboard.putData("Debugger Filter ", Debugger);
+		//SmartDashboard.putData("Debugger Filter ", Debugger);
+		displayVersioningOnSmartDashboard();	
 		if (elevator != null) {
 			elevator.setHieghtToCurrentPosition();
 			Elevator.minimumPotentiometerValue = preferences.getDouble("minimumPotentiometerValue", 0);
@@ -161,7 +161,9 @@ public class Robot extends IterativeRobot {
 		// Use the selected autonomous command
 
 		autonomousCommand = (Command) autonomousProgramChooser.getSelected();
-
+		//double desiredDistrance = preferences.getDouble("DesiredDistance", 9.0);
+		//autonomousCommand = new AutonomousCommandToteStrategy();
+		//autonomousCommand = new StrafeCommand(3, 0.7);
 		//double desiredDistance = preferences.getDouble("DesiredDistance", 9.0);
 		//autonomousCommand = new AutonomousCommandToteStrategy();
 
@@ -169,11 +171,12 @@ public class Robot extends IterativeRobot {
 		// wanting to go to a random position (default zero)
 		elevator.setHieghtToCurrentPosition();
 		// Tells the elevator to approximate the other maximum when it hits a limit switch
-
 		Elevator.needToApproximate = true;
 		Elevator.didSaveTopValue = false;
 		Elevator.didSaveBottomValue = false;
-
+		Elevator.needToApproximate = true;
+		Elevator.didSaveTopValue = false;
+		Elevator.didSaveBottomValue = false;
 		autonomousCommand.start();
 	}
 
