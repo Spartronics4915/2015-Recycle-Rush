@@ -79,7 +79,6 @@ public class Robot extends IterativeRobot {
 	 */
 	public void robotInit() {
 		RobotMap.init();
-
 		debugger = new CustomDebugger();
 		preferences = Preferences.getInstance();
 		driveTrain = new DriveTrain();
@@ -113,19 +112,17 @@ public class Robot extends IterativeRobot {
 		
 		SmartDashboard.putData("Autonomous Program", autonomousProgramChooser);
 		
-		Debugger = new SendableChooser();
-		Debugger.addDefault("General", new ShowOnly(LoggerNames.GENERAL));
-		Debugger.addObject("Grabber", new ShowOnly(LoggerNames.GRABBER));
-		Debugger.addObject("Drivetrain", new ShowOnly(LoggerNames.DRIVETRAIN));
-		Debugger.addObject("Autonomous", new ShowOnly(LoggerNames.AUTONOMOUS));
-		Debugger.addObject("Elevator", new ShowOnly(LoggerNames.ELEVATOR));
+	//	Debugger = new SendableChooser();
+	//	Debugger.addDefault("General", new ShowOnly(LoggerNames.GENERAL));
+	//	Debugger.addObject("Grabber", new ShowOnly(LoggerNames.GRABBER));
+	//	Debugger.addObject("Drivetrain", new ShowOnly(LoggerNames.DRIVETRAIN));
+	//	Debugger.addObject("Autonomous", new ShowOnly(LoggerNames.AUTONOMOUS));
+	//	Debugger.addObject("Elevator", new ShowOnly(LoggerNames.ELEVATOR));
 		
-		SmartDashboard.putData("Debugger Filter", Debugger);
-		displayVersioningOnSmartDashboard();
+	//	SmartDashboard.putData("Debugger Filter", Debugger);
 
-		SmartDashboard.putData("Debugger Filter ", Debugger);
-		displayVersioningOnSmartDashboard();	
-		SmartDashboard.putData("Debugger Filter ", Debugger);
+		//SmartDashboard.putData("Debugger Filter ", Debugger);
+		//SmartDashboard.putData("Debugger Filter ", Debugger);
 		displayVersioningOnSmartDashboard();	
 		if (elevator != null) {
 			elevator.setHieghtToCurrentPosition();
@@ -174,7 +171,6 @@ public class Robot extends IterativeRobot {
 		// wanting to go to a random position (default zero)
 		elevator.setHieghtToCurrentPosition();
 		// Tells the elevator to approximate the other maximum when it hits a limit switch
-		elevator.needToApproximate = true;
 		Elevator.needToApproximate = true;
 		Elevator.didSaveTopValue = false;
 		Elevator.didSaveBottomValue = false;

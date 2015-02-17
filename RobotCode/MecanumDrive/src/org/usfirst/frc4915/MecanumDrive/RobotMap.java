@@ -140,8 +140,8 @@ public class RobotMap {
 		elevatorWinchMotor.ConfigFwdLimitSwitchNormallyOpen(true);
 		elevatorWinchMotor.ConfigRevLimitSwitchNormallyOpen(true);
 		elevatorWinchMotor.enableBrakeMode(true);
-		slackLimitSwitch = new DigitalInput(1);
-		bottomLimitSwitch = new DigitalInput(5);
+		//slackLimitSwitch = new DigitalInput(1);
+		//bottomLimitSwitch = new DigitalInput(5);
 		
 		// Potentiometer instantiation
 		

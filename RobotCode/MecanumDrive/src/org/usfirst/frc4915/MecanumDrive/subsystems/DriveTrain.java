@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj.Gyro;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Ultrasonic;
+import edu.wpi.first.wpilibj.CANTalon.ControlMode;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class DriveTrain extends Subsystem {
@@ -110,6 +111,31 @@ public class DriveTrain extends Subsystem {
 	 */
 	public void driveSideways(double speed){
 		robotDrive.mecanumDrive_Cartesian(speed, 0.0, 0.0, 0.0);
+	}
+	
+	public void turnLeft(boolean left){
+		// left is true, right is false
+		for (int i = 0; i < motors.size(); i++) {
+			CANTalon motor = motors.get(i);	
+			RobotMap.changeControlMode(ControlMode.Speed);
+			robotDrive.mecanumDrive_Cartesian(0, 0, -.7, 0);
+//			if ( i == 0 || i == 1) {
+//				if (left) {
+//					motor.set(-.7);
+//				}
+//				else {
+//					motor.set(.7);
+//				}
+//			}
+//			else if ( i == 2 || i== 3) {
+//				if (left) {
+//					motor.set(-.7);
+//				}
+//				else {
+//					motor.set(.7);
+//				}
+//			}
+		}
 	}
 		
 	/**
