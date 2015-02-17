@@ -6,6 +6,7 @@ import org.usfirst.frc4915.MecanumDrive.commands.elevator.ElevatorFineTune;
 import org.usfirst.frc4915.debuggersystem.CustomDebugger.LoggerNames;
 
 import edu.wpi.first.wpilibj.CANTalon;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -15,7 +16,6 @@ public class Elevator extends Subsystem {
 	// If you need to stack on top of 3 totes, use position 3.
 	// If you need to stack on the ground, use position 0.
 
-	// TODO initialize height
 	// Not in inches. Between minimumPotentiometerValue and
 	// maximumPotentiometerValue.
 	public static double setPoint;
@@ -25,11 +25,18 @@ public class Elevator extends Subsystem {
 	// Set by ElevatorMax/MinHeightCalibrate commands
 	public static double minimumPotentiometerValue = 0;
 	public static double maximumPotentiometerValue = 1023;
-
+	public static double slackMinimum = 0;
+	
+	public static final double APPROXIMATE_OFFSET = 500;
+	public static boolean needToApproximate = true;
+	
+	public static boolean didSaveTopValue = false;
+	public static boolean didSaveBottomValue = false;
+	
 	public static boolean SAFETY = true;
 	
 	public static final double RANGE_OF_MOTION = 53; // The elevator can go a
-														// distance between 54
+														// distance between 53
 														// inches
 
 	public static final double CHASIS_HEIGHT = 5; // These two measurements are
@@ -39,9 +46,12 @@ public class Elevator extends Subsystem {
 	private static final double JOYSTICK_SCALE = -5; // TODO Decide scale for
 														// joystick movement
 														// position change
-
+	
+	private static double previousJoystickY = 0;
+	
 	public CANTalon winch = RobotMap.elevatorWinchMotor;
-
+	public DigitalInput slackLimitSwitch = RobotMap.slackLimitSwitch;
+	
 	/**
 	 * Initializes the default command (WPI java default method) Called on
 	 * initialization of the subsystem
@@ -52,9 +62,6 @@ public class Elevator extends Subsystem {
 		// setDefaultCommand(new MySpecialCommand());
 	}
 
-	// TODO Make sure that the winch does not begin winding the wrong way -- We
-	// may use a limit switch to tell if the cable is tight or not.
-	// Discuss this with Elevator Subteam and Riyadth
 	/**
 	 * Moves the elevator at a speed given by the joystick (y axis).
 	 * 
@@ -66,12 +73,25 @@ public class Elevator extends Subsystem {
 		if (Math.abs(joystickY) <= .2) {
 			Robot.debugger.logError(LoggerNames.ELEVATOR, "Joystick value too small");
 			moveElevator(0);
+		} else if (shouldStopElevator(joystickY)){
+			setPoint = getPosition();
+			moveElevator(0);
 		} else {
 			moveElevator(joystickY * JOYSTICK_SCALE);
 		}
+		previousJoystickY = joystickY;
 	}
 	
-	// TODO Change the functionality to increase/decrease the height value.
+	/**
+	 * If you push or pull the joystick from positive to negative/0, it will stop the elevator.
+	 * Probably won't work because it is hard to move the joystick in the span of 20 ms.
+	 * @param joystickY current joystickY value.
+	 * @return true if the change in joystick value is more than 1 (so from + to -, or from - to +)
+	 */
+	private boolean shouldStopElevator(double joystickY) {
+		return (Math.abs(joystickY - previousJoystickY) >= 1);
+	}
+
 	/**
 	 * Changes height based on the input
 	 * 
@@ -184,18 +204,69 @@ public class Elevator extends Subsystem {
 		if (isAtTopOfElevator()) {
 			winch.enableBrakeMode(true);
 			maximumPotentiometerValue = getPosition();
+			if (needToApproximate) {
+				minimumPotentiometerValue = getPosition() - APPROXIMATE_OFFSET;
+				needToApproximate = false;
+			}
+			if (didSaveTopValue == false) {
+				Robot.preferences.putDouble("maximumPotentiometerValue", maximumPotentiometerValue);
+				Robot.preferences.putDouble("minimumPotentiometerValue", minimumPotentiometerValue);
+				Robot.preferences.save();
+				didSaveTopValue = true;
+			}
 		}
-		if (isAtBottomOfElevator()) {
+		else if (isAtBottomOfElevator()) {
 			winch.enableBrakeMode(true);
 			minimumPotentiometerValue = getPosition();
+			if (needToApproximate) {
+				maximumPotentiometerValue = getPosition() + APPROXIMATE_OFFSET;
+				needToApproximate = false;
+			}
+			if (didSaveBottomValue == false) {
+				Robot.preferences.putDouble("minimumPotentiometerValue", minimumPotentiometerValue);
+				Robot.preferences.putDouble("maximumPotentiometerValue", maximumPotentiometerValue);
+				Robot.preferences.save();
+				didSaveBottomValue = true;
+			}
 		}
+		else {
+			didSaveTopValue = false;
+			didSaveBottomValue = false;
+		}
+
+		keepWinchTight();
 		if (setPoint > maximumPotentiometerValue) {
-			setPoint = maximumPotentiometerValue;
+			setPoint = maximumPotentiometerValue - 1;
 		}
 		if (setPoint < minimumPotentiometerValue) {
-			setPoint = minimumPotentiometerValue;
+			setPoint = minimumPotentiometerValue; // I'd like to use the +1 to re-fix the winch cable, 
+									// but I'm worried that the cable would automatically get tangled
 		}
 		Robot.debugger.logError(LoggerNames.ELEVATOR, "Elevator's height is " + setPoint);
+	}
+
+	/**
+	 * If the slack limit switch is true and it hasn't been triggered before,
+	 *  it will keep the setpoint from unwinding further.
+	 */
+	public void keepWinchTight() {
+		if (elevatorIsSlack() && slackMinimum == 0) {
+			slackMinimum = getPosition();
+		}
+		if (setPoint < slackMinimum) {
+			setPoint = slackMinimum;
+		}
+		else if (!elevatorIsSlack()) {
+			slackMinimum = 0;
+		}
+	}
+	
+	/**
+	 * Is the elevator cable slack and about to unwind?
+	 * @return true if the elevator is slack, false if not.
+	 */
+	private boolean elevatorIsSlack() {
+		return slackLimitSwitch.get();
 	}
 
 }
