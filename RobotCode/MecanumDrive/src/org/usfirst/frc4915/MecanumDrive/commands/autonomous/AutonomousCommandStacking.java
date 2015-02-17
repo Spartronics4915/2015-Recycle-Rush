@@ -54,9 +54,9 @@ public class AutonomousCommandStacking extends CommandGroup {
     	//inches
     	addSequential(new ElevatorJumpToPosition(1));
     	addSequential(new ElevatorIsAbovePositionNumber(12), 2);
-    	addSequential(new StrafeCommand(-12,0.7)); //going left
+    	addSequential(new StrafeCommand(-12,0.7)); //going left 12 ft
     	addSequential(new ElevatorJumpToPosition(0));
     	addSequential(new ElevatorIsBelowPositionNumber(0.5), 3);
-    	
+    	addSequential(new OpenGrabber());
     }
 }
