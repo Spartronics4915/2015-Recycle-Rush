@@ -119,7 +119,7 @@ public class RobotMap {
 		/*
 		 * Distance instantiation -- UNUSED
 		 */
-		// distanceSensor = new Ultrasonic(ULTRASONIC_PORT_FIRST, ULTRASONIC_PORT_SECOND);
+		distanceSensor = new Ultrasonic(ULTRASONIC_PORT_FIRST, ULTRASONIC_PORT_SECOND);
 
 		/*
 		 * MECANUM WHEEL END
