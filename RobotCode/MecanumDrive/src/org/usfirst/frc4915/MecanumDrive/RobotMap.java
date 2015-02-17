@@ -11,7 +11,6 @@ import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Ultrasonic;
 
-//TODO decide and finalize the input ports for each sensor
 
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
@@ -118,9 +117,9 @@ public class RobotMap {
 		gyro = new Gyro(GYRO_PORT);
 
 		/*
-		 * Distance instantiation
+		 * Distance instantiation -- UNUSED
 		 */
-		distanceSensor = new Ultrasonic(ULTRASONIC_PORT_FIRST, ULTRASONIC_PORT_SECOND); // TODO decide on ports
+		// distanceSensor = new Ultrasonic(ULTRASONIC_PORT_FIRST, ULTRASONIC_PORT_SECOND);
 
 		/*
 		 * MECANUM WHEEL END
@@ -130,7 +129,6 @@ public class RobotMap {
 		 * ELEVATOR START
 		 */
 		// ELEVATOR instantiation
-		// TODO set limit switch configuration on the winch motor
 		elevatorWinchMotor = new CANTalon(MOTOR_PORT_ELEVATOR_WINCH);
 		elevatorWinchMotor.changeControlMode(ControlMode.Position);
 		elevatorWinchMotor.setFeedbackDevice(CANTalon.FeedbackDevice.AnalogPot);
@@ -188,7 +186,6 @@ public class RobotMap {
 		mecanumDriveControlsRightFront.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
 		mecanumDriveControlsRightRear.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
 
-		// TODO confirm that these values are what we want
 		// Sets PID Values for the Mecanum Drive Train
 		if (mode.equals(ControlMode.Speed)) {
 			mecanumDriveControlsLeftFront.setPID(1, 0.002, 1.0, 0.0001, 255, 200, 0);

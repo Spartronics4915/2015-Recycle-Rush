@@ -17,8 +17,6 @@ public class ArcadeDrive extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		// TODO read joystick value for thottle and update motor values with the
-		// modified throttle
 		Robot.driveTrain.arcadeDrive(Robot.oi.driveStick);
 
 	}
