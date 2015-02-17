@@ -4,8 +4,8 @@ import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandCon
 import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandJustDrive;
 import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandStacking;
 import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandToteStrategy;
-import org.usfirst.frc4915.MecanumDrive.commands.debug.DebuggerFilter;
 import org.usfirst.frc4915.MecanumDrive.commands.drive.StrafeCommand;
+import org.usfirst.frc4915.MecanumDrive.commands.debug.ShowOnly;
 import org.usfirst.frc4915.MecanumDrive.commands.drive.ToggleDriveMode;
 import org.usfirst.frc4915.MecanumDrive.subsystems.DriveTrain;
 import org.usfirst.frc4915.MecanumDrive.subsystems.Elevator;
@@ -61,7 +61,7 @@ public class Robot extends IterativeRobot {
 	public static DriveTrain driveTrain;
 	public static Elevator elevator;
 	public static Grabber grabber;
-	public static CustomDebugger debugger = new CustomDebugger();
+	public static CustomDebugger debugger;
 	
 	// vars for camera code
 	private Image frame;
@@ -80,6 +80,7 @@ public class Robot extends IterativeRobot {
 	public void robotInit() {
 		RobotMap.init();
 
+		debugger = new CustomDebugger();
 		preferences = Preferences.getInstance();
 		driveTrain = new DriveTrain();
 		elevator = new Elevator();
@@ -113,16 +114,17 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putData("Autonomous Program", autonomousProgramChooser);
 		
 		Debugger = new SendableChooser();
-		Debugger.addDefault("General", new DebuggerFilter(LoggerNames.GENERAL));
-		Debugger.addObject("Grabber", new DebuggerFilter(LoggerNames.GRABBER));
-		Debugger.addObject("Drivetrain", new DebuggerFilter(LoggerNames.DRIVETRAIN));
-		Debugger.addObject("Autonomous", new DebuggerFilter(LoggerNames.AUTONOMOUS));
-		Debugger.addObject("Elevator", new DebuggerFilter(LoggerNames.ELEVATOR));
+		Debugger.addDefault("General", new ShowOnly(LoggerNames.GENERAL));
+		Debugger.addObject("Grabber", new ShowOnly(LoggerNames.GRABBER));
+		Debugger.addObject("Drivetrain", new ShowOnly(LoggerNames.DRIVETRAIN));
+		Debugger.addObject("Autonomous", new ShowOnly(LoggerNames.AUTONOMOUS));
+		Debugger.addObject("Elevator", new ShowOnly(LoggerNames.ELEVATOR));
 		
-
 		SmartDashboard.putData("Debugger Filter", Debugger);
 		displayVersioningOnSmartDashboard();
 
+		SmartDashboard.putData("Debugger Filter ", Debugger);
+		displayVersioningOnSmartDashboard();	
 		SmartDashboard.putData("Debugger Filter ", Debugger);
 		displayVersioningOnSmartDashboard();	
 		if (elevator != null) {
@@ -173,6 +175,9 @@ public class Robot extends IterativeRobot {
 		elevator.setHieghtToCurrentPosition();
 		// Tells the elevator to approximate the other maximum when it hits a limit switch
 		elevator.needToApproximate = true;
+		Elevator.needToApproximate = true;
+		Elevator.didSaveTopValue = false;
+		Elevator.didSaveBottomValue = false;
 		Elevator.needToApproximate = true;
 		Elevator.didSaveTopValue = false;
 		Elevator.didSaveBottomValue = false;
@@ -256,7 +261,7 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putNumber("Elevator D", elevator.winch.getD());
 		SmartDashboard.putNumber("Maximum height value: ", Elevator.maximumPotentiometerValue);
 		SmartDashboard.putNumber("Minimum height value: ", Elevator.minimumPotentiometerValue);
-		SmartDashboard.putNumber("Position Number of Elevator: ", Robot.elevator.getElevatorLevel());
+		SmartDashboard.putNumber("Position Number of Elevator: ", Robot.elevator.getPositionNumber());
 		SmartDashboard.putBoolean("Safety Enabled", Elevator.SAFETY);
 		
 

@@ -16,8 +16,6 @@ import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
-//TODO write javadoc comments for all these methods
-
 public class DriveTrain extends Subsystem {
 
 	RobotDrive robotDrive;
@@ -91,19 +89,32 @@ public class DriveTrain extends Subsystem {
 
 	}
 	
+	/**
+	 * Calibrates the gyro using gyro.reset()
+	 */
 	public void calibrateGyro() {
 		gyro.reset();
 	}
-
+	
+	/**
+	 * Drives using mecanumDrive_Cartesian forward
+	 * @param speed that it drives at.
+	 */
 	public void driveStraight(double speed) {
 		robotDrive.mecanumDrive_Cartesian(0.0, speed, 0.0, 0.0);
 	}
-
-		public void driveSideways(double speed){
-			robotDrive.mecanumDrive_Cartesian(speed, 0.0, 0.0, 0.0);
-		}
+	
+	/**
+	 * Drives using mecanumDrive_Cartesian sideways
+	 * @param speed that it drives at
+	 */
+	public void driveSideways(double speed){
+		robotDrive.mecanumDrive_Cartesian(speed, 0.0, 0.0, 0.0);
+	}
 		
 	/**
+	 * calculates the distance traveled using the wheel circumference and the
+	 * number of wheel rotations.
 	 * @param motor Motor with an encoder to determine distance traveled.
 	 * @param elapsed Time since the last sampling of the motor.
 	 * @return Distance traveled since the last sampling of the encoder.
@@ -122,6 +133,10 @@ public class DriveTrain extends Subsystem {
 
 	// TODO Make a method that displays the speed of a motor
 
+	/**
+	 * Drives like ATLaS. Forward/Back for straight and backwards, and left right to spin in place.
+	 * @param stick used to control the DriveTrain.
+	 */
 	public void arcadeDrive(Joystick stick) {
 		debugger.logError(LoggerNames.DRIVETRAIN, "Arcade Drive");
 		debugger.setFilter(LoggerNames.DRIVETRAIN);
@@ -129,6 +144,10 @@ public class DriveTrain extends Subsystem {
 		robotDrive.arcadeDrive(stick);
 	}
    
+	/**
+	 * Swaps from field mode to the opposite mode.
+	 * @return what mode it is in - true for field mode.
+	 */
 	public boolean toggleFieldMode() {
 		return fieldMode = !fieldMode;
     }

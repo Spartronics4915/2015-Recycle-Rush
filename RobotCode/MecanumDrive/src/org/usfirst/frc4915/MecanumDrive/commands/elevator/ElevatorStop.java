@@ -10,8 +10,6 @@ public class ElevatorStop extends Command {
 	Elevator elevator = Robot.elevator;
 
 	public ElevatorStop() {
-		// Use requires() here to declare subsystem dependencies
-		// eg. requires(chassis);
 		requires(elevator);
 	}
 

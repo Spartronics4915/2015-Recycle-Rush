@@ -11,8 +11,7 @@ public class ElevatorSetHeight extends Command {
     private int targetHeight;
 
     public ElevatorSetHeight(int targetHeight) {
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
+		// DON'T require Robot.elevator
         this.targetHeight = targetHeight;
     }
 

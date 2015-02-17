@@ -13,7 +13,6 @@ public class OpenGrabber extends Command {
 		// Use requires() here to declare subsystem dependencies
 		// eg. requires(chassis);
 		requires(Robot.grabber);
-		requires(Robot.elevator);
 	}
 
 	// Called just before this Command runs the first time
@@ -24,9 +23,8 @@ public class OpenGrabber extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		Robot.grabber.vent();
-		Robot.grabber.open();
-
+		Robot.grabber.secondaryOff();
+		Robot.grabber.primaryOff();
 		finished = true;
 	}
 

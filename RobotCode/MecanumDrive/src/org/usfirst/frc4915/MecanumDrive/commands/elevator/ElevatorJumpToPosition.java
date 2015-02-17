@@ -14,10 +14,8 @@ public class ElevatorJumpToPosition extends Command {
 	private double positionNumber;
 
 	public ElevatorJumpToPosition(double d) {
-		// eg. requires(chassis);
-		requires(Robot.grabber);
-		requires(Robot.elevator);
 		positionNumber = d;
+		// DON'T require Robot.elevator
 	}
 
 	// Called just before this Command runs the first time
@@ -32,7 +30,6 @@ public class ElevatorJumpToPosition extends Command {
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
-	// TODO This command doesn't end
 	protected boolean isFinished() {
 		return true;
 	}

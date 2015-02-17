@@ -5,9 +5,9 @@ import org.usfirst.frc4915.debuggersystem.CustomDebugger.LoggerNames;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class DebuggerFilter extends Command {
+public class ShowOnly extends Command {
 	private LoggerNames name;
-	public DebuggerFilter(LoggerNames name) {
+	public ShowOnly(LoggerNames name) {
 		// Use requires() here to declare subsystem dependencies
 		// eg. requires(chassis);
 		this.name = name;
