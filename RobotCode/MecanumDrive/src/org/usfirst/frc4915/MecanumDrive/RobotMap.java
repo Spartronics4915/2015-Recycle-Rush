@@ -132,7 +132,7 @@ public class RobotMap {
 		elevatorWinchMotor = new CANTalon(MOTOR_PORT_ELEVATOR_WINCH);
 		elevatorWinchMotor.changeControlMode(ControlMode.Position);
 		elevatorWinchMotor.setFeedbackDevice(CANTalon.FeedbackDevice.AnalogPot);
-		elevatorWinchMotor.setPID(15, .01, 0.001, 0.0001, 25, 1, 0); //Values we determined after the gearbox was lubricated
+		elevatorWinchMotor.setPID(20, .03, 0.6, 0.0001, 20, 0, 0); //Values we determined after the gearbox was lubricated
 		elevatorWinchMotor.setForwardSoftLimit(FWD_SOFT_LIMIT); // The absolute maximum height that the elevator can be
 		elevatorWinchMotor.setReverseSoftLimit(REV_SOFT_LIMIT); // The greater minimum height that the elevator can be
 		elevatorWinchMotor.enableForwardSoftLimit(true);
