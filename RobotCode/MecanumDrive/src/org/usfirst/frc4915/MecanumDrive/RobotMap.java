@@ -81,6 +81,8 @@ public class RobotMap {
 	private static final int FWD_SOFT_LIMIT = 1023;
 	private static final int REV_SOFT_LIMIT = 0;
 	public static DigitalInput slackLimitSwitch;
+	public static DigitalInput bottomLimitSwitch;
+
 
 	/*
 	 * GRABBER
@@ -148,6 +150,7 @@ public class RobotMap {
 		elevatorWinchMotor.ConfigRevLimitSwitchNormallyOpen(true);
 		elevatorWinchMotor.enableBrakeMode(true);
 		slackLimitSwitch = new DigitalInput(1);
+		bottomLimitSwitch = new DigitalInput(5);
 		
 		// Potentiometer instantiation
 		

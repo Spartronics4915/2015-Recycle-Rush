@@ -119,17 +119,12 @@ public class Robot extends IterativeRobot {
 		Debugger.addObject("Autonomous", new DebuggerFilter(LoggerNames.AUTONOMOUS));
 		Debugger.addObject("Elevator", new DebuggerFilter(LoggerNames.ELEVATOR));
 		
-<<<<<<< HEAD
+
 		SmartDashboard.putData("Debugger Filter", Debugger);
-		
-		
+		displayVersioningOnSmartDashboard();
 
-		displayOnSmartDashboardVersioning();
-
-=======
 		SmartDashboard.putData("Debugger Filter ", Debugger);
 		displayVersioningOnSmartDashboard();	
->>>>>>> d0e0f5b997176876fc793a14d755bfd45315883c
 		if (elevator != null) {
 			elevator.setHieghtToCurrentPosition();
 			Elevator.minimumPotentiometerValue = preferences.getDouble("minimumPotentiometerValue", 0);

@@ -4,10 +4,7 @@ import org.usfirst.frc4915.MecanumDrive.commands.drive.MoveStraightPositionModeC
 import org.usfirst.frc4915.MecanumDrive.commands.elevator.ElevatorJumpToPosition;
 import org.usfirst.frc4915.MecanumDrive.commands.elevator.ElevatorMoveToHeight;
 import org.usfirst.frc4915.MecanumDrive.commands.grabber.CloseGrabber;
-<<<<<<< HEAD
 import org.usfirst.frc4915.MecanumDrive.commands.grabber.OpenGrabber;
-=======
->>>>>>> d0e0f5b997176876fc793a14d755bfd45315883c
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
