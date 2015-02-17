@@ -139,6 +139,15 @@ public class Elevator extends Subsystem {
 		Robot.debugger.logError(LoggerNames.ELEVATOR, "The elevator is at position " + position + " (inches)");
 		return position;
 	}
+	
+	/**
+	 * @return the position number of the elevator -- how many totes 
+	 * could be below it. Between 0 and 5.
+	 */
+	public double getPositionNumber() {
+		double positionNumber = getPositionInches() / HEIGHT_OF_TOTE;
+		return positionNumber;
+	}
 
 	/**
 	 * @return the read value from the potentiometer (between 0 and 1023)
@@ -163,14 +172,6 @@ public class Elevator extends Subsystem {
 		setPoint = minimumPotentiometerValue + ((maximumPotentiometerValue - minimumPotentiometerValue) 
 											 * HEIGHT_OF_TOTE * positionNumber / RANGE_OF_MOTION);
 		Robot.debugger.logError(LoggerNames.ELEVATOR, "Elevator's height is " + setPoint);
-	}
-	
-	/**
-	 * 
-	 * @return Level of Elevator in number of totes
-	 */
-	public double getElevatorLevel() {
-		return ((RANGE_OF_MOTION * (winch.getPosition())) / (maximumPotentiometerValue - minimumPotentiometerValue)) / 12;
 	}
 
 	/**
