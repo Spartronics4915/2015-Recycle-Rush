@@ -5,14 +5,12 @@ import org.usfirst.frc4915.MecanumDrive.commands.drive.MoveStraightPositionModeC
 import org.usfirst.frc4915.MecanumDrive.commands.drive.StrafeCommand;
 import org.usfirst.frc4915.MecanumDrive.commands.elevator.ElevatorJumpToPosition;
 import org.usfirst.frc4915.MecanumDrive.commands.elevator.ElevatorPositionCalibration;
-import org.usfirst.frc4915.MecanumDrive.commands.elevator.ElevatorSetHeight;
 import org.usfirst.frc4915.MecanumDrive.commands.elevator.ElevatorSetSafety;
 import org.usfirst.frc4915.MecanumDrive.commands.elevator.ElevatorStop;
 import org.usfirst.frc4915.MecanumDrive.commands.grabber.CloseGrabber;
 import org.usfirst.frc4915.MecanumDrive.commands.grabber.IntermediateOpen;
 import org.usfirst.frc4915.MecanumDrive.commands.grabber.OpenGrabber;
 import org.usfirst.frc4915.MecanumDrive.subsystems.DriveTrain;
-import org.usfirst.frc4915.MecanumDrive.subsystems.Elevator;
 import org.usfirst.frc4915.MecanumDrive.utility.VersionFinder;
 import org.usfirst.frc4915.debuggersystem.CustomDebugger.LoggerNames;
 
@@ -125,7 +123,7 @@ public class OI {
 		 * DRIVE STRAIGHT
 		 */
 		SmartDashboard.putData("Move Straight 5 feet", new MoveStraightPositionModeCommand(5,0.7));
-		SmartDashboard.putData("Strafe 3 feet", new StrafeCommand(3, 0.7));
+		SmartDashboard.putData("Strafe 1.9 feet", new StrafeCommand(1.9, 0.7));
 		//SmartDashboard.putData("Move Backwards 3 feet", new MoveStraightPositionModeCommand(-3, 0.7));
 		//SmartDashboard.putData("DriveStraight 1 second", new DriveStraight());
 
@@ -158,8 +156,8 @@ public class OI {
 		SmartDashboard.putBoolean("Elevator At Top", Robot.elevator.isAtTopOfElevator());
 		SmartDashboard.putBoolean("Elevator At Bottom", Robot.elevator.isAtBottomOfElevator());
 		SmartDashboard.putData("Disable Elevator Safety", new ElevatorSetSafety(false));
-		SmartDashboard.putData("Enable Elevator Safety", new ElevatorSetSafety(true));		
-
+		SmartDashboard.putData("Enable Elevator Safety", new ElevatorSetSafety(true));
+		
 		/*
 		 * DEBUGGER BUTTONS
 

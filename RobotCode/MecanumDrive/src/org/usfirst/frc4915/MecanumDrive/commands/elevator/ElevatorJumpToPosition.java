@@ -15,8 +15,6 @@ public class ElevatorJumpToPosition extends Command {
 
 	public ElevatorJumpToPosition(double d) {
 		// eg. requires(chassis);
-		requires(Robot.grabber);
-		requires(Robot.elevator);
 		positionNumber = d;
 	}
 

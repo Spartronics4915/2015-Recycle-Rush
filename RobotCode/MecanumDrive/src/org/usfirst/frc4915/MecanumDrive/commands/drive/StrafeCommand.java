@@ -76,9 +76,9 @@ public class StrafeCommand extends Command {
 	private boolean isMotorFinished(int i) {
 		boolean finished = false;
 		double currentPosition = motors.get(i).getPosition();
-		Double desiredPosition = desiredTicksValue.get(i);
-		System.out.println("Motor " + i + ": current position: " + currentPosition + ", desired position " + desiredPosition);
-
+		double desiredPosition = desiredTicksValue.get(i);
+		System.out.println("**____******____****Motor " + i + ": current position: " + currentPosition + ", desired position " + desiredPosition);
+		
 		if (i == 1 || i == 3) {
 			// right motors are inverted
 			if (inputDistance < 0) {
