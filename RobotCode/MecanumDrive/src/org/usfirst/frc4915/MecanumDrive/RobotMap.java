@@ -4,6 +4,8 @@ import edu.wpi.first.wpilibj.BuiltInAccelerometer;
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.CANTalon.ControlMode;
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.Gyro;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Solenoid;
@@ -18,7 +20,7 @@ import edu.wpi.first.wpilibj.Ultrasonic;
  * floating around.
  */
 public class RobotMap {
-	
+
 	/*
 	 * CONSTANTS
 	 */
@@ -44,7 +46,7 @@ public class RobotMap {
 	public final static int SOLENOID_CHANNEL_PRIMARY = 0;
 	public final static int SOLENOID_CHANNEL_SECONDARY = 1;
 	
-	public final static int SOLENOID_CHANNEL_AUNTIE = 3;
+	//public final static int SOLENOID_CHANNEL_AUNTIE = 3;
 	
 	/*
 	 * DRIVETRAIN
@@ -80,7 +82,7 @@ public class RobotMap {
 	 */
 	public static Solenoid primarySolenoid;
 	public static Solenoid secondarySolenoid;
-
+	
 	/*
 	 * GENERAL SENSORS
 	 */
@@ -151,9 +153,10 @@ public class RobotMap {
 		 */
 		// Double Solenoid instantiation. Wiring: 0 --> Forward channel
 		// (extended). 1 --> Reverse channel (retracted).
-		//mommaSolenoid = new DoubleSolenoid(PCM_NODE_ID, SOLENOID_CHANNEL_MOMMA_FORWARD, SOLENOID_CHANNEL_MOMMA_REVERSE); // Uses 10 as the Node ID for the PCM
+
 		primarySolenoid = new Solenoid(PCM_NODE_ID, SOLENOID_CHANNEL_PRIMARY);
 		secondarySolenoid = new Solenoid(PCM_NODE_ID,SOLENOID_CHANNEL_SECONDARY); 
+		
 
 		/*
 		 * GRABBER END

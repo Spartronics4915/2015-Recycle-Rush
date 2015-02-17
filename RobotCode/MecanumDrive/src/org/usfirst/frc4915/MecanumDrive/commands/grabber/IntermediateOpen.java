@@ -23,8 +23,8 @@ public class IntermediateOpen extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		Robot.grabber.block();
-		Robot.grabber.open();
+		Robot.grabber.secondaryOn();
+		Robot.grabber.primaryOff();
 		finished = true;
 	}
 
