@@ -35,31 +35,8 @@ public class Turn90Degrees extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	boolean finished = false;
-    	ArrayList<Double> startPosition = new ArrayList<Double>();
-    	for (int i = 0; i < motors.size(); i++) {
-    		startPosition.add(motors.get(i).getPosition());
-    	}
-		for (int i = 0; i < motors.size(); i++) {
-			double desiredPosition;
-			System.out.println("Testing distance for motor" + i);
-			if (goLeft) {
-				desiredPosition = startPosition.get(i) + 10000;
-				double currentPosition = motors.get(i).getPosition();
-				System.out.println("Motor " + i + " " + currentPosition);
-				finished = currentPosition >= desiredPosition;
-			} else {
-			    desiredPosition = startPosition.get(i) - 10000;
-				double currentPosition = motors.get(i).getPosition();
-				finished = currentPosition <= desiredPosition;
-			}
-		}
-		if (finished) {
-			System.out.println("Finished! Yay!");
-		} else {
-			System.out.println("Not finished");
-		}
-		return finished;
+    	setTimeout(.7);
+    	return isTimedOut();
 	}	
 
     // Called once after isFinished returns true

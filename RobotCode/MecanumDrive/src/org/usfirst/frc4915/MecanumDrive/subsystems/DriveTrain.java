@@ -118,7 +118,13 @@ public class DriveTrain extends Subsystem {
 		for (int i = 0; i < motors.size(); i++) {
 			CANTalon motor = motors.get(i);	
 			RobotMap.changeControlMode(ControlMode.Speed);
-			robotDrive.mecanumDrive_Cartesian(0, 0, -.7, 0);
+			if (left){
+				robotDrive.mecanumDrive_Cartesian(0, 0, -.7, 0);
+			}
+			else {
+				robotDrive.mecanumDrive_Cartesian(0, 0, .7, 0);
+			}
+			}
 //			if ( i == 0 || i == 1) {
 //				if (left) {
 //					motor.set(-.7);
@@ -136,7 +142,7 @@ public class DriveTrain extends Subsystem {
 //				}
 //			}
 		}
-	}
+	
 		
 	/**
 	 * calculates the distance traveled using the wheel circumference and the
