@@ -142,6 +142,7 @@ public class RobotMap {
 		elevatorWinchMotor.ConfigFwdLimitSwitchNormallyOpen(true);
 		elevatorWinchMotor.ConfigRevLimitSwitchNormallyOpen(true);
 		elevatorWinchMotor.enableBrakeMode(true);
+
 		bottomLimitSwitch = new DigitalInput(5);
 		
 		/*
