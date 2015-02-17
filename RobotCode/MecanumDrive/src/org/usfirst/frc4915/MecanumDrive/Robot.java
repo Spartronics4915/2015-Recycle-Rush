@@ -27,7 +27,6 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.Timer;
 
@@ -35,7 +34,9 @@ import com.ni.vision.NIVision;
 import com.ni.vision.NIVision.Image;
 
 
+
 import edu.wpi.first.wpilibj.CameraServer;
+
 import com.ni.vision.NIVision;
 import com.ni.vision.VisionException;
 
@@ -253,6 +254,9 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putNumber("Minimum height value: ", Elevator.minimumPotentiometerValue);
 		SmartDashboard.putNumber("Position Number of Elevator: ", Robot.elevator.getPositionNumber());
 		SmartDashboard.putBoolean("Safety Enabled", Elevator.SAFETY);
+		SmartDashboard.putNumber("Gyro Angle", Robot.driveTrain.gyroHeading);
+		SmartDashboard.putNumber("Turn Rate", Robot.driveTrain.deltaGyro);
+		Robot.driveTrain.trackGyro();
 		
 
 		if (cam1available)
