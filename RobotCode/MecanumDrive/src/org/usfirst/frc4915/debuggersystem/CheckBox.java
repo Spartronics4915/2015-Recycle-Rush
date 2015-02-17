@@ -1,7 +1,4 @@
 package org.usfirst.frc4915.debuggersystem;
-import javax.swing.*;
-import edu.wpi.first.wpilibj.smartdashboard.*;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 //public class CheckBox extends AbstractValueWidget {
 

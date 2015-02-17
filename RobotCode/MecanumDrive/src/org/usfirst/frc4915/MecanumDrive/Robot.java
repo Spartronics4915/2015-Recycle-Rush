@@ -3,8 +3,8 @@ package org.usfirst.frc4915.MecanumDrive;
 import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandContainerStrategy;
 import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandJustDrive;
 import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandToteStrategy;
+import org.usfirst.frc4915.MecanumDrive.commands.debug.ShowOnly;
 import org.usfirst.frc4915.MecanumDrive.commands.drive.ToggleDriveMode;
-import org.usfirst.frc4915.MecanumDrive.commands.debug.DebuggerFilter;
 import org.usfirst.frc4915.MecanumDrive.subsystems.DriveTrain;
 import org.usfirst.frc4915.MecanumDrive.subsystems.Elevator;
 import org.usfirst.frc4915.MecanumDrive.subsystems.Grabber;
@@ -12,8 +12,11 @@ import org.usfirst.frc4915.MecanumDrive.utility.VersionFinder;
 import org.usfirst.frc4915.debuggersystem.CustomDebugger;
 import org.usfirst.frc4915.debuggersystem.CustomDebugger.LoggerNames;
 
+import com.ni.vision.NIVision;
 import com.ni.vision.NIVision.Image;
+import com.ni.vision.VisionException;
 
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Preferences;
@@ -23,10 +26,6 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
-import edu.wpi.first.wpilibj.CameraServer;
-import com.ni.vision.NIVision;
-import com.ni.vision.VisionException;
 /**
  * The VM is configured to automatically run this class, and to call the
  * functions corresponding to each mode, as described in the IterativeRobot
@@ -50,7 +49,7 @@ public class Robot extends IterativeRobot {
 	public static DriveTrain driveTrain;
 	public static Elevator elevator;
 	public static Grabber grabber;
-	public static CustomDebugger debugger = new CustomDebugger();
+	public static CustomDebugger debugger;
 	
 	// vars for camera code
 	private Image frame;
@@ -69,6 +68,7 @@ public class Robot extends IterativeRobot {
 	public void robotInit() {
 		RobotMap.init();
 
+		debugger = new CustomDebugger();
 		preferences = Preferences.getInstance();
 		driveTrain = new DriveTrain();
 		elevator = new Elevator();
@@ -100,11 +100,11 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putData("Autonomous Program", autonomousProgramChooser);
 		
 		Debugger = new SendableChooser();
-		Debugger.addDefault("General", new DebuggerFilter(LoggerNames.GENERAL));
-		Debugger.addObject("Grabber", new DebuggerFilter(LoggerNames.GRABBER));
-		Debugger.addObject("Drivetrain", new DebuggerFilter(LoggerNames.DRIVETRAIN));
-		Debugger.addObject("Autonomous", new DebuggerFilter(LoggerNames.AUTONOMOUS));
-		Debugger.addObject("Elevator", new DebuggerFilter(LoggerNames.ELEVATOR));
+		Debugger.addDefault("General", new ShowOnly(LoggerNames.GENERAL));
+		Debugger.addObject("Grabber", new ShowOnly(LoggerNames.GRABBER));
+		Debugger.addObject("Drivetrain", new ShowOnly(LoggerNames.DRIVETRAIN));
+		Debugger.addObject("Autonomous", new ShowOnly(LoggerNames.AUTONOMOUS));
+		Debugger.addObject("Elevator", new ShowOnly(LoggerNames.ELEVATOR));
 		
 		SmartDashboard.putData("Debugger Filter ", Debugger);
 		displayVersioningOnSmartDashboard();	
@@ -119,13 +119,13 @@ public class Robot extends IterativeRobot {
 
 	private void displayVersioningOnSmartDashboard() {
 		String parsedVersion = VersionFinder.getAttribute(this, VersionFinder.VERSION_ATTRIBUTE);
-		DriverStation.reportError("Code Version " + parsedVersion == null ? "<not found>" : parsedVersion, false);
+		DriverStation.reportError("Code Version " + parsedVersion + "\n", false);
 
 		String parsedBuilder = VersionFinder.getAttribute(this, VersionFinder.BUILT_BY_ATTRIBUTE);
-		DriverStation.reportError("Code Built By " + parsedBuilder == null ? "<not found>" : parsedBuilder, false);
+		DriverStation.reportError("Code Built By " + parsedBuilder + "\n", false);
 
 		String parsedBuildDate = VersionFinder.getAttribute(this, VersionFinder.BUILT_AT_ATTRIBUTE);
-		DriverStation.reportError("Code Built At " + parsedBuildDate == null ? "<not found>" : parsedBuildDate, false);		
+		DriverStation.reportError("Code Built At " + parsedBuildDate + "\n", false);		
 	}
 
 	/**
@@ -227,6 +227,7 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putNumber("Elevator SetPoint", Elevator.setPoint);
 		SmartDashboard.putBoolean("Elevator At Top", elevator.isAtTopOfElevator());
 		SmartDashboard.putBoolean("Elevator At Bottom", elevator.isAtBottomOfElevator());
+		SmartDashboard.putBoolean("Elevator is Slack", elevator.elevatorIsSlack());
 		SmartDashboard.putNumber("Elevator Potentiometer Value", elevator.getPosition());
 		SmartDashboard.putNumber("Elevator P", elevator.winch.getP());
 		SmartDashboard.putNumber("Elevator I", elevator.winch.getI());
@@ -306,7 +307,7 @@ public class Robot extends IterativeRobot {
 		
 	}
 	public void cameragrab(int sessionid){
-System.out.println("camera session: "+ sessionid);
+		System.out.println("camera session: "+ sessionid);
 		NIVision.IMAQdxGrab(sessionid, frame, 1);
 		CameraServer.getInstance().setImage(frame);
 		

@@ -1,8 +1,6 @@
 package org.usfirst.frc4915.MecanumDrive.commands.autonomous;
 
 import org.usfirst.frc4915.MecanumDrive.commands.drive.MoveStraightPositionModeCommand;
-import org.usfirst.frc4915.MecanumDrive.commands.drive.StrafeCommand;
-import org.usfirst.frc4915.MecanumDrive.commands.elevator.ElevatorJumpToPosition;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
