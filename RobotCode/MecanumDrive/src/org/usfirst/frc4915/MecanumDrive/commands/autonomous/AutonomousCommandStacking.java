@@ -33,27 +33,30 @@ public class AutonomousCommandStacking extends CommandGroup {
 
     	addParallel(new ElevatorMoveToHeight());
     	
-    	System.out.println("Moving Elevator (level 1.5)");
-    	addSequential(new ElevatorJumpToPosition(1.5));
-    	addSequential(new ElevatorIsAbovePositionNumber(18), 1.2);
+    	System.out.println("Moving Elevator (level 1.2)");
+    	addSequential(new ElevatorJumpToPosition(1.2));
+    	addSequential(new ElevatorIsAbovePositionNumber(15), 1.2);
     	System.out.println("Closing Grabber");
     	addSequential(new CloseGrabber());
     	addSequential(new Wait(.5));
-    	System.out.println("Moving Elevator (level 2.5)");
-    	addSequential(new ElevatorJumpToPosition(2.5)); 
-    	addSequential(new ElevatorIsAbovePositionNumber(30), 1.2);
-    	System.out.println("Strafing");
-    	//strafe left 1.9ft
-    	addSequential(new StrafeCommand(1.9,.5));
+    	System.out.println("Moving Elevator (level 2.8)");
+    	addSequential(new ElevatorJumpToPosition(2.8));
+    	addSequential(new ElevatorIsAbovePositionNumber(34), 1.2);
+    	System.out.println("Driving back 12 ft");
+    	addSequential(new MoveStraightPositionModeCommand(1, 0.7));
     	addSequential(new OpenGrabber());
-    	addSequential(new Wait(.5));
+    	addSequential(new Wait(1));
+    	System.out.println("Moving Elevator (level 0)");
     	addSequential(new ElevatorJumpToPosition(0));
-    	addSequential(new ElevatorIsBelowPositionNumber(1), 1.2);
+    	addSequential(new ElevatorIsBelowPositionNumber(0.5), 3);
     	addSequential(new CloseGrabber());
     	addSequential(new Wait(.5));
+    	//inches
     	addSequential(new ElevatorJumpToPosition(1));
-    	addSequential(new ElevatorIsAbovePositionNumber(12), 1.2);
-    	System.out.println("Driving back 12 ft");
-    	addSequential(new MoveStraightPositionModeCommand(-2, 0.7));
+    	addSequential(new ElevatorIsAbovePositionNumber(12), 2);
+    	addSequential(new StrafeCommand(-3.5,0.7)); //going left currently
+    	addSequential(new ElevatorJumpToPosition(0));
+    	addSequential(new ElevatorIsBelowPositionNumber(0.5), 3);
+    	
     }
 }

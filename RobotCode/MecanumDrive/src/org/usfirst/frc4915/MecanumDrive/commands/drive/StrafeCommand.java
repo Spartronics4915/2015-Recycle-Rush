@@ -60,9 +60,9 @@ public class StrafeCommand extends Command {
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
 		if (inputDistance < 0)
-			driveTrain.driveSideways(.7);
-		else
 			driveTrain.driveSideways(-.7);
+		else
+			driveTrain.driveSideways(.7);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
@@ -80,14 +80,14 @@ public class StrafeCommand extends Command {
 		System.out.println("**____******____****Motor " + i + ": current position: " + currentPosition + ", desired position " + desiredPosition);
 		
 		if (i == 1 || i == 3) {
-			// right motors are inverted
-			if (inputDistance > 0) {
+			// flipping back motors... right motors are inverted
+			if (inputDistance < 0) {
 				finished = currentPosition >= desiredPosition;
 			} else {
 				finished = currentPosition <= desiredPosition;
 			}
 		} else {
-			if (inputDistance > 0) {
+			if (inputDistance < 0) {
 				finished = currentPosition <= desiredPosition;
 			} else {
 				finished = currentPosition >= desiredPosition;
