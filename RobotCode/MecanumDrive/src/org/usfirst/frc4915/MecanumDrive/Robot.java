@@ -37,6 +37,9 @@ import edu.wpi.first.wpilibj.Timer;
 import com.ni.vision.NIVision;
 import com.ni.vision.NIVision.Image;
 
+
+
+
 import edu.wpi.first.wpilibj.CameraServer;
 
 import com.ni.vision.NIVision;
@@ -93,16 +96,20 @@ public class Robot extends IterativeRobot {
 		// constructed yet. Thus, their requires() statements may grab null
 		// pointers. Bad news. Don't move it.
 		oi = new OI();
-		//if (RobotMap.gyro != null){
-		//	RobotMap.gyro.initGyro();
-		//}
+		
+		if (RobotMap.gyro != null){
+			RobotMap.gyro.initGyro();
+			RobotMap.gyro.setSensitivity(0.001655);
+			RobotMap.gyro.reset();
+			System.out.println("Initialized Gyro: " + RobotMap.gyro.getAngle());
+		}
 
 		testPreferencesItemOne = preferences.getDouble("TestOne", 123.4);
 		testPreferencesItemTwo = preferences.getDouble("TestTwo", 456.7);
 		preferences.putDouble("TestThree", 987.65);
 		testPreferencesItemThree = preferences.getDouble("TestThree", 1.11);
 	    preferences.getString("DesiredDistance", "9.0");
-	    debugger.logError(LoggerNames.GENERAL, "TestOne = "+testPreferencesItemOne);
+	    debugger.logError(LoggerNames.GENERAL, "TestOne = "	+testPreferencesItemOne);
 	    debugger.logError(LoggerNames.GENERAL, "TestThree = "+testPreferencesItemThree);
 	    debugger.logError(LoggerNames.GENERAL, preferences.getString("DesiredDistance", "9.0"));
 
@@ -275,7 +282,9 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putNumber("Position Number of Elevator: ", Robot.elevator.getPositionNumber());
 		SmartDashboard.putBoolean("Safety Enabled", Elevator.SAFETY);
 		
-		SmartDashboard.putNumber("Gyro Angle", RobotMap.gyro.getAngle());
+		//Gyro Tracking and debug
+		Robot.driveTrain.trackGyro();
+		SmartDashboard.putNumber("Gyro Angle", Robot.driveTrain.gyroHeading);
 
 		if (cam1available)
 		{
