@@ -7,6 +7,8 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.Gyro;
+import edu.wpi.first.wpilibj.I2C;
+import edu.wpi.first.wpilibj.I2C.Port;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Ultrasonic;
@@ -86,7 +88,12 @@ public class RobotMap {
 	 * GENERAL SENSORS
 	 */
 	public static BuiltInAccelerometer accelerometer;
-
+	
+	/**
+	 * ARDUINO
+	 */
+	public static I2C wire;
+	
 	public static void init() {
 
 		/*
@@ -175,6 +182,14 @@ public class RobotMap {
 
 		/*
 		 * SENSORS END
+		 */
+		
+		/**
+		 * ARDUIONO START
+		 */
+		wire = new I2C(Port.kOnboard, 4); // TODO confirm port and device address
+		/**
+		 * ARDUIN0 END
 		 */
 	}
 
