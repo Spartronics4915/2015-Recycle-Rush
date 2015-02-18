@@ -3,6 +3,7 @@ package org.usfirst.frc4915.MecanumDrive.commands.drive;
 import org.usfirst.frc4915.MecanumDrive.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 /**
  *
  */
@@ -21,6 +22,7 @@ public class ToggleDriveMode extends Command {
     	Robot.driveTrain.toggleFieldMode();
     	//Robot.debugger.logError(LoggerNames.DRIVETRAIN,"After Toggling Drive Mode" + ((Robot.driveTrain.toggleFieldMode()) ? "TRUE" : "FALSE") );
     	System.out.println("After Toggling Drive Mode" + ((Robot.driveTrain.toggleFieldMode()) ? "TRUE" : "FALSE"));
+    	SmartDashboard.putBoolean("Field Mode", Robot.driveTrain.fieldMode);
     }
 
     // Called just before this Command runs the first time

@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj.CANTalon.ControlMode;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class DriveTrain extends Subsystem {
 
@@ -78,6 +79,11 @@ public class DriveTrain extends Subsystem {
 		double throttleX = throttle*joystickX;
 		double throttleY = throttle*joystickY;
 		double throttleTwist = throttle*joystickTwist;
+		
+		//Gyro Tracking and debug
+		Robot.driveTrain.trackGyro();
+		SmartDashboard.putNumber("Gyro Angle", Robot.driveTrain.gyroHeading);
+
 
 		debugger.logError(LoggerNames.DRIVETRAIN, ("Joystick: "+ joystickX + ", " + joystickY + ", " + joystickTwist));
 		debugger.logError(LoggerNames.DRIVETRAIN, ("Throttle: "+ throttleX + ", " + throttleY + ", " + throttleTwist));
@@ -86,8 +92,7 @@ public class DriveTrain extends Subsystem {
 			robotDrive.stopMotor();
 		} else {
 			debugger.logError(LoggerNames.DRIVETRAIN,"Gyro Angle: " + gyro.getAngle());
-			robotDrive.mecanumDrive_Cartesian(throttleX, throttleY, throttleTwist, gyroHeading);
-					//, fieldMode ? gyro.getAngle() : 0);
+			robotDrive.mecanumDrive_Cartesian(throttleX, throttleY, throttleTwist, fieldMode == true ? gyroHeading : 0);
 		}
 		
 
