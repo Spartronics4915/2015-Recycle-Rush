@@ -31,7 +31,6 @@ public class AutonomousCommandToteStrategy extends CommandGroup {
         // e.g. if Command1 requires chassis, and Command2 requires arm,
         // a CommandGroup containing them would require both the chassis and the
         // arm.
-    	System.out.println("++++++RUNNING AUTONOMOUS COMMAND TOTE STRATEGY");
     	addParallel(new ElevatorMoveToHeight());
     	addParallel(new StopDriveTrain());
     	System.out.println("Moving Elevator (level 0)");
