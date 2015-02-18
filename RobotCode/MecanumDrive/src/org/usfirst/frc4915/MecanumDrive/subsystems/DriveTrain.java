@@ -183,4 +183,9 @@ public class DriveTrain extends Subsystem {
 	public boolean toggleFieldMode() {
 		return fieldMode = !fieldMode;
     }
+
+	public int trackGyro() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }

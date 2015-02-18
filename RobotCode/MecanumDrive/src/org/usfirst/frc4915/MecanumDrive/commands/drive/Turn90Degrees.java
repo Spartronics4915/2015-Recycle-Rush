@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.usfirst.frc4915.MecanumDrive.Robot;
+import org.usfirst.frc4915.MecanumDrive.RobotMap;
+
 import org.usfirst.frc4915.MecanumDrive.subsystems.DriveTrain;
 
 import edu.wpi.first.wpilibj.CANTalon;
@@ -24,7 +26,7 @@ public class Turn90Degrees extends Command {
     
     // Called just before this Command runs the first time
     protected void initialize() {
-    	
+    	Robot.driveTrain.calibrateGyro();
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -35,8 +37,13 @@ public class Turn90Degrees extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	setTimeout(.7);
-    	return isTimedOut();
+    	if (DriveTrain.gyro != null){
+    		System.out.println("Turn 90: track Gyro "+ Robot.driveTrain.trackGyro());
+    		return (Robot.driveTrain.trackGyro() >= 90);    		
+    	}else{
+    		setTimeout(.7);
+    		return isTimedOut();
+    	}
 	}	
 
     // Called once after isFinished returns true
