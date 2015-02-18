@@ -258,9 +258,10 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putNumber("Minimum height value: ", Elevator.minimumPotentiometerValue);
 		SmartDashboard.putNumber("Position Number of Elevator: ", Robot.elevator.getPositionNumber());
 		SmartDashboard.putBoolean("Safety Enabled", Elevator.SAFETY);
+		
+		//Gyro Tracking and debug
 		Robot.driveTrain.trackGyro();
 		SmartDashboard.putNumber("Gyro Angle", Robot.driveTrain.gyroHeading);
-		SmartDashboard.putNumber("Turn Rate", Robot.driveTrain.deltaGyro);
 		
 		
 

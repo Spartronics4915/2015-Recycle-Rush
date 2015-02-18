@@ -187,8 +187,7 @@ public class DriveTrain extends Subsystem {
 		return fieldMode = !fieldMode;
     }
 	public void trackGyro() {
-		deltaGyro = gyro.getRate();
-		gyroHeading += gyro.getRate();
+		gyroHeading = gyro.getAngle() % 360;
 		
 		debugger.logError(LoggerNames.DRIVETRAIN,"Change in angle: " + deltaGyro);
 		debugger.logError(LoggerNames.DRIVETRAIN, "Robot angle: " + gyroHeading);
