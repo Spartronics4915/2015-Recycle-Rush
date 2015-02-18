@@ -34,6 +34,7 @@ public class AutonomousCommandStacking extends CommandGroup {
         // arm.
 
     	addParallel(new ElevatorMoveToHeight());
+    	addParallel(new StopDriveTrain());
        	System.out.println("Moving Elevator (level 1.5)");
     	addSequential(new ElevatorJumpToPosition(1.5), 0.7);
     	System.out.println("Closing Grabber");
@@ -50,7 +51,6 @@ public class AutonomousCommandStacking extends CommandGroup {
     	System.out.println("Driving back 12 ft");
     	// FIXME change the value to -12
     	addSequential(new MoveStraightPositionModeCommand(-2, 0.7));
-    	addParallel(new StopDriveTrain());
        	System.out.println("Moving Elevator (level 1.2)");
     	addSequential(new ElevatorJumpToPosition(1.2));
     	addSequential(new ElevatorIsAbovePositionNumber(15), 1.2);
