@@ -275,6 +275,7 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putNumber("Position Number of Elevator: ", Robot.elevator.getPositionNumber());
 		SmartDashboard.putBoolean("Safety Enabled", Elevator.SAFETY);
 		
+		SmartDashboard.putNumber("Gyro Angle", RobotMap.gyro.getAngle());
 
 		if (cam1available)
 		{
