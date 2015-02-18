@@ -86,7 +86,7 @@ public class DriveTrain extends Subsystem {
 			robotDrive.stopMotor();
 		} else {
 			debugger.logError(LoggerNames.DRIVETRAIN,"Gyro Angle: " + gyro.getAngle());
-			robotDrive.mecanumDrive_Cartesian(throttleX, throttleY, throttleTwist, gyro.getAngle());
+			robotDrive.mecanumDrive_Cartesian(throttleX, throttleY, throttleTwist, gyroHeading);
 					//, fieldMode ? gyro.getAngle() : 0);
 		}
 		
@@ -187,7 +187,7 @@ public class DriveTrain extends Subsystem {
 		return fieldMode = !fieldMode;
     }
 	public double trackGyro() {
-		gyroHeading = gyro.getAngle();
+		gyroHeading = -1*gyro.getAngle();
 		
 		debugger.logError(LoggerNames.DRIVETRAIN,"Change in angle: " + deltaGyro);
 		debugger.logError(LoggerNames.DRIVETRAIN, "Robot angle: " + gyroHeading);
