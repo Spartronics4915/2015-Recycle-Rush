@@ -30,6 +30,12 @@ public class AutonomousCommandContainerStrategy extends CommandGroup {
         // e.g. if Command1 requires chassis, and Command2 requires arm,
         // a CommandGroup containing them would require both the chassis and the
         // arm.
+    	System.out.println("***Running Container Command***");
+    	addSequential(new ElevatorMoveToHeight());
+    	System.out.println("Moving Elevator (level 1.5)");
+    	addSequential(new ElevatorJumpToPosition(1.5), 0.7);
+    	addSequential(new ElevatorJumpToPosition(1.5));
+    	addSequential(new ElevatorIsAbovePositionNumber(18), 1.2);
     	
     	addParallel(new ElevatorMoveToHeight());
     	addParallel(new StopDriveTrain());
@@ -41,6 +47,11 @@ public class AutonomousCommandContainerStrategy extends CommandGroup {
     	addSequential(new CloseGrabber());
     	addSequential(new Wait(.5));
     	System.out.println("Moving Elevator (level 2.5)");
+
+    	addSequential(new ElevatorJumpToPosition(2.5), 0.7);
+    	System.out.println("Driving back 12 ft");
+    	// FIXME change this drive value to -12
+    	addSequential(new MoveStraightPositionModeCommand(-2, 0.7));
     	addSequential(new ElevatorJumpToPosition(2.5));
     	addSequential(new ElevatorIsAbovePositionNumber(30), 1.2);
     	System.out.println("Driving back 9.5 ft"); // // // // 

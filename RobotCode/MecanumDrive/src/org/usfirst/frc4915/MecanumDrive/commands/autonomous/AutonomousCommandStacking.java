@@ -2,6 +2,7 @@ package org.usfirst.frc4915.MecanumDrive.commands.autonomous;
 import org.usfirst.frc4915.MecanumDrive.commands.drive.MoveStraightPositionModeCommand;
 import org.usfirst.frc4915.MecanumDrive.commands.drive.StopDriveTrain;
 import org.usfirst.frc4915.MecanumDrive.commands.drive.StrafeCommand;
+import org.usfirst.frc4915.MecanumDrive.commands.drive.Turn90Degrees;
 import org.usfirst.frc4915.MecanumDrive.commands.drive.Wait;
 import org.usfirst.frc4915.MecanumDrive.commands.elevator.ElevatorIsAbovePositionNumber;
 import org.usfirst.frc4915.MecanumDrive.commands.elevator.ElevatorIsBelowPositionNumber;
@@ -33,9 +34,24 @@ public class AutonomousCommandStacking extends CommandGroup {
         // arm.
 
     	addParallel(new ElevatorMoveToHeight());
+       	System.out.println("Moving Elevator (level 1.5)");
+    	addSequential(new ElevatorJumpToPosition(1.5), 0.7);
+    	System.out.println("Closing Grabber");
+    	addSequential(new CloseGrabber());
+    	System.out.println("Moving Elevator (level 2.5)");
+    	addSequential(new ElevatorJumpToPosition(2.5), 0.7);
+    	System.out.println("Strafing");
+    	//strafe left 1.9ft
+    	addSequential(new StrafeCommand(-1.9,.5));
+    	addSequential(new OpenGrabber());
+    	addSequential(new ElevatorJumpToPosition(0), 1.0);
+    	addSequential(new CloseGrabber());
+    	addSequential(new ElevatorJumpToPosition(1), 0.7);
+    	System.out.println("Driving back 12 ft");
+    	// FIXME change the value to -12
+    	addSequential(new MoveStraightPositionModeCommand(-2, 0.7));
     	addParallel(new StopDriveTrain());
-    	
-    	System.out.println("Moving Elevator (level 1.2)");
+       	System.out.println("Moving Elevator (level 1.2)");
     	addSequential(new ElevatorJumpToPosition(1.2));
     	addSequential(new ElevatorIsAbovePositionNumber(15), 1.2);
     	System.out.println("Closing Grabber");
@@ -56,7 +72,8 @@ public class AutonomousCommandStacking extends CommandGroup {
     	//inches
     	addSequential(new ElevatorJumpToPosition(1));
     	addSequential(new ElevatorIsAbovePositionNumber(12), 2);
-    	addSequential(new StrafeCommand(-9.5,0.7)); //going left 9.5 ft // prefer
+    	addSequential(new Turn90Degrees(false));
+    	addSequential(new MoveStraightPositionModeCommand(-9.5,0.7)); //going left 9.5 ft // prefer
     	addSequential(new ElevatorJumpToPosition(0));
     	addSequential(new ElevatorIsBelowPositionNumber(0.5), 3);
     	addSequential(new OpenGrabber());

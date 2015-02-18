@@ -4,6 +4,8 @@ import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandCon
 import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandJustDrive;
 import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandStacking;
 import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandToteStrategy;
+import org.usfirst.frc4915.MecanumDrive.commands.drive.StrafeCommand;
+import org.usfirst.frc4915.MecanumDrive.commands.debug.ShowOnly;
 import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandTwoContainers;
 import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandTwoTotesOneContainer;
 //import org.usfirst.frc4915.MecanumDrive.commands.debug.DebuggerFilter;
@@ -35,11 +37,13 @@ import edu.wpi.first.wpilibj.Timer;
 import com.ni.vision.NIVision;
 import com.ni.vision.NIVision.Image;
 
+
+
+
 import edu.wpi.first.wpilibj.CameraServer;
 
 import com.ni.vision.NIVision;
 import com.ni.vision.VisionException;
-
 /**
  * The VM is configured to automatically run this class, and to call the
  * functions corresponding to each mode, as described in the IterativeRobot
@@ -72,16 +76,13 @@ public class Robot extends IterativeRobot {
 	private boolean cam1available = false;
 	private boolean cam0available = false;
 
-
-
-
 	/**
 	 * This function is run when the robot is first started up and should be
 	 * used for any initialization code.
 	 */
 	public void robotInit() {
 		RobotMap.init();
-
+		debugger = new CustomDebugger();
 		preferences = Preferences.getInstance();
 		driveTrain = new DriveTrain();
 		elevator = new Elevator();
@@ -92,16 +93,20 @@ public class Robot extends IterativeRobot {
 		// constructed yet. Thus, their requires() statements may grab null
 		// pointers. Bad news. Don't move it.
 		oi = new OI();
-		//if (RobotMap.gyro != null){
-		//	RobotMap.gyro.initGyro();
-		//}
+		
+		if (RobotMap.gyro != null){
+			RobotMap.gyro.initGyro();
+			RobotMap.gyro.setSensitivity(0.001655);
+			RobotMap.gyro.reset();
+			System.out.println("Initialized Gyro: " + RobotMap.gyro.getAngle());
+		}
 
 		testPreferencesItemOne = preferences.getDouble("TestOne", 123.4);
 		testPreferencesItemTwo = preferences.getDouble("TestTwo", 456.7);
 		preferences.putDouble("TestThree", 987.65);
 		testPreferencesItemThree = preferences.getDouble("TestThree", 1.11);
 	    preferences.getString("DesiredDistance", "9.0");
-	    debugger.logError(LoggerNames.GENERAL, "TestOne = "+testPreferencesItemOne);
+	    debugger.logError(LoggerNames.GENERAL, "TestOne = "	+testPreferencesItemOne);
 	    debugger.logError(LoggerNames.GENERAL, "TestThree = "+testPreferencesItemThree);
 	    debugger.logError(LoggerNames.GENERAL, preferences.getString("DesiredDistance", "9.0"));
 
@@ -112,10 +117,19 @@ public class Robot extends IterativeRobot {
 		autonomousProgramChooser.addObject("Autonomous Stacking Strategy", new AutonomousCommandStacking());
 		//autonomousProgramChooser.addObject("Autonomous Two Totes One Container Strategy", new AutonomousCommandTwoTotesOneContainer());
 		//autonomousProgramChooser.addObject("Autonomous Two Container Strategy", new AutonomousCommandTwoContainers());
-
+		
 		SmartDashboard.putString("TEST BUTTON", "button");
 
 		SmartDashboard.putData("Autonomous Program", autonomousProgramChooser);
+		
+	//	Debugger = new SendableChooser();
+	//	Debugger.addDefault("General", new ShowOnly(LoggerNames.GENERAL));
+	//	Debugger.addObject("Grabber", new ShowOnly(LoggerNames.GRABBER));
+	//	Debugger.addObject("Drivetrain", new ShowOnly(LoggerNames.DRIVETRAIN));
+	//	Debugger.addObject("Autonomous", new ShowOnly(LoggerNames.AUTONOMOUS));
+	//	Debugger.addObject("Elevator", new ShowOnly(LoggerNames.ELEVATOR));
+		
+	//	SmartDashboard.putData("Debugger Filter", Debugger);
 	/*	
 		Debugger = new SendableChooser();
 		Debugger.addDefault("General", new DebuggerFilter(LoggerNames.GENERAL));
@@ -129,6 +143,9 @@ public class Robot extends IterativeRobot {
 		//SmartDashboard.putData("Debugger Filter ", Debugger);
 		displayVersioningOnSmartDashboard();	
 
+		//SmartDashboard.putData("Debugger Filter ", Debugger);
+		//SmartDashboard.putData("Debugger Filter ", Debugger);
+		displayVersioningOnSmartDashboard();	
 		if (elevator != null) {
 			elevator.setHieghtToCurrentPosition();
 			Elevator.minimumPotentiometerValue = preferences.getDouble("minimumPotentiometerValue", 0);
@@ -166,7 +183,9 @@ public class Robot extends IterativeRobot {
 		// Use the selected autonomous command
 
 		autonomousCommand = (Command) autonomousProgramChooser.getSelected();
-
+		//double desiredDistrance = preferences.getDouble("DesiredDistance", 9.0);
+		//autonomousCommand = new AutonomousCommandToteStrategy();
+		//autonomousCommand = new StrafeCommand(3, 0.7);
 		//double desiredDistance = preferences.getDouble("DesiredDistance", 9.0);
 		//autonomousCommand = new AutonomousCommandToteStrategy();
 
@@ -174,11 +193,12 @@ public class Robot extends IterativeRobot {
 		// wanting to go to a random position (default zero)
 		elevator.setHieghtToCurrentPosition();
 		// Tells the elevator to approximate the other maximum when it hits a limit switch
-
 		Elevator.needToApproximate = true;
 		Elevator.didSaveTopValue = false;
 		Elevator.didSaveBottomValue = false;
-
+		Elevator.needToApproximate = true;
+		Elevator.didSaveTopValue = false;
+		Elevator.didSaveBottomValue = false;
 		autonomousCommand.start();
 	}
 
@@ -254,14 +274,11 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putBoolean("Elevator At Bottom", elevator.isAtBottomOfElevator());
 		SmartDashboard.putBoolean("Elevator is Slack", elevator.elevatorIsSlack());
 		SmartDashboard.putNumber("Elevator Potentiometer Value", elevator.getPosition());
-		SmartDashboard.putNumber("Elevator P", elevator.winch.getP());
-		SmartDashboard.putNumber("Elevator I", elevator.winch.getI());
-		SmartDashboard.putNumber("Elevator D", elevator.winch.getD());
 		SmartDashboard.putNumber("Maximum height value: ", Elevator.maximumPotentiometerValue);
 		SmartDashboard.putNumber("Minimum height value: ", Elevator.minimumPotentiometerValue);
 		SmartDashboard.putNumber("Position Number of Elevator: ", Robot.elevator.getPositionNumber());
 		SmartDashboard.putBoolean("Safety Enabled", Elevator.SAFETY);
-		
+
 
 		if (cam1available)
 		{

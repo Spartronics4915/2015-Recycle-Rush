@@ -7,6 +7,8 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.Gyro;
+import edu.wpi.first.wpilibj.I2C;
+import edu.wpi.first.wpilibj.I2C.Port;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Ultrasonic;
@@ -34,10 +36,8 @@ public class RobotMap {
 	/*
 	 * The Pneumatic Control Module's CAN Node ID. Use 10 for 4915. Use 20 for 9999
 	 */
-	
 	public final static int PCM_NODE_ID = 10;
-	
-	public final static int GYRO_PORT = 0;
+		public final static int GYRO_PORT = 0;
 	
 	public final static int ULTRASONIC_PORT_FIRST = 0;
 	public final static int ULTRASONIC_PORT_SECOND = 1;
@@ -74,7 +74,9 @@ public class RobotMap {
 	public static CANTalon elevatorWinchMotor;
 	private static final int FWD_SOFT_LIMIT = 1023;
 	private static final int REV_SOFT_LIMIT = 0;
+	public static DigitalInput slackLimitSwitch;
 	public static DigitalInput bottomLimitSwitch;
+
 
 	/*
 	 * GRABBER
@@ -86,7 +88,12 @@ public class RobotMap {
 	 * GENERAL SENSORS
 	 */
 	public static BuiltInAccelerometer accelerometer;
-
+	
+	/**
+	 * ARDUINO
+	 */
+	public static I2C wire;
+	
 	public static void init() {
 
 		/*
@@ -132,7 +139,7 @@ public class RobotMap {
 		elevatorWinchMotor = new CANTalon(MOTOR_PORT_ELEVATOR_WINCH);
 		elevatorWinchMotor.changeControlMode(ControlMode.Position);
 		elevatorWinchMotor.setFeedbackDevice(CANTalon.FeedbackDevice.AnalogPot);
-		elevatorWinchMotor.setPID(15, .01, 0.001, 0.0001, 25, 1, 0); //Values we determined after the gearbox was lubricated
+		elevatorWinchMotor.setPID(20, .03, 0.6, 0.0001, 20, 0, 0); //Values we determined after the gearbox was lubricated
 		elevatorWinchMotor.setForwardSoftLimit(FWD_SOFT_LIMIT); // The absolute maximum height that the elevator can be
 		elevatorWinchMotor.setReverseSoftLimit(REV_SOFT_LIMIT); // The greater minimum height that the elevator can be
 		elevatorWinchMotor.enableForwardSoftLimit(true);
@@ -140,7 +147,12 @@ public class RobotMap {
 		elevatorWinchMotor.ConfigFwdLimitSwitchNormallyOpen(true);
 		elevatorWinchMotor.ConfigRevLimitSwitchNormallyOpen(true);
 		elevatorWinchMotor.enableBrakeMode(true);
-
+		//slackLimitSwitch = new DigitalInput(1);
+		//bottomLimitSwitch = new DigitalInput(5);
+		
+		// Potentiometer instantiation
+		
+		// TODO Limit Switches instantiation goes here
 		bottomLimitSwitch = new DigitalInput(5);
 		
 		/*
@@ -170,6 +182,14 @@ public class RobotMap {
 
 		/*
 		 * SENSORS END
+		 */
+		
+		/**
+		 * ARDUIONO START
+		 */
+		wire = new I2C(Port.kOnboard, 4); // TODO confirm port and device address
+		/**
+		 * ARDUIN0 END
 		 */
 	}
 
