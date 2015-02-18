@@ -2,6 +2,7 @@ package org.usfirst.frc4915.MecanumDrive.commands.drive;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.lang.Math;
 
 import org.usfirst.frc4915.MecanumDrive.Robot;
 import org.usfirst.frc4915.MecanumDrive.RobotMap;
@@ -42,7 +43,7 @@ public class Turn90Degrees extends Command {
     protected boolean isFinished() {
     	if (DriveTrain.gyro != null){
     		System.out.println("Turn 90: track Gyro "+ Robot.driveTrain.trackGyro());
-    		return (Robot.driveTrain.trackGyro() >= 90);    		
+    		return (Math.abs(Robot.driveTrain.trackGyro()) >= 90);    		
     	}else{
     		setTimeout(.7);
     		return isTimedOut();

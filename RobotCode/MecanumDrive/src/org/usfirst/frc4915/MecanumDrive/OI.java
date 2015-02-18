@@ -123,7 +123,7 @@ public class OI {
 		/*
 		 * DRIVE STRAIGHT
 		 */
-		SmartDashboard.putData("Turn 90 Degrees right", new Turn90Degrees(false));
+		SmartDashboard.putData("Turn 90 Degrees left", new Turn90Degrees(true));
 //
 //		SmartDashboard.putData("Move Straight 5 feet", new MoveStraightPositionModeCommand(5,0.7));
 //		SmartDashboard.putData("Strafe 1.9 feet", new StrafeCommand(1.9, 0.7));
