@@ -28,6 +28,9 @@ public class DriveTrain extends Subsystem {
 	public static Ultrasonic distanceSensor = RobotMap.distanceSensor;
 
 	public double throttle = 0;
+	
+	public double deltaGyro = 0;
+	public double gyroHeading = 0;
 	public boolean fieldMode = false; 
 
 	// Put methods for controlling this subsystem
@@ -82,11 +85,11 @@ public class DriveTrain extends Subsystem {
 			debugger.logError(LoggerNames.DRIVETRAIN, ("Stopping Motor"));
 			robotDrive.stopMotor();
 		} else {
-			
-			robotDrive.mecanumDrive_Cartesian(throttleX, throttleY, throttleTwist, 0);
+			debugger.logError(LoggerNames.DRIVETRAIN,"Gyro Angle: " + gyro.getAngle());
+			robotDrive.mecanumDrive_Cartesian(throttleX, throttleY, throttleTwist, gyroHeading);
 					//, fieldMode ? gyro.getAngle() : 0);
 		}
-		debugger.logError(LoggerNames.DRIVETRAIN,"Gyro Angle: " + gyro.getAngle());
+		
 
 	}
 	
@@ -119,10 +122,10 @@ public class DriveTrain extends Subsystem {
 			CANTalon motor = motors.get(i);	
 			RobotMap.changeControlMode(ControlMode.Speed);
 			if (left){
-				robotDrive.mecanumDrive_Cartesian(0, 0, -.7, 0);
+				robotDrive.mecanumDrive_Cartesian(0, 0, -.5, 0);
 			}
 			else {
-				robotDrive.mecanumDrive_Cartesian(0, 0, .7, 0);
+				robotDrive.mecanumDrive_Cartesian(0, 0, .5, 0);
 			}
 			}
 //			if ( i == 0 || i == 1) {
@@ -183,4 +186,12 @@ public class DriveTrain extends Subsystem {
 	public boolean toggleFieldMode() {
 		return fieldMode = !fieldMode;
     }
+
+	public double trackGyro() {
+		gyroHeading = -1*gyro.getAngle();
+		
+		debugger.logError(LoggerNames.DRIVETRAIN,"Change in angle: " + deltaGyro);
+		debugger.logError(LoggerNames.DRIVETRAIN, "Robot angle: " + gyroHeading);
+		return gyroHeading;
+			}
 }

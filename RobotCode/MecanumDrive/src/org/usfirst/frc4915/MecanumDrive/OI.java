@@ -123,10 +123,10 @@ public class OI {
 		/*
 		 * DRIVE STRAIGHT
 		 */
-		SmartDashboard.putData("Turn 90 Degrees right", new Turn90Degrees(false));
-
-		SmartDashboard.putData("Move Straight 5 feet", new MoveStraightPositionModeCommand(5,0.7));
-		SmartDashboard.putData("Strafe 1.9 feet", new StrafeCommand(1.9, 0.7));
+		SmartDashboard.putData("Turn 90 Degrees left", new Turn90Degrees(true));
+//
+//		SmartDashboard.putData("Move Straight 5 feet", new MoveStraightPositionModeCommand(5,0.7));
+//		SmartDashboard.putData("Strafe 1.9 feet", new StrafeCommand(1.9, 0.7));
 		//SmartDashboard.putData("Move Backwards 3 feet", new MoveStraightPositionModeCommand(-3, 0.7));
 		//SmartDashboard.putData("DriveStraight 1 second", new DriveStraight());
 
@@ -140,35 +140,26 @@ public class OI {
 		/*
 		 * GRABBER
 		 */
-
-		SmartDashboard.putData("Close Grabber", new CloseGrabber());
-		SmartDashboard.putData("Intermediate Open", new IntermediateOpen());
-		SmartDashboard.putData("Open Grabber", new OpenGrabber());
-
 		
 		/*
 		 * ELEVATOR
-		 */
+		 */		
 		SmartDashboard.putData("ElevatorPositionCalibration", new ElevatorPositionCalibration());
-		SmartDashboard.putData("ElevatorStop", new ElevatorStop());
 		SmartDashboard.putData("Disable Elevator Safety", new ElevatorSetSafety(false));
 		SmartDashboard.putData("Enable Elevator Safety", new ElevatorSetSafety(true));		
 		SmartDashboard.putData("Enable Elevator Safety", new ElevatorSetSafety(true));
-				/*
-		SmartDashboard.putData("Enable Elevator Safety", new ElevatorSetSafety(true));
-		
+				
 		/*
 		 * DEBUGGER BUTTONS
-
-		 * */
+		 */
 		 
 		
-		SmartDashboard.putData("Set debugger to drivetrain", new ShowOnly(LoggerNames.DRIVETRAIN));
-		SmartDashboard.putData("Set debugger to grabber", new ShowOnly(LoggerNames.GRABBER));
-		SmartDashboard.putData("Set debugger to general", new ShowOnly(LoggerNames.GENERAL));
-		SmartDashboard.putData("Set debugger to autonomous", new ShowOnly(LoggerNames.AUTONOMOUS));
-		SmartDashboard.putData("Set debugger to elevator", new ShowOnly(LoggerNames.ELEVATOR));
-		SmartDashboard.putData("Reset debugger filter", new DebuggerFilterReset());
+//		SmartDashboard.putData("Set debugger to drivetrain", new ShowOnly(LoggerNames.DRIVETRAIN));
+//		SmartDashboard.putData("Set debugger to grabber", new ShowOnly(LoggerNames.GRABBER));
+//		SmartDashboard.putData("Set debugger to general", new ShowOnly(LoggerNames.GENERAL));
+//		SmartDashboard.putData("Set debugger to autonomous", new ShowOnly(LoggerNames.AUTONOMOUS));
+//		SmartDashboard.putData("Set debugger to elevator", new ShowOnly(LoggerNames.ELEVATOR));
+//		SmartDashboard.putData("Reset debugger filter", new DebuggerFilterReset());
 		
 
 		/*
@@ -179,8 +170,7 @@ public class OI {
 		LiveWindow.addSensor("Drive Train", "Distance Sensor", DriveTrain.distanceSensor);
 		LiveWindow.addActuator("Grabber Primary Solenoid", "Solenoid", RobotMap.primarySolenoid);
 		LiveWindow.addActuator("Grabber Secondary Solenoid", "Solenoid", RobotMap.secondarySolenoid);
-		SmartDashboard.putNumber("Gyro Angle", RobotMap.gyro.getAngle());
-	
+		
 		/*
 		 * CODE VERSION OUTPUT
 		 */

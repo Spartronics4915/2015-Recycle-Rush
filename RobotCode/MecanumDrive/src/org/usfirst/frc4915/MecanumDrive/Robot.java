@@ -6,6 +6,9 @@ import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandSta
 import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandToteStrategy;
 import org.usfirst.frc4915.MecanumDrive.commands.drive.StrafeCommand;
 import org.usfirst.frc4915.MecanumDrive.commands.debug.ShowOnly;
+import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandTwoContainers;
+import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandTwoTotesOneContainer;
+//import org.usfirst.frc4915.MecanumDrive.commands.debug.DebuggerFilter;
 import org.usfirst.frc4915.MecanumDrive.commands.drive.ToggleDriveMode;
 import org.usfirst.frc4915.MecanumDrive.subsystems.DriveTrain;
 import org.usfirst.frc4915.MecanumDrive.subsystems.Elevator;
@@ -35,7 +38,10 @@ import com.ni.vision.NIVision;
 import com.ni.vision.NIVision.Image;
 
 
+
+
 import edu.wpi.first.wpilibj.CameraServer;
+
 import com.ni.vision.NIVision;
 import com.ni.vision.VisionException;
 /**
@@ -61,7 +67,7 @@ public class Robot extends IterativeRobot {
 	public static DriveTrain driveTrain;
 	public static Elevator elevator;
 	public static Grabber grabber;
-	public static CustomDebugger debugger;
+	public static CustomDebugger debugger = new CustomDebugger();
 	
 	// vars for camera code
 	private Image frame;
@@ -69,9 +75,6 @@ public class Robot extends IterativeRobot {
 	private int session1;
 	private boolean cam1available = false;
 	private boolean cam0available = false;
-
-
-
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -90,16 +93,20 @@ public class Robot extends IterativeRobot {
 		// constructed yet. Thus, their requires() statements may grab null
 		// pointers. Bad news. Don't move it.
 		oi = new OI();
-		//if (RobotMap.gyro != null){
-		//	RobotMap.gyro.initGyro();
-		//}
+		
+		if (RobotMap.gyro != null){
+			RobotMap.gyro.initGyro();
+			RobotMap.gyro.setSensitivity(0.001655);
+			RobotMap.gyro.reset();
+			System.out.println("Initialized Gyro: " + RobotMap.gyro.getAngle());
+		}
 
 		testPreferencesItemOne = preferences.getDouble("TestOne", 123.4);
 		testPreferencesItemTwo = preferences.getDouble("TestTwo", 456.7);
 		preferences.putDouble("TestThree", 987.65);
 		testPreferencesItemThree = preferences.getDouble("TestThree", 1.11);
 	    preferences.getString("DesiredDistance", "9.0");
-	    debugger.logError(LoggerNames.GENERAL, "TestOne = "+testPreferencesItemOne);
+	    debugger.logError(LoggerNames.GENERAL, "TestOne = "	+testPreferencesItemOne);
 	    debugger.logError(LoggerNames.GENERAL, "TestThree = "+testPreferencesItemThree);
 	    debugger.logError(LoggerNames.GENERAL, preferences.getString("DesiredDistance", "9.0"));
 
@@ -108,8 +115,11 @@ public class Robot extends IterativeRobot {
 		autonomousProgramChooser.addObject("Autonomous Container Strategy", new AutonomousCommandContainerStrategy());
 		autonomousProgramChooser.addObject("Autonomous Tote Strategy", new AutonomousCommandToteStrategy());
 		autonomousProgramChooser.addObject("Autonomous Stacking Strategy", new AutonomousCommandStacking());
-
+		//autonomousProgramChooser.addObject("Autonomous Two Totes One Container Strategy", new AutonomousCommandTwoTotesOneContainer());
+		//autonomousProgramChooser.addObject("Autonomous Two Container Strategy", new AutonomousCommandTwoContainers());
 		
+		SmartDashboard.putString("TEST BUTTON", "button");
+
 		SmartDashboard.putData("Autonomous Program", autonomousProgramChooser);
 		
 	//	Debugger = new SendableChooser();
@@ -120,6 +130,18 @@ public class Robot extends IterativeRobot {
 	//	Debugger.addObject("Elevator", new ShowOnly(LoggerNames.ELEVATOR));
 		
 	//	SmartDashboard.putData("Debugger Filter", Debugger);
+	/*	
+		Debugger = new SendableChooser();
+		Debugger.addDefault("General", new DebuggerFilter(LoggerNames.GENERAL));
+		Debugger.addObject("Grabber", new DebuggerFilter(LoggerNames.GRABBER));
+		Debugger.addObject("Drivetrain", new DebuggerFilter(LoggerNames.DRIVETRAIN));
+		Debugger.addObject("Autonomous", new DebuggerFilter(LoggerNames.AUTONOMOUS));
+		Debugger.addObject("Elevator", new DebuggerFilter(LoggerNames.ELEVATOR));
+		
+		*/
+
+		//SmartDashboard.putData("Debugger Filter ", Debugger);
+		displayVersioningOnSmartDashboard();	
 
 		//SmartDashboard.putData("Debugger Filter ", Debugger);
 		//SmartDashboard.putData("Debugger Filter ", Debugger);
@@ -257,6 +279,9 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putNumber("Position Number of Elevator: ", Robot.elevator.getPositionNumber());
 		SmartDashboard.putBoolean("Safety Enabled", Elevator.SAFETY);
 		
+		//Gyro Tracking and debug
+		Robot.driveTrain.trackGyro();
+		SmartDashboard.putNumber("Gyro Angle", Robot.driveTrain.gyroHeading);
 
 		if (cam1available)
 		{
