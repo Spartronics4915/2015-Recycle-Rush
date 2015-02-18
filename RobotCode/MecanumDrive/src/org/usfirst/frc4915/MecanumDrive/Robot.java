@@ -76,9 +76,6 @@ public class Robot extends IterativeRobot {
 	private boolean cam1available = false;
 	private boolean cam0available = false;
 
-
-
-
 	/**
 	 * This function is run when the robot is first started up and should be
 	 * used for any initialization code.
@@ -120,7 +117,7 @@ public class Robot extends IterativeRobot {
 		autonomousProgramChooser.addObject("Autonomous Stacking Strategy", new AutonomousCommandStacking());
 		//autonomousProgramChooser.addObject("Autonomous Two Totes One Container Strategy", new AutonomousCommandTwoTotesOneContainer());
 		//autonomousProgramChooser.addObject("Autonomous Two Container Strategy", new AutonomousCommandTwoContainers());
-
+		
 		SmartDashboard.putString("TEST BUTTON", "button");
 
 		SmartDashboard.putData("Autonomous Program", autonomousProgramChooser);
