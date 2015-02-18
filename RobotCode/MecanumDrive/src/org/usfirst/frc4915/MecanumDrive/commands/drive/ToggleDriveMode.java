@@ -17,16 +17,16 @@ public class ToggleDriveMode extends Command {
     public ToggleDriveMode() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
+    }
+
+    // Called just before this Command runs the first time
+    protected void initialize() {
     	//Robot.debugger.logError(LoggerNames.DRIVETRAIN,"Before Toggling Drive Mode=" + ((Robot.driveTrain.toggleFieldMode()) ? "TRUE" : "FALSE") );
     	System.out.println("Before Toggling Drive Mode=" + ((Robot.driveTrain.toggleFieldMode()) ? "TRUE" : "FALSE"));
     	Robot.driveTrain.toggleFieldMode();
     	//Robot.debugger.logError(LoggerNames.DRIVETRAIN,"After Toggling Drive Mode" + ((Robot.driveTrain.toggleFieldMode()) ? "TRUE" : "FALSE") );
     	System.out.println("After Toggling Drive Mode" + ((Robot.driveTrain.toggleFieldMode()) ? "TRUE" : "FALSE"));
     	SmartDashboard.putBoolean("Field Mode", Robot.driveTrain.fieldMode);
-    }
-
-    // Called just before this Command runs the first time
-    protected void initialize() {
     }
 
     // Called repeatedly when this Command is scheduled to run
