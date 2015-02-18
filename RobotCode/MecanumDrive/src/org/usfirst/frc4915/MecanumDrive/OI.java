@@ -3,6 +3,7 @@ import org.usfirst.frc4915.MecanumDrive.commands.debug.ShowOnly;
 import org.usfirst.frc4915.MecanumDrive.commands.debug.DebuggerFilterReset;
 import org.usfirst.frc4915.MecanumDrive.commands.drive.MoveStraightPositionModeCommand;
 import org.usfirst.frc4915.MecanumDrive.commands.drive.StrafeCommand;
+import org.usfirst.frc4915.MecanumDrive.commands.drive.ToggleDriveMode;
 import org.usfirst.frc4915.MecanumDrive.commands.drive.Turn90Degrees;
 import org.usfirst.frc4915.MecanumDrive.commands.elevator.ElevatorJumpToPosition;
 import org.usfirst.frc4915.MecanumDrive.commands.elevator.ElevatorPositionCalibration;
@@ -134,8 +135,8 @@ public class OI {
 		/*
 		 * TOGGLE FIELD ORIENTED DRIVE
 		 */
-		//SmartDashboard.putData("Toggle Field Drive", new ToggleDriveMode());
-		//SmartDashboard.putBoolean("Field Mode", Robot.driveTrain.fieldMode);
+		SmartDashboard.putData("Toggle Field Drive", new ToggleDriveMode());
+		SmartDashboard.putBoolean("Field Mode", Robot.driveTrain.fieldMode);
 		
 		/*
 		 * GRABBER
@@ -146,7 +147,6 @@ public class OI {
 		 */		
 		SmartDashboard.putData("ElevatorPositionCalibration", new ElevatorPositionCalibration());
 		SmartDashboard.putData("Disable Elevator Safety", new ElevatorSetSafety(false));
-		SmartDashboard.putData("Enable Elevator Safety", new ElevatorSetSafety(true));		
 		SmartDashboard.putData("Enable Elevator Safety", new ElevatorSetSafety(true));
 				
 		/*

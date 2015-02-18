@@ -107,9 +107,7 @@ public class Elevator extends Subsystem {
 	 * first
 	 */
 	public void moveToHeight() {
-		if (SAFETY) {
-			keepHeightInRange();
-		}
+		keepHeightInRange();
 		winch.set(setPoint);
 	}
 	
@@ -215,7 +213,7 @@ public class Elevator extends Subsystem {
 				didSaveTopValue = true;
 			}
 		}
-		else if (isAtBottomOfElevator()) {
+		else if (isAtBottomOfElevator() && SAFETY) {
 			winch.enableBrakeMode(true);
 			minimumPotentiometerValue = getPosition();
 			if (needToApproximate) {
@@ -233,12 +231,13 @@ public class Elevator extends Subsystem {
 			didSaveTopValue = false;
 			didSaveBottomValue = false;
 		}
-
-		keepWinchTight();
-		if (setPoint > maximumPotentiometerValue) {
+		if (SAFETY) {
+			keepWinchTight();
+		}
+		if ((setPoint > maximumPotentiometerValue)) {
 			setPoint = maximumPotentiometerValue - 1;
 		}
-		if (setPoint < minimumPotentiometerValue) {
+		if ((setPoint < minimumPotentiometerValue)) {
 			setPoint = minimumPotentiometerValue; // I'd like to use the +1 to re-fix the winch cable, 
 									// but I'm worried that the cable would automatically get tangled
 		}
