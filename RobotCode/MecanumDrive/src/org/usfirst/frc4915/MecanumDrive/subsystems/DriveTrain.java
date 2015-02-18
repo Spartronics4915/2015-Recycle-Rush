@@ -28,6 +28,9 @@ public class DriveTrain extends Subsystem {
 	public static Ultrasonic distanceSensor = RobotMap.distanceSensor;
 
 	public double throttle = 0;
+	
+	public double deltaGyro = 0;
+	public double gyroHeading = 0;
 	public boolean fieldMode = false; 
 
 	// Put methods for controlling this subsystem
@@ -82,11 +85,11 @@ public class DriveTrain extends Subsystem {
 			debugger.logError(LoggerNames.DRIVETRAIN, ("Stopping Motor"));
 			robotDrive.stopMotor();
 		} else {
-			
-			robotDrive.mecanumDrive_Cartesian(throttleX, throttleY, throttleTwist, 0);
+			debugger.logError(LoggerNames.DRIVETRAIN,"Gyro Angle: " + gyro.getAngle());
+			robotDrive.mecanumDrive_Cartesian(throttleX, throttleY, throttleTwist, gyro.getAngle());
 					//, fieldMode ? gyro.getAngle() : 0);
 		}
-		debugger.logError(LoggerNames.DRIVETRAIN,"Gyro Angle: " + gyro.getAngle());
+		
 
 	}
 	
@@ -183,4 +186,12 @@ public class DriveTrain extends Subsystem {
 	public boolean toggleFieldMode() {
 		return fieldMode = !fieldMode;
     }
+	public double trackGyro() {
+		gyroHeading = gyro.getAngle();
+		
+		debugger.logError(LoggerNames.DRIVETRAIN,"Change in angle: " + deltaGyro);
+		debugger.logError(LoggerNames.DRIVETRAIN, "Robot angle: " + gyroHeading);
+		return gyroHeading;
+		
+	}
 }
