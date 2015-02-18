@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.usfirst.frc4915.MecanumDrive.Robot;
+import org.usfirst.frc4915.MecanumDrive.RobotMap;
+
 import org.usfirst.frc4915.MecanumDrive.subsystems.DriveTrain;
 
 import edu.wpi.first.wpilibj.CANTalon;
@@ -17,6 +19,7 @@ public class Turn90Degrees extends Command {
 	public static List<CANTalon> motors = DriveTrain.motors;
 	private boolean goLeft;
 	public Turn90Degrees(boolean left) {
+		System.out.println("**** Turn 90 construction ****");
     	requires(Robot.driveTrain);  
     	goLeft = left;
     	}
@@ -24,19 +27,26 @@ public class Turn90Degrees extends Command {
     
     // Called just before this Command runs the first time
     protected void initialize() {
-    	
+    	Robot.driveTrain.calibrateGyro();
+    	System.out.println("******************In Turn 90 command initialize ******  " + Robot.driveTrain.trackGyro());
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() { 
     	Robot.driveTrain.turnLeft(goLeft);
+    	System.out.println("******************In Turn 90 command execute ******  " + Robot.driveTrain.trackGyro());
     }
    
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	setTimeout(.7);
-    	return isTimedOut();
+    	if (DriveTrain.gyro != null){
+    		System.out.println("Turn 90: track Gyro "+ Robot.driveTrain.trackGyro());
+    		return (Robot.driveTrain.trackGyro() >= 90);    		
+    	}else{
+    		setTimeout(.7);
+    		return isTimedOut();
+    	}
 	}	
 
     // Called once after isFinished returns true
