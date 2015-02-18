@@ -6,6 +6,9 @@ import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandSta
 import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandToteStrategy;
 import org.usfirst.frc4915.MecanumDrive.commands.drive.StrafeCommand;
 import org.usfirst.frc4915.MecanumDrive.commands.debug.ShowOnly;
+import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandTwoContainers;
+import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandTwoTotesOneContainer;
+//import org.usfirst.frc4915.MecanumDrive.commands.debug.DebuggerFilter;
 import org.usfirst.frc4915.MecanumDrive.commands.drive.ToggleDriveMode;
 import org.usfirst.frc4915.MecanumDrive.subsystems.DriveTrain;
 import org.usfirst.frc4915.MecanumDrive.subsystems.Elevator;
@@ -36,6 +39,7 @@ import com.ni.vision.NIVision.Image;
 
 
 
+
 import edu.wpi.first.wpilibj.CameraServer;
 
 import com.ni.vision.NIVision;
@@ -63,7 +67,7 @@ public class Robot extends IterativeRobot {
 	public static DriveTrain driveTrain;
 	public static Elevator elevator;
 	public static Grabber grabber;
-	public static CustomDebugger debugger;
+	public static CustomDebugger debugger = new CustomDebugger();
 	
 	// vars for camera code
 	private Image frame;
@@ -110,8 +114,11 @@ public class Robot extends IterativeRobot {
 		autonomousProgramChooser.addObject("Autonomous Container Strategy", new AutonomousCommandContainerStrategy());
 		autonomousProgramChooser.addObject("Autonomous Tote Strategy", new AutonomousCommandToteStrategy());
 		autonomousProgramChooser.addObject("Autonomous Stacking Strategy", new AutonomousCommandStacking());
+		//autonomousProgramChooser.addObject("Autonomous Two Totes One Container Strategy", new AutonomousCommandTwoTotesOneContainer());
+		//autonomousProgramChooser.addObject("Autonomous Two Container Strategy", new AutonomousCommandTwoContainers());
 
-		
+		SmartDashboard.putString("TEST BUTTON", "button");
+
 		SmartDashboard.putData("Autonomous Program", autonomousProgramChooser);
 		
 	//	Debugger = new SendableChooser();
@@ -122,6 +129,18 @@ public class Robot extends IterativeRobot {
 	//	Debugger.addObject("Elevator", new ShowOnly(LoggerNames.ELEVATOR));
 		
 	//	SmartDashboard.putData("Debugger Filter", Debugger);
+	/*	
+		Debugger = new SendableChooser();
+		Debugger.addDefault("General", new DebuggerFilter(LoggerNames.GENERAL));
+		Debugger.addObject("Grabber", new DebuggerFilter(LoggerNames.GRABBER));
+		Debugger.addObject("Drivetrain", new DebuggerFilter(LoggerNames.DRIVETRAIN));
+		Debugger.addObject("Autonomous", new DebuggerFilter(LoggerNames.AUTONOMOUS));
+		Debugger.addObject("Elevator", new DebuggerFilter(LoggerNames.ELEVATOR));
+		
+		*/
+
+		//SmartDashboard.putData("Debugger Filter ", Debugger);
+		displayVersioningOnSmartDashboard();	
 
 		//SmartDashboard.putData("Debugger Filter ", Debugger);
 		//SmartDashboard.putData("Debugger Filter ", Debugger);
