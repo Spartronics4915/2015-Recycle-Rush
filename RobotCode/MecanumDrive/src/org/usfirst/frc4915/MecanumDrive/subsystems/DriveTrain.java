@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj.CANTalon.ControlMode;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class DriveTrain extends Subsystem {
 
@@ -78,6 +79,11 @@ public class DriveTrain extends Subsystem {
 		double throttleX = throttle*joystickX;
 		double throttleY = throttle*joystickY;
 		double throttleTwist = throttle*joystickTwist;
+		
+		//Gyro Tracking and debug
+		Robot.driveTrain.trackGyro();
+		SmartDashboard.putNumber("Gyro Angle", Robot.driveTrain.gyroHeading);
+
 
 		debugger.logError(LoggerNames.DRIVETRAIN, ("Joystick: "+ joystickX + ", " + joystickY + ", " + joystickTwist));
 		debugger.logError(LoggerNames.DRIVETRAIN, ("Throttle: "+ throttleX + ", " + throttleY + ", " + throttleTwist));
@@ -88,6 +94,8 @@ public class DriveTrain extends Subsystem {
 			debugger.logError(LoggerNames.DRIVETRAIN,"Gyro Angle: " + gyro.getAngle());
 			robotDrive.mecanumDrive_Cartesian(throttleX, throttleY, throttleTwist, 0);
 					//, fieldMode ? gyro.getAngle() : 0);
+
+			robotDrive.mecanumDrive_Cartesian(throttleX, throttleY, throttleTwist, fieldMode == true ? gyroHeading : 0);
 		}
 		
 
@@ -122,10 +130,10 @@ public class DriveTrain extends Subsystem {
 			CANTalon motor = motors.get(i);	
 			RobotMap.changeControlMode(ControlMode.Speed);
 			if (left){
-				robotDrive.mecanumDrive_Cartesian(0, 0, -.7, 0);
+				robotDrive.mecanumDrive_Cartesian(0, 0, -.5, 0);
 			}
 			else {
-				robotDrive.mecanumDrive_Cartesian(0, 0, .7, 0);
+				robotDrive.mecanumDrive_Cartesian(0, 0, .5, 0);
 			}
 			}
 //			if ( i == 0 || i == 1) {
@@ -166,8 +174,6 @@ public class DriveTrain extends Subsystem {
 		return motor.getSpeed() * elapsed / ticksPerRevolution * circumferenceOfWheel / inchesPerFoot;
 	}
 
-	// TODO Make a method that displays the speed of a motor
-
 	/**
 	 * Drives like ATLaS. Forward/Back for straight and backwards, and left right to spin in place.
 	 * @param stick used to control the DriveTrain.
@@ -184,14 +190,15 @@ public class DriveTrain extends Subsystem {
 	 * @return what mode it is in - true for field mode.
 	 */
 	public boolean toggleFieldMode() {
-		return fieldMode = !fieldMode;
+		fieldMode = !fieldMode;
+		return fieldMode;
     }
+
 	public double trackGyro() {
-		gyroHeading = -1*gyro.getAngle();
+		gyroHeading = -gyro.getAngle();
 		
 		debugger.logError(LoggerNames.DRIVETRAIN,"Change in angle: " + deltaGyro);
 		debugger.logError(LoggerNames.DRIVETRAIN, "Robot angle: " + gyroHeading);
 		return gyroHeading;
-		
-	}
+			}
 }
