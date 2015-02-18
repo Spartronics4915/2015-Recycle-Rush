@@ -122,10 +122,10 @@ public class DriveTrain extends Subsystem {
 			CANTalon motor = motors.get(i);	
 			RobotMap.changeControlMode(ControlMode.Speed);
 			if (left){
-				robotDrive.mecanumDrive_Cartesian(0, 0, -.7, 0);
+				robotDrive.mecanumDrive_Cartesian(0, 0, -.5, 0);
 			}
 			else {
-				robotDrive.mecanumDrive_Cartesian(0, 0, .7, 0);
+				robotDrive.mecanumDrive_Cartesian(0, 0, .5, 0);
 			}
 			}
 //			if ( i == 0 || i == 1) {

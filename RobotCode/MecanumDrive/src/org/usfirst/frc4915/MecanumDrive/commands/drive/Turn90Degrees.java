@@ -19,6 +19,7 @@ public class Turn90Degrees extends Command {
 	public static List<CANTalon> motors = DriveTrain.motors;
 	private boolean goLeft;
 	public Turn90Degrees(boolean left) {
+		System.out.println("**** Turn 90 construction ****");
     	requires(Robot.driveTrain);  
     	goLeft = left;
     	}
@@ -27,11 +28,13 @@ public class Turn90Degrees extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	Robot.driveTrain.calibrateGyro();
+    	System.out.println("******************In Turn 90 command initialize ******  " + Robot.driveTrain.trackGyro());
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() { 
     	Robot.driveTrain.turnLeft(goLeft);
+    	System.out.println("******************In Turn 90 command execute ******  " + Robot.driveTrain.trackGyro());
     }
    
 
