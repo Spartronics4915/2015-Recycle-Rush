@@ -85,11 +85,11 @@ public class DriveTrain extends Subsystem {
 			debugger.logError(LoggerNames.DRIVETRAIN, ("Stopping Motor"));
 			robotDrive.stopMotor();
 		} else {
-			
-			robotDrive.mecanumDrive_Cartesian(throttleX, throttleY, throttleTwist, 0);
+			debugger.logError(LoggerNames.DRIVETRAIN,"Gyro Angle: " + gyro.getAngle());
+			robotDrive.mecanumDrive_Cartesian(throttleX, throttleY, throttleTwist, gyro.getAngle());
 					//, fieldMode ? gyro.getAngle() : 0);
 		}
-		debugger.logError(LoggerNames.DRIVETRAIN,"Gyro Angle: " + gyro.getAngle());
+		
 
 	}
 	
