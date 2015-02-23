@@ -83,7 +83,7 @@ public class DriveTrain extends Subsystem {
 		
 		//Gyro Tracking and debug
 		Robot.driveTrain.trackGyro();
-		SmartDashboard.putNumber("Gyro Angle", Robot.driveTrain.gyroHeading);
+		SmartDashboard.putNumber("Gyro Angle", Robot.driveTrain.gyroHeading % 360);
 
 
 		debugger.logError(LoggerNames.DRIVETRAIN, ("Joystick: "+ joystickX + ", " + joystickY + ", " + joystickTwist));
