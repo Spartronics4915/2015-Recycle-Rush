@@ -32,6 +32,7 @@ public class DriveTrain extends Subsystem {
 	
 	public double deltaGyro = 0;
 	public double gyroHeading = 0;
+	public double startingAngle = 0;
 	public boolean fieldMode = false; 
 
 	// Put methods for controlling this subsystem
@@ -195,7 +196,7 @@ public class DriveTrain extends Subsystem {
     }
 
 	public double trackGyro() {
-		gyroHeading = -gyro.getAngle();
+		gyroHeading = -gyro.getAngle()+startingAngle;
 		
 		debugger.logError(LoggerNames.DRIVETRAIN,"Change in angle: " + deltaGyro);
 		debugger.logError(LoggerNames.DRIVETRAIN, "Robot angle: " + gyroHeading);
