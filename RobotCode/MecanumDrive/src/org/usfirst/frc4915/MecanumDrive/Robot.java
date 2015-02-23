@@ -118,8 +118,6 @@ public class Robot extends IterativeRobot {
 		//autonomousProgramChooser.addObject("Autonomous Two Totes One Container Strategy", new AutonomousCommandTwoTotesOneContainer());
 		//autonomousProgramChooser.addObject("Autonomous Two Container Strategy", new AutonomousCommandTwoContainers());
 		
-		SmartDashboard.putString("TEST BUTTON", "button");
-
 		SmartDashboard.putData("Autonomous Program", autonomousProgramChooser);
 		
 	//	Debugger = new SendableChooser();
@@ -225,7 +223,6 @@ public class Robot extends IterativeRobot {
 		Elevator.didSaveTopValue = false;
 		Elevator.didSaveBottomValue = false;
 
-		SmartDashboard.putData("Toggle Field Drive", new ToggleDriveMode());
 		SmartDashboard.putBoolean("Field Mode", Robot.driveTrain.fieldMode);
 
 		// Init camera
@@ -269,7 +266,7 @@ public class Robot extends IterativeRobot {
 		Scheduler.getInstance().run();
 		
 		// Elevator debug information
-		SmartDashboard.putNumber("Elevator SetPoint", Elevator.setPoint);
+		SmartDashboard.putNumber("Elevator SetPoint", Elevator.setPoint); // We may not need this one
 		SmartDashboard.putBoolean("Elevator At Top", elevator.isAtTopOfElevator());
 		SmartDashboard.putBoolean("Elevator At Bottom", elevator.isAtBottomOfElevator());
 		SmartDashboard.putBoolean("Elevator is Slack", elevator.elevatorIsSlack());

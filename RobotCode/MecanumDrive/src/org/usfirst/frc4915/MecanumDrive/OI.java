@@ -60,6 +60,12 @@ public class OI {
 	public Joystick driveStick;
 	public Joystick elevatorStick;
 	
+	
+	/*
+	 * JOYSTICK BUTTONS (DRIVER)
+	 */
+	public JoystickButton toggleFieldDrive;
+	
 	/*
 	 * JOYSTICK BUTTONS (ELEVATOR)
 	 */
@@ -111,7 +117,7 @@ public class OI {
 		grabberOpen.whenPressed(new OpenGrabber());
 		grabberClosed = new JoystickButton(elevatorStick, 2);
 		grabberClosed.whenPressed(new CloseGrabber());
-		grabberIntermediate = new JoystickButton(elevatorStick, 4);
+		grabberIntermediate = new JoystickButton(elevatorStick, 5);
 		grabberIntermediate.whenPressed(new IntermediateOpen());
 		
 		/*
@@ -124,7 +130,7 @@ public class OI {
 		/*
 		 * DRIVE STRAIGHT
 		 */
-		SmartDashboard.putData("Turn 90 Degrees left", new Turn90Degrees(true));
+		// SmartDashboard.putData("Turn 90 Degrees left", new Turn90Degrees(true));
 //
 //		SmartDashboard.putData("Move Straight 5 feet", new MoveStraightPositionModeCommand(5,0.7));
 //		SmartDashboard.putData("Strafe 1.9 feet", new StrafeCommand(1.9, 0.7));
@@ -135,12 +141,10 @@ public class OI {
 		/*
 		 * TOGGLE FIELD ORIENTED DRIVE
 		 */
-		SmartDashboard.putData("Toggle Field Drive", new ToggleDriveMode());
+		toggleFieldDrive = new JoystickButton(driveStick, 11);
+		toggleFieldDrive.whenPressed(new ToggleDriveMode());
+		//SmartDashboard.putData("Toggle Field Drive", new ToggleDriveMode());
 		SmartDashboard.putBoolean("Field Mode", Robot.driveTrain.fieldMode);
-		
-		/*
-		 * GRABBER
-		 */
 		
 		/*
 		 * ELEVATOR
@@ -175,10 +179,10 @@ public class OI {
 		 * CODE VERSION OUTPUT
 		 */
 
-
+/*
 		SmartDashboard.putString("Code Version", VersionFinder.getAttribute(this, VersionFinder.VERSION_ATTRIBUTE));
 		SmartDashboard.putString("Code Built By", VersionFinder.getAttribute(this, VersionFinder.BUILT_BY_ATTRIBUTE));
 		SmartDashboard.putString("Code Built At", VersionFinder.getAttribute(this, VersionFinder.BUILT_AT_ATTRIBUTE));
-
+*/
 	}
 }
