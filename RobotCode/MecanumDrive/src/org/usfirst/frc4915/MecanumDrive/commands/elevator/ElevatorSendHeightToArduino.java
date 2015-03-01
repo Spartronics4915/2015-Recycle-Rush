@@ -8,12 +8,12 @@ import org.usfirst.frc4915.MecanumDrive.subsystems.Elevator;
 
 import java.math.BigInteger;
 
-public class SendHeightOfElevatorToArduino extends Command {
+public class ElevatorSendHeightToArduino extends Command {
 
     I2C wire = RobotMap.wire;
     Elevator elevator = Robot.elevator;
 
-    public SendHeightOfElevatorToArduino() {
+    public ElevatorSendHeightToArduino() {
         requires(Robot.elevator);
     }
 
