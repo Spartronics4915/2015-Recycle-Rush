@@ -5,11 +5,11 @@ import org.usfirst.frc4915.MecanumDrive.Robot;
 import org.usfirst.frc4915.MecanumDrive.subsystems.Elevator;
 import org.usfirst.frc4915.debuggersystem.CustomDebugger.LoggerNames;
 
-public class ElevatorPositionCalibration extends CommandGroup {
+public class ElevatorPositionCalibrationCommand extends CommandGroup {
 
     Elevator elevator = Robot.elevator;
 
-    public ElevatorPositionCalibration() {
+    public ElevatorPositionCalibrationCommand() {
         // Add Commands here:
         // e.g. addSequential(new Command1());
         // addSequential(new Command2());
@@ -26,10 +26,10 @@ public class ElevatorPositionCalibration extends CommandGroup {
         // e.g. if Command1 requires chassis, and Command2 requires arm,
         // a CommandGroup containing them would require both the chassis and the
         // arm.
-        Robot.debugger.logError(LoggerNames.ELEVATOR, "ElevatorPositionCalibration Running");
-        addParallel(new ElevatorMoveToHeight());
-        addSequential(new ElevatorMinHeightCalibrate());
-        addSequential(new ElevatorMaxHeightCalibrate());
-        addSequential(new ElevatorStop());
+        Robot.debugger.logError(LoggerNames.ELEVATOR, "ElevatorPositionCalibrationCommand Running");
+        addParallel(new ElevatorMoveToHeightCommand());
+        addSequential(new ElevatorMinHeightCalibrateCommand());
+        addSequential(new ElevatorMaxHeightCalibrateCommand());
+        addSequential(new ElevatorStopCommand());
     }
 }

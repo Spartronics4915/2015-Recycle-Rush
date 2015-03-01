@@ -4,11 +4,11 @@ import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc4915.MecanumDrive.Robot;
 import org.usfirst.frc4915.debuggersystem.CustomDebugger;
 
-public class IntermediateOpen extends Command {
+public class OpenGrabberCommand extends Command {
 
     private boolean finished = false;
 
-    public IntermediateOpen() {
+    public OpenGrabberCommand() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
         requires(Robot.grabber);
@@ -16,13 +16,13 @@ public class IntermediateOpen extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-        Robot.debugger.logError(CustomDebugger.LoggerNames.GRABBER, "Releasing");
+        Robot.debugger.logError(CustomDebugger.LoggerNames.GRABBER, "Opening");
         finished = false;
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        Robot.grabber.secondaryOn();
+        Robot.grabber.secondaryOff();
         Robot.grabber.primaryOff();
         finished = true;
     }

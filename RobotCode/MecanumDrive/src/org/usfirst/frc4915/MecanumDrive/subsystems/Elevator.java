@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import org.usfirst.frc4915.MecanumDrive.Robot;
 import org.usfirst.frc4915.MecanumDrive.RobotMap;
-import org.usfirst.frc4915.MecanumDrive.commands.elevator.ElevatorFineTune;
+import org.usfirst.frc4915.MecanumDrive.commands.elevator.ElevatorFineTuneCommand;
 import org.usfirst.frc4915.debuggersystem.CustomDebugger.LoggerNames;
 
 public class Elevator extends Subsystem {
@@ -46,7 +46,7 @@ public class Elevator extends Subsystem {
      * initialization of the subsystem
      */
     public void initDefaultCommand() {
-        setDefaultCommand(new ElevatorFineTune());
+        setDefaultCommand(new ElevatorFineTuneCommand());
         // Set the default command for a subsystem here.
         // setDefaultCommand(new MySpecialCommand());
     }

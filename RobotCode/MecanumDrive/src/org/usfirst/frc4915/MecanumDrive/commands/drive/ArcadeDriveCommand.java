@@ -3,9 +3,9 @@ package org.usfirst.frc4915.MecanumDrive.commands.drive;
 import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc4915.MecanumDrive.Robot;
 
-public class ArcadeDrive extends Command {
+public class ArcadeDriveCommand extends Command {
 
-    public ArcadeDrive() {
+    public ArcadeDriveCommand() {
         // Use requires() here to declare subsystem dependencies
         requires(Robot.driveTrain);
     }

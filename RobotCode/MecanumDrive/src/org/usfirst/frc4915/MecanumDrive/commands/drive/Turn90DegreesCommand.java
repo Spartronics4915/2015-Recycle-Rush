@@ -11,11 +11,11 @@ import java.util.List;
 /**
  *
  */
-public class Turn90Degrees extends Command {
+public class Turn90DegreesCommand extends Command {
     public static List<CANTalon> motors = DriveTrain.motors;
     private boolean goLeft;
 
-    public Turn90Degrees(boolean left) {
+    public Turn90DegreesCommand(boolean left) {
         System.out.println("**** Turn 90 construction ****");
         requires(Robot.driveTrain);
         goLeft = left;

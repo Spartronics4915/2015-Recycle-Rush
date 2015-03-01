@@ -1,20 +1,22 @@
-package org.usfirst.frc4915.MecanumDrive.commands.elevator;
+package org.usfirst.frc4915.MecanumDrive.commands.grabber;
 
 import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc4915.MecanumDrive.Robot;
-import org.usfirst.frc4915.MecanumDrive.subsystems.Elevator;
+import org.usfirst.frc4915.debuggersystem.CustomDebugger;
 
-public class ElevatorStop extends Command {
+public class CloseGrabberCommand extends Command {
 
-    Elevator elevator = Robot.elevator;
-
-    public ElevatorStop() {
-        requires(elevator);
+    public CloseGrabberCommand() {
+        // Use requires() here to declare subsystem dependencies
+        // eg. requires(chassis);
+        requires(Robot.grabber);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-        elevator.stopElevator();
+        Robot.debugger.logError(CustomDebugger.LoggerNames.GRABBER, "Closing");
+        Robot.grabber.secondaryOff();
+        Robot.grabber.primaryOn();
     }
 
     // Called repeatedly when this Command is scheduled to run

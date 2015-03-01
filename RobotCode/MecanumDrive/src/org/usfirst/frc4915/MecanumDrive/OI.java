@@ -4,13 +4,13 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import org.usfirst.frc4915.MecanumDrive.commands.drive.ToggleDriveMode;
-import org.usfirst.frc4915.MecanumDrive.commands.elevator.ElevatorJumpToPosition;
-import org.usfirst.frc4915.MecanumDrive.commands.elevator.ElevatorPositionCalibration;
-import org.usfirst.frc4915.MecanumDrive.commands.elevator.ElevatorSetSafety;
-import org.usfirst.frc4915.MecanumDrive.commands.grabber.CloseGrabber;
-import org.usfirst.frc4915.MecanumDrive.commands.grabber.IntermediateOpen;
-import org.usfirst.frc4915.MecanumDrive.commands.grabber.OpenGrabber;
+import org.usfirst.frc4915.MecanumDrive.commands.drive.ToggleDriveModeCommand;
+import org.usfirst.frc4915.MecanumDrive.commands.elevator.ElevatorJumpToPositionCommand;
+import org.usfirst.frc4915.MecanumDrive.commands.elevator.ElevatorPositionCalibrationCommand;
+import org.usfirst.frc4915.MecanumDrive.commands.elevator.ElevatorSetSafetyCommand;
+import org.usfirst.frc4915.MecanumDrive.commands.grabber.CloseGrabberCommand;
+import org.usfirst.frc4915.MecanumDrive.commands.grabber.IntermediateOpenGrabberCommand;
+import org.usfirst.frc4915.MecanumDrive.commands.grabber.OpenGrabberCommand;
 import org.usfirst.frc4915.MecanumDrive.subsystems.DriveTrain;
 
 /**
@@ -90,15 +90,15 @@ public class OI {
 
 
         elevatorJumpToPositionZero = new JoystickButton(elevatorStick, 6);
-        elevatorJumpToPositionZero.whenPressed(new ElevatorJumpToPosition(0));
+        elevatorJumpToPositionZero.whenPressed(new ElevatorJumpToPositionCommand(0));
         elevatorJumpToPositionOne = new JoystickButton(elevatorStick, 7);
-        elevatorJumpToPositionOne.whenPressed(new ElevatorJumpToPosition(1));
+        elevatorJumpToPositionOne.whenPressed(new ElevatorJumpToPositionCommand(1));
         elevatorJumpToPositionTwo = new JoystickButton(elevatorStick, 8);
-        elevatorJumpToPositionTwo.whenPressed(new ElevatorJumpToPosition(2));
+        elevatorJumpToPositionTwo.whenPressed(new ElevatorJumpToPositionCommand(2));
         elevatorJumpToPositionThree = new JoystickButton(elevatorStick, 9);
-        elevatorJumpToPositionThree.whenPressed(new ElevatorJumpToPosition(3));
+        elevatorJumpToPositionThree.whenPressed(new ElevatorJumpToPositionCommand(3));
         elevatorJumpToPositionFour = new JoystickButton(elevatorStick, 10);
-        elevatorJumpToPositionFour.whenPressed(new ElevatorJumpToPosition(4));
+        elevatorJumpToPositionFour.whenPressed(new ElevatorJumpToPositionCommand(4));
 		
 		
 		/*
@@ -106,11 +106,11 @@ public class OI {
 		 */
 
         grabberOpen = new JoystickButton(elevatorStick, 3);
-        grabberOpen.whenPressed(new OpenGrabber());
+        grabberOpen.whenPressed(new OpenGrabberCommand());
         grabberClosed = new JoystickButton(elevatorStick, 2);
-        grabberClosed.whenPressed(new CloseGrabber());
+        grabberClosed.whenPressed(new CloseGrabberCommand());
         grabberIntermediate = new JoystickButton(elevatorStick, 5);
-        grabberIntermediate.whenPressed(new IntermediateOpen());
+        grabberIntermediate.whenPressed(new IntermediateOpenGrabberCommand());
 		
 		/*
 		 /*
@@ -122,40 +122,40 @@ public class OI {
 		/*
 		 * DRIVE STRAIGHT
 		 */
-        // SmartDashboard.putData("Turn 90 Degrees left", new Turn90Degrees(true));
+        // SmartDashboard.putData("Turn 90 Degrees left", new Turn90DegreesCommand(true));
 //
 //		SmartDashboard.putData("Move Straight 5 feet", new MoveStraightPositionModeCommand(5,0.7));
 //		SmartDashboard.putData("Strafe 1.9 feet", new StrafeCommand(1.9, 0.7));
         //SmartDashboard.putData("Move Backwards 3 feet", new MoveStraightPositionModeCommand(-3, 0.7));
-        //SmartDashboard.putData("DriveStraight 1 second", new DriveStraight());
+        //SmartDashboard.putData("DriveStraight 1 second", new DriveStraightCommand());
 
 		
 		/*
 		 * TOGGLE FIELD ORIENTED DRIVE
 		 */
         toggleFieldDrive = new JoystickButton(driveStick, 11);
-        toggleFieldDrive.whenPressed(new ToggleDriveMode());
-        //SmartDashboard.putData("Toggle Field Drive", new ToggleDriveMode());
+        toggleFieldDrive.whenPressed(new ToggleDriveModeCommand());
+        //SmartDashboard.putData("Toggle Field Drive", new ToggleDriveModeCommand());
         SmartDashboard.putBoolean("Field Mode", Robot.driveTrain.fieldMode);
 		
 		/*
 		 * ELEVATOR
 		 */
-        SmartDashboard.putData("ElevatorPositionCalibration", new ElevatorPositionCalibration());
-        SmartDashboard.putData("Disable Elevator Safety", new ElevatorSetSafety(false));
-        SmartDashboard.putData("Enable Elevator Safety", new ElevatorSetSafety(true));
+        SmartDashboard.putData("ElevatorPositionCalibrationCommand", new ElevatorPositionCalibrationCommand());
+        SmartDashboard.putData("Disable Elevator Safety", new ElevatorSetSafetyCommand(false));
+        SmartDashboard.putData("Enable Elevator Safety", new ElevatorSetSafetyCommand(true));
 				
 		/*
 		 * DEBUGGER BUTTONS
 		 */
 
 
-//		SmartDashboard.putData("Set debugger to drivetrain", new ShowOnly(LoggerNames.DRIVETRAIN));
-//		SmartDashboard.putData("Set debugger to grabber", new ShowOnly(LoggerNames.GRABBER));
-//		SmartDashboard.putData("Set debugger to general", new ShowOnly(LoggerNames.GENERAL));
-//		SmartDashboard.putData("Set debugger to autonomous", new ShowOnly(LoggerNames.AUTONOMOUS));
-//		SmartDashboard.putData("Set debugger to elevator", new ShowOnly(LoggerNames.ELEVATOR));
-//		SmartDashboard.putData("Reset debugger filter", new DebuggerFilterReset());
+//		SmartDashboard.putData("Set debugger to drivetrain", new DebuggerShowOnlyCommand(LoggerNames.DRIVETRAIN));
+//		SmartDashboard.putData("Set debugger to grabber", new DebuggerShowOnlyCommand(LoggerNames.GRABBER));
+//		SmartDashboard.putData("Set debugger to general", new DebuggerShowOnlyCommand(LoggerNames.GENERAL));
+//		SmartDashboard.putData("Set debugger to autonomous", new DebuggerShowOnlyCommand(LoggerNames.AUTONOMOUS));
+//		SmartDashboard.putData("Set debugger to elevator", new DebuggerShowOnlyCommand(LoggerNames.ELEVATOR));
+//		SmartDashboard.putData("Reset debugger filter", new DebuggerFilterResetCommand());
 		
 
 		/*

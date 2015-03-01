@@ -1,26 +1,21 @@
-package org.usfirst.frc4915.MecanumDrive.commands.grabber;
+package org.usfirst.frc4915.MecanumDrive.commands.debug;
 
 import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc4915.MecanumDrive.Robot;
-import org.usfirst.frc4915.debuggersystem.CustomDebugger;
 
-public class CloseGrabber extends Command {
-
-    public CloseGrabber() {
+public class DebuggerFilterResetCommand extends Command {
+    public DebuggerFilterResetCommand() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-        requires(Robot.grabber);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-        Robot.debugger.logError(CustomDebugger.LoggerNames.GRABBER, "Closing");
-        Robot.grabber.secondaryOff();
-        Robot.grabber.primaryOn();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+        Robot.debugger.resetFilter();
     }
 
     // Make this return true when this Command no longer needs to run execute()

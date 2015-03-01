@@ -2,35 +2,38 @@ package org.usfirst.frc4915.MecanumDrive.commands.elevator;
 
 import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc4915.MecanumDrive.Robot;
-import org.usfirst.frc4915.MecanumDrive.subsystems.Elevator;
-import org.usfirst.frc4915.debuggersystem.CustomDebugger.LoggerNames;
 
-public class ElevatorMaxHeightCalibrate extends Command {
+/**
+ *
+ */
+public class ElevatorSetSafetyCommand extends Command {
 
-    Elevator elevator = Robot.elevator;
+    private boolean safety;
 
-    public ElevatorMaxHeightCalibrate() {
+    public ElevatorSetSafetyCommand(boolean value) {
         // DON'T require Robot.elevator
+        safety = value;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
+        Robot.elevator.SAFETY = safety;
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        Elevator.setPoint = 1023; // Through experimentation, the maximum is closer to 973
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return elevator.isAtTopOfElevator();
+        return true;
     }
 
     // Called once after isFinished returns true
     protected void end() {
-        Elevator.maximumPotentiometerValue = elevator.getPositionInches();
-        Robot.debugger.logError(LoggerNames.ELEVATOR, "Maximum position value " + Elevator.maximumPotentiometerValue);
+        Robot.elevator.SAFETY = safety;
+        Robot.elevator.minimumPotentiometerValue = 0;
+        Robot.elevator.maximumPotentiometerValue = 1023;
     }
 
     // Called when another command which requires one or more of the same

@@ -20,7 +20,7 @@ import org.usfirst.frc4915.MecanumDrive.utility.VersionFinder;
 import org.usfirst.frc4915.debuggersystem.CustomDebugger;
 import org.usfirst.frc4915.debuggersystem.CustomDebugger.LoggerNames;
 
-//import org.usfirst.frc4915.MecanumDrive.commands.debug.DebuggerFilter;
+//import org.usfirst.frc4915.MecanumDriveCommand.commands.debug.DebuggerFilter;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -95,11 +95,11 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putData("Autonomous Program", autonomousProgramChooser);
 
         //	Debugger = new SendableChooser();
-        //	Debugger.addDefault("General", new ShowOnly(LoggerNames.GENERAL));
-        //	Debugger.addObject("Grabber", new ShowOnly(LoggerNames.GRABBER));
-        //	Debugger.addObject("Drivetrain", new ShowOnly(LoggerNames.DRIVETRAIN));
-        //	Debugger.addObject("Autonomous", new ShowOnly(LoggerNames.AUTONOMOUS));
-        //	Debugger.addObject("Elevator", new ShowOnly(LoggerNames.ELEVATOR));
+        //	Debugger.addDefault("General", new DebuggerShowOnlyCommand(LoggerNames.GENERAL));
+        //	Debugger.addObject("Grabber", new DebuggerShowOnlyCommand(LoggerNames.GRABBER));
+        //	Debugger.addObject("Drivetrain", new DebuggerShowOnlyCommand(LoggerNames.DRIVETRAIN));
+        //	Debugger.addObject("Autonomous", new DebuggerShowOnlyCommand(LoggerNames.AUTONOMOUS));
+        //	Debugger.addObject("Elevator", new DebuggerShowOnlyCommand(LoggerNames.ELEVATOR));
 
         //	SmartDashboard.putData("Debugger Filter", Debugger);
     /*

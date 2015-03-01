@@ -1,44 +1,38 @@
-package org.usfirst.frc4915.MecanumDrive.commands.drive;
+package org.usfirst.frc4915.MecanumDrive.commands.debug;
 
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc4915.MecanumDrive.Robot;
-import org.usfirst.frc4915.debuggersystem.CustomDebugger;
 import org.usfirst.frc4915.debuggersystem.CustomDebugger.LoggerNames;
 
-public class MecanumDrive extends Command {
-    CustomDebugger debugger;
+public class DebuggerShowOnlyCommand extends Command {
+    private LoggerNames name;
 
-    public MecanumDrive() {
+    public DebuggerShowOnlyCommand(LoggerNames name) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-        requires(Robot.driveTrain);
+        this.name = name;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-        Robot.debugger.logError(LoggerNames.DRIVETRAIN, "Starting MecanumDrive Command");
+        Robot.debugger.setFilter(name);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        Joystick joystickDrive = Robot.oi.driveStick;
-        Robot.driveTrain.mecanumDrive(joystickDrive);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return true;
     }
 
     // Called once after isFinished returns true
     protected void end() {
-        Robot.driveTrain.getRobotDrive().stopMotor();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-        end();
     }
 }

@@ -9,7 +9,7 @@ import org.usfirst.frc4915.MecanumDrive.RobotMap;
  * A test using the accelerometer to determine the distance traveled
  * provides constant feedback of distance traveled very time execute is called
  */
-public class TestDistanceCalculations extends Command {
+public class TestDistanceCalculationsCommand extends Command {
 
     double previousAccelerationX;
     double currentAccelerationX;
@@ -34,7 +34,7 @@ public class TestDistanceCalculations extends Command {
 
     BuiltInAccelerometer accelerometer = RobotMap.accelerometer;
 
-    public TestDistanceCalculations() {
+    public TestDistanceCalculationsCommand() {
         requires(Robot.driveTrain);
     }
 

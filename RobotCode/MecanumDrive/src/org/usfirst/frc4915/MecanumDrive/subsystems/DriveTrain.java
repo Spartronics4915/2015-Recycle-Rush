@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc4915.MecanumDrive.Robot;
 import org.usfirst.frc4915.MecanumDrive.RobotMap;
-import org.usfirst.frc4915.MecanumDrive.commands.drive.MecanumDrive;
+import org.usfirst.frc4915.MecanumDrive.commands.drive.MecanumDriveCommand;
 import org.usfirst.frc4915.debuggersystem.CustomDebugger;
 import org.usfirst.frc4915.debuggersystem.CustomDebugger.LoggerNames;
 
@@ -30,7 +30,7 @@ public class DriveTrain extends Subsystem {
     // here. Call these from Commands.
 
     public void initDefaultCommand() {
-        setDefaultCommand(new MecanumDrive());
+        setDefaultCommand(new MecanumDriveCommand());
 
         // Set the default command for a subsystem here.
         // setDefaultCommand(new MySpecialCommand());

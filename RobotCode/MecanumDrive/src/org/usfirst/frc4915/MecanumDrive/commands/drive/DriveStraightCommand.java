@@ -4,9 +4,9 @@ import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc4915.MecanumDrive.Robot;
 import org.usfirst.frc4915.debuggersystem.CustomDebugger;
 
-public class DriveStraight extends Command {
+public class DriveStraightCommand extends Command {
 
-    public DriveStraight() {
+    public DriveStraightCommand() {
         // Use requires() here to declare subsystem dependencies
         requires(Robot.driveTrain);
         setTimeout(1);
