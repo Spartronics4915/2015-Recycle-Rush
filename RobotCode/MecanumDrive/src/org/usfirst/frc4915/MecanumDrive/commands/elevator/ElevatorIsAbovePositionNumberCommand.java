@@ -3,9 +3,6 @@ package org.usfirst.frc4915.MecanumDrive.commands.elevator;
 import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc4915.MecanumDrive.Robot;
 
-/**
- *
- */
 public class ElevatorIsAbovePositionNumberCommand extends Command {
 
     private double posNumber;

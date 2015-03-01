@@ -4,9 +4,6 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc4915.MecanumDrive.Robot;
 
-/**
- *
- */
 
 
 public class ToggleDriveModeCommand extends Command {

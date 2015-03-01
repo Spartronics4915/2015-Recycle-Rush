@@ -8,9 +8,6 @@ import org.usfirst.frc4915.MecanumDrive.subsystems.DriveTrain;
 import java.util.List;
 
 
-/**
- *
- */
 public class Turn90DegreesCommand extends Command {
     public static List<CANTalon> motors = DriveTrain.motors;
     private boolean goLeft;
