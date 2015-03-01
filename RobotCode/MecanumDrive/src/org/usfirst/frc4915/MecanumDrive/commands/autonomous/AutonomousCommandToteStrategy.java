@@ -54,6 +54,5 @@ public class AutonomousCommandToteStrategy extends CommandGroup {
         addSequential(new ElevatorIsBelowPositionNumberCommand(.5), 2);
         addSequential(new OpenGrabberCommand());
 
-
     }
 }

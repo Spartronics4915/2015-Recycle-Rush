@@ -7,7 +7,6 @@ import org.usfirst.frc4915.MecanumDrive.subsystems.DriveTrain;
 
 import java.util.List;
 
-
 public class Turn90DegreesCommand extends Command {
     public static List<CANTalon> motors = DriveTrain.motors;
     private boolean goLeft;
@@ -17,7 +16,6 @@ public class Turn90DegreesCommand extends Command {
         requires(Robot.driveTrain);
         goLeft = left;
     }
-
 
     // Called just before this Command runs the first time
     protected void initialize() {
@@ -30,7 +28,6 @@ public class Turn90DegreesCommand extends Command {
         Robot.driveTrain.turnLeft(goLeft);
         System.out.println("******************In Turn 90 command execute ******  " + Robot.driveTrain.trackGyro());
     }
-
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {

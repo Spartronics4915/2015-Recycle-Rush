@@ -103,7 +103,7 @@ public class Robot extends IterativeRobot {
 
         //	SmartDashboard.putData("Debugger Filter", Debugger);
     /*
-		Debugger = new SendableChooser();
+        Debugger = new SendableChooser();
 		Debugger.addDefault("General", new DebuggerFilter(LoggerNames.GENERAL));
 		Debugger.addObject("Grabber", new DebuggerFilter(LoggerNames.GRABBER));
 		Debugger.addObject("Drivetrain", new DebuggerFilter(LoggerNames.DRIVETRAIN));
@@ -250,7 +250,6 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putNumber("Position Number of Elevator: ", Robot.elevator.getPositionNumber());
         SmartDashboard.putBoolean("Safety Enabled", Elevator.SAFETY);
 
-
         if (cam1available) {
             cameragrab(session1);
         } else if (cam0available) {
@@ -268,7 +267,6 @@ public class Robot extends IterativeRobot {
     public void testInit() {
         // Init camera
         frame = NIVision.imaqCreateImage(NIVision.ImageType.IMAGE_RGB, 0);
-
 
         // the camera name (ex "cam0") can be found through the roborio web interface
         try {

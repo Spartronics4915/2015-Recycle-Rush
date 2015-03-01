@@ -18,6 +18,7 @@ public class MoveStraightGivenDistanceCommand extends Command {
     double distance;
     double distanceSinceElapsed;
     private DriveTrain driveTrain = Robot.driveTrain;
+
     public MoveStraightGivenDistanceCommand(double inputDistance, double speed) {
         requires(driveTrain);
         this.inputDistance = inputDistance;

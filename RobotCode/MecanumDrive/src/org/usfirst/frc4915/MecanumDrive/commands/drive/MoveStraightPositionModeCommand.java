@@ -94,7 +94,6 @@ public class MoveStraightPositionModeCommand extends Command {
         double desiredPosition = desiredTicksValue.get(i);
         System.out.println("Motor " + i + ": current position: " + currentPosition + ", desired position " + desiredPosition);
 
-
         if (i >= 2) {
             // right motors are inverted
             if (inputDistance < 0) {

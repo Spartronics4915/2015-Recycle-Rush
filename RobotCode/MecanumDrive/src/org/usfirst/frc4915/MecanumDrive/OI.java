@@ -52,7 +52,6 @@ public class OI {
     public Joystick driveStick;
     public Joystick elevatorStick;
 
-
     /*
      * JOYSTICK BUTTONS (DRIVER)
      */
@@ -85,9 +84,8 @@ public class OI {
         elevatorStick = new Joystick(1);
 
 		/*
-		 * JOYSTICK BUTTONS (ELEVATOR)
+         * JOYSTICK BUTTONS (ELEVATOR)
 		 */
-
 
         elevatorJumpToPositionZero = new JoystickButton(elevatorStick, 6);
         elevatorJumpToPositionZero.whenPressed(new ElevatorJumpToPositionCommand(0));
@@ -99,10 +97,10 @@ public class OI {
         elevatorJumpToPositionThree.whenPressed(new ElevatorJumpToPositionCommand(3));
         elevatorJumpToPositionFour = new JoystickButton(elevatorStick, 10);
         elevatorJumpToPositionFour.whenPressed(new ElevatorJumpToPositionCommand(4));
-		
+
 		
 		/*
-		 * Grabber Buttons
+         * Grabber Buttons
 		 */
 
         grabberOpen = new JoystickButton(elevatorStick, 3);
@@ -148,7 +146,6 @@ public class OI {
 		/*
 		 * DEBUGGER BUTTONS
 		 */
-
 
 //		SmartDashboard.putData("Set debugger to drivetrain", new DebuggerShowOnlyCommand(LoggerNames.DRIVETRAIN));
 //		SmartDashboard.putData("Set debugger to grabber", new DebuggerShowOnlyCommand(LoggerNames.GRABBER));

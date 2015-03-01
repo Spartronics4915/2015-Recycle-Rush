@@ -4,10 +4,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc4915.MecanumDrive.Robot;
 
-
-
 public class ToggleDriveModeCommand extends Command {
-
 
     public ToggleDriveModeCommand() {
         // Use requires() here to declare subsystem dependencies
@@ -43,6 +40,5 @@ public class ToggleDriveModeCommand extends Command {
     // subsystems is scheduled to run
     protected void interrupted() {
     }
-
 
 }

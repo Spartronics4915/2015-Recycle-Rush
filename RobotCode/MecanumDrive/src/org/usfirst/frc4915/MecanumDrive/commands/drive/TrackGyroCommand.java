@@ -5,7 +5,6 @@ import org.usfirst.frc4915.MecanumDrive.Robot;
 
 public class TrackGyroCommand extends Command {
 
-
     public TrackGyroCommand() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);

@@ -4,7 +4,6 @@ import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.CANTalon.ControlMode;
 import edu.wpi.first.wpilibj.I2C.Port;
 
-
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
  * to a variable name. This provides flexibility changing wiring, makes checking
@@ -64,7 +63,6 @@ public class RobotMap {
     public static DigitalInput slackLimitSwitch;
     public static DigitalInput bottomLimitSwitch;
 
-
     /*
      * GRABBER
      */
@@ -84,7 +82,7 @@ public class RobotMap {
     public static void init() {
 
 		/*
-		 * MECANUM WHEEL START
+         * MECANUM WHEEL START
 		 */
         mecanumDriveControlsLeftFront = new CANTalon(MOTOR_PORT_LEFT_FRONT);
         mecanumDriveControlsLeftRear = new CANTalon(MOTOR_PORT_LEFT_REAR);
@@ -106,12 +104,12 @@ public class RobotMap {
         driveTrainRobotDrive.setInvertedMotor(RobotDrive.MotorType.kRearRight, true);
 
 		/*
-		 * Gyro instantiation
+         * Gyro instantiation
 		 */
         gyro = new Gyro(GYRO_PORT);
 
 		/*
-		 * Distance instantiation -- UNUSED
+         * Distance instantiation -- UNUSED
 		 */
         distanceSensor = new Ultrasonic(ULTRASONIC_PORT_FIRST, ULTRASONIC_PORT_SECOND);
 

@@ -76,7 +76,6 @@ public class DriveTrain extends Subsystem {
         Robot.driveTrain.trackGyro();
         SmartDashboard.putNumber("Gyro Angle", Robot.driveTrain.gyroHeading);
 
-
         debugger.logError(LoggerNames.DRIVETRAIN, ("Joystick: " + joystickX + ", " + joystickY + ", " + joystickTwist));
         debugger.logError(LoggerNames.DRIVETRAIN, ("Throttle: " + throttleX + ", " + throttleY + ", " + throttleTwist));
         if (deadZoneX && deadZoneY && deadZoneTwist) {
@@ -89,7 +88,6 @@ public class DriveTrain extends Subsystem {
 
             robotDrive.mecanumDrive_Cartesian(throttleX, throttleY, throttleTwist, fieldMode == true ? gyroHeading : 0);
         }
-
 
     }
 
@@ -146,7 +144,6 @@ public class DriveTrain extends Subsystem {
 //				}
 //			}
     }
-
 
     /**
      * calculates the distance traveled using the wheel circumference and the
