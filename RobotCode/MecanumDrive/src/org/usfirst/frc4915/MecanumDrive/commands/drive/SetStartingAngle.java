@@ -1,24 +1,24 @@
 package org.usfirst.frc4915.MecanumDrive.commands.drive;
 
-import org.usfirst.frc4915.MecanumDrive.Robot;
-
 import edu.wpi.first.wpilibj.command.Command;
+import org.usfirst.frc4915.MecanumDrive.Robot;
 
 /**
  *
  */
 public class SetStartingAngle extends Command {
-	private double angle;
+    private double angle;
+
     public SetStartingAngle(double startingAngle) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	angle = startingAngle;
-    	
+        angle = startingAngle;
+
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.driveTrain.startingAngle = angle;
+        Robot.driveTrain.startingAngle = angle;
     }
 
     // Called repeatedly when this Command is scheduled to run

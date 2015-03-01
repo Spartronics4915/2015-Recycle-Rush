@@ -1,19 +1,19 @@
 package org.usfirst.frc4915.MecanumDrive.commands.elevator;
 
-import org.usfirst.frc4915.MecanumDrive.Robot; 
 import edu.wpi.first.wpilibj.command.Command;
+import org.usfirst.frc4915.MecanumDrive.Robot;
 
 /**
  *
  */
 public class ElevatorIsAbovePositionNumber extends Command {
 
-	private double posNumber;
-	
-	public ElevatorIsAbovePositionNumber(double posNumber) {
+    private double posNumber;
+
+    public ElevatorIsAbovePositionNumber(double posNumber) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-		this.posNumber = posNumber;
+        this.posNumber = posNumber;
     }
 
     // Called just before this Command runs the first time

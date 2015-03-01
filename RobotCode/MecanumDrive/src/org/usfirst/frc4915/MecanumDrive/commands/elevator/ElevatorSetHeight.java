@@ -1,23 +1,22 @@
 package org.usfirst.frc4915.MecanumDrive.commands.elevator;
 
+import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc4915.MecanumDrive.Robot;
 import org.usfirst.frc4915.MecanumDrive.subsystems.Elevator;
 import org.usfirst.frc4915.debuggersystem.CustomDebugger.LoggerNames;
-
-import edu.wpi.first.wpilibj.command.Command;
 
 public class ElevatorSetHeight extends Command {
 
     private int targetHeight;
 
     public ElevatorSetHeight(int targetHeight) {
-		// DON'T require Robot.elevator
+        // DON'T require Robot.elevator
         this.targetHeight = targetHeight;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Elevator.setPoint = targetHeight;
+        Elevator.setPoint = targetHeight;
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -31,7 +30,7 @@ public class ElevatorSetHeight extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.debugger.logError(LoggerNames.ELEVATOR, "Set height to " + targetHeight);
+        Robot.debugger.logError(LoggerNames.ELEVATOR, "Set height to " + targetHeight);
     }
 
     // Called when another command which requires one or more of the same

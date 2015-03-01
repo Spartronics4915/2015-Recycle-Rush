@@ -1,16 +1,14 @@
 package org.usfirst.frc4915.MecanumDrive.commands.drive;
 
 import edu.wpi.first.wpilibj.command.Command;
-
 import org.usfirst.frc4915.MecanumDrive.Robot;
-import org.usfirst.frc4915.MecanumDrive.subsystems.DriveTrain;
 
 /**
  *
  */
 public class TrackGyro extends Command {
 
-	
+
     public TrackGyro() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
@@ -22,7 +20,7 @@ public class TrackGyro extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.driveTrain.trackGyro();
+        Robot.driveTrain.trackGyro();
     }
 
     // Make this return true when this Command no longer needs to run execute()
