@@ -119,6 +119,7 @@ public class Robot extends IterativeRobot {
 		//autonomousProgramChooser.addObject("Autonomous Two Container Strategy", new AutonomousCommandTwoContainers());
 		
 		SmartDashboard.putData("Autonomous Program", autonomousProgramChooser);
+		SmartDashboard.putData(Scheduler.getInstance());
 		
 	//	Debugger = new SendableChooser();
 	//	Debugger.addDefault("General", new ShowOnly(LoggerNames.GENERAL));
@@ -169,8 +170,10 @@ public class Robot extends IterativeRobot {
 	 * to reset subsystems before shutting down.
 	 */
 	public void disabledInit() {
+		
 		if (cam1available)NIVision.IMAQdxStopAcquisition(session1);	
 		if (cam0available)NIVision.IMAQdxStopAcquisition(session0);	
+		
 	}
 
 	public void disabledPeriodic() {
@@ -256,7 +259,8 @@ public class Robot extends IterativeRobot {
 		}
 		if (session0 > 0 && cam0available){
 			NIVision.IMAQdxStartAcquisition(session0);
-		}		
+		}	
+		
 	}
 
 	/**
@@ -276,16 +280,15 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putNumber("Position Number of Elevator: ", Robot.elevator.getPositionNumber());
 		SmartDashboard.putBoolean("Safety Enabled", Elevator.SAFETY);
 
-
 		if (cam1available)
 		{
 			cameragrab(session1);
 		} else if (cam0available) {
 			cameragrab(session0);
 		}
-
+		
         /** robot code here! **/
-        Timer.delay(0.005);		// wait for a motor update time
+        //Timer.delay(0.005);		// wait for a motor update time
 
        // NIVision.IMAQdxStopAcquisition(session);
         // NIVision.IMAQdxStopAcquisition(session);

@@ -67,9 +67,9 @@ public class Elevator extends Subsystem {
 	 */
 	public void moveWithJoystick(Joystick joystick) {
 		double joystickY = joystick.getAxis(Joystick.AxisType.kY);
-		Robot.debugger.logError(LoggerNames.ELEVATOR, "Elevator joystick " + joystickY);
+		//Robot.debugger.logError(LoggerNames.ELEVATOR, "Elevator joystick " + joystickY);
 		if (Math.abs(joystickY) <= .1) {
-			Robot.debugger.logError(LoggerNames.ELEVATOR, "Joystick value too small");
+			//Robot.debugger.logError(LoggerNames.ELEVATOR, "Joystick value too small");
 			joystickY = 0;
 			moveElevator(0);
 		} if (shouldStopElevator(joystickY)){
@@ -124,7 +124,7 @@ public class Elevator extends Subsystem {
 	 */
 	public void stopElevator() {
 		winch.disableControl();
-		Robot.debugger.logError(LoggerNames.ELEVATOR, "Winch has stopped");
+		//Robot.debugger.logError(LoggerNames.ELEVATOR, "Winch has stopped");
 	}
 
 	/**
@@ -133,7 +133,7 @@ public class Elevator extends Subsystem {
 	public double getPositionInches() {
 		double position = (getPosition() - minimumPotentiometerValue) 
 						* (RANGE_OF_MOTION / (maximumPotentiometerValue - minimumPotentiometerValue));
-		Robot.debugger.logError(LoggerNames.ELEVATOR, "The elevator is at position " + position + " (inches)");
+		//Robot.debugger.logError(LoggerNames.ELEVATOR, "The elevator is at position " + position + " (inches)");
 		return position;
 	}
 	
@@ -150,7 +150,7 @@ public class Elevator extends Subsystem {
 	 * @return the read value from the potentiometer (between 0 and 1023)
 	 */
 	public double getPosition() {
-		Robot.debugger.logError(LoggerNames.ELEVATOR, "The potentiometer reads " + winch.getPosition());
+		//Robot.debugger.logError(LoggerNames.ELEVATOR, "The potentiometer reads " + winch.getPosition());
 		return winch.getPosition();
 	}
 
@@ -168,7 +168,7 @@ public class Elevator extends Subsystem {
 		// the change in value per inch and multiply by the number of inches that the totes are stacked
 		setPoint = minimumPotentiometerValue + ((maximumPotentiometerValue - minimumPotentiometerValue) 
 											 * HEIGHT_OF_TOTE * positionNumber / RANGE_OF_MOTION);
-		Robot.debugger.logError(LoggerNames.ELEVATOR, "Elevator's height is " + setPoint);
+		//Robot.debugger.logError(LoggerNames.ELEVATOR, "Elevator's height is " + setPoint);
 	}
 
 	/**
@@ -177,7 +177,7 @@ public class Elevator extends Subsystem {
 	 */
 	public boolean isAtTopOfElevator() {
 		if (winch.isFwdLimitSwitchClosed()) {
-			Robot.debugger.logError(LoggerNames.ELEVATOR, "Elevator Top LimitSwitch has been reached");
+			//Robot.debugger.logError(LoggerNames.ELEVATOR, "Elevator Top LimitSwitch has been reached");
 		}
 		return winch.isFwdLimitSwitchClosed();
 	}
@@ -188,7 +188,7 @@ public class Elevator extends Subsystem {
 	 */
 	public boolean isAtBottomOfElevator() {
 		if (bottomLimitSwitch.get()) {
-			Robot.debugger.logError(LoggerNames.ELEVATOR, "Elevator Bottom LimitSwitch has been reached");
+			//Robot.debugger.logError(LoggerNames.ELEVATOR, "Elevator Bottom LimitSwitch has been reached");
 		}
 		return bottomLimitSwitch.get();
 	}
@@ -241,7 +241,7 @@ public class Elevator extends Subsystem {
 			setPoint = minimumPotentiometerValue; // I'd like to use the +1 to re-fix the winch cable, 
 									// but I'm worried that the cable would automatically get tangled
 		}
-		Robot.debugger.logError(LoggerNames.ELEVATOR, "Elevator's height is " + setPoint);
+		//Robot.debugger.logError(LoggerNames.ELEVATOR, "Elevator's height is " + setPoint);
 	}
 
 	/**
