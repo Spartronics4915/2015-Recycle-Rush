@@ -93,6 +93,7 @@ public class Robot extends IterativeRobot {
         //autonomousProgramChooser.addObject("Autonomous Two Container Strategy", new AutonomousCommandTwoContainers());
 
         SmartDashboard.putData("Autonomous Program", autonomousProgramChooser);
+        SmartDashboard.putData(Scheduler.getInstance());
 
         //	Debugger = new SendableChooser();
         //	Debugger.addDefault("General", new DebuggerShowOnlyCommand(LoggerNames.GENERAL));
@@ -257,7 +258,7 @@ public class Robot extends IterativeRobot {
         }
 
         /** robot code here! **/
-        Timer.delay(0.005);        // wait for a motor update time
+        //Timer.delay(0.005);        // wait for a motor update time
 
         // NIVision.IMAQdxStopAcquisition(session);
         // NIVision.IMAQdxStopAcquisition(session);
