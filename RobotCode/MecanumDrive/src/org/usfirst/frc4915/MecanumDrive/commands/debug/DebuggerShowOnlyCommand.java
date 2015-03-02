@@ -1,33 +1,30 @@
-package org.usfirst.frc4915.MecanumDrive.commands.drive;
+package org.usfirst.frc4915.MecanumDrive.commands.debug;
 
 import edu.wpi.first.wpilibj.command.Command;
-
 import org.usfirst.frc4915.MecanumDrive.Robot;
-import org.usfirst.frc4915.MecanumDrive.subsystems.DriveTrain;
+import org.usfirst.frc4915.debuggersystem.CustomDebugger.LoggerNames;
 
-/**
- *
- */
-public class TrackGyro extends Command {
+public class DebuggerShowOnlyCommand extends Command {
+    private LoggerNames name;
 
-	
-    public TrackGyro() {
+    public DebuggerShowOnlyCommand(LoggerNames name) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
+        this.name = name;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
+        Robot.debugger.setFilter(name);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.driveTrain.trackGyro();
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return true;
     }
 
     // Called once after isFinished returns true

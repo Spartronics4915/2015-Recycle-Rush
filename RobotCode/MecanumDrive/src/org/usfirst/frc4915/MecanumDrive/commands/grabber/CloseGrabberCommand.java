@@ -1,24 +1,22 @@
-package org.usfirst.frc4915.MecanumDrive.commands.drive;
-
-import org.usfirst.frc4915.MecanumDrive.Robot;
+package org.usfirst.frc4915.MecanumDrive.commands.grabber;
 
 import edu.wpi.first.wpilibj.command.Command;
+import org.usfirst.frc4915.MecanumDrive.Robot;
+import org.usfirst.frc4915.debuggersystem.CustomDebugger;
 
-/**
- *
- */
-public class SetStartingAngle extends Command {
-	private double angle;
-    public SetStartingAngle(double startingAngle) {
+public class CloseGrabberCommand extends Command {
+
+    public CloseGrabberCommand() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	angle = startingAngle;
-    	
+        requires(Robot.grabber);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.driveTrain.startingAngle = angle;
+        Robot.debugger.logError(CustomDebugger.LoggerNames.GRABBER, "Closing");
+        Robot.grabber.secondaryOff();
+        Robot.grabber.primaryOn();
     }
 
     // Called repeatedly when this Command is scheduled to run
