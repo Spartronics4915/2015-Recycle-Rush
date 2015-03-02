@@ -78,7 +78,7 @@ public class DriveTrain extends Subsystem {
 		
 		//Gyro Tracking and debug
 		Robot.driveTrain.trackGyro();
-		SmartDashboard.putNumber("Gyro Angle", Robot.driveTrain.gyroHeading % 360);
+		//SmartDashboard.putNumber("Gyro Angle", Robot.driveTrain.gyroHeading % 360);
 
 
 		debugger.logError(LoggerNames.DRIVETRAIN, ("Joystick: "+ joystickX + ", " + joystickY + ", " + joystickTwist));
@@ -88,8 +88,8 @@ public class DriveTrain extends Subsystem {
 			robotDrive.stopMotor();
 		} else {
 			debugger.logError(LoggerNames.DRIVETRAIN,"Gyro Angle: " + gyro.getAngle());
-
-			robotDrive.mecanumDrive_Cartesian(throttleX, throttleY, throttleTwist, fieldMode == true ? gyroHeading : 0);
+			robotDrive.mecanumDrive_Cartesian(throttleX, throttleY, throttleTwist, 0);
+			//robotDrive.mecanumDrive_Cartesian(throttleX, throttleY, throttleTwist, fieldMode == true ? gyroHeading : 0);
 		}
 		
 

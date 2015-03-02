@@ -55,7 +55,7 @@ public class OI {
     /*
      * JOYSTICK BUTTONS (DRIVER)
      */
-    public JoystickButton toggleFieldDrive;
+    //public JoystickButton toggleFieldDrive;
 
     /*
      * JOYSTICK BUTTONS (ELEVATOR)
@@ -131,10 +131,10 @@ public class OI {
 		/*
 		 * TOGGLE FIELD ORIENTED DRIVE
 		 */
-        toggleFieldDrive = new JoystickButton(driveStick, 11);
-        toggleFieldDrive.whenPressed(new ToggleDriveModeCommand());
+        //toggleFieldDrive = new JoystickButton(driveStick, 11);
+        //toggleFieldDrive.whenPressed(new ToggleDriveModeCommand());
         //SmartDashboard.putData("Toggle Field Drive", new ToggleDriveModeCommand());
-        SmartDashboard.putBoolean("Field Mode", Robot.driveTrain.fieldMode);
+        //SmartDashboard.putBoolean("Field Mode", Robot.driveTrain.fieldMode);
 		
 		/*
 		 * ELEVATOR

@@ -41,15 +41,10 @@ public class AutonomousCommandContainerStrategy extends CommandGroup {
         addSequential(new CloseGrabberCommand());
         addSequential(new WaitCommand(.5));
         System.out.println("Moving Elevator (level 2.5)");
-
         addSequential(new ElevatorJumpToPositionCommand(2.5), 0.7);
-        System.out.println("Driving back 12 ft");
-        // FIXME change this drive value to -12
-        addSequential(new MoveStraightPositionModeCommand(-2, 0.7));
-        addSequential(new ElevatorJumpToPositionCommand(2.5));
         addSequential(new ElevatorIsAbovePositionNumberCommand(30), 1.2);
-        System.out.println("Driving back 9.5 ft"); // // // //
-        addSequential(new MoveStraightPositionModeCommand(-9.5, 0.7));
+        System.out.println("Driving back 8.5 ft");
+        addSequential(new MoveStraightPositionModeCommand(-8.5, 0.7));
 
         System.out.println("Moving Elevator (level 1.5)"); //puts down container
         addSequential(new ElevatorJumpToPositionCommand(1.5));

@@ -116,9 +116,6 @@ public class Robot extends IterativeRobot {
         //SmartDashboard.putData("Debugger Filter ", Debugger);
         displayVersioningOnSmartDashboard();
 
-        //SmartDashboard.putData("Debugger Filter ", Debugger);
-        //SmartDashboard.putData("Debugger Filter ", Debugger);
-        displayVersioningOnSmartDashboard();
         if (elevator != null) {
             elevator.setHieghtToCurrentPosition();
             Elevator.minimumPotentiometerValue = preferences.getDouble("minimumPotentiometerValue", 0);
@@ -144,8 +141,10 @@ public class Robot extends IterativeRobot {
      * to reset subsystems before shutting down.
      */
     public void disabledInit() {
+    	/*
         if (cam1available) NIVision.IMAQdxStopAcquisition(session1);
         if (cam0available) NIVision.IMAQdxStopAcquisition(session0);
+        */
     }
 
     public void disabledPeriodic() {
@@ -199,7 +198,7 @@ public class Robot extends IterativeRobot {
         Elevator.didSaveBottomValue = false;
 
         SmartDashboard.putBoolean("Field Mode", Robot.driveTrain.fieldMode);
-
+/*
         // Init camera
         frame = NIVision.imaqCreateImage(NIVision.ImageType.IMAGE_RGB, 0);
 
@@ -232,6 +231,7 @@ public class Robot extends IterativeRobot {
         if (session0 > 0 && cam0available) {
             NIVision.IMAQdxStartAcquisition(session0);
         }
+        */
     }
 
     /**
@@ -250,13 +250,13 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putNumber("Minimum height value: ", Elevator.minimumPotentiometerValue);
         SmartDashboard.putNumber("Position Number of Elevator: ", Robot.elevator.getPositionNumber());
         SmartDashboard.putBoolean("Safety Enabled", Elevator.SAFETY);
-
+/*
         if (cam1available) {
             cameragrab(session1);
         } else if (cam0available) {
             cameragrab(session0);
         }
-
+*/
         /** robot code here! **/
         //Timer.delay(0.005);        // wait for a motor update time
 
