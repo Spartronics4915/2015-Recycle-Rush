@@ -1,64 +1,74 @@
 package org.usfirst.frc4915.MecanumDrive.subsystems;
 
-import org.usfirst.frc4915.MecanumDrive.Robot;
-import org.usfirst.frc4915.MecanumDrive.RobotMap;
-import org.usfirst.frc4915.MecanumDrive.commands.elevator.ElevatorFineTune;
-import org.usfirst.frc4915.debuggersystem.CustomDebugger.LoggerNames;
-
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import org.usfirst.frc4915.MecanumDrive.Robot;
+import org.usfirst.frc4915.MecanumDrive.RobotMap;
+import org.usfirst.frc4915.MecanumDrive.commands.elevator.ElevatorFineTuneCommand;
+import org.usfirst.frc4915.debuggersystem.CustomDebugger.LoggerNames;
 
 public class Elevator extends Subsystem {
 
-	// These positions describe the number of totes you stacking on top of.
-	// If you need to stack on top of 3 totes, use position 3.
-	// If you need to stack on the ground, use position 0.
+    // These positions describe the number of totes you stacking on top of.
+    // If you need to stack on top of 3 totes, use position 3.
+    // If you need to stack on the ground, use position 0.
 
-	// Not in inches. Between minimumPotentiometerValue and
-	// maximumPotentiometerValue.
-	public static double setPoint;
+    public static final double APPROXIMATE_OFFSET = 430;
 
-	// POTENTIOMTERS : fwd --> top, rev --> bottom
+    // POTENTIOMTERS : fwd --> top, rev --> bottom
+    public static final double RANGE_OF_MOTION = 53; // The elevator can go a
+    public static final double CHASIS_HEIGHT = 5; // These two measurements are
+    // in inches
+    public static final double HEIGHT_OF_TOTE = 12;
+    private static final double JOYSTICK_SCALE = -18;
+    // Not in inches. Between minimumPotentiometerValue and
+    // maximumPotentiometerValue.
+    public static double setPoint;
+    // Set by ElevatorMax/MinHeightCalibrate commands
+    public static double minimumPotentiometerValue = 0;
+    public static double maximumPotentiometerValue = 1023;
+    public static double slackMinimum = 0;
+    public static boolean needToApproximate = true;
+    // distance between 53
+    // inches
+    public static boolean didSaveTopValue = false;
+    public static boolean didSaveBottomValue = false;
+    public static boolean SAFETY = true;
+    private static double previousJoystickY = 0;
 
-	// Set by ElevatorMax/MinHeightCalibrate commands
-	public static double minimumPotentiometerValue = 0;
-	public static double maximumPotentiometerValue = 1023;
-	public static double slackMinimum = 0;
-	
-	public static final double APPROXIMATE_OFFSET = 430;
-	public static boolean needToApproximate = true;
-	
-	public static boolean didSaveTopValue = false;
-	public static boolean didSaveBottomValue = false;
-	
-	public static boolean SAFETY = true;
-	
-	public static final double RANGE_OF_MOTION = 53; // The elevator can go a
-														// distance between 53
-														// inches
+    public CANTalon winch = RobotMap.elevatorWinchMotor;
+    public DigitalInput bottomLimitSwitch = RobotMap.bottomLimitSwitch;
 
-	public static final double CHASIS_HEIGHT = 5; // These two measurements are
-													// in inches
-	public static final double HEIGHT_OF_TOTE = 12;
+    /**
+     * Initializes the default command (WPI java default method) Called on
+     * initialization of the subsystem
+     */
+    public void initDefaultCommand() {
+        setDefaultCommand(new ElevatorFineTuneCommand());
+        // Set the default command for a subsystem here.
+        // setDefaultCommand(new MySpecialCommand());
+    }
 
-	private static final double JOYSTICK_SCALE = -18;
-	
-	private static double previousJoystickY = 0;
-	
-	public CANTalon winch = RobotMap.elevatorWinchMotor;
-	public DigitalInput bottomLimitSwitch = RobotMap.bottomLimitSwitch;
-	
-	/**
-	 * Initializes the default command (WPI java default method) Called on
-	 * initialization of the subsystem
-	 */
-	public void initDefaultCommand() {
-		setDefaultCommand(new ElevatorFineTune());
-		// Set the default command for a subsystem here.
-		// setDefaultCommand(new MySpecialCommand());
-	}
+    /**
+     * Changes height based on the input
+     *
+     * @param heightChange + goes up, - goes down
+     */
+    public void moveElevator(double heightChange) {
+        setPoint += heightChange;
+        moveToHeight();
+    }
+
+    /**
+     * Moves the elevator to the height variable Ensures that height is in range
+     * first
+     */
+    public void moveToHeight() {
+        keepHeightInRange();
+        winch.set(setPoint);
+    }
 
 	/**
 	 * Moves the elevator at a speed given by the joystick (y axis).
@@ -92,31 +102,11 @@ public class Elevator extends Subsystem {
 	}
 
 	/**
-	 * Changes height based on the input
-	 * 
-	 * @param heightChange
-	 *            + goes up, - goes down
-	 */
-	public void moveElevator(double heightChange) {
-		setPoint += heightChange;
-		moveToHeight();
-	}
-
-	/**
-	 * Moves the elevator to the height variable Ensures that height is in range
-	 * first
-	 */
-	public void moveToHeight() {
-		keepHeightInRange();
-		winch.set(setPoint);
-	}
-	
-	/**
-	 * Sets the height to where it currently is so that the elevator should not go up or down.
-	 */
-	public void setHieghtToCurrentPosition() {
-		setPoint = getPosition();
-	}
+     * Sets the height to where it currently is so that the elevator should not go up or down.
+     */
+    public void setHieghtToCurrentPosition() {
+        setPoint = getPosition();
+    }
 
 	/**
 	 * Stops the winch from winding. This may still have the elevator fall under
@@ -154,20 +144,19 @@ public class Elevator extends Subsystem {
 		return winch.getPosition();
 	}
 
-	/**
-	 * Converts from a position between zero totes to six totes to inches.
-	 * If you need to stack on top of 3 totes, use position 3.
-	 * If you need to stack on the ground, use position 0.
-	 * 
-	 * @param positionNumber
-	 *            the number of totes you are stacking on top of.
-	 */
-	public void setHeightToPosition(double positionNumber) {
+    /**
+     * Converts from a position between zero totes to six totes to inches.
+     * If you need to stack on top of 3 totes, use position 3.
+     * If you need to stack on the ground, use position 0.
+     *
+     * @param positionNumber the number of totes you are stacking on top of.
+     */
+    public void setHeightToPosition(double positionNumber) {
 
-		// find the range between the min and max Potentiometer values, divide by 54 to get
-		// the change in value per inch and multiply by the number of inches that the totes are stacked
-		setPoint = minimumPotentiometerValue + ((maximumPotentiometerValue - minimumPotentiometerValue) 
-											 * HEIGHT_OF_TOTE * positionNumber / RANGE_OF_MOTION);
+        // find the range between the min and max Potentiometer values, divide by 54 to get
+        // the change in value per inch and multiply by the number of inches that the totes are stacked
+        setPoint = minimumPotentiometerValue + ((maximumPotentiometerValue - minimumPotentiometerValue)
+                * HEIGHT_OF_TOTE * positionNumber / RANGE_OF_MOTION);
 		//Robot.debugger.logError(LoggerNames.ELEVATOR, "Elevator's height is " + setPoint);
 	}
 
@@ -183,7 +172,6 @@ public class Elevator extends Subsystem {
 	}
 
 	/**
-	 * 
 	 * @return if the elevator is at it's min height, return true
 	 */
 	public boolean isAtBottomOfElevator() {
@@ -239,33 +227,33 @@ public class Elevator extends Subsystem {
 		}
 		if ((setPoint < minimumPotentiometerValue)) {
 			setPoint = minimumPotentiometerValue; // I'd like to use the +1 to re-fix the winch cable, 
-									// but I'm worried that the cable would automatically get tangled
+			// but I'm worried that the cable would automatically get tangled
 		}
 		//Robot.debugger.logError(LoggerNames.ELEVATOR, "Elevator's height is " + setPoint);
 	}
 
-	/**
-	 * If the slack limit switch is true and it hasn't been triggered before,
-	 *  it will keep the setpoint from unwinding further.
-	 */
-	public void keepWinchTight() {
-		if (elevatorIsSlack() && slackMinimum == 0) {
-			slackMinimum = getPosition();
-		}
-		if (setPoint < slackMinimum) {
-			setPoint = slackMinimum;
-		}
-		else if (!elevatorIsSlack()) {
-			slackMinimum = 0;
-		}
-	}
-	
-	/**
-	 * Is the elevator cable slack and about to unwind?
-	 * @return true if the elevator is slack, false if not.
-	 */
-	public boolean elevatorIsSlack() {
-		return winch.isRevLimitSwitchClosed();
-	}
+    /**
+     * If the slack limit switch is true and it hasn't been triggered before,
+     * it will keep the setpoint from unwinding further.
+     */
+    public void keepWinchTight() {
+        if (elevatorIsSlack() && slackMinimum == 0) {
+            slackMinimum = getPosition();
+        }
+        if (setPoint < slackMinimum) {
+            setPoint = slackMinimum;
+        } else if (!elevatorIsSlack()) {
+            slackMinimum = 0;
+        }
+    }
+
+    /**
+     * Is the elevator cable slack and about to unwind?
+     *
+     * @return true if the elevator is slack, false if not.
+     */
+    public boolean elevatorIsSlack() {
+        return winch.isRevLimitSwitchClosed();
+    }
 
 }

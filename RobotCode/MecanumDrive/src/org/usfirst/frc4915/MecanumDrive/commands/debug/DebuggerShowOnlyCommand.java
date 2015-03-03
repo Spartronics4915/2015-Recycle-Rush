@@ -1,23 +1,21 @@
-package org.usfirst.frc4915.MecanumDrive.commands.elevator;
+package org.usfirst.frc4915.MecanumDrive.commands.debug;
 
-import org.usfirst.frc4915.MecanumDrive.Robot; 
 import edu.wpi.first.wpilibj.command.Command;
+import org.usfirst.frc4915.MecanumDrive.Robot;
+import org.usfirst.frc4915.debuggersystem.CustomDebugger.LoggerNames;
 
-/**
- *
- */
-public class ElevatorIsAbovePositionNumber extends Command {
+public class DebuggerShowOnlyCommand extends Command {
+    private LoggerNames name;
 
-	private double posNumber;
-	
-	public ElevatorIsAbovePositionNumber(double posNumber) {
+    public DebuggerShowOnlyCommand(LoggerNames name) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-		this.posNumber = posNumber;
+        this.name = name;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
+        Robot.debugger.setFilter(name);
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -26,7 +24,7 @@ public class ElevatorIsAbovePositionNumber extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return Robot.elevator.getPositionInches() >= posNumber;
+        return true;
     }
 
     // Called once after isFinished returns true

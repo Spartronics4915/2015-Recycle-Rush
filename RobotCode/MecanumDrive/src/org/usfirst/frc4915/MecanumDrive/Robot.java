@@ -1,15 +1,18 @@
 package org.usfirst.frc4915.MecanumDrive;
 
+import com.ni.vision.NIVision;
+import com.ni.vision.NIVision.Image;
+import com.ni.vision.VisionException;
+import edu.wpi.first.wpilibj.*;
+import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandContainerStrategy;
 import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandJustDrive;
 import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandStacking;
 import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandToteStrategy;
-import org.usfirst.frc4915.MecanumDrive.commands.drive.StrafeCommand;
-import org.usfirst.frc4915.MecanumDrive.commands.debug.ShowOnly;
-import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandTwoContainers;
-import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandTwoTotesOneContainer;
-//import org.usfirst.frc4915.MecanumDrive.commands.debug.DebuggerFilter;
-import org.usfirst.frc4915.MecanumDrive.commands.drive.ToggleDriveMode;
 import org.usfirst.frc4915.MecanumDrive.subsystems.DriveTrain;
 import org.usfirst.frc4915.MecanumDrive.subsystems.Elevator;
 import org.usfirst.frc4915.MecanumDrive.subsystems.Grabber;
@@ -17,33 +20,8 @@ import org.usfirst.frc4915.MecanumDrive.utility.VersionFinder;
 import org.usfirst.frc4915.debuggersystem.CustomDebugger;
 import org.usfirst.frc4915.debuggersystem.CustomDebugger.LoggerNames;
 
-import com.ni.vision.NIVision;
-import com.ni.vision.NIVision.Image;
-import com.ni.vision.VisionException;
+//import org.usfirst.frc4915.MecanumDriveCommand.commands.debug.DebuggerFilter;
 
-import edu.wpi.first.wpilibj.CameraServer;
-import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.IterativeRobot;
-import edu.wpi.first.wpilibj.Preferences;
-import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.command.Scheduler;
-import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj.CameraServer;
-import edu.wpi.first.wpilibj.Timer;
-
-import com.ni.vision.NIVision;
-import com.ni.vision.NIVision.Image;
-
-
-
-
-import edu.wpi.first.wpilibj.CameraServer;
-
-import com.ni.vision.NIVision;
-import com.ni.vision.VisionException;
 /**
  * The VM is configured to automatically run this class, and to call the
  * functions corresponding to each mode, as described in the IterativeRobot
@@ -106,8 +84,8 @@ public class Robot extends IterativeRobot {
 		preferences.putDouble("TestThree", 987.65);
 		testPreferencesItemThree = preferences.getDouble("TestThree", 1.11);
 	    preferences.getString("DesiredDistance", "9.0");
-	    debugger.logError(LoggerNames.GENERAL, "TestOne = "	+testPreferencesItemOne);
-	    debugger.logError(LoggerNames.GENERAL, "TestThree = "+testPreferencesItemThree);
+	    debugger.logError(LoggerNames.GENERAL, "TestOne = "	+ testPreferencesItemOne);
+	    debugger.logError(LoggerNames.GENERAL, "TestThree = " + testPreferencesItemThree);
 	    debugger.logError(LoggerNames.GENERAL, preferences.getString("DesiredDistance", "9.0"));
 
 		autonomousProgramChooser = new SendableChooser();
@@ -140,11 +118,8 @@ public class Robot extends IterativeRobot {
 		*/
 
 		//SmartDashboard.putData("Debugger Filter ", Debugger);
-		displayVersioningOnSmartDashboard();	
+		displayVersioningOnSmartDashboard();
 
-		//SmartDashboard.putData("Debugger Filter ", Debugger);
-		//SmartDashboard.putData("Debugger Filter ", Debugger);
-		displayVersioningOnSmartDashboard();	
 		if (elevator != null) {
 			elevator.setHieghtToCurrentPosition();
 			Elevator.minimumPotentiometerValue = preferences.getDouble("minimumPotentiometerValue", 0);
@@ -170,10 +145,10 @@ public class Robot extends IterativeRobot {
 	 * to reset subsystems before shutting down.
 	 */
 	public void disabledInit() {
-		
+		/*
 		if (cam1available)NIVision.IMAQdxStopAcquisition(session1);	
 		if (cam0available)NIVision.IMAQdxStopAcquisition(session0);	
-		
+		*/
 	}
 
 	public void disabledPeriodic() {
@@ -226,8 +201,8 @@ public class Robot extends IterativeRobot {
 		Elevator.didSaveTopValue = false;
 		Elevator.didSaveBottomValue = false;
 
-		SmartDashboard.putBoolean("Field Mode", Robot.driveTrain.fieldMode);
-
+		//SmartDashboard.putBoolean("Field Mode", Robot.driveTrain.fieldMode);
+		/*
 		// Init camera
 		frame = NIVision.imaqCreateImage(NIVision.ImageType.IMAGE_RGB, 0);
 		
@@ -260,7 +235,7 @@ public class Robot extends IterativeRobot {
 		if (session0 > 0 && cam0available){
 			NIVision.IMAQdxStartAcquisition(session0);
 		}	
-		
+		*/
 	}
 
 	/**
@@ -279,80 +254,78 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putNumber("Minimum height value: ", Elevator.minimumPotentiometerValue);
 		SmartDashboard.putNumber("Position Number of Elevator: ", Robot.elevator.getPositionNumber());
 		SmartDashboard.putBoolean("Safety Enabled", Elevator.SAFETY);
-
+		/*
 		if (cam1available)
 		{
 			cameragrab(session1);
 		} else if (cam0available) {
 			cameragrab(session0);
 		}
-		
+		 */		
         /** robot code here! **/
         //Timer.delay(0.005);		// wait for a motor update time
 
-       // NIVision.IMAQdxStopAcquisition(session);
+        // NIVision.IMAQdxStopAcquisition(session);
         // NIVision.IMAQdxStopAcquisition(session);
 
-	}
-	
-	public void testInit() {
-		// Init camera
-		frame = NIVision.imaqCreateImage(NIVision.ImageType.IMAGE_RGB, 0);
-		
-		
+    }
 
-		// the camera name (ex "cam0") can be found through the roborio web interface
-		try {
-			session1 = NIVision
-					.IMAQdxOpenCamera(
-							"cam1",
-							NIVision.IMAQdxCameraControlMode.CameraControlModeController);
-			NIVision.IMAQdxConfigureGrab(session1);
-			cam1available = true; 
-		} catch (VisionException ve) {
-			cam1available = false;
-			debugger.logError(LoggerNames.GENERAL,"Camera 1 has failed to initialized");
-		}
-		try {
-			session0 = NIVision
-					.IMAQdxOpenCamera(
-							"cam0",
-							NIVision.IMAQdxCameraControlMode.CameraControlModeController);
-			NIVision.IMAQdxConfigureGrab(session0);
-			cam0available = true; 
-		} catch (VisionException ve) {
-			cam0available = false;
-			debugger.logError(LoggerNames.GENERAL,"Camera 0 has failed to initialized");
-		}
-		if (session1 > 0 && cam1available){
-			NIVision.IMAQdxStartAcquisition(session1);
-		}
-		if (session0 > 0 && cam0available){
-			NIVision.IMAQdxStartAcquisition(session0);
-		}
-	}
+    public void testInit() {
+        // Init camera
+        frame = NIVision.imaqCreateImage(NIVision.ImageType.IMAGE_RGB, 0);
 
-	/**
-	 * This function is called periodically during test mode
-	 */
-	public void testPeriodic() {
-		LiveWindow.run();
-		/**
-		 * grab an image, draw the circle, and provide it for the camera server
-		 * which will in turn send it to the dashboard.
-		 */
-		if (cam1available)
-		{
-			cameragrab(session1);
-		} else if (cam0available) {
-			cameragrab(session0);
-		}
-		
-	}
-	public void cameragrab(int sessionid){
-		System.out.println("camera session: "+ sessionid);
-		NIVision.IMAQdxGrab(sessionid, frame, 1);
-		CameraServer.getInstance().setImage(frame);
-		
-   }
+        // the camera name (ex "cam0") can be found through the roborio web interface
+        try {
+            session1 = NIVision
+                    .IMAQdxOpenCamera(
+                            "cam1",
+                            NIVision.IMAQdxCameraControlMode.CameraControlModeController);
+            NIVision.IMAQdxConfigureGrab(session1);
+            cam1available = true;
+        } catch (VisionException ve) {
+            cam1available = false;
+            debugger.logError(LoggerNames.GENERAL, "Camera 1 has failed to initialized");
+        }
+        try {
+            session0 = NIVision
+                    .IMAQdxOpenCamera(
+                            "cam0",
+                            NIVision.IMAQdxCameraControlMode.CameraControlModeController);
+            NIVision.IMAQdxConfigureGrab(session0);
+            cam0available = true;
+        } catch (VisionException ve) {
+            cam0available = false;
+            debugger.logError(LoggerNames.GENERAL, "Camera 0 has failed to initialized");
+        }
+        if (session1 > 0 && cam1available) {
+            NIVision.IMAQdxStartAcquisition(session1);
+        }
+        if (session0 > 0 && cam0available) {
+            NIVision.IMAQdxStartAcquisition(session0);
+        }
+    }
+
+    /**
+     * This function is called periodically during test mode
+     */
+    public void testPeriodic() {
+        LiveWindow.run();
+        /**
+         * grab an image, draw the circle, and provide it for the camera server
+         * which will in turn send it to the dashboard.
+         */
+        if (cam1available) {
+            cameragrab(session1);
+        } else if (cam0available) {
+            cameragrab(session0);
+        }
+
+    }
+
+    public void cameragrab(int sessionid) {
+        System.out.println("camera session: " + sessionid);
+        NIVision.IMAQdxGrab(sessionid, frame, 1);
+        CameraServer.getInstance().setImage(frame);
+
+    }
 }

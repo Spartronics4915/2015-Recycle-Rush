@@ -1,44 +1,38 @@
-package org.usfirst.frc4915.MecanumDrive.commands.debug;
+package org.usfirst.frc4915.MecanumDrive.commands.drive;
 
 import edu.wpi.first.wpilibj.command.Command;
+import org.usfirst.frc4915.MecanumDrive.Robot;
+import org.usfirst.frc4915.debuggersystem.CustomDebugger;
 
-public class GenericTestCommand extends Command {
+public class DriveStraightCommand extends Command {
 
-    int count = 0;
-    int i;
-    String message;
-
-    public GenericTestCommand(int count, String message) {
+    public DriveStraightCommand() {
         // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
-        this.count = count;
-        this.message = message;
+        requires(Robot.driveTrain);
+        setTimeout(1);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-        System.out.printf("** Saying \"%s\" %d times.%n", message, count);
+        Robot.debugger.logError(CustomDebugger.LoggerNames.DRIVETRAIN, "Drive Straight");
+        Robot.driveTrain.driveStraight(.2);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        System.out.printf("** %s (%d/%d)%n", message, i, count);
-        i++;
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return i == count;
+        return isTimedOut();
     }
 
     // Called once after isFinished returns true
     protected void end() {
-        System.out.printf("** Finished saying \"%s\" %d times.%n", message, count);
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-        System.out.printf("** Interrupted whilst saying \"%s\" %d times.%n", message, count);
     }
 }

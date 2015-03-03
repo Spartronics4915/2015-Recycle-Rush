@@ -5,7 +5,7 @@ package org.usfirst.frc4915.debuggersystem;
 //    public static final DataType[] TYPES = {DataType.BOOLEAN};
 
 //    public final BooleanProperty editable = new BooleanProperty(this, "Editable", true);
-    
+
 //    private EditableBooleanValueCheckBox valueField;
 
 //    public void init() {
