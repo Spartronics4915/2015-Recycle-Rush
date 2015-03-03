@@ -35,22 +35,7 @@ public class AutonomousCommandStacking extends CommandGroup {
 
     	addParallel(new ElevatorMoveToHeight());
     	addParallel(new StopDriveTrain());
-       	System.out.println("Moving Elevator (level 1.5)");
-    	addSequential(new ElevatorJumpToPosition(1.5), 0.7);
-    	System.out.println("Closing Grabber");
-    	addSequential(new CloseGrabber());
-    	System.out.println("Moving Elevator (level 2.5)");
-    	addSequential(new ElevatorJumpToPosition(2.5), 0.7);
-    	System.out.println("Strafing");
-    	//strafe left 1.9ft
-    	addSequential(new StrafeCommand(-1.9,.5));
-    	addSequential(new OpenGrabber());
-    	addSequential(new ElevatorJumpToPosition(0), 1.0);
-    	addSequential(new CloseGrabber());
-    	addSequential(new ElevatorJumpToPosition(1), 0.7);
-    	System.out.println("Driving back 12 ft");
-    	// FIXME change the value to -12
-    	addSequential(new MoveStraightPositionModeCommand(-2, 0.7));
+    	
        	System.out.println("Moving Elevator (level 1.2)");
     	addSequential(new ElevatorJumpToPosition(1.2));
     	addSequential(new ElevatorIsAbovePositionNumber(15), 1.2);
@@ -60,8 +45,8 @@ public class AutonomousCommandStacking extends CommandGroup {
     	System.out.println("Moving Elevator (level 2.8)");
     	addSequential(new ElevatorJumpToPosition(2.8));
     	addSequential(new ElevatorIsAbovePositionNumber(34), 1.2);
-    	System.out.println("Driving back 9.5 ft");
-    	addSequential(new MoveStraightPositionModeCommand(9.5, 0.7));
+    	System.out.println("Driving forward 2 ft");
+    	addSequential(new MoveStraightPositionModeCommand(2, 0.7));
     	addSequential(new OpenGrabber());
     	addSequential(new Wait(1));
     	System.out.println("Moving Elevator (level 0)");

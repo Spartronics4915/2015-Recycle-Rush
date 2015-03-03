@@ -140,10 +140,7 @@ public class Robot extends IterativeRobot {
 		Debugger.addObject("Autonomous", new DebuggerFilter(LoggerNames.AUTONOMOUS));
 		Debugger.addObject("Elevator", new DebuggerFilter(LoggerNames.ELEVATOR));
 		
-		*/
-
-		//SmartDashboard.putData("Debugger Filter ", Debugger);
-		displayVersioningOnSmartDashboard();	
+		*/	
 
 		//SmartDashboard.putData("Debugger Filter ", Debugger);
 		//SmartDashboard.putData("Debugger Filter ", Debugger);
@@ -291,7 +288,7 @@ public class Robot extends IterativeRobot {
         /** robot code here! **/
         Timer.delay(0.005);		// wait for a motor update time
 
-       // NIVision.IMAQdxStopAcquisition(session);
+        // NIVision.IMAQdxStopAcquisition(session);
         // NIVision.IMAQdxStopAcquisition(session);
 
 	}
