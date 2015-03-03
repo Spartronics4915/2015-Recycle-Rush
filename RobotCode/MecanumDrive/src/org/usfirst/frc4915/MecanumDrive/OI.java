@@ -1,4 +1,8 @@
 package org.usfirst.frc4915.MecanumDrive;
+import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandContainerStrategy;
+import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandJustDrive;
+import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandStacking;
+import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandToteStrategy;
 import org.usfirst.frc4915.MecanumDrive.commands.debug.ShowOnly;
 import org.usfirst.frc4915.MecanumDrive.commands.debug.DebuggerFilterReset;
 import org.usfirst.frc4915.MecanumDrive.commands.drive.MoveStraightPositionModeCommand;
@@ -18,7 +22,9 @@ import org.usfirst.frc4915.debuggersystem.CustomDebugger.LoggerNames;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
@@ -136,7 +142,16 @@ public class OI {
 //		SmartDashboard.putData("Strafe 1.9 feet", new StrafeCommand(1.9, 0.7));
 		//SmartDashboard.putData("Move Backwards 3 feet", new MoveStraightPositionModeCommand(-3, 0.7));
 		//SmartDashboard.putData("DriveStraight 1 second", new DriveStraight());
+		
+		SendableChooser autonomousProgramChooser;
 
+		autonomousProgramChooser = new SendableChooser();
+		autonomousProgramChooser.addDefault("Autonomous Just Drive", new AutonomousCommandJustDrive());
+		autonomousProgramChooser.addObject("Autonomous Container Strategy", new AutonomousCommandContainerStrategy());
+		autonomousProgramChooser.addObject("Autonomous Tote Strategy", new AutonomousCommandToteStrategy());
+		autonomousProgramChooser.addObject("Autonomous Stacking Strategy", new AutonomousCommandStacking());
+		
+		SmartDashboard.putData("Autonomous Program", autonomousProgramChooser);
 		
 		/*
 		 * TOGGLE FIELD ORIENTED DRIVE

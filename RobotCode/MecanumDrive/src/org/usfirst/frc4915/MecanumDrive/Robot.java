@@ -3,9 +3,12 @@ package org.usfirst.frc4915.MecanumDrive;
 import org.usfirst.frc4915.MecanumDrive.OI;
 import org.usfirst.frc4915.MecanumDrive.RobotMap;
 import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandContainerStrategy;
+import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandContainerWithPlatform;
+import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandDoNothing;
 import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandJustDrive;
 import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandStacking;
 import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandToteStrategy;
+import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandToteWithPlatform;
 import org.usfirst.frc4915.MecanumDrive.commands.drive.StrafeCommand;
 import org.usfirst.frc4915.MecanumDrive.commands.debug.ShowOnly;
 import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandTwoContainers;
@@ -38,6 +41,9 @@ import edu.wpi.first.wpilibj.Timer;
 
 import com.ni.vision.NIVision;
 import com.ni.vision.NIVision.Image;
+
+
+
 
 
 
@@ -118,9 +124,11 @@ public class Robot extends IterativeRobot {
 		autonomousProgramChooser.addDefault("Autonomous Just Drive", new AutonomousCommandJustDrive());
 		autonomousProgramChooser.addObject("Autonomous Container Strategy", new AutonomousCommandContainerStrategy());
 		autonomousProgramChooser.addObject("Autonomous Tote Strategy", new AutonomousCommandToteStrategy());
+		autonomousProgramChooser.addObject("Autonomous Container WITH Platform", new AutonomousCommandContainerWithPlatform());
+		autonomousProgramChooser.addObject("Autonomous Tote WITH Platform", new AutonomousCommandToteWithPlatform());
 		autonomousProgramChooser.addObject("Autonomous Stacking Strategy", new AutonomousCommandStacking());
-		//autonomousProgramChooser.addObject("Autonomous Two Totes One Container Strategy", new AutonomousCommandTwoTotesOneContainer());
-		//autonomousProgramChooser.addObject("Autonomous Two Container Strategy", new AutonomousCommandTwoContainers());
+		autonomousProgramChooser.addObject("Autonomous Do Nothing", new AutonomousCommandDoNothing());
+
 		
 		SmartDashboard.putData("Autonomous Program", autonomousProgramChooser);
 		
