@@ -1,23 +1,21 @@
-package org.usfirst.frc4915.MecanumDrive.commands.elevator;
+package org.usfirst.frc4915.MecanumDrive.commands.drive;
 
-import org.usfirst.frc4915.MecanumDrive.Robot; 
 import edu.wpi.first.wpilibj.command.Command;
+import org.usfirst.frc4915.MecanumDrive.Robot;
 
-/**
- *
- */
-public class ElevatorIsAbovePositionNumber extends Command {
+public class SetStartingAngleCommand extends Command {
+    private double angle;
 
-	private double posNumber;
-	
-	public ElevatorIsAbovePositionNumber(double posNumber) {
+    public SetStartingAngleCommand(double startingAngle) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-		this.posNumber = posNumber;
+        angle = startingAngle;
+
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
+        Robot.driveTrain.startingAngle = angle;
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -26,7 +24,7 @@ public class ElevatorIsAbovePositionNumber extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return Robot.elevator.getPositionInches() >= posNumber;
+        return true;
     }
 
     // Called once after isFinished returns true

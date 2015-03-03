@@ -1,22 +1,17 @@
 package org.usfirst.frc4915.MecanumDrive.subsystems;
 
-import java.util.Arrays;
-import java.util.List;
-
-import org.usfirst.frc4915.MecanumDrive.Robot;
-import org.usfirst.frc4915.MecanumDrive.RobotMap;
-import org.usfirst.frc4915.MecanumDrive.commands.drive.MecanumDrive;
-import org.usfirst.frc4915.debuggersystem.CustomDebugger;
-import org.usfirst.frc4915.debuggersystem.CustomDebugger.LoggerNames;
-
-import edu.wpi.first.wpilibj.CANTalon;
-import edu.wpi.first.wpilibj.Gyro;
-import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.RobotDrive;
-import edu.wpi.first.wpilibj.Ultrasonic;
+import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.CANTalon.ControlMode;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import org.usfirst.frc4915.MecanumDrive.Robot;
+import org.usfirst.frc4915.MecanumDrive.RobotMap;
+import org.usfirst.frc4915.MecanumDrive.commands.drive.MecanumDriveCommand;
+import org.usfirst.frc4915.debuggersystem.CustomDebugger;
+import org.usfirst.frc4915.debuggersystem.CustomDebugger.LoggerNames;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class DriveTrain extends Subsystem {
 
@@ -39,7 +34,7 @@ public class DriveTrain extends Subsystem {
 	// here. Call these from Commands.
 
 	public void initDefaultCommand() {
-		setDefaultCommand(new MecanumDrive());
+		setDefaultCommand(new MecanumDriveCommand());
 
 		// Set the default command for a subsystem here.
 		// setDefaultCommand(new MySpecialCommand());
@@ -83,7 +78,7 @@ public class DriveTrain extends Subsystem {
 		
 		//Gyro Tracking and debug
 		Robot.driveTrain.trackGyro();
-		SmartDashboard.putNumber("Gyro Angle", Robot.driveTrain.gyroHeading);
+		//SmartDashboard.putNumber("Gyro Angle", Robot.driveTrain.gyroHeading % 360);
 
 
 		debugger.logError(LoggerNames.DRIVETRAIN, ("Joystick: "+ joystickX + ", " + joystickY + ", " + joystickTwist));
@@ -94,9 +89,7 @@ public class DriveTrain extends Subsystem {
 		} else {
 			debugger.logError(LoggerNames.DRIVETRAIN,"Gyro Angle: " + gyro.getAngle());
 			robotDrive.mecanumDrive_Cartesian(throttleX, throttleY, throttleTwist, 0);
-					//, fieldMode ? gyro.getAngle() : 0);
-
-			robotDrive.mecanumDrive_Cartesian(throttleX, throttleY, throttleTwist, fieldMode == true ? gyroHeading : 0);
+			//robotDrive.mecanumDrive_Cartesian(throttleX, throttleY, throttleTwist, fieldMode == true ? gyroHeading : 0);
 		}
 		
 
@@ -153,53 +146,55 @@ public class DriveTrain extends Subsystem {
 //					motor.set(.7);
 //				}
 //			}
-		}
-	
-		
-	/**
-	 * calculates the distance traveled using the wheel circumference and the
-	 * number of wheel rotations.
-	 * @param motor Motor with an encoder to determine distance traveled.
-	 * @param elapsed Time since the last sampling of the motor.
-	 * @return Distance traveled since the last sampling of the encoder.
-	 */
-	// calculates the distance traveled using the wheel circumference and the
-	// number of wheel rotations.
-	public double getDistanceForMotor(CANTalon motor, long elapsed) {
-		int ticksPerRevolution = 1000;
-		double circumferenceOfWheel = 6 * Math.PI;
-		int inchesPerFoot = 12;
-		debugger.logError(LoggerNames.DRIVETRAIN, ("Speed" + motor.getSpeed()));
-		debugger.setFilter(LoggerNames.DRIVETRAIN);
-		debugger.resetFilter();
-		return motor.getSpeed() * elapsed / ticksPerRevolution * circumferenceOfWheel / inchesPerFoot;
-	}
-
-	/**
-	 * Drives like ATLaS. Forward/Back for straight and backwards, and left right to spin in place.
-	 * @param stick used to control the DriveTrain.
-	 */
-	public void arcadeDrive(Joystick stick) {
-		debugger.logError(LoggerNames.DRIVETRAIN, "Arcade Drive");
-		debugger.setFilter(LoggerNames.DRIVETRAIN);
-		debugger.resetFilter();
-		robotDrive.arcadeDrive(stick);
-	}
-   
-	/**
-	 * Swaps from field mode to the opposite mode.
-	 * @return what mode it is in - true for field mode.
-	 */
-	public boolean toggleFieldMode() {
-		fieldMode = !fieldMode;
-		return fieldMode;
     }
 
-	public double trackGyro() {
-		gyroHeading = -gyro.getAngle()+startingAngle;
-		
-		debugger.logError(LoggerNames.DRIVETRAIN,"Change in angle: " + deltaGyro);
-		debugger.logError(LoggerNames.DRIVETRAIN, "Robot angle: " + gyroHeading);
-		return gyroHeading;
-			}
+    /**
+     * calculates the distance traveled using the wheel circumference and the
+     * number of wheel rotations.
+     *
+     * @param motor   Motor with an encoder to determine distance traveled.
+     * @param elapsed Time since the last sampling of the motor.
+     * @return Distance traveled since the last sampling of the encoder.
+     */
+    // calculates the distance traveled using the wheel circumference and the
+    // number of wheel rotations.
+    public double getDistanceForMotor(CANTalon motor, long elapsed) {
+        int ticksPerRevolution = 1000;
+        double circumferenceOfWheel = 6 * Math.PI;
+        int inchesPerFoot = 12;
+        debugger.logError(LoggerNames.DRIVETRAIN, ("Speed" + motor.getSpeed()));
+        debugger.setFilter(LoggerNames.DRIVETRAIN);
+        debugger.resetFilter();
+        return motor.getSpeed() * elapsed / ticksPerRevolution * circumferenceOfWheel / inchesPerFoot;
+    }
+
+    /**
+     * Drives like ATLaS. Forward/Back for straight and backwards, and left right to spin in place.
+     *
+     * @param stick used to control the DriveTrain.
+     */
+    public void arcadeDrive(Joystick stick) {
+        debugger.logError(LoggerNames.DRIVETRAIN, "Arcade Drive");
+        debugger.setFilter(LoggerNames.DRIVETRAIN);
+        debugger.resetFilter();
+        robotDrive.arcadeDrive(stick);
+    }
+
+    /**
+     * Swaps from field mode to the opposite mode.
+     *
+     * @return what mode it is in - true for field mode.
+     */
+    public boolean toggleFieldMode() {
+        fieldMode = !fieldMode;
+        return fieldMode;
+    }
+
+    public double trackGyro() {
+        gyroHeading = -gyro.getAngle() + startingAngle;
+
+        debugger.logError(LoggerNames.DRIVETRAIN, "Change in angle: " + deltaGyro);
+        debugger.logError(LoggerNames.DRIVETRAIN, "Robot angle: " + gyroHeading);
+        return gyroHeading;
+    }
 }

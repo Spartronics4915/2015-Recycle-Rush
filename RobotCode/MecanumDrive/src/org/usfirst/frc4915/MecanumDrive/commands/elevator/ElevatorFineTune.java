@@ -20,7 +20,7 @@ public class ElevatorFineTune extends Command {
 	// Called just before this Command runs the first time
 	protected void initialize() {
 		elevator.winch.enableControl();
-		Robot.debugger.logError(LoggerNames.ELEVATOR, "ElevatorFineTune initialized");
+		//Robot.debugger.logError(LoggerNames.ELEVATOR, "ElevatorFineTune initialized");
 	}
 
 	// Called repeatedly when this Command is scheduled to run
@@ -37,7 +37,7 @@ public class ElevatorFineTune extends Command {
 
 	// Called once after isFinished returns true
 	protected void end() {
-		Robot.debugger.logError(LoggerNames.ELEVATOR, "ElevatorFineTune deactivated");
+		//Robot.debugger.logError(LoggerNames.ELEVATOR, "ElevatorFineTune deactivated");
 		elevator.stopElevator();
 	}
 

@@ -1,24 +1,20 @@
 package org.usfirst.frc4915.MecanumDrive.commands.elevator;
 
-import org.usfirst.frc4915.MecanumDrive.Robot;
-
 import edu.wpi.first.wpilibj.command.Command;
+import org.usfirst.frc4915.MecanumDrive.Robot;
+import org.usfirst.frc4915.MecanumDrive.subsystems.Elevator;
 
-/**
- *
- */
-public class ElevatorSetSafety extends Command {
+public class ElevatorStopCommand extends Command {
 
-	private boolean safety;
-	
-    public ElevatorSetSafety(boolean value) {
-		// DON'T require Robot.elevator
-    	safety = value;
+    Elevator elevator = Robot.elevator;
+
+    public ElevatorStopCommand() {
+        requires(elevator);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.elevator.SAFETY = safety;
+        elevator.stopElevator();
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -32,9 +28,6 @@ public class ElevatorSetSafety extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.elevator.SAFETY = safety;
-    	Robot.elevator.minimumPotentiometerValue = 0;
-    	Robot.elevator.maximumPotentiometerValue = 1023;
     }
 
     // Called when another command which requires one or more of the same

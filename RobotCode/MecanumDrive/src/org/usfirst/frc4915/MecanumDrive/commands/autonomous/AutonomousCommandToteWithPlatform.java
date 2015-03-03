@@ -1,14 +1,14 @@
 package org.usfirst.frc4915.MecanumDrive.commands.autonomous;
 
 import org.usfirst.frc4915.MecanumDrive.commands.drive.MoveStraightPositionModeCommand;
-import org.usfirst.frc4915.MecanumDrive.commands.drive.StopDriveTrain;
-import org.usfirst.frc4915.MecanumDrive.commands.drive.Wait;
-import org.usfirst.frc4915.MecanumDrive.commands.elevator.ElevatorIsAbovePositionNumber;
-import org.usfirst.frc4915.MecanumDrive.commands.elevator.ElevatorIsBelowPositionNumber;
-import org.usfirst.frc4915.MecanumDrive.commands.elevator.ElevatorJumpToPosition;
-import org.usfirst.frc4915.MecanumDrive.commands.elevator.ElevatorMoveToHeight;
-import org.usfirst.frc4915.MecanumDrive.commands.grabber.CloseGrabber;
-import org.usfirst.frc4915.MecanumDrive.commands.grabber.OpenGrabber;
+import org.usfirst.frc4915.MecanumDrive.commands.drive.StopDriveTrainCommand;
+import org.usfirst.frc4915.MecanumDrive.commands.drive.WaitCommand;
+import org.usfirst.frc4915.MecanumDrive.commands.elevator.ElevatorIsAbovePositionNumberCommand;
+import org.usfirst.frc4915.MecanumDrive.commands.elevator.ElevatorIsBelowPositionNumberCommand;
+import org.usfirst.frc4915.MecanumDrive.commands.elevator.ElevatorJumpToPositionCommand;
+import org.usfirst.frc4915.MecanumDrive.commands.elevator.ElevatorMoveToHeightCommand;
+import org.usfirst.frc4915.MecanumDrive.commands.grabber.CloseGrabberCommand;
+import org.usfirst.frc4915.MecanumDrive.commands.grabber.OpenGrabberCommand;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
@@ -31,27 +31,27 @@ public class AutonomousCommandToteWithPlatform extends CommandGroup {
         // e.g. if Command1 requires chassis, and Command2 requires arm,
         // a CommandGroup containing them would require both the chassis and the
         // arm.
-    	addParallel(new ElevatorMoveToHeight());
-    	addParallel(new StopDriveTrain());
+    	addParallel(new ElevatorMoveToHeightCommand());
+    	addParallel(new StopDriveTrainCommand());
     	
     	System.out.println("Moving Elevator (level 0)");
-    	addSequential(new ElevatorJumpToPosition(0));
+    	addSequential(new ElevatorJumpToPositionCommand(0));
     	//inches
-    	addSequential(new ElevatorIsBelowPositionNumber(.5), 2);
+    	addSequential(new ElevatorIsBelowPositionNumberCommand(.5), 2);
     	System.out.println("Closing Grabber");
-    	addSequential(new CloseGrabber());
-    	addSequential(new Wait(.5));
+    	addSequential(new CloseGrabberCommand());
+    	addSequential(new WaitCommand(.5));
     	System.out.println("Moving Elevator (level 1)");
-    	addSequential(new ElevatorJumpToPosition(1));
+    	addSequential(new ElevatorJumpToPositionCommand(1));
     	//position
-    	addSequential(new ElevatorIsAbovePositionNumber(12), 1.2);
+    	addSequential(new ElevatorIsAbovePositionNumberCommand(12), 1.2);
     	
     	addSequential(new MoveStraightPositionModeCommand(-10, 0.7));    	
     	System.out.println("Moving Elevator (level 0)"); //puts down tote  
-    	addSequential(new ElevatorJumpToPosition(0));
+    	addSequential(new ElevatorJumpToPositionCommand(0));
     	//inches
-    	addSequential(new ElevatorIsBelowPositionNumber(.5), 2);
-    	addSequential(new OpenGrabber());
+    	addSequential(new ElevatorIsBelowPositionNumberCommand(.5), 2);
+    	addSequential(new OpenGrabberCommand());
     	
 
    

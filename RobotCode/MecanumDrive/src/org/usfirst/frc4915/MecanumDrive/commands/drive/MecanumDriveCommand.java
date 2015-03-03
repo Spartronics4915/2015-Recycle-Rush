@@ -1,44 +1,44 @@
-package org.usfirst.frc4915.MecanumDrive.commands.debug;
+package org.usfirst.frc4915.MecanumDrive.commands.drive;
 
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Command;
+import org.usfirst.frc4915.MecanumDrive.Robot;
+import org.usfirst.frc4915.debuggersystem.CustomDebugger;
+import org.usfirst.frc4915.debuggersystem.CustomDebugger.LoggerNames;
 
-public class GenericTestCommand extends Command {
+public class MecanumDriveCommand extends Command {
+    CustomDebugger debugger;
 
-    int count = 0;
-    int i;
-    String message;
-
-    public GenericTestCommand(int count, String message) {
+    public MecanumDriveCommand() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-        this.count = count;
-        this.message = message;
+        requires(Robot.driveTrain);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-        System.out.printf("** Saying \"%s\" %d times.%n", message, count);
+        Robot.debugger.logError(LoggerNames.DRIVETRAIN, "Starting MecanumDrive Command");
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        System.out.printf("** %s (%d/%d)%n", message, i, count);
-        i++;
+        Joystick joystickDrive = Robot.oi.driveStick;
+        Robot.driveTrain.mecanumDrive(joystickDrive);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return i == count;
+        return false;
     }
 
     // Called once after isFinished returns true
     protected void end() {
-        System.out.printf("** Finished saying \"%s\" %d times.%n", message, count);
+        Robot.driveTrain.getRobotDrive().stopMotor();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-        System.out.printf("** Interrupted whilst saying \"%s\" %d times.%n", message, count);
+        end();
     }
 }

@@ -1,44 +1,35 @@
-package org.usfirst.frc4915.MecanumDrive.commands.debug;
+package org.usfirst.frc4915.MecanumDrive.commands.drive;
 
 import edu.wpi.first.wpilibj.command.Command;
+import org.usfirst.frc4915.MecanumDrive.Robot;
 
-public class GenericTestCommand extends Command {
+public class TrackGyroCommand extends Command {
 
-    int count = 0;
-    int i;
-    String message;
-
-    public GenericTestCommand(int count, String message) {
+    public TrackGyroCommand() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-        this.count = count;
-        this.message = message;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-        System.out.printf("** Saying \"%s\" %d times.%n", message, count);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        System.out.printf("** %s (%d/%d)%n", message, i, count);
-        i++;
+        Robot.driveTrain.trackGyro();
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return i == count;
+        return false;
     }
 
     // Called once after isFinished returns true
     protected void end() {
-        System.out.printf("** Finished saying \"%s\" %d times.%n", message, count);
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-        System.out.printf("** Interrupted whilst saying \"%s\" %d times.%n", message, count);
     }
 }
