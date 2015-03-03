@@ -29,6 +29,7 @@ public class AutonomousCommandJustDrive extends CommandGroup {
         // a CommandGroup containing them would require both the chassis and the
         // arm.
         System.out.println("***Running Just Drive Command***");
-        addSequential(new MoveStraightPositionModeCommand(5, 0.7));
+        // Change to 4 ft from 5 ft
+        addSequential(new MoveStraightPositionModeCommand(4, 0.7));
     }
 }

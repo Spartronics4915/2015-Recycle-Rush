@@ -87,16 +87,7 @@ public class Robot extends IterativeRobot {
 	    debugger.logError(LoggerNames.GENERAL, "TestOne = "	+ testPreferencesItemOne);
 	    debugger.logError(LoggerNames.GENERAL, "TestThree = " + testPreferencesItemThree);
 	    debugger.logError(LoggerNames.GENERAL, preferences.getString("DesiredDistance", "9.0"));
-
-		autonomousProgramChooser = new SendableChooser();
-		autonomousProgramChooser.addDefault("Autonomous Just Drive", new AutonomousCommandJustDrive());
-		autonomousProgramChooser.addObject("Autonomous Container Strategy", new AutonomousCommandContainerStrategy());
-		autonomousProgramChooser.addObject("Autonomous Tote Strategy", new AutonomousCommandToteStrategy());
-		autonomousProgramChooser.addObject("Autonomous Stacking Strategy", new AutonomousCommandStacking());
-		//autonomousProgramChooser.addObject("Autonomous Two Totes One Container Strategy", new AutonomousCommandTwoTotesOneContainer());
-		//autonomousProgramChooser.addObject("Autonomous Two Container Strategy", new AutonomousCommandTwoContainers());
-		
-		SmartDashboard.putData("Autonomous Program", autonomousProgramChooser);
+	    
 		SmartDashboard.putData(Scheduler.getInstance());
 		
 	//	Debugger = new SendableChooser();
@@ -158,7 +149,7 @@ public class Robot extends IterativeRobot {
 	public void autonomousInit() {
 		// Use the selected autonomous command
 
-		autonomousCommand = (Command) autonomousProgramChooser.getSelected();
+		autonomousCommand = (Command) oi.autonomousProgramChooser.getSelected();
 		//double desiredDistrance = preferences.getDouble("DesiredDistance", 9.0);
 		//autonomousCommand = new AutonomousCommandToteStrategy();
 		//autonomousCommand = new StrafeCommand(3, 0.7);

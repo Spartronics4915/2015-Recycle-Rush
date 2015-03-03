@@ -3,7 +3,13 @@ package org.usfirst.frc4915.MecanumDrive;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
+import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandContainerStrategy;
+import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandJustDrive;
+import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandStacking;
+import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandToteStrategy;
 import org.usfirst.frc4915.MecanumDrive.commands.drive.ToggleDriveModeCommand;
 import org.usfirst.frc4915.MecanumDrive.commands.elevator.ElevatorJumpToPositionCommand;
 import org.usfirst.frc4915.MecanumDrive.commands.elevator.ElevatorPositionCalibrationCommand;
@@ -75,8 +81,22 @@ public class OI {
     public JoystickButton grabberClosed;
     public JoystickButton grabberIntermediate;
 
+    public SendableChooser autonomousProgramChooser;
+    
     public OI() {
-
+    	/**
+    	 * AUTONOMOUS CHOOSER
+    	 */
+    	autonomousProgramChooser = new SendableChooser();
+		autonomousProgramChooser.addDefault("Autonomous Just Drive", new AutonomousCommandJustDrive());
+		autonomousProgramChooser.addObject("Autonomous Container Strategy", new AutonomousCommandContainerStrategy());
+		autonomousProgramChooser.addObject("Autonomous Tote Strategy", new AutonomousCommandToteStrategy());
+		autonomousProgramChooser.addObject("Autonomous Stacking Strategy", new AutonomousCommandStacking());
+		//autonomousProgramChooser.addObject("Autonomous Two Totes One Container Strategy", new AutonomousCommandTwoTotesOneContainer());
+		//autonomousProgramChooser.addObject("Autonomous Two Container Strategy", new AutonomousCommandTwoContainers());
+		
+		SmartDashboard.putData("Autonomous Program", autonomousProgramChooser);
+		
 		/*
          * JOYSTICKS
 		 */
