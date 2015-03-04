@@ -88,7 +88,7 @@ public class Robot extends IterativeRobot {
 	    debugger.logError(LoggerNames.GENERAL, "TestThree = " + testPreferencesItemThree);
 	    debugger.logError(LoggerNames.GENERAL, preferences.getString("DesiredDistance", "9.0"));
 	    
-		SmartDashboard.putData(Scheduler.getInstance());
+		//SmartDashboard.putData(Scheduler.getInstance());
 		
 	//	Debugger = new SendableChooser();
 	//	Debugger.addDefault("General", new ShowOnly(LoggerNames.GENERAL));

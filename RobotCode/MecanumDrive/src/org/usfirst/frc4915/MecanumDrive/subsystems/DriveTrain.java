@@ -64,6 +64,7 @@ public class DriveTrain extends Subsystem {
 		throttle = 0.40 * (-joystick.getThrottle()) + 0.60;
 		debugger.logError(LoggerNames.DRIVETRAIN, "Throttle Value: " + throttle);
 
+		// TODO test if these values improve driving .3, .2, .3
 		boolean deadZoneX = Math.abs(joystickX) < 0.2;
 		boolean deadZoneY = Math.abs(joystickY) < 0.2;
 		boolean deadZoneTwist = Math.abs(joystickTwist) < 0.2;
