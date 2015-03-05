@@ -7,11 +7,13 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandContainerStrategy;
+import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandContainerWithPlatform;
+import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandDoNothing;
 import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandJustDrive;
 import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandStacking;
 import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandStayPut;
 import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandToteStrategy;
-import org.usfirst.frc4915.MecanumDrive.commands.drive.ToggleDriveModeCommand;
+import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandToteWithPlatform;
 import org.usfirst.frc4915.MecanumDrive.commands.elevator.ElevatorJumpToPositionCommand;
 import org.usfirst.frc4915.MecanumDrive.commands.elevator.ElevatorPositionCalibrationCommand;
 import org.usfirst.frc4915.MecanumDrive.commands.elevator.ElevatorSetSafetyCommand;
@@ -92,10 +94,11 @@ public class OI {
 		autonomousProgramChooser.addDefault("Autonomous Just Drive", new AutonomousCommandJustDrive());
 		autonomousProgramChooser.addObject("Autonomous Container Strategy", new AutonomousCommandContainerStrategy());
 		autonomousProgramChooser.addObject("Autonomous Tote Strategy", new AutonomousCommandToteStrategy());
+		autonomousProgramChooser.addObject("Autonomous Container WITH Platform", new AutonomousCommandContainerWithPlatform());
+		autonomousProgramChooser.addObject("Autonomous Tote WITH Platform", new AutonomousCommandToteWithPlatform());
 		autonomousProgramChooser.addObject("Autonomous Stay Put", new AutonomousCommandStayPut());
-		//autonomousProgramChooser.addObject("Autonomous Stacking Strategy", new AutonomousCommandStacking());
-		//autonomousProgramChooser.addObject("Autonomous Two Totes One Container Strategy", new AutonomousCommandTwoTotesOneContainer());
-		//autonomousProgramChooser.addObject("Autonomous Two Container Strategy", new AutonomousCommandTwoContainers());
+		autonomousProgramChooser.addObject("Autonomous Stacking Strategy", new AutonomousCommandStacking());
+		autonomousProgramChooser.addObject("Autonomous Do Nothing", new AutonomousCommandDoNothing());
 		
 		SmartDashboard.putData("Autonomous Program", autonomousProgramChooser);
 		
