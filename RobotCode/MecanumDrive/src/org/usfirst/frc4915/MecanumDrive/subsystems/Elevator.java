@@ -18,9 +18,8 @@ public class Elevator extends Subsystem {
     public static final double APPROXIMATE_OFFSET = 430;
 
     // POTENTIOMTERS : fwd --> top, rev --> bottom
-    public static final double RANGE_OF_MOTION = 53; // The elevator can go a
-    public static final double CHASIS_HEIGHT = 5; // These two measurements are
-    // in inches
+    public static final double RANGE_OF_MOTION = 53; //inches
+    public static final double POSITION_OFFSET = 2.5; //inches
     public static final double HEIGHT_OF_TOTE = 12;
     private static final double JOYSTICK_SCALE = -18;
     // Not in inches. Between minimumPotentiometerValue and
@@ -132,7 +131,7 @@ public class Elevator extends Subsystem {
 	 * could be below it. Between 0 and 5.
 	 */
 	public double getPositionNumber() {
-		double positionNumber = getPositionInches() / HEIGHT_OF_TOTE;
+		double positionNumber = (getPositionInches() - POSITION_OFFSET) / HEIGHT_OF_TOTE;
 		return positionNumber;
 	}
 
@@ -156,7 +155,7 @@ public class Elevator extends Subsystem {
         // find the range between the min and max Potentiometer values, divide by 54 to get
         // the change in value per inch and multiply by the number of inches that the totes are stacked
         setPoint = minimumPotentiometerValue + ((maximumPotentiometerValue - minimumPotentiometerValue)
-                * HEIGHT_OF_TOTE * positionNumber / RANGE_OF_MOTION);
+                * HEIGHT_OF_TOTE * (positionNumber + POSITION_OFFSET / HEIGHT_OF_TOTE) / RANGE_OF_MOTION);
 		//Robot.debugger.logError(LoggerNames.ELEVATOR, "Elevator's height is " + setPoint);
 	}
 

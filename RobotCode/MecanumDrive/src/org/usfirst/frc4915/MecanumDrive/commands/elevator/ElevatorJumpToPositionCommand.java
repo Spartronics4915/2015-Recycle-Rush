@@ -11,7 +11,7 @@ public class ElevatorJumpToPositionCommand extends Command {
     // Position number -- number of totes that you would need to stack on top
     // of.
     private double positionNumber;
-
+    
     public ElevatorJumpToPositionCommand(double d) {
         positionNumber = d;
         // DON'T require Robot.elevator
