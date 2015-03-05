@@ -96,7 +96,7 @@ public class OI {
 		autonomousProgramChooser.addObject("Autonomous Tote Strategy", new AutonomousCommandToteStrategy());
 		autonomousProgramChooser.addObject("Autonomous Container WITH Platform", new AutonomousCommandContainerWithPlatform());
 		autonomousProgramChooser.addObject("Autonomous Tote WITH Platform", new AutonomousCommandToteWithPlatform());
-		autonomousProgramChooser.addObject("Autonomous Stay Put", new AutonomousCommandStayPut());
+		//autonomousProgramChooser.addObject("Autonomous Stay Put", new AutonomousCommandStayPut());
 		autonomousProgramChooser.addObject("Autonomous Stacking Strategy", new AutonomousCommandStacking());
 		autonomousProgramChooser.addObject("Autonomous Do Nothing", new AutonomousCommandDoNothing());
 		

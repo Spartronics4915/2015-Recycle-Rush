@@ -30,6 +30,9 @@ public class DriveTrain extends Subsystem {
 	public double startingAngle = 0;
 	public boolean fieldMode = false; 
 
+	public static final double SECTOR_15º_RATIO = .27;
+	public static final double DEFAULT_BUFFER = .2;
+	public static final double DOUBLE = 2;
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.
 
@@ -63,15 +66,39 @@ public class DriveTrain extends Subsystem {
 
 		throttle = 0.40 * (-joystick.getThrottle()) + 0.60;
 		debugger.logError(LoggerNames.DRIVETRAIN, "Throttle Value: " + throttle);
+		
+		if (Math.abs(joystickX) <= .2) {
+			joystickX = 0;
+		}
+		if (Math.abs(joystickY) <= .2) {
+			joystickY = 0;
+		}
+		
+		boolean strafeOnly = (Math.abs(joystickY) < SECTOR_15º_RATIO * Math.abs(joystickX));
+		boolean forwardOnly = (Math.abs(joystickX) < SECTOR_15º_RATIO * Math.abs(joystickY));
+		
+		double bufferX = DEFAULT_BUFFER;
+		double bufferY = DEFAULT_BUFFER;
+		double bufferZ = DEFAULT_BUFFER;
 
-		// TODO test if these values improve driving .3, .2, .3
-		boolean deadZoneX = Math.abs(joystickX) < 0.2;
-		boolean deadZoneY = Math.abs(joystickY) < 0.2;
-		boolean deadZoneTwist = Math.abs(joystickTwist) < 0.2;
-
+		if (strafeOnly) {
+			bufferY *= DOUBLE;
+			bufferZ *= DOUBLE;
+		}
+		if (forwardOnly) {
+			bufferX *= DOUBLE;
+			bufferZ *= DOUBLE;
+		}
+		
+		boolean deadZoneX = Math.abs(joystickX) < bufferX;
+		boolean deadZoneY = Math.abs(joystickY) < bufferY;
+		boolean deadZoneTwist = Math.abs(joystickTwist) < bufferZ;
+		
 		if (deadZoneX) joystickX = 0;
-		if (deadZoneY) joystickY = 0;
-		if (deadZoneTwist) joystickTwist = 0;
+		
+		
+		if (deadZoneY || strafeOnly) joystickY = 0;
+		if (deadZoneTwist || strafeOnly) joystickTwist = 0;
 		
 		double throttleX = throttle*joystickX;
 		double throttleY = throttle*joystickY;
