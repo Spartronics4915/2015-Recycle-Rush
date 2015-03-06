@@ -160,9 +160,7 @@ public class Robot extends IterativeRobot {
 		// wanting to go to a random position (default zero)
 		elevator.setHieghtToCurrentPosition();
 		// Tells the elevator to approximate the other maximum when it hits a limit switch
-		Elevator.needToApproximate = true;
-		Elevator.didSaveTopValue = false;
-		Elevator.didSaveBottomValue = false;
+		Elevator.SAFETY = true;
 		Elevator.needToApproximate = true;
 		Elevator.didSaveTopValue = false;
 		Elevator.didSaveBottomValue = false;
@@ -188,6 +186,7 @@ public class Robot extends IterativeRobot {
 		// wanting to go to a random position (default zero)
 		elevator.setHieghtToCurrentPosition();
 		// Tells the elevator to approximate the other maximum when it hits a limit switch
+		Elevator.SAFETY = true;
 		Elevator.needToApproximate = true;
 		Elevator.didSaveTopValue = false;
 		Elevator.didSaveBottomValue = false;
