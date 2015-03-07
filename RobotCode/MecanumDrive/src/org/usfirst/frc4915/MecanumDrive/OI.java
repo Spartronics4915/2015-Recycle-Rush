@@ -13,6 +13,7 @@ import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandJus
 import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandStacking;
 import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandToteStrategy;
 import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandToteWithPlatform;
+import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandTurn180WithTote;
 import org.usfirst.frc4915.MecanumDrive.commands.elevator.ElevatorJumpToPositionCommand;
 import org.usfirst.frc4915.MecanumDrive.commands.elevator.ElevatorPositionCalibrationCommand;
 import org.usfirst.frc4915.MecanumDrive.commands.elevator.ElevatorSetSafetyCommand;
@@ -20,6 +21,7 @@ import org.usfirst.frc4915.MecanumDrive.commands.grabber.CloseGrabberCommand;
 import org.usfirst.frc4915.MecanumDrive.commands.grabber.IntermediateOpenGrabberCommand;
 import org.usfirst.frc4915.MecanumDrive.commands.grabber.OpenGrabberCommand;
 import org.usfirst.frc4915.MecanumDrive.subsystems.DriveTrain;
+import org.usfirst.frc4915.MecanumDrive.utility.VersionFinder;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -97,6 +99,7 @@ public class OI {
 		autonomousProgramChooser.addObject("Autonomous Tote WITH Platform", new AutonomousCommandToteWithPlatform());
 		autonomousProgramChooser.addObject("Autonomous Stacking Strategy", new AutonomousCommandStacking());
 		autonomousProgramChooser.addObject("Autonomous Do Nothing", new AutonomousCommandDoNothing());
+		autonomousProgramChooser.addObject("Autonomous Tote 180º", new AutonomousCommandTurn180WithTote());
 		
 		SmartDashboard.putData("Autonomous Program", autonomousProgramChooser);
 		
@@ -191,8 +194,9 @@ public class OI {
 		 * CODE VERSION OUTPUT
 		 */
 
-/*
+
 		SmartDashboard.putString("Code Version", VersionFinder.getAttribute(this, VersionFinder.VERSION_ATTRIBUTE));
+		/*
 		SmartDashboard.putString("Code Built By", VersionFinder.getAttribute(this, VersionFinder.BUILT_BY_ATTRIBUTE));
 		SmartDashboard.putString("Code Built At", VersionFinder.getAttribute(this, VersionFinder.BUILT_AT_ATTRIBUTE));
 */
