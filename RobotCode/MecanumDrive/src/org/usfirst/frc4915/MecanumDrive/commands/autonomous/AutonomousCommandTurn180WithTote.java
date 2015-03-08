@@ -2,6 +2,7 @@ package org.usfirst.frc4915.MecanumDrive.commands.autonomous;
 
 import org.usfirst.frc4915.MecanumDrive.commands.drive.StopDriveTrainCommand;
 import org.usfirst.frc4915.MecanumDrive.commands.drive.Turn90DegreesCommand;
+import org.usfirst.frc4915.MecanumDrive.commands.drive.WaitCommand;
 import org.usfirst.frc4915.MecanumDrive.commands.elevator.ElevatorIsAbovePositionNumberCommand;
 import org.usfirst.frc4915.MecanumDrive.commands.elevator.ElevatorIsBelowPositionNumberCommand;
 import org.usfirst.frc4915.MecanumDrive.commands.elevator.ElevatorJumpToPositionCommand;
@@ -37,7 +38,9 @@ public class AutonomousCommandTurn180WithTote extends CommandGroup {
     	addParallel(new StopDriveTrainCommand());
     	
     	addSequential(new ElevatorJumpToPositionCommand(0));
-    	addSequential(new ElevatorIsBelowPositionNumberCommand(1), 1.2);
+    	addSequential(new ElevatorIsBelowPositionNumberCommand(.5), 1.2);
+    	
+    	addSequential(new WaitCommand(2));
     	
     	addSequential(new CloseGrabberCommand());
     	
@@ -49,7 +52,7 @@ public class AutonomousCommandTurn180WithTote extends CommandGroup {
     	addSequential(new Turn90DegreesCommand(false));
     	
     	addSequential(new ElevatorJumpToPositionCommand(0));
-    	addSequential(new ElevatorIsBelowPositionNumberCommand(1), 1.2);
+    	addSequential(new ElevatorIsBelowPositionNumberCommand(.5), 1.2);
     	
     }
 }
