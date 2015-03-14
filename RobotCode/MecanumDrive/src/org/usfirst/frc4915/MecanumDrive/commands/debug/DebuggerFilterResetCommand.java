@@ -1,7 +1,8 @@
 package org.usfirst.frc4915.MecanumDrive.commands.debug;
 
-import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc4915.MecanumDrive.Robot;
+
+import edu.wpi.first.wpilibj.command.Command;
 
 public class DebuggerFilterResetCommand extends Command {
     public DebuggerFilterResetCommand() {

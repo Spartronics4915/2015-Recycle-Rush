@@ -59,17 +59,14 @@ public class OI {
     /*
      * JOYSTICKS
      */
+
     public Joystick driveStick;
     public Joystick elevatorStick;
 
     /*
-     * JOYSTICK BUTTONS (DRIVER)
-     */
-    //public JoystickButton toggleFieldDrive;
-
-    /*
      * JOYSTICK BUTTONS (ELEVATOR)
      */
+
     public JoystickButton elevatorJumpToPositionZero;
     public JoystickButton elevatorJumpToPositionOne;
     public JoystickButton elevatorJumpToPositionTwo;
@@ -81,37 +78,41 @@ public class OI {
     /*
      * JOYSTICK BUTTONS (GRABBER)
      */
+
     public JoystickButton grabberOpen;
     public JoystickButton grabberClosed;
     public JoystickButton grabberIntermediate;
 
     public SendableChooser autonomousProgramChooser;
-    
+
     public OI() {
-    	/**
-    	 * AUTONOMOUS CHOOSER
-    	 */
-    	autonomousProgramChooser = new SendableChooser();
-		autonomousProgramChooser.addDefault("Autonomous Just Drive", new AutonomousCommandJustDrive());
-		autonomousProgramChooser.addObject("Autonomous Container Strategy", new AutonomousCommandContainerStrategy());
-		autonomousProgramChooser.addObject("Autonomous Tote Strategy", new AutonomousCommandToteStrategy());
-		autonomousProgramChooser.addObject("Autonomous Container WITH Platform", new AutonomousCommandContainerWithPlatform());
-		autonomousProgramChooser.addObject("Autonomous Tote WITH Platform", new AutonomousCommandToteWithPlatform());
-		autonomousProgramChooser.addObject("Autonomous Stacking Strategy", new AutonomousCommandStacking());
-		autonomousProgramChooser.addObject("Autonomous Do Nothing", new AutonomousCommandDoNothing());
-		autonomousProgramChooser.addObject("Autonomous Tote 180º", new AutonomousCommandTurn180WithTote());
-		
-		SmartDashboard.putData("Autonomous Program", autonomousProgramChooser);
-		
-		/*
+
+        /*
+         * AUTONOMOUS CHOOSER
+         */
+
+        autonomousProgramChooser = new SendableChooser();
+        autonomousProgramChooser.addDefault("Autonomous Just Drive", new AutonomousCommandJustDrive());
+        autonomousProgramChooser.addObject("Autonomous Container Strategy", new AutonomousCommandContainerStrategy());
+        autonomousProgramChooser.addObject("Autonomous Tote Strategy", new AutonomousCommandToteStrategy());
+        autonomousProgramChooser.addObject("Autonomous Container WITH Platform", new AutonomousCommandContainerWithPlatform());
+        autonomousProgramChooser.addObject("Autonomous Tote WITH Platform", new AutonomousCommandToteWithPlatform());
+        autonomousProgramChooser.addObject("Autonomous Stacking Strategy", new AutonomousCommandStacking());
+        autonomousProgramChooser.addObject("Autonomous Do Nothing", new AutonomousCommandDoNothing());
+        autonomousProgramChooser.addObject("Autonomous Tote 180º", new AutonomousCommandTurn180WithTote());
+
+        SmartDashboard.putData("Autonomous Program", autonomousProgramChooser);
+
+        /*
          * JOYSTICKS
-		 */
+         */
+
         driveStick = new Joystick(0);
         elevatorStick = new Joystick(1);
 
-		/*
+        /*
          * JOYSTICK BUTTONS (ELEVATOR)
-		 */
+         */
 
         elevatorJumpToPositionZero = new JoystickButton(elevatorStick, 6);
         elevatorJumpToPositionZero.whenPressed(new ElevatorJumpToPositionCommand(0));
@@ -124,10 +125,9 @@ public class OI {
         elevatorJumpToPositionFour = new JoystickButton(elevatorStick, 10);
         elevatorJumpToPositionFour.whenPressed(new ElevatorJumpToPositionCommand(4));
 
-		
-		/*
-         * Grabber Buttons
-		 */
+        /*
+         * JOYSTICK BUTTONS (GRABBER)
+         */
 
         grabberOpen = new JoystickButton(elevatorStick, 3);
         grabberOpen.whenPressed(new OpenGrabberCommand());
@@ -135,70 +135,22 @@ public class OI {
         grabberClosed.whenPressed(new CloseGrabberCommand());
         grabberIntermediate = new JoystickButton(elevatorStick, 5);
         grabberIntermediate.whenPressed(new IntermediateOpenGrabberCommand());
-		
-		/*
-		 /*
-		 * AUTONOMOUS COMMAND
-		 */
-        //SmartDashboard.putData("Autonomous Command ", new AutonomousCommand());
-        //SmartDashboard.putData("Autonomous Command Drive", new AutonomousCommandJustDrive());
-        //SmartDashboard.putData("Autonomous Command Container", new AutonomousCommandContainerStrategy());
-		/*
-		 * DRIVE STRAIGHT
-		 */
-        // SmartDashboard.putData("Turn 90 Degrees left", new Turn90DegreesCommand(true));
-//
-//		SmartDashboard.putData("Move Straight 5 feet", new MoveStraightPositionModeCommand(5,0.7));
-//		SmartDashboard.putData("Strafe 1.9 feet", new StrafeCommand(1.9, 0.7));
-        //SmartDashboard.putData("Move Backwards 3 feet", new MoveStraightPositionModeCommand(-3, 0.7));
-        //SmartDashboard.putData("DriveStraight 1 second", new DriveStraightCommand());
 
-		
-		/*
-		 * TOGGLE FIELD ORIENTED DRIVE
-		 */
-        //toggleFieldDrive = new JoystickButton(driveStick, 11);
-        //toggleFieldDrive.whenPressed(new ToggleDriveModeCommand());
-        //SmartDashboard.putData("Toggle Field Drive", new ToggleDriveModeCommand());
-        //SmartDashboard.putBoolean("Field Mode", Robot.driveTrain.fieldMode);
-		
-		/*
-		 * ELEVATOR
-		 */
+        /*
+         * ELEVATOR
+         */
+
         SmartDashboard.putData("ElevatorPositionCalibrationCommand", new ElevatorPositionCalibrationCommand());
         SmartDashboard.putData("Disable Elevator Safety", new ElevatorSetSafetyCommand(false));
         SmartDashboard.putData("Enable Elevator Safety", new ElevatorSetSafetyCommand(true));
-				
-		/*
-		 * DEBUGGER BUTTONS
-		 */
 
-//		SmartDashboard.putData("Set debugger to drivetrain", new DebuggerShowOnlyCommand(LoggerNames.DRIVETRAIN));
-//		SmartDashboard.putData("Set debugger to grabber", new DebuggerShowOnlyCommand(LoggerNames.GRABBER));
-//		SmartDashboard.putData("Set debugger to general", new DebuggerShowOnlyCommand(LoggerNames.GENERAL));
-//		SmartDashboard.putData("Set debugger to autonomous", new DebuggerShowOnlyCommand(LoggerNames.AUTONOMOUS));
-//		SmartDashboard.putData("Set debugger to elevator", new DebuggerShowOnlyCommand(LoggerNames.ELEVATOR));
-//		SmartDashboard.putData("Reset debugger filter", new DebuggerFilterResetCommand());
-		
-
-		/*
-		 * SENSOR OUTPUT
-		 */
+        /*
+         * SENSOR OUTPUT
+         */
 
         LiveWindow.addSensor("Other Sensors", "Accelerometer", RobotMap.accelerometer);
         LiveWindow.addSensor("Drive Train", "Distance Sensor", DriveTrain.distanceSensor);
         LiveWindow.addActuator("Grabber Primary Solenoid", "Solenoid", RobotMap.primarySolenoid);
         LiveWindow.addActuator("Grabber Secondary Solenoid", "Solenoid", RobotMap.secondarySolenoid);
-		
-		/*
-		 * CODE VERSION OUTPUT
-		 */
-
-
-		SmartDashboard.putString("Code Version", VersionFinder.getAttribute(this, VersionFinder.VERSION_ATTRIBUTE));
-		/*
-		SmartDashboard.putString("Code Built By", VersionFinder.getAttribute(this, VersionFinder.BUILT_BY_ATTRIBUTE));
-		SmartDashboard.putString("Code Built At", VersionFinder.getAttribute(this, VersionFinder.BUILT_AT_ATTRIBUTE));
-*/
     }
 }

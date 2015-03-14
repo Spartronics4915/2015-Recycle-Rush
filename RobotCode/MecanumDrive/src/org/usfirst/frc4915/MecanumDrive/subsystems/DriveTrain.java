@@ -1,179 +1,165 @@
 package org.usfirst.frc4915.MecanumDrive.subsystems;
 
-import edu.wpi.first.wpilibj.*;
-import edu.wpi.first.wpilibj.CANTalon.ControlMode;
-import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import java.util.Arrays;
+import java.util.List;
+
 import org.usfirst.frc4915.MecanumDrive.Robot;
 import org.usfirst.frc4915.MecanumDrive.RobotMap;
 import org.usfirst.frc4915.MecanumDrive.commands.drive.MecanumDriveCommand;
 import org.usfirst.frc4915.debuggersystem.CustomDebugger;
 import org.usfirst.frc4915.debuggersystem.CustomDebugger.LoggerNames;
 
-import java.util.Arrays;
-import java.util.List;
+import edu.wpi.first.wpilibj.CANTalon;
+import edu.wpi.first.wpilibj.CANTalon.ControlMode;
+import edu.wpi.first.wpilibj.Gyro;
+import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.RobotDrive;
+import edu.wpi.first.wpilibj.Ultrasonic;
+import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class DriveTrain extends Subsystem {
 
-	RobotDrive robotDrive;
-	CustomDebugger debugger = Robot.debugger;
+    RobotDrive robotDrive;
+    CustomDebugger debugger = Robot.debugger;
 
-	public static List<CANTalon> motors = Arrays.asList(RobotMap.mecanumDriveControlsLeftFront, RobotMap.mecanumDriveControlsLeftRear, RobotMap.mecanumDriveControlsRightFront, RobotMap.mecanumDriveControlsRightRear);
+    public static List<CANTalon> motors = Arrays.asList(RobotMap.mecanumDriveControlsLeftFront, RobotMap.mecanumDriveControlsLeftRear, RobotMap.mecanumDriveControlsRightFront, RobotMap.mecanumDriveControlsRightRear);
 
-	public static Gyro gyro = RobotMap.gyro;
-	public static Ultrasonic distanceSensor = RobotMap.distanceSensor;
+    public static Gyro gyro = RobotMap.gyro;
+    public static Ultrasonic distanceSensor = RobotMap.distanceSensor;
 
-	public double throttle = 0;
-	
-	public double deltaGyro = 0;
-	public double gyroHeading = 0;
-	public double startingAngle = 0;
-	public boolean fieldMode = false; 
+    public double throttle = 0;
 
-	public static final double SECTOR_15º_RATIO = .27;
-	public static final double DEFAULT_BUFFER = .2;
-	public static final double DOUBLE = 2;
-	// Put methods for controlling this subsystem
-	// here. Call these from Commands.
+    public double deltaGyro = 0;
+    public double gyroHeading = 0;
+    public double startingAngle = 0;
+    public boolean fieldMode = false;
 
-	public void initDefaultCommand() {
-		setDefaultCommand(new MecanumDriveCommand());
+    public static final double SECTOR_15º_RATIO = .27;
+    public static final double DEFAULT_BUFFER = .2;
+    public static final double DOUBLE = 2;
+    // Put methods for controlling this subsystem
+    // here. Call these from Commands.
 
-		// Set the default command for a subsystem here.
-		// setDefaultCommand(new MySpecialCommand());
+    public void initDefaultCommand() {
+        setDefaultCommand(new MecanumDriveCommand());
 
-		robotDrive = RobotMap.driveTrainRobotDrive;
-	}
+        // Set the default command for a subsystem here.
+        // setDefaultCommand(new MySpecialCommand());
 
-	public RobotDrive getRobotDrive() {
-		return robotDrive;
-	}
+        robotDrive = RobotMap.driveTrainRobotDrive;
+    }
 
-	/**
-	 * Drives a mecanum drivetrain in the direction of the joystick pointed
-	 * Since the motors are enabled to use their encoders in RobotMap, each
-	 * motor should go at the speeds that they need to more accurately. Because
-	 * of this, we do not want to use setMaxOutput, because the value set in
-	 * RobotMap.java is needed to be the same.
-	 * 
-	 * @param joystick Joystick controlling the robot movement
-	 */
-	public void mecanumDrive(Joystick joystick) {
+    public RobotDrive getRobotDrive() {
+        return robotDrive;
+    }
 
-		double joystickX = joystick.getAxis(Joystick.AxisType.kX);
-		double joystickY = joystick.getAxis(Joystick.AxisType.kY);
-		double joystickTwist = joystick.getAxis(Joystick.AxisType.kTwist);
+    /**
+     * Drives a mecanum drivetrain in the direction of the joystick pointed
+     * Since the motors are enabled to use their encoders in RobotMap, each
+     * motor should go at the speeds that they need to more accurately. Because
+     * of this, we do not want to use setMaxOutput, because the value set in
+     * RobotMap.java is needed to be the same.
+     *
+     * @param joystick Joystick controlling the robot movement
+     */
+    public void mecanumDrive(Joystick joystick) {
 
-		throttle = 0.40 * (-joystick.getThrottle()) + 0.60;
-		debugger.logError(LoggerNames.DRIVETRAIN, "Throttle Value: " + throttle);
-		
-		if (Math.abs(joystickX) <= .2) {
-			joystickX = 0;
-		}
-		if (Math.abs(joystickY) <= .2) {
-			joystickY = 0;
-		}
-		
-		boolean strafeOnly = (Math.abs(joystickY) < SECTOR_15º_RATIO * Math.abs(joystickX));
-		boolean forwardOnly = (Math.abs(joystickX) < SECTOR_15º_RATIO * Math.abs(joystickY));
-		
-		double bufferX = DEFAULT_BUFFER;
-		double bufferY = DEFAULT_BUFFER;
-		double bufferZ = DEFAULT_BUFFER;
+        double joystickX = joystick.getAxis(Joystick.AxisType.kX);
+        double joystickY = joystick.getAxis(Joystick.AxisType.kY);
+        double joystickTwist = joystick.getAxis(Joystick.AxisType.kTwist);
 
-		if (strafeOnly) {
-			bufferY *= DOUBLE;
-			bufferZ *= DOUBLE;
-		}
-		if (forwardOnly) {
-			bufferX *= DOUBLE;
-			bufferZ *= DOUBLE;
-		}
-		
-		boolean deadZoneX = Math.abs(joystickX) < bufferX;
-		boolean deadZoneY = Math.abs(joystickY) < bufferY;
-		boolean deadZoneTwist = Math.abs(joystickTwist) < bufferZ;
-		
-		if (deadZoneX) joystickX = 0;
-		
-		
-		if (deadZoneY || strafeOnly) joystickY = 0;
-		if (deadZoneTwist || strafeOnly) joystickTwist = 0;
-		
-		double throttleX = throttle*joystickX;
-		double throttleY = throttle*joystickY;
-		double throttleTwist = throttle*joystickTwist;
-		
-		//Gyro Tracking and debug
-		Robot.driveTrain.trackGyro();
-		//SmartDashboard.putNumber("Gyro Angle", Robot.driveTrain.gyroHeading % 360);
+        throttle = 0.40 * (-joystick.getThrottle()) + 0.60;
+        debugger.logError(LoggerNames.DRIVETRAIN, "Throttle Value: " + throttle);
+
+        if (Math.abs(joystickX) <= .2) {
+            joystickX = 0;
+        }
+        if (Math.abs(joystickY) <= .2) {
+            joystickY = 0;
+        }
+
+        boolean strafeOnly = (Math.abs(joystickY) < SECTOR_15º_RATIO * Math.abs(joystickX));
+        boolean forwardOnly = (Math.abs(joystickX) < SECTOR_15º_RATIO * Math.abs(joystickY));
+
+        double bufferX = DEFAULT_BUFFER;
+        double bufferY = DEFAULT_BUFFER;
+        double bufferZ = DEFAULT_BUFFER;
+
+        if (strafeOnly) {
+            bufferY *= DOUBLE;
+            bufferZ *= DOUBLE;
+        }
+        if (forwardOnly) {
+            bufferX *= DOUBLE;
+            bufferZ *= DOUBLE;
+        }
+
+        boolean deadZoneX = Math.abs(joystickX) < bufferX;
+        boolean deadZoneY = Math.abs(joystickY) < bufferY;
+        boolean deadZoneTwist = Math.abs(joystickTwist) < bufferZ;
+
+        if (deadZoneX) joystickX = 0;
 
 
-		debugger.logError(LoggerNames.DRIVETRAIN, ("Joystick: "+ joystickX + ", " + joystickY + ", " + joystickTwist));
-		debugger.logError(LoggerNames.DRIVETRAIN, ("Throttle: "+ throttleX + ", " + throttleY + ", " + throttleTwist));
-		if (deadZoneX && deadZoneY && deadZoneTwist) {
-			debugger.logError(LoggerNames.DRIVETRAIN, ("Stopping Motor"));
-			robotDrive.stopMotor();
-		} else {
-			debugger.logError(LoggerNames.DRIVETRAIN,"Gyro Angle: " + gyro.getAngle());
-			robotDrive.mecanumDrive_Cartesian(throttleX, throttleY, throttleTwist, 0);
-			//robotDrive.mecanumDrive_Cartesian(throttleX, throttleY, throttleTwist, fieldMode == true ? gyroHeading : 0);
-		}
-		
+        if (deadZoneY || strafeOnly) joystickY = 0;
+        if (deadZoneTwist || strafeOnly) joystickTwist = 0;
 
-	}
-	
-	/**
-	 * Calibrates the gyro using gyro.reset()
-	 */
-	public void calibrateGyro() {
-		gyro.reset();
-	}
-	
-	/**
-	 * Drives using mecanumDrive_Cartesian forward
-	 * @param speed that it drives at.
-	 */
-	public void driveStraight(double speed) {
-		robotDrive.mecanumDrive_Cartesian(0.0, speed, 0.0, 0.0);
-	}
-	
-	/**
-	 * Drives using mecanumDrive_Cartesian sideways
-	 * @param speed that it drives at
-	 */
-	public void driveSideways(double speed){
-		robotDrive.mecanumDrive_Cartesian(speed, 0.0, 0.0, 0.0);
-	}
-	
-	public void turnLeft(boolean left){
-		// left is true, right is false
-		for (int i = 0; i < motors.size(); i++) {
-			CANTalon motor = motors.get(i);	
-			RobotMap.changeControlMode(ControlMode.Speed);
-			if (left){
-				robotDrive.mecanumDrive_Cartesian(0, 0, -.5, 0);
-			}
-			else {
-				robotDrive.mecanumDrive_Cartesian(0, 0, .5, 0);
-			}
-			}
-//			if ( i == 0 || i == 1) {
-//				if (left) {
-//					motor.set(-.7);
-//				}
-//				else {
-//					motor.set(.7);
-//				}
-//			}
-//			else if ( i == 2 || i== 3) {
-//				if (left) {
-//					motor.set(-.7);
-//				}
-//				else {
-//					motor.set(.7);
-//				}
-//			}
+        double throttleX = throttle*joystickX;
+        double throttleY = throttle*joystickY;
+        double throttleTwist = throttle*joystickTwist;
+
+        //Gyro Tracking and debug
+        Robot.driveTrain.trackGyro();
+
+
+        debugger.logError(LoggerNames.DRIVETRAIN, ("Joystick: "+ joystickX + ", " + joystickY + ", " + joystickTwist));
+        debugger.logError(LoggerNames.DRIVETRAIN, ("Throttle: "+ throttleX + ", " + throttleY + ", " + throttleTwist));
+        if (deadZoneX && deadZoneY && deadZoneTwist) {
+            debugger.logError(LoggerNames.DRIVETRAIN, ("Stopping Motor"));
+            robotDrive.stopMotor();
+        } else {
+            debugger.logError(LoggerNames.DRIVETRAIN,"Gyro Angle: " + gyro.getAngle());
+            robotDrive.mecanumDrive_Cartesian(throttleX, throttleY, throttleTwist, 0);
+        }
+
+
+    }
+
+    /**
+     * Calibrates the gyro using gyro.reset()
+     */
+    public void calibrateGyro() {
+        gyro.reset();
+    }
+
+    /**
+     * Drives using mecanumDrive_Cartesian forward
+     * @param speed that it drives at.
+     */
+    public void driveStraight(double speed) {
+        robotDrive.mecanumDrive_Cartesian(0.0, speed, 0.0, 0.0);
+    }
+
+    /**
+     * Drives using mecanumDrive_Cartesian sideways
+     * @param speed that it drives at
+     */
+    public void driveSideways(double speed){
+        robotDrive.mecanumDrive_Cartesian(speed, 0.0, 0.0, 0.0);
+    }
+
+    public void turnLeft(boolean left){
+        // left is true, right is false
+        for (int i = 0; i < motors.size(); i++) {
+            CANTalon motor = motors.get(i);
+            RobotMap.changeControlMode(ControlMode.Speed);
+            if (left){
+                robotDrive.mecanumDrive_Cartesian(0, 0, -.5, 0);
+            }
+            else {
+                robotDrive.mecanumDrive_Cartesian(0, 0, .5, 0);
+            }
+        }
     }
 
     /**
@@ -184,8 +170,6 @@ public class DriveTrain extends Subsystem {
      * @param elapsed Time since the last sampling of the motor.
      * @return Distance traveled since the last sampling of the encoder.
      */
-    // calculates the distance traveled using the wheel circumference and the
-    // number of wheel rotations.
     public double getDistanceForMotor(CANTalon motor, long elapsed) {
         int ticksPerRevolution = 1000;
         double circumferenceOfWheel = 6 * Math.PI;

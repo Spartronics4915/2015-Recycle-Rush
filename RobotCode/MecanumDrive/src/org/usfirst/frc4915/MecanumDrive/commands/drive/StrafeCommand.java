@@ -1,12 +1,13 @@
 package org.usfirst.frc4915.MecanumDrive.commands.drive;
 
-import edu.wpi.first.wpilibj.CANTalon;
-import edu.wpi.first.wpilibj.command.Command;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.usfirst.frc4915.MecanumDrive.Robot;
 import org.usfirst.frc4915.MecanumDrive.subsystems.DriveTrain;
 
-import java.util.ArrayList;
-import java.util.List;
+import edu.wpi.first.wpilibj.CANTalon;
+import edu.wpi.first.wpilibj.command.Command;
 
 public class StrafeCommand extends Command {
     public static List<CANTalon> motors = DriveTrain.motors;

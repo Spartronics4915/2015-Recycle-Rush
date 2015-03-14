@@ -1,8 +1,9 @@
 package org.usfirst.frc4915.MecanumDrive.subsystems;
 
+import org.usfirst.frc4915.MecanumDrive.RobotMap;
+
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import org.usfirst.frc4915.MecanumDrive.RobotMap;
 
 public class Grabber extends Subsystem {
 
@@ -34,13 +35,13 @@ public class Grabber extends Subsystem {
         primarySolenoid.set(true);
     }
 
-//	/**
-//	 * extends the piston a small amount to relax the grip on the totes
-//	 */
-//	public void smallOpen(){
-//		secondarySolenoid.set(false);
-//		primarySolenoid.set(true);
-//	}
+//    /**
+//     * extends the piston a small amount to relax the grip on the totes
+//     */
+//    public void smallOpen(){
+//        secondarySolenoid.set(false);
+//        primarySolenoid.set(true);
+//    }
 
     /**
      * vents the system
