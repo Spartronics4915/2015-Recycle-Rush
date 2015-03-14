@@ -1,7 +1,5 @@
 package org.usfirst.frc4915.MecanumDrive.commands.autonomous;
 
-import edu.wpi.first.wpilibj.command.CommandGroup;
-
 import org.usfirst.frc4915.MecanumDrive.commands.drive.MoveStraightPositionModeCommand;
 import org.usfirst.frc4915.MecanumDrive.commands.drive.StopDriveTrainCommand;
 import org.usfirst.frc4915.MecanumDrive.commands.drive.WaitCommand;
@@ -11,6 +9,8 @@ import org.usfirst.frc4915.MecanumDrive.commands.elevator.ElevatorJumpToPosition
 import org.usfirst.frc4915.MecanumDrive.commands.elevator.ElevatorMoveToHeightCommand;
 import org.usfirst.frc4915.MecanumDrive.commands.grabber.CloseGrabberCommand;
 import org.usfirst.frc4915.MecanumDrive.commands.grabber.OpenGrabberCommand;
+
+import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class AutonomousCommandToteStrategy extends CommandGroup {
 
@@ -33,7 +33,7 @@ public class AutonomousCommandToteStrategy extends CommandGroup {
         // arm.
         addParallel(new ElevatorMoveToHeightCommand());
         addParallel(new StopDriveTrainCommand());
-        
+
         System.out.println("Moving Elevator (level 0)");
         addSequential(new ElevatorJumpToPositionCommand(0));
         //inches
@@ -45,7 +45,7 @@ public class AutonomousCommandToteStrategy extends CommandGroup {
         addSequential(new ElevatorJumpToPositionCommand(1));
         //position
         addSequential(new ElevatorIsAbovePositionNumberCommand(12), 1.2);
-        
+
         addSequential(new MoveStraightPositionModeCommand(-8.5, 0.7));
         System.out.println("Moving Elevator (level 0)"); //puts down tote
         addSequential(new ElevatorJumpToPositionCommand(0));

@@ -1,13 +1,17 @@
 package org.usfirst.frc4915.MecanumDrive.commands.autonomous;
 
-import edu.wpi.first.wpilibj.command.CommandGroup;
-import org.usfirst.frc4915.MecanumDrive.commands.drive.*;
+import org.usfirst.frc4915.MecanumDrive.commands.drive.MoveStraightPositionModeCommand;
+import org.usfirst.frc4915.MecanumDrive.commands.drive.StopDriveTrainCommand;
+import org.usfirst.frc4915.MecanumDrive.commands.drive.Turn90DegreesCommand;
+import org.usfirst.frc4915.MecanumDrive.commands.drive.WaitCommand;
 import org.usfirst.frc4915.MecanumDrive.commands.elevator.ElevatorIsAbovePositionNumberCommand;
 import org.usfirst.frc4915.MecanumDrive.commands.elevator.ElevatorIsBelowPositionNumberCommand;
 import org.usfirst.frc4915.MecanumDrive.commands.elevator.ElevatorJumpToPositionCommand;
 import org.usfirst.frc4915.MecanumDrive.commands.elevator.ElevatorMoveToHeightCommand;
 import org.usfirst.frc4915.MecanumDrive.commands.grabber.CloseGrabberCommand;
 import org.usfirst.frc4915.MecanumDrive.commands.grabber.OpenGrabberCommand;
+
+import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class AutonomousCommandStacking extends CommandGroup {
 
@@ -31,7 +35,7 @@ public class AutonomousCommandStacking extends CommandGroup {
 
         addParallel(new ElevatorMoveToHeightCommand());
         addParallel(new StopDriveTrainCommand());
-        
+
         System.out.println("Moving Elevator (level 1.2)");
         addSequential(new ElevatorJumpToPositionCommand(1.2));
         addSequential(new ElevatorIsAbovePositionNumberCommand(15), 1.2);
@@ -41,7 +45,7 @@ public class AutonomousCommandStacking extends CommandGroup {
         System.out.println("Moving Elevator (level 2.8)");
         addSequential(new ElevatorJumpToPositionCommand(2.8));
         addSequential(new ElevatorIsAbovePositionNumberCommand(34), 1.2);
-        
+
         System.out.println("Driving forward 2 ft");
         addSequential(new MoveStraightPositionModeCommand(2, 0.7));
         addSequential(new OpenGrabberCommand());
@@ -59,37 +63,6 @@ public class AutonomousCommandStacking extends CommandGroup {
         addSequential(new ElevatorJumpToPositionCommand(0));
         addSequential(new ElevatorIsBelowPositionNumberCommand(0.5), 3);
         addSequential(new OpenGrabberCommand());
-        
-        /*
-        System.out.println("Moving Elevator (level 1.2)");
-        addSequential(new ElevatorJumpToPositionCommand(1.2), 0.7);
-        System.out.println("Closing Grabber");
-        addSequential(new CloseGrabberCommand());
-        System.out.println("Moving Elevator (level 2.5)");
-        addSequential(new ElevatorJumpToPositionCommand(2.5), 0.7);
-        System.out.println("Strafing");
-        //strafe left 1.9ft
-        addSequential(new StrafeCommand(-1.9, .5));
-        addSequential(new OpenGrabberCommand());
-        addSequential(new ElevatorJumpToPositionCommand(0), 1.0);
-        addSequential(new CloseGrabberCommand());
-        addSequential(new ElevatorJumpToPositionCommand(1), 0.7);
-        System.out.println("Driving back 12 ft");
-        // FIXME change the value to -12
-        addSequential(new MoveStraightPositionModeCommand(-2, 0.7));
-        
-        
-        
-        System.out.println("Driving back 9.5 ft");
-        addSequential(new MoveStraightPositionModeCommand(9.5, 0.7));
-        addSequential(new OpenGrabberCommand());
-        addSequential(new WaitCommand(1));
-        System.out.println("Moving Elevator (level 0)");
-        addSequential(new ElevatorJumpToPositionCommand(0));
-        addSequential(new ElevatorIsBelowPositionNumberCommand(0.5), 2.5);
-        addSequential(new CloseGrabberCommand());
-        addSequential(new WaitCommand(.5));
-        //inches
-        */
+
     }
 }

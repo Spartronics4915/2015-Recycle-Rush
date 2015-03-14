@@ -9,7 +9,7 @@ import java.util.logging.Logger;
 /**
  * This is a custom system that allows for easy debug logging
  * and sorting from any system on the robot
- * <p/>
+ *
  * <p>To add other categories to the system simply add or take away parts from {@link LoggerNames}
  * at the top of the class file, the initializer will take care of the rest</p>
  */
@@ -19,7 +19,7 @@ public class CustomDebugger {
 
     /**
      * Constructor.
-     * <p/>
+     *
      * <p>
      * This method:
      * </p>
@@ -40,7 +40,7 @@ public class CustomDebugger {
 
     /**
      * Sets the internal logger filter. This turns all loggers other than <code>logger</code> off.
-     * <p/>
+     *
      * <p>You <strong>must</strong> call {@link #resetFilter} before setting another filter.</p>
      *
      * @param logger Logger to filter the output of
@@ -55,7 +55,7 @@ public class CustomDebugger {
 
     /**
      * Clears the filter set by {@link #setFilter}.
-     * <p/>
+     *
      * <p>This <strong>must</strong> be called before another filter is set.</p>
      */
     public void resetFilter() {
@@ -67,7 +67,7 @@ public class CustomDebugger {
     /**
      * Sets the internal Java logger's <code>setUseParentHandlers</code> option
      * to false.
-     * <p/>
+     *
      * <p>
      * This is an important step in getting this system to even work.
      * </p>

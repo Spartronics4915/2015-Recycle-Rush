@@ -1,6 +1,5 @@
 package org.usfirst.frc4915.MecanumDrive.commands.autonomous;
 
-import edu.wpi.first.wpilibj.command.CommandGroup;
 import org.usfirst.frc4915.MecanumDrive.commands.drive.MoveStraightPositionModeCommand;
 import org.usfirst.frc4915.MecanumDrive.commands.drive.StopDriveTrainCommand;
 import org.usfirst.frc4915.MecanumDrive.commands.drive.WaitCommand;
@@ -10,6 +9,8 @@ import org.usfirst.frc4915.MecanumDrive.commands.elevator.ElevatorJumpToPosition
 import org.usfirst.frc4915.MecanumDrive.commands.elevator.ElevatorMoveToHeightCommand;
 import org.usfirst.frc4915.MecanumDrive.commands.grabber.CloseGrabberCommand;
 import org.usfirst.frc4915.MecanumDrive.commands.grabber.OpenGrabberCommand;
+
+import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class AutonomousCommandContainerStrategy extends CommandGroup {
 

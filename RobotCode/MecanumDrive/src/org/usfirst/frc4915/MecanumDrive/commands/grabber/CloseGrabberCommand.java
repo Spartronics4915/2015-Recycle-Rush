@@ -1,8 +1,9 @@
 package org.usfirst.frc4915.MecanumDrive.commands.grabber;
 
-import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc4915.MecanumDrive.Robot;
 import org.usfirst.frc4915.debuggersystem.CustomDebugger;
+
+import edu.wpi.first.wpilibj.command.Command;
 
 public class CloseGrabberCommand extends Command {
 

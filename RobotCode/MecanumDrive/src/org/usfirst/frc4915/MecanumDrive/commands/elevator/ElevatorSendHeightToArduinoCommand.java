@@ -1,12 +1,13 @@
 package org.usfirst.frc4915.MecanumDrive.commands.elevator;
 
-import edu.wpi.first.wpilibj.I2C;
-import edu.wpi.first.wpilibj.command.Command;
+import java.math.BigInteger;
+
 import org.usfirst.frc4915.MecanumDrive.Robot;
 import org.usfirst.frc4915.MecanumDrive.RobotMap;
 import org.usfirst.frc4915.MecanumDrive.subsystems.Elevator;
 
-import java.math.BigInteger;
+import edu.wpi.first.wpilibj.I2C;
+import edu.wpi.first.wpilibj.command.Command;
 
 public class ElevatorSendHeightToArduinoCommand extends Command {
 

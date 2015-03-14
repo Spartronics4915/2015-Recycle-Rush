@@ -7,8 +7,8 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class AutonomousCommandDoNothing extends CommandGroup {
 
-	public AutonomousCommandDoNothing() {
-		addParallel(new ElevatorMoveToHeightCommand());
-		addParallel(new StopDriveTrainCommand());
-	}
+    public AutonomousCommandDoNothing() {
+        addParallel(new ElevatorMoveToHeightCommand());
+        addParallel(new StopDriveTrainCommand());
+    }
 }

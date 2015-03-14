@@ -1,13 +1,8 @@
 package org.usfirst.frc4915.MecanumDrive.commands.autonomous;
 
 import org.usfirst.frc4915.MecanumDrive.commands.drive.MoveStraightPositionModeCommand;
-import org.usfirst.frc4915.MecanumDrive.commands.drive.StrafeCommand;
-import org.usfirst.frc4915.MecanumDrive.commands.elevator.ElevatorMoveToHeightCommand;
-import org.usfirst.frc4915.MecanumDrive.commands.grabber.CloseGrabberCommand;
-import org.usfirst.frc4915.MecanumDrive.commands.grabber.OpenGrabberCommand;
-import org.usfirst.frc4915.MecanumDrive.commands.elevator.ElevatorJumpToPositionCommand;
+
 import edu.wpi.first.wpilibj.command.CommandGroup;
-import org.usfirst.frc4915.MecanumDrive.commands.drive.MoveStraightPositionModeCommand;
 
 public class AutonomousCommandJustDrive extends CommandGroup {
 

@@ -1,9 +1,10 @@
 package org.usfirst.frc4915.MecanumDrive.commands.elevator;
 
-import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc4915.MecanumDrive.Robot;
 import org.usfirst.frc4915.MecanumDrive.subsystems.Elevator;
 import org.usfirst.frc4915.debuggersystem.CustomDebugger.LoggerNames;
+
+import edu.wpi.first.wpilibj.command.Command;
 
 public class ElevatorJumpToPositionCommand extends Command {
     Elevator elevator = Robot.elevator;
@@ -11,7 +12,7 @@ public class ElevatorJumpToPositionCommand extends Command {
     // Position number -- number of totes that you would need to stack on top
     // of.
     private double positionNumber;
-    
+
     public ElevatorJumpToPositionCommand(double d) {
         positionNumber = d;
         // DON'T require Robot.elevator

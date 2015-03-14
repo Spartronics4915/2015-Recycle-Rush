@@ -1,8 +1,15 @@
 package org.usfirst.frc4915.MecanumDrive;
 
-import edu.wpi.first.wpilibj.*;
+import edu.wpi.first.wpilibj.BuiltInAccelerometer;
+import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.CANTalon.ControlMode;
+import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.Gyro;
+import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.I2C.Port;
+import edu.wpi.first.wpilibj.RobotDrive;
+import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.Ultrasonic;
 
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
@@ -12,9 +19,9 @@ import edu.wpi.first.wpilibj.I2C.Port;
  */
 public class RobotMap {
 
-	/*
+    /*
      * CONSTANTS
-	 */
+     */
 
     public static final int MOTOR_PORT_LEFT_FRONT = 10;
     public static final int MOTOR_PORT_LEFT_REAR = 11;
@@ -23,23 +30,24 @@ public class RobotMap {
 
     public static final int MOTOR_PORT_ELEVATOR_WINCH = 14;
 
-    /*
+    /**
      * The Pneumatic Control Module's CAN Node ID. Use 10 for 4915. Use 20 for 9999
      */
-    public final static int PCM_NODE_ID = 10;
-    public final static int GYRO_PORT = 0;
+    public static final int PCM_NODE_ID = 10;
+    public static final int GYRO_PORT = 0;
 
-    public final static int ULTRASONIC_PORT_FIRST = 0;
-    public final static int ULTRASONIC_PORT_SECOND = 1;
+    public static final int ULTRASONIC_PORT_FIRST = 0;
+    public static final int ULTRASONIC_PORT_SECOND = 1;
 
-    public final static int SOLENOID_CHANNEL_PRIMARY = 0;
-    public final static int SOLENOID_CHANNEL_SECONDARY = 1;
+    public static final int SOLENOID_CHANNEL_PRIMARY = 0;
+    public static final int SOLENOID_CHANNEL_SECONDARY = 1;
 
-    //public final static int SOLENOID_CHANNEL_AUNTIE = 3;
+    //public static final int SOLENOID_CHANNEL_AUNTIE = 3;
     // TODO explain the reason for this number
     public static final double DEFAULT_MAX_OUTPUT = 950;
-    private static final int FWD_SOFT_LIMIT = 1023;
-    private static final int REV_SOFT_LIMIT = 0;
+    public static final int FWD_SOFT_LIMIT = 1023;
+    public static final int REV_SOFT_LIMIT = 0;
+
     /*
      * DRIVETRAIN
      */
@@ -74,16 +82,17 @@ public class RobotMap {
      */
     public static BuiltInAccelerometer accelerometer;
 
-    /**
+    /*
      * ARDUINO
      */
     public static I2C wire;
 
     public static void init() {
 
-		/*
+        /*
          * MECANUM WHEEL START
-		 */
+         */
+
         mecanumDriveControlsLeftFront = new CANTalon(MOTOR_PORT_LEFT_FRONT);
         mecanumDriveControlsLeftRear = new CANTalon(MOTOR_PORT_LEFT_REAR);
         mecanumDriveControlsRightFront = new CANTalon(MOTOR_PORT_RIGHT_FRONT);
@@ -103,24 +112,22 @@ public class RobotMap {
         driveTrainRobotDrive.setInvertedMotor(RobotDrive.MotorType.kFrontRight, true);
         driveTrainRobotDrive.setInvertedMotor(RobotDrive.MotorType.kRearRight, true);
 
-		/*
+        /*
          * Gyro instantiation
-		 */
+         */
+
         gyro = new Gyro(GYRO_PORT);
 
-		/*
+        /*
          * Distance instantiation -- UNUSED
-		 */
+         */
+
         distanceSensor = new Ultrasonic(ULTRASONIC_PORT_FIRST, ULTRASONIC_PORT_SECOND);
 
-		/*
-		 * MECANUM WHEEL END
-		 */
+        /*
+         * ELEVATOR START
+         */
 
-		/*
-		 * ELEVATOR START
-		 */
-        // ELEVATOR instantiation
         elevatorWinchMotor = new CANTalon(MOTOR_PORT_ELEVATOR_WINCH);
         elevatorWinchMotor.changeControlMode(ControlMode.Position);
         elevatorWinchMotor.setFeedbackDevice(CANTalon.FeedbackDevice.AnalogPot);
@@ -132,50 +139,34 @@ public class RobotMap {
         elevatorWinchMotor.ConfigFwdLimitSwitchNormallyOpen(true);
         elevatorWinchMotor.ConfigRevLimitSwitchNormallyOpen(true);
         elevatorWinchMotor.enableBrakeMode(true);
-        //slackLimitSwitch = new DigitalInput(1);
-        //bottomLimitSwitch = new DigitalInput(5);
 
         // Potentiometer instantiation
 
         // TODO Limit Switches instantiation goes here
         bottomLimitSwitch = new DigitalInput(5);
-		
-		/*
-		 * ELEVATOR END
-		 */
 
-		/*
-		 * GRABBER START
-		 */
+        /*
+         * GRABBER START
+         */
         // Double Solenoid instantiation. Wiring: 0 --> Forward channel
         // (extended). 1 --> Reverse channel (retracted).
 
         primarySolenoid = new Solenoid(PCM_NODE_ID, SOLENOID_CHANNEL_PRIMARY);
         secondarySolenoid = new Solenoid(PCM_NODE_ID, SOLENOID_CHANNEL_SECONDARY);
-		
 
-		/*
-		 * GRABBER END
-		 */
+        /*
+         * GENERAL SENSORS START
+         */
 
-		/*
-		 * GENERAL SENSORS START
-		 */
-        // Built in Accelerometer
         accelerometer = new BuiltInAccelerometer();
         accelerometer.startLiveWindowMode();
 
-		/*
-		 * SENSORS END
-		 */
+        /*
+         * ARDUINO
+         */
 
-        /**
-         * ARDUIONO START
-         */
         wire = new I2C(Port.kOnboard, 4); // TODO confirm port and device address
-        /**
-         * ARDUIN0 END
-         */
+
     }
 
     public static void changeControlMode(ControlMode mode) {
