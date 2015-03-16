@@ -68,7 +68,7 @@ public class AutonomousCommandTwoTotesOneContainer extends CommandGroup {
         System.out.println("Moving Elevator (level 1)");
         addSequential(new ElevatorJumpToPositionCommand(1));
         addSequential(new ElevatorIsAbovePositionNumberCommand(12), 2);
-        addSequential(new StrafeCommand(-9, 0.7)); //going left 9 ft
+        addSequential(new StrafeCommand(-9)); //going left 9 ft
         addSequential(new ElevatorJumpToPositionCommand(0));
         addSequential(new ElevatorIsBelowPositionNumberCommand(0.5), 3);
         addSequential(new OpenGrabberCommand());

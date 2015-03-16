@@ -11,14 +11,12 @@ import java.util.List;
 public class StrafeCommand extends Command {
     public static List<CANTalon> motors = DriveTrain.motors;
     public double inputDistance;
-    public double inputSpeed;
     private DriveTrain driveTrain = Robot.driveTrain;
     private List<Double> desiredTicksValue;
 
-    public StrafeCommand(double inputDistance, double inputSpeed) {
+    public StrafeCommand(double inputDistance) {
         requires(driveTrain);
         System.out.println("***StrafeCommand inputDistance: " + inputDistance + "*******");
-        System.out.println("***StrafeCommand inputSpeed: " + inputSpeed + "*******");
         this.inputDistance = inputDistance;
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
