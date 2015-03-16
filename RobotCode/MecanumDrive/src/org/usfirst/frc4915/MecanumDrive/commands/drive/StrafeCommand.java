@@ -18,8 +18,6 @@ public class StrafeCommand extends Command {
         requires(driveTrain);
         System.out.println("***StrafeCommand inputDistance: " + inputDistance + "*******");
         this.inputDistance = inputDistance;
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
     }
 
     // Called just before this Command runs the first time
