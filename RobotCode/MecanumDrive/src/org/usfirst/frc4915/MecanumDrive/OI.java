@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandContainerAndReturn;
 import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandContainerStrategy;
 import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandContainerWithPlatform;
 import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandDoNothing;
@@ -100,6 +101,7 @@ public class OI {
 		autonomousProgramChooser.addObject("Autonomous Stacking Strategy", new AutonomousCommandStacking());
 		autonomousProgramChooser.addObject("Autonomous Do Nothing", new AutonomousCommandDoNothing());
 		autonomousProgramChooser.addObject("Autonomous Tote 180º", new AutonomousCommandTurn180WithTote());
+		autonomousProgramChooser.addObject("Container to Auto and Return", new AutonomousCommandContainerAndReturn());
 		
 		SmartDashboard.putData("Autonomous Program", autonomousProgramChooser);
 		
