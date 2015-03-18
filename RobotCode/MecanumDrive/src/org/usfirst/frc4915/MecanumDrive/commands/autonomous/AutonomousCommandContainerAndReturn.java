@@ -33,7 +33,7 @@ public class AutonomousCommandContainerAndReturn extends CommandGroup {
         addSequential(new ElevatorJumpToPositionCommand(2.5), 0.7);
         addSequential(new ElevatorIsAbovePositionNumberCommand(30), 1.2);
         System.out.println("Driving back 8.5 ft");
-        addSequential(new MoveStraightPositionModeCommand(-8.5, 0.7));
+        addSequential(new MoveStraightPositionModeCommand(-8.5, 1));
 
         //Turn Left
         addSequential(new Turn90DegreesCommand(true));

@@ -45,7 +45,7 @@ public class AutonomousCommandContainerWithPlatform extends CommandGroup {
 		addSequential(new ElevatorJumpToPositionCommand(2.5), 0.7);
 		addSequential(new ElevatorIsAbovePositionNumberCommand(30), 1.2);
 		System.out.println("Driving back 10 ft");
-		addSequential(new MoveStraightPositionModeCommand(-10, 0.7));
+		addSequential(new MoveStraightPositionModeCommand(-10, 1));
 
 		System.out.println("Moving Elevator (level 1.5)"); // puts down
 															// container

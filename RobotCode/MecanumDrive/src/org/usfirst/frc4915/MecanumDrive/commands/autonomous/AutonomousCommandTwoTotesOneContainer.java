@@ -13,6 +13,7 @@ import org.usfirst.frc4915.MecanumDrive.commands.grabber.OpenGrabberCommand;
 
 public class AutonomousCommandTwoTotesOneContainer extends CommandGroup {
 
+	// DEPRECATED -- DO NOT USE!!!
     public AutonomousCommandTwoTotesOneContainer() {
         // Add Commands here:
         // e.g. addSequential(new Command1());

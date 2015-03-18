@@ -30,6 +30,6 @@ public class AutonomousCommandJustDrive extends CommandGroup {
         // arm.
         System.out.println("***Running Just Drive Command***");
         // Change to 4 ft from 5 ft
-        addSequential(new MoveStraightPositionModeCommand(5, 0.7));
+        addSequential(new MoveStraightPositionModeCommand(5, 1));
     }
 }

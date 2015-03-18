@@ -43,7 +43,7 @@ public class AutonomousCommandStacking extends CommandGroup {
         addSequential(new ElevatorIsAbovePositionNumberCommand(34), 1.2);
         
         System.out.println("Driving forward 2 ft");
-        addSequential(new MoveStraightPositionModeCommand(2, 0.7));
+        addSequential(new MoveStraightPositionModeCommand(2, 1));
         addSequential(new OpenGrabberCommand());
         addSequential(new WaitCommand(1));
         System.out.println("Moving Elevator (level 0)");
@@ -55,7 +55,7 @@ public class AutonomousCommandStacking extends CommandGroup {
         addSequential(new ElevatorJumpToPositionCommand(1));
         addSequential(new ElevatorIsAbovePositionNumberCommand(12), 2);
         addSequential(new Turn90DegreesCommand(false));
-        addSequential(new MoveStraightPositionModeCommand(-9.5, 0.7)); //going left 9.5 ft // prefer
+        addSequential(new MoveStraightPositionModeCommand(-9.5, 1)); //going left 9.5 ft // prefer
         addSequential(new ElevatorJumpToPositionCommand(0));
         addSequential(new ElevatorIsBelowPositionNumberCommand(0.5), 3);
         addSequential(new OpenGrabberCommand());

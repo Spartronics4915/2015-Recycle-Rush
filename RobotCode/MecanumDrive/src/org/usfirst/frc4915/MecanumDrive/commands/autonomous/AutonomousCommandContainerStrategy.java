@@ -44,7 +44,7 @@ public class AutonomousCommandContainerStrategy extends CommandGroup {
         addSequential(new ElevatorJumpToPositionCommand(2.5), 0.7);
         addSequential(new ElevatorIsAbovePositionNumberCommand(30), 1.2);
         System.out.println("Driving back 8.5 ft");
-        addSequential(new MoveStraightPositionModeCommand(-8.5, 0.7));
+        addSequential(new MoveStraightPositionModeCommand(-8.5, 1));
 
         System.out.println("Moving Elevator (level 1.5)"); //puts down container
         addSequential(new ElevatorJumpToPositionCommand(1.5));

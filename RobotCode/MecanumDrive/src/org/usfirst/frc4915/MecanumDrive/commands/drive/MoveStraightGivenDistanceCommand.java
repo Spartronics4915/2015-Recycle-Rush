@@ -11,7 +11,7 @@ import java.util.List;
 public class MoveStraightGivenDistanceCommand extends Command {
     public static List<CANTalon> motors = DriveTrain.motors;
     public double inputDistance;
-    public double speed;
+    public double movementSpeed;
     long elapsed;
     long startTime;
     long endTime;
@@ -19,11 +19,17 @@ public class MoveStraightGivenDistanceCommand extends Command {
     double distanceSinceElapsed;
     private DriveTrain driveTrain = Robot.driveTrain;
 
+    /**
+     * 
+     * @param inputDistance Distance in feet
+     * @param speed between 0 and 1. Positive or negative will have no effect on the result.
+ * 					The default value is 1.
+     */
     public MoveStraightGivenDistanceCommand(double inputDistance, double speed) {
         requires(driveTrain);
         this.inputDistance = inputDistance;
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
+        movementSpeed = Math.abs(speed);
+        // Distance in feet
     }
 
     // Called just before this Command runs the first time
@@ -54,10 +60,10 @@ public class MoveStraightGivenDistanceCommand extends Command {
         // backwards.
         if (inputDistance < 0) {
             Robot.debugger.logError(CustomDebugger.LoggerNames.DRIVETRAIN, "Driving backwards...");
-            driveTrain.driveStraight(-1);
+            driveTrain.driveStraight(-movementSpeed);
         } else {
             Robot.debugger.logError(CustomDebugger.LoggerNames.DRIVETRAIN, "Driving forwards...");
-            driveTrain.driveStraight(1);
+            driveTrain.driveStraight(movementSpeed);
         }
         // creates a loop to track the distance traveled
         // uses the time to determine the distance traveled since the last time

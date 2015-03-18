@@ -46,7 +46,7 @@ public class AutonomousCommandToteWithPlatform extends CommandGroup {
 		// position
 		addSequential(new ElevatorIsAbovePositionNumberCommand(12), 1.2);
 
-		addSequential(new MoveStraightPositionModeCommand(-10, 0.7));
+		addSequential(new MoveStraightPositionModeCommand(-10, 1));
 		System.out.println("Moving Elevator (level 0)"); // puts down tote
 		addSequential(new ElevatorJumpToPositionCommand(0));
 		// inches

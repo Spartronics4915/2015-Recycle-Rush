@@ -33,6 +33,8 @@ public class DriveTrain extends Subsystem {
 	public static final double SECTOR_15º_RATIO = .27;
 	public static final double DEFAULT_BUFFER = .2;
 	public static final double DOUBLE = 2;
+	
+	public static final double WHEEL_DIAMETER = 6;
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.
 
@@ -188,7 +190,7 @@ public class DriveTrain extends Subsystem {
     // number of wheel rotations.
     public double getDistanceForMotor(CANTalon motor, long elapsed) {
         int ticksPerRevolution = 1000;
-        double circumferenceOfWheel = 6 * Math.PI;
+        double circumferenceOfWheel = WHEEL_DIAMETER * Math.PI;
         int inchesPerFoot = 12;
         debugger.logError(LoggerNames.DRIVETRAIN, ("Speed" + motor.getSpeed()));
         debugger.setFilter(LoggerNames.DRIVETRAIN);
