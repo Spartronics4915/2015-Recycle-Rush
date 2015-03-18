@@ -39,9 +39,9 @@ public class AutonomousCommandContainerAndReturn extends CommandGroup {
         addSequential(new Turn90DegreesCommand(true));
         
         System.out.println("Moving Elevator (level 1.5)"); //puts down container
-        addSequential(new ElevatorJumpToPositionCommand(1.5));
+        addSequential(new ElevatorJumpToPositionCommand(1));
         //inches
-        addSequential(new ElevatorIsBelowPositionNumberCommand(18), 3);
+        addSequential(new ElevatorIsBelowPositionNumberCommand(14), 3);
         addSequential(new OpenGrabberCommand());
         addSequential(new WaitCommand(.5));
         
@@ -50,12 +50,11 @@ public class AutonomousCommandContainerAndReturn extends CommandGroup {
         addSequential(new ElevatorIsAbovePositionNumberCommand(30), 3);
         
         // Should go right 8.5 feet - needs testing
-        addSequential(new StrafeCommand(8.5), 5);
+        addSequential(new StrafeCommand(10), 5);
         addSequential(new ElevatorJumpToPositionCommand(0));
         addSequential(new ElevatorIsBelowPositionNumberCommand(2), 1.2);
         
         addSequential(new WaitCommand(.5));
         
-        addSequential(new CloseGrabberCommand());
     }
 }
