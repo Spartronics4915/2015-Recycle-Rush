@@ -12,6 +12,7 @@ import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandCon
 import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandDoNothing;
 import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandJustDrive;
 import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandStacking;
+import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandToteAndAlign;
 import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandToteStrategy;
 import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandToteWithPlatform;
 import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandTurn180WithTote;
@@ -102,6 +103,7 @@ public class OI {
 		autonomousProgramChooser.addObject("Autonomous Do Nothing", new AutonomousCommandDoNothing());
 		autonomousProgramChooser.addObject("Autonomous Tote 180º", new AutonomousCommandTurn180WithTote());
 		autonomousProgramChooser.addObject("Container to Auto and Return", new AutonomousCommandContainerAndReturn());
+		autonomousProgramChooser.addObject("Align Tote", new AutonomousCommandToteAndAlign());
 		
 		SmartDashboard.putData("Autonomous Program", autonomousProgramChooser);
 		

@@ -36,8 +36,8 @@ public class AutonomousCommandContainerWithPlatform extends CommandGroup {
 		addParallel(new StopDriveTrainCommand());
 
 		System.out.println("Moving Elevator (level 1.3)");
-		addSequential(new ElevatorJumpToPositionCommand(1.3));
-		addSequential(new ElevatorIsAbovePositionNumberCommand(16), 1.2);
+		addSequential(new ElevatorJumpToPositionCommand(1));
+		addSequential(new ElevatorIsAbovePositionNumberCommand(11), 1.2);
 		System.out.println("Closing Grabber");
 		addSequential(new CloseGrabberCommand());
 		addSequential(new WaitCommand(.5));
@@ -45,7 +45,7 @@ public class AutonomousCommandContainerWithPlatform extends CommandGroup {
 		addSequential(new ElevatorJumpToPositionCommand(2.5), 0.7);
 		addSequential(new ElevatorIsAbovePositionNumberCommand(30), 1.2);
 		System.out.println("Driving back 10 ft");
-		addSequential(new MoveStraightPositionModeCommand(-10, 1));
+		addSequential(new MoveStraightPositionModeCommand(-12, 1));
 
 		System.out.println("Moving Elevator (level 1.5)"); // puts down
 															// container
