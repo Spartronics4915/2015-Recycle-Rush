@@ -2,6 +2,7 @@ package org.usfirst.frc4915.MecanumDrive.commands.autonomous;
 
 import org.usfirst.frc4915.MecanumDrive.commands.drive.MoveStraightPositionModeCommand;
 import org.usfirst.frc4915.MecanumDrive.commands.drive.StopDriveTrainCommand;
+import org.usfirst.frc4915.MecanumDrive.commands.drive.Turn90DegreesCommand;
 import org.usfirst.frc4915.MecanumDrive.commands.drive.WaitCommand;
 import org.usfirst.frc4915.MecanumDrive.commands.elevator.ElevatorIsAbovePositionNumberCommand;
 import org.usfirst.frc4915.MecanumDrive.commands.elevator.ElevatorIsBelowPositionNumberCommand;
@@ -42,16 +43,22 @@ public class AutonomousCommandContainerWithPlatform extends CommandGroup {
 		addSequential(new CloseGrabberCommand());
 		addSequential(new WaitCommand(.5));
 		System.out.println("Moving Elevator (level 2.5)");
-		addSequential(new ElevatorJumpToPositionCommand(2.5), 0.7);
-		addSequential(new ElevatorIsAbovePositionNumberCommand(30), 1.2);
+		addSequential(new ElevatorJumpToPositionCommand(1.5), 0.7);
+		addSequential(new ElevatorIsAbovePositionNumberCommand(16), 1.2);
 		System.out.println("Driving back 10 ft");
 		addSequential(new MoveStraightPositionModeCommand(-12, 1));
+        
+		addSequential(new Turn90DegreesCommand(true));
+        
+        System.out.println("Moving Elevator (level 1)"); //puts down container
+        addSequential(new ElevatorJumpToPositionCommand(1));
+        //inches
+        addSequential(new ElevatorIsBelowPositionNumberCommand(13), 2);
+        addSequential(new OpenGrabberCommand());
+        
+        addSequential(new ElevatorJumpToPositionCommand(2.5), 0.7);
+        addSequential(new ElevatorIsAbovePositionNumberCommand(30), 1);
 
-		System.out.println("Moving Elevator (level 1.5)"); // puts down
-															// container
-		addSequential(new ElevatorJumpToPositionCommand(1.5));
-		// inches
-		addSequential(new ElevatorIsBelowPositionNumberCommand(18), 3);
-		addSequential(new OpenGrabberCommand());
+        addSequential(new Turn90DegreesCommand(false));
 	}
 }

@@ -43,8 +43,8 @@ public class AutonomousCommandContainerStrategy extends CommandGroup {
         addSequential(new CloseGrabberCommand());
         addSequential(new WaitCommand(.5));
         System.out.println("Moving Elevator (level 2.5)");
-        addSequential(new ElevatorJumpToPositionCommand(2.5), 0.7);
-        addSequential(new ElevatorIsAbovePositionNumberCommand(30), 1.2);
+        addSequential(new ElevatorJumpToPositionCommand(1.5), 0.7);
+        addSequential(new ElevatorIsAbovePositionNumberCommand(16), 1.2);
         System.out.println("Driving back 8.5 ft");
         addSequential(new MoveStraightPositionModeCommand(-8.5, 1));
 
@@ -53,11 +53,11 @@ public class AutonomousCommandContainerStrategy extends CommandGroup {
         System.out.println("Moving Elevator (level 1)"); //puts down container
         addSequential(new ElevatorJumpToPositionCommand(1));
         //inches
-        addSequential(new ElevatorIsBelowPositionNumberCommand(13), 3);
+        addSequential(new ElevatorIsBelowPositionNumberCommand(13), 2);
         addSequential(new OpenGrabberCommand());
         
         addSequential(new ElevatorJumpToPositionCommand(2.5), 0.7);
-        addSequential(new ElevatorIsAbovePositionNumberCommand(30), 1.2);
+        addSequential(new ElevatorIsAbovePositionNumberCommand(30), 1);
 
         addSequential(new Turn90DegreesCommand(false));
     }
