@@ -49,7 +49,7 @@ public class AutonomousCommandContainerAndReturn extends CommandGroup {
         addSequential(new ElevatorJumpToPositionCommand(3));
         addSequential(new ElevatorIsAbovePositionNumberCommand(30), 3);
         
-        // Should go right 8.5 feet - needs testing
+        // Should go right 10 feet - needs testing
         addSequential(new StrafeCommand(10), 5);
         addSequential(new ElevatorJumpToPositionCommand(0));
         addSequential(new ElevatorIsBelowPositionNumberCommand(2), 1.2);

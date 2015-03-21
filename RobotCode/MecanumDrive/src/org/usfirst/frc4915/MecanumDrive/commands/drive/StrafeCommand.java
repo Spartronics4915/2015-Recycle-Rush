@@ -14,6 +14,10 @@ public class StrafeCommand extends Command {
     private DriveTrain driveTrain = Robot.driveTrain;
     private List<Double> desiredTicksValue;
 
+    /**
+     * 
+     * @param inputDistance positive strafes right, negative strafes left
+     */
     public StrafeCommand(double inputDistance) {
         requires(driveTrain);
         System.out.println("***StrafeCommand inputDistance: " + inputDistance + "*******");
