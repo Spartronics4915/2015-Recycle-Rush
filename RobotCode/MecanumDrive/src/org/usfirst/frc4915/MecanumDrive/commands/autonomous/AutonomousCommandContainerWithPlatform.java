@@ -43,8 +43,8 @@ public class AutonomousCommandContainerWithPlatform extends CommandGroup {
 		addSequential(new CloseGrabberCommand());
 		addSequential(new WaitCommand(.5));
 		System.out.println("Moving Elevator (level 2.5)");
-		addSequential(new ElevatorJumpToPositionCommand(1.5), 0.7);
-		addSequential(new ElevatorIsAbovePositionNumberCommand(16), 1.2);
+		addSequential(new ElevatorJumpToPositionCommand(2.5), 0.7);
+		addSequential(new ElevatorIsAbovePositionNumberCommand(29), 1.2);
 		System.out.println("Driving back 10 ft");
 		addSequential(new MoveStraightPositionModeCommand(-12, 1));
         

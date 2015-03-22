@@ -78,8 +78,8 @@ public class OI {
     public JoystickButton elevatorJumpToPositionTwo;
     public JoystickButton elevatorJumpToPositionThree;
     public JoystickButton elevatorJumpToPositionFour;
-    public JoystickButton elevatorJumpToPositionFive;
-    public JoystickButton elevatorJumpToPositionSix;
+    
+    public JoystickButton elevatorResetButton;
 
     /*
      * JOYSTICK BUTTONS (GRABBER)
@@ -129,6 +129,8 @@ public class OI {
         elevatorJumpToPositionThree.whenPressed(new ElevatorJumpToPositionCommand(3));
         elevatorJumpToPositionFour = new JoystickButton(elevatorStick, 10);
         elevatorJumpToPositionFour.whenPressed(new ElevatorJumpToPositionCommand(4));
+        
+        elevatorResetButton = new JoystickButton(elevatorStick, 11);
 
 		
 		/*

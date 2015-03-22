@@ -24,24 +24,24 @@ public class AutonomousCommandContainerAndReturn extends CommandGroup {
         addParallel(new StopDriveTrainCommand());
 
         System.out.println("Moving Elevator (level 1.3)");
-        addSequential(new ElevatorJumpToPositionCommand(1.3));
-        addSequential(new ElevatorIsAbovePositionNumberCommand(16), 1.2);
+        addSequential(new ElevatorJumpToPositionCommand(1));
+        addSequential(new ElevatorIsAbovePositionNumberCommand(11), 1.2);
         System.out.println("Closing Grabber");
         addSequential(new CloseGrabberCommand());
         addSequential(new WaitCommand(.5));
         System.out.println("Moving Elevator (level 2.5)");
         addSequential(new ElevatorJumpToPositionCommand(2.5), 0.7);
-        addSequential(new ElevatorIsAbovePositionNumberCommand(30), 1.2);
+        addSequential(new ElevatorIsAbovePositionNumberCommand(29), 1.2);
         System.out.println("Driving back 8.5 ft");
         addSequential(new MoveStraightPositionModeCommand(-8.5, 1));
 
         //Turn Left
         addSequential(new Turn90DegreesCommand(true));
         
-        System.out.println("Moving Elevator (level 1.5)"); //puts down container
+        System.out.println("Moving Elevator (level 1)"); //puts down container
         addSequential(new ElevatorJumpToPositionCommand(1));
         //inches
-        addSequential(new ElevatorIsBelowPositionNumberCommand(14), 3);
+        addSequential(new ElevatorIsBelowPositionNumberCommand(13), 3);
         addSequential(new OpenGrabberCommand());
         addSequential(new WaitCommand(.5));
         

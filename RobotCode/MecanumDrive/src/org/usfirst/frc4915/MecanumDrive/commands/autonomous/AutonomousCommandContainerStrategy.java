@@ -36,15 +36,15 @@ public class AutonomousCommandContainerStrategy extends CommandGroup {
         addParallel(new ElevatorMoveToHeightCommand());
         addParallel(new StopDriveTrainCommand());
 
-        System.out.println("Moving Elevator (level 1.3)");
+        System.out.println("Moving Elevator (level 1)");
         addSequential(new ElevatorJumpToPositionCommand(1));
         addSequential(new ElevatorIsAbovePositionNumberCommand(11), 1.2);
         System.out.println("Closing Grabber");
         addSequential(new CloseGrabberCommand());
         addSequential(new WaitCommand(.5));
         System.out.println("Moving Elevator (level 2.5)");
-        addSequential(new ElevatorJumpToPositionCommand(1.5), 0.7);
-        addSequential(new ElevatorIsAbovePositionNumberCommand(16), 1.2);
+        addSequential(new ElevatorJumpToPositionCommand(2.5), 0.7);
+        addSequential(new ElevatorIsAbovePositionNumberCommand(29), 1.2);
         System.out.println("Driving back 8.5 ft");
         addSequential(new MoveStraightPositionModeCommand(-8.5, 1));
 
