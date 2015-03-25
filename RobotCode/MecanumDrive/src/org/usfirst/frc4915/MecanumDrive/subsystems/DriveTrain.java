@@ -35,9 +35,11 @@ public class DriveTrain extends Subsystem {
 	public static final double DOUBLE = 2;
 	
 	public static final double WHEEL_DIAMETER = 6;
+
+	private static final int SPEED_BUTTON = 0;
+
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.
-
 	public void initDefaultCommand() {
 		setDefaultCommand(new MecanumDriveCommand());
 
@@ -65,7 +67,14 @@ public class DriveTrain extends Subsystem {
 		double joystickX = joystick.getAxis(Joystick.AxisType.kX);
 		double joystickY = joystick.getAxis(Joystick.AxisType.kY);
 		double joystickTwist = joystick.getAxis(Joystick.AxisType.kTwist);
-
+		boolean speedButton = joystick.getRawButton(SPEED_BUTTON);
+		
+		double twistScale = .5;
+		
+		if (speedButton) {
+			twistScale = 1;
+		}
+		
 		throttle = 0.40 * (-joystick.getThrottle()) + 0.60;
 		debugger.logError(LoggerNames.DRIVETRAIN, "Throttle Value: " + throttle);
 		
@@ -104,7 +113,7 @@ public class DriveTrain extends Subsystem {
 		
 		double throttleX = throttle*joystickX;
 		double throttleY = throttle*joystickY;
-		double throttleTwist = throttle*joystickTwist;
+		double throttleTwist = throttle*twistScale*joystickTwist;
 		
 		//Gyro Tracking and debug
 		Robot.driveTrain.trackGyro();
