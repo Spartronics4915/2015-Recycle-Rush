@@ -25,7 +25,7 @@ public class Turn90DegreesCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        Robot.driveTrain.turnLeft(goLeft);
+        Robot.driveTrain.turn(goLeft);
         System.out.println("******************In Turn 90 command execute ******  " + Robot.driveTrain.trackGyro());
     }
 

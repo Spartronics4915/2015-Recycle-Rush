@@ -43,9 +43,6 @@ public class DriveTrain extends Subsystem {
 	public void initDefaultCommand() {
 		setDefaultCommand(new MecanumDriveCommand());
 
-		// Set the default command for a subsystem here.
-		// setDefaultCommand(new MySpecialCommand());
-
 		robotDrive = RobotMap.driveTrainRobotDrive;
 	}
 
@@ -106,8 +103,6 @@ public class DriveTrain extends Subsystem {
 		boolean deadZoneTwist = Math.abs(joystickTwist) < bufferZ;
 		
 		if (deadZoneX) joystickX = 0;
-		
-		
 		if (deadZoneY || strafeOnly) joystickY = 0;
 		if (deadZoneTwist || strafeOnly) joystickTwist = 0;
 		
@@ -117,7 +112,6 @@ public class DriveTrain extends Subsystem {
 		
 		//Gyro Tracking and debug
 		Robot.driveTrain.trackGyro();
-		//SmartDashboard.putNumber("Gyro Angle", Robot.driveTrain.gyroHeading % 360);
 
 
 		debugger.logError(LoggerNames.DRIVETRAIN, ("Joystick: "+ joystickX + ", " + joystickY + ", " + joystickTwist));
@@ -128,7 +122,6 @@ public class DriveTrain extends Subsystem {
 		} else {
 			debugger.logError(LoggerNames.DRIVETRAIN,"Gyro Angle: " + gyro.getAngle());
 			robotDrive.mecanumDrive_Cartesian(throttleX, throttleY, throttleTwist, 0);
-			//robotDrive.mecanumDrive_Cartesian(throttleX, throttleY, throttleTwist, fieldMode == true ? gyroHeading : 0);
 		}
 		
 
@@ -157,46 +150,30 @@ public class DriveTrain extends Subsystem {
 		robotDrive.mecanumDrive_Cartesian(speed, 0.0, 0.0, 0.0);
 	}
 	
-	public void turnLeft(boolean left){
-		// left is true, right is false
+	/**
+	 * Turns the robot.
+	 * @param left Whether to turn left (true), or right (false)
+	 */
+	public void turn(boolean left){
 		for (int i = 0; i < motors.size(); i++) {
-			CANTalon motor = motors.get(i);	
 			RobotMap.changeControlMode(ControlMode.Speed);
-			if (left){
+			if (left) {
 				robotDrive.mecanumDrive_Cartesian(0, 0, -.5, 0);
 			}
 			else {
 				robotDrive.mecanumDrive_Cartesian(0, 0, .5, 0);
 			}
-			}
-//			if ( i == 0 || i == 1) {
-//				if (left) {
-//					motor.set(-.7);
-//				}
-//				else {
-//					motor.set(.7);
-//				}
-//			}
-//			else if ( i == 2 || i== 3) {
-//				if (left) {
-//					motor.set(-.7);
-//				}
-//				else {
-//					motor.set(.7);
-//				}
-//			}
+		}
     }
 
     /**
-     * calculates the distance traveled using the wheel circumference and the
+     * Calculates the distance traveled using the wheel circumference and the
      * number of wheel rotations.
      *
      * @param motor   Motor with an encoder to determine distance traveled.
      * @param elapsed Time since the last sampling of the motor.
      * @return Distance traveled since the last sampling of the encoder.
      */
-    // calculates the distance traveled using the wheel circumference and the
-    // number of wheel rotations.
     public double getDistanceForMotor(CANTalon motor, long elapsed) {
         int ticksPerRevolution = 1000;
         double circumferenceOfWheel = WHEEL_DIAMETER * Math.PI;
