@@ -36,7 +36,8 @@ public class DriveTrain extends Subsystem {
 	
 	public static final double WHEEL_DIAMETER = 6;
 
-	private static final int SPEED_BUTTON = 0;
+	private static final int SPEED_BUTTON = 11;
+	private static final double DEFAULT_TWIST_SCALE = .5;
 
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.
@@ -66,7 +67,7 @@ public class DriveTrain extends Subsystem {
 		double joystickTwist = joystick.getAxis(Joystick.AxisType.kTwist);
 		boolean speedButton = joystick.getRawButton(SPEED_BUTTON);
 		
-		double twistScale = .5;
+		double twistScale = DEFAULT_TWIST_SCALE;
 		
 		if (speedButton) {
 			twistScale = 1;
