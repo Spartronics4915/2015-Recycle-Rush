@@ -35,11 +35,14 @@ public class RobotMap {
     public final static int SOLENOID_CHANNEL_PRIMARY = 0;
     public final static int SOLENOID_CHANNEL_SECONDARY = 1;
 
+    private static final int HOOK_PNEUMATIC_CHANNEL = 2;
+    
     //public final static int SOLENOID_CHANNEL_AUNTIE = 3;
     // TODO explain the reason for this number
     public static final double DEFAULT_MAX_OUTPUT = 950;
     private static final int FWD_SOFT_LIMIT = 1023;
     private static final int REV_SOFT_LIMIT = 0;
+	
     /*
      * DRIVETRAIN
      */
@@ -74,11 +77,16 @@ public class RobotMap {
      */
     public static BuiltInAccelerometer accelerometer;
 
-    /**
+    /*
      * ARDUINO
      */
-    public static I2C wire;
-
+    //public static I2C wire;
+    
+    /*
+     * CONTAINER HOOK
+     */
+    public static DoubleSolenoid containerHookPneumatic;
+    
     public static void init() {
 
 		/*
@@ -164,16 +172,20 @@ public class RobotMap {
         // Built in Accelerometer
         accelerometer = new BuiltInAccelerometer();
         accelerometer.startLiveWindowMode();
-
 		/*
 		 * SENSORS END
 		 */
-
-        /**
-         * ARDUIONO START
+        
+        /*
+         * CONTAINER HOOK START
          */
-        wire = new I2C(Port.kOnboard, 4); // TODO confirm port and device address
-        /**
+        containerHookPneumatic = new DoubleSolenoid(PCM_NODE_ID, HOOK_PNEUMATIC_CHANNEL);
+        
+        /*
+         * ARDUINO START
+         */
+        //wire = new I2C(Port.kOnboard, 4); // TODO confirm port and device address
+        /*
          * ARDUIN0 END
          */
     }

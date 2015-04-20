@@ -10,7 +10,7 @@ import java.math.BigInteger;
 
 public class ElevatorSendHeightToArduinoCommand extends Command {
 
-    I2C wire = RobotMap.wire;
+    //I2C wire = RobotMap.wire;
     Elevator elevator = Robot.elevator;
 
     public ElevatorSendHeightToArduinoCommand() {
@@ -23,8 +23,8 @@ public class ElevatorSendHeightToArduinoCommand extends Command {
 
     @Override
     protected void execute() {
-        byte[] height = intToByteArray((int) elevator.getPositionInches());
-        wire.transaction(height, height.length, null, 0);
+//        byte[] height = intToByteArray((int) elevator.getPositionInches());
+//        wire.transaction(height, height.length, null, 0);
     }
 
     @Override
@@ -40,9 +40,9 @@ public class ElevatorSendHeightToArduinoCommand extends Command {
         return false;
     }
 
-    private byte[] intToByteArray(int num) {
-        BigInteger number = BigInteger.valueOf(num);
-        return number.toByteArray();
-    }
+//    private byte[] intToByteArray(int num) {
+//        BigInteger number = BigInteger.valueOf(num);
+//        return number.toByteArray();
+//    }
 
 }

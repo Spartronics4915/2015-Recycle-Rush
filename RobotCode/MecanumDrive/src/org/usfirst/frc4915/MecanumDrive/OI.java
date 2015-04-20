@@ -10,6 +10,7 @@ import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandCon
 import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandContainerStrategy;
 import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandContainerWithPlatform;
 import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandDoNothing;
+import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandHookAndDrive;
 import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandJustDrive;
 import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandJustGrab;
 import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandStacking;
@@ -20,10 +21,12 @@ import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandTot
 import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandTurn180WithTote;
 import org.usfirst.frc4915.MecanumDrive.commands.elevator.ElevatorJumpToPositionCommand;
 import org.usfirst.frc4915.MecanumDrive.commands.elevator.ElevatorPositionCalibrationCommand;
+import org.usfirst.frc4915.MecanumDrive.commands.elevator.ElevatorResetSettingsCommand;
 import org.usfirst.frc4915.MecanumDrive.commands.elevator.ElevatorSetSafetyCommand;
 import org.usfirst.frc4915.MecanumDrive.commands.grabber.CloseGrabberCommand;
 import org.usfirst.frc4915.MecanumDrive.commands.grabber.IntermediateOpenGrabberCommand;
 import org.usfirst.frc4915.MecanumDrive.commands.grabber.OpenGrabberCommand;
+import org.usfirst.frc4915.MecanumDrive.commands.hook.ToggleContainerHookStateCommand;
 import org.usfirst.frc4915.MecanumDrive.subsystems.DriveTrain;
 import org.usfirst.frc4915.MecanumDrive.utility.VersionFinder;
 
@@ -88,7 +91,9 @@ public class OI {
     public JoystickButton grabberOpen;
     public JoystickButton grabberClosed;
     public JoystickButton grabberIntermediate;
-
+    
+    public JoystickButton toggleContainerHook;
+    
     public SendableChooser autonomousProgramChooser;
     
     public OI() {
@@ -99,15 +104,16 @@ public class OI {
 		autonomousProgramChooser.addDefault("Autonomous Just Drive", new AutonomousCommandJustDrive());
 		autonomousProgramChooser.addObject("Autonomous Container Strategy", new AutonomousCommandContainerStrategy());
 		autonomousProgramChooser.addObject("Autonomous Tote Strategy", new AutonomousCommandToteStrategy());
-		autonomousProgramChooser.addObject("Autonomous Container WITH Platform", new AutonomousCommandContainerWithPlatform());
-		autonomousProgramChooser.addObject("Autonomous Tote WITH Platform", new AutonomousCommandToteWithPlatform());
-		autonomousProgramChooser.addObject("Autonomous Stacking Strategy", new AutonomousCommandStacking());
+		//autonomousProgramChooser.addObject("Autonomous Container WITH Platform", new AutonomousCommandContainerWithPlatform());
+		//autonomousProgramChooser.addObject("Autonomous Tote WITH Platform", new AutonomousCommandToteWithPlatform());
+		//autonomousProgramChooser.addObject("Autonomous Stacking Strategy", new AutonomousCommandStacking());
 		autonomousProgramChooser.addObject("Autonomous Do Nothing", new AutonomousCommandDoNothing());
-		autonomousProgramChooser.addObject("Autonomous Tote 180º", new AutonomousCommandTurn180WithTote());
+		//autonomousProgramChooser.addObject("Autonomous Tote 180º", new AutonomousCommandTurn180WithTote());
 		autonomousProgramChooser.addObject("Container to Auto and Return", new AutonomousCommandContainerAndReturn());
 		autonomousProgramChooser.addObject("Align Tote", new AutonomousCommandToteAndAlign());
 		autonomousProgramChooser.addObject("Strafe Right", new AutonomousCommandStrafeRight());
 		autonomousProgramChooser.addObject("Just Grab", new AutonomousCommandJustGrab());
+		autonomousProgramChooser.addObject("Hook and Drive Straight", new AutonomousCommandHookAndDrive());
 		
 		SmartDashboard.putData("Autonomous Program", autonomousProgramChooser);
 		
@@ -133,6 +139,7 @@ public class OI {
         elevatorJumpToPositionFour.whenPressed(new ElevatorJumpToPositionCommand(4));
         
         elevatorResetButton = new JoystickButton(elevatorStick, 11);
+        elevatorResetButton.whenPressed(new ElevatorResetSettingsCommand());
 
 		
 		/*
@@ -146,6 +153,12 @@ public class OI {
         grabberIntermediate = new JoystickButton(elevatorStick, 5);
         grabberIntermediate.whenPressed(new IntermediateOpenGrabberCommand());
 		
+        /*
+         * Container Hook Button
+         */
+        toggleContainerHook = new JoystickButton(driveStick, 3);
+        toggleContainerHook.whenPressed(new ToggleContainerHookStateCommand());
+        
 		/*
 		 /*
 		 * AUTONOMOUS COMMAND
