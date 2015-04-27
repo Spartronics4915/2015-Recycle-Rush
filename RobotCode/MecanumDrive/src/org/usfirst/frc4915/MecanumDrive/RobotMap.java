@@ -35,7 +35,9 @@ public class RobotMap {
     public final static int SOLENOID_CHANNEL_PRIMARY = 0;
     public final static int SOLENOID_CHANNEL_SECONDARY = 1;
 
-    private static final int HOOK_PNEUMATIC_CHANNEL = 2;
+    private static final int HOOK_SOLENOID_CHANNEL = 7;
+    //private static final int HOOK_FORWARD_CHANNEL = 6;
+    //private static final int HOOK_REVERSE_CHANNEL = 7;
     
     //public final static int SOLENOID_CHANNEL_AUNTIE = 3;
     // TODO explain the reason for this number
@@ -85,7 +87,7 @@ public class RobotMap {
     /*
      * CONTAINER HOOK
      */
-    public static DoubleSolenoid containerHookPneumatic;
+    public static Solenoid containerHookPneumatic;
     
     public static void init() {
 
@@ -179,8 +181,8 @@ public class RobotMap {
         /*
          * CONTAINER HOOK START
          */
-        containerHookPneumatic = new DoubleSolenoid(PCM_NODE_ID, HOOK_PNEUMATIC_CHANNEL);
-        
+        //containerHookPneumatic = new DoubleSolenoid(HOOK_FORWARD_CHANNEL, HOOK_REVERSE_CHANNEL);
+        containerHookPneumatic = new Solenoid(PCM_NODE_ID, HOOK_SOLENOID_CHANNEL);
         /*
          * ARDUINO START
          */

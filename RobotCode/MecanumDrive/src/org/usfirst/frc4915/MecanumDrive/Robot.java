@@ -11,10 +11,7 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandContainerStrategy;
-import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandJustDrive;
-import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandStacking;
-import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandToteStrategy;
+
 import org.usfirst.frc4915.MecanumDrive.subsystems.ContainerHook;
 import org.usfirst.frc4915.MecanumDrive.subsystems.DriveTrain;
 import org.usfirst.frc4915.MecanumDrive.subsystems.Elevator;

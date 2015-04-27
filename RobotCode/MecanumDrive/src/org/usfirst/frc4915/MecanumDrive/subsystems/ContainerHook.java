@@ -4,6 +4,7 @@ import org.usfirst.frc4915.MecanumDrive.RobotMap;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -12,7 +13,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class ContainerHook extends Subsystem {
     //TODO We need to make sure that this subsystem always starts retracted
 
-	DoubleSolenoid actuator = RobotMap.containerHookPneumatic;
+	Solenoid actuator = RobotMap.containerHookPneumatic;
 	
 	boolean wasExtended = false;
 	
@@ -21,11 +22,11 @@ public class ContainerHook extends Subsystem {
     }
     
     public void extendPneumatic() {
-    	actuator.set(Value.kForward);
+    	actuator.set(true);
     }
     
     public void retractPneumatic() {
-    	actuator.set(Value.kReverse);
+    	actuator.set(false);
     }
     
     public void togglePneumaticState() {

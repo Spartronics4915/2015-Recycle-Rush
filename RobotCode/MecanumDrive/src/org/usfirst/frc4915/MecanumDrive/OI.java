@@ -26,6 +26,8 @@ import org.usfirst.frc4915.MecanumDrive.commands.elevator.ElevatorSetSafetyComma
 import org.usfirst.frc4915.MecanumDrive.commands.grabber.CloseGrabberCommand;
 import org.usfirst.frc4915.MecanumDrive.commands.grabber.IntermediateOpenGrabberCommand;
 import org.usfirst.frc4915.MecanumDrive.commands.grabber.OpenGrabberCommand;
+import org.usfirst.frc4915.MecanumDrive.commands.hook.ExtendHook;
+import org.usfirst.frc4915.MecanumDrive.commands.hook.RetractHook;
 import org.usfirst.frc4915.MecanumDrive.commands.hook.ToggleContainerHookStateCommand;
 import org.usfirst.frc4915.MecanumDrive.subsystems.DriveTrain;
 import org.usfirst.frc4915.MecanumDrive.utility.VersionFinder;
@@ -93,6 +95,8 @@ public class OI {
     public JoystickButton grabberIntermediate;
     
     public JoystickButton toggleContainerHook;
+    public JoystickButton extend;
+    public JoystickButton retract;
     
     public SendableChooser autonomousProgramChooser;
     
@@ -159,6 +163,11 @@ public class OI {
         toggleContainerHook = new JoystickButton(driveStick, 3);
         toggleContainerHook.whenPressed(new ToggleContainerHookStateCommand());
         
+        extend = new JoystickButton(driveStick, 7);
+        retract = new JoystickButton(driveStick, 8);
+        extend.whenPressed(new ExtendHook());
+        retract.whenPressed(new RetractHook());
+        
 		/*
 		 /*
 		 * AUTONOMOUS COMMAND
@@ -212,7 +221,7 @@ public class OI {
         LiveWindow.addSensor("Drive Train", "Distance Sensor", DriveTrain.distanceSensor);
         LiveWindow.addActuator("Grabber Primary Solenoid", "Solenoid", RobotMap.primarySolenoid);
         LiveWindow.addActuator("Grabber Secondary Solenoid", "Solenoid", RobotMap.secondarySolenoid);
-		
+		LiveWindow.addActuator("Hook Double Solenoid", "Solenoid", RobotMap.containerHookPneumatic);
 		/*
 		 * CODE VERSION OUTPUT
 		 */
