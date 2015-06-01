@@ -8,17 +8,14 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandContainerAndReturn;
 import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandContainerStrategy;
-import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandContainerWithPlatform;
 import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandDoNothing;
 import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandHookAndDrive;
 import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandJustDrive;
 import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandJustGrab;
-import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandStacking;
 import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandStrafeRight;
 import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandToteAndAlign;
 import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandToteStrategy;
-import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandToteWithPlatform;
-import org.usfirst.frc4915.MecanumDrive.commands.autonomous.AutonomousCommandTurn180WithTote;
+import org.usfirst.frc4915.MecanumDrive.commands.drive.ToggleDriveModeCommand;
 import org.usfirst.frc4915.MecanumDrive.commands.elevator.ElevatorJumpToPositionCommand;
 import org.usfirst.frc4915.MecanumDrive.commands.elevator.ElevatorPositionCalibrationCommand;
 import org.usfirst.frc4915.MecanumDrive.commands.elevator.ElevatorResetSettingsCommand;
@@ -74,7 +71,7 @@ public class OI {
     /*
      * JOYSTICK BUTTONS (DRIVER)
      */
-    //public JoystickButton toggleFieldDrive;
+    public JoystickButton toggleFieldDrive;
 
     /*
      * JOYSTICK BUTTONS (ELEVATOR)
@@ -189,10 +186,10 @@ public class OI {
 		/*
 		 * TOGGLE FIELD ORIENTED DRIVE
 		 */
-        //toggleFieldDrive = new JoystickButton(driveStick, 11);
-        //toggleFieldDrive.whenPressed(new ToggleDriveModeCommand());
-        //SmartDashboard.putData("Toggle Field Drive", new ToggleDriveModeCommand());
-        //SmartDashboard.putBoolean("Field Mode", Robot.driveTrain.fieldMode);
+        toggleFieldDrive = new JoystickButton(driveStick, 11);
+        toggleFieldDrive.whenPressed(new ToggleDriveModeCommand());
+        SmartDashboard.putData("Toggle Field Drive", new ToggleDriveModeCommand());
+        SmartDashboard.putBoolean("Field Mode", Robot.driveTrain.fieldMode);
 		
 		/*
 		 * ELEVATOR

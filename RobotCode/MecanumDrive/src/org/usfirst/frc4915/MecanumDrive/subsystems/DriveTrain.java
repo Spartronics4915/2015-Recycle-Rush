@@ -3,7 +3,6 @@ package org.usfirst.frc4915.MecanumDrive.subsystems;
 import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.CANTalon.ControlMode;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc4915.MecanumDrive.Robot;
 import org.usfirst.frc4915.MecanumDrive.RobotMap;
 import org.usfirst.frc4915.MecanumDrive.commands.drive.MecanumDriveCommand;
@@ -120,6 +119,8 @@ public class DriveTrain extends Subsystem {
 		if (deadZoneX && deadZoneY && deadZoneTwist) {
 			debugger.logError(LoggerNames.DRIVETRAIN, ("Stopping Motor"));
 			robotDrive.stopMotor();
+		} else if (fieldMode) {
+			robotDrive.mecanumDrive_Cartesian(throttleX, throttleY, throttleTwist, gyro.getAngle());
 		} else {
 			debugger.logError(LoggerNames.DRIVETRAIN,"Gyro Angle: " + gyro.getAngle());
 			robotDrive.mecanumDrive_Cartesian(throttleX, throttleY, throttleTwist, 0);

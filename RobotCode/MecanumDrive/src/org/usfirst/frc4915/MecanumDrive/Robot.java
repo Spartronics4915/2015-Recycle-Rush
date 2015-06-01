@@ -166,6 +166,7 @@ public class Robot extends IterativeRobot {
 		Elevator.needToApproximate = true;
 		Elevator.didSaveTopValue = false;
 		Elevator.didSaveBottomValue = false;
+		driveTrain.fieldMode = false;
 		autonomousCommand.start();
 	}
 
@@ -192,8 +193,7 @@ public class Robot extends IterativeRobot {
 		Elevator.needToApproximate = true;
 		Elevator.didSaveTopValue = false;
 		Elevator.didSaveBottomValue = false;
-
-		//SmartDashboard.putBoolean("Field Mode", Robot.driveTrain.fieldMode);
+		driveTrain.fieldMode = false;
 		/*
 		// Init camera
 		frame = NIVision.imaqCreateImage(NIVision.ImageType.IMAGE_RGB, 0);
